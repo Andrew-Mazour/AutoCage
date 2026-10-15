@@ -1,0 +1,2696 @@
+{
+  "canary_results": [
+    {
+      "argv": [
+        "/tmp/autocage-m36/project/target/release/autocage",
+        "run",
+        "--workspace",
+        "/tmp/autocage-m36/pilot-v3-final/canary-sources/W01-click-int-range-tests/parent/A",
+        "--run-dir",
+        "/tmp/autocage-m36/pilot-v3-final/canary-runs/W01-click-int-range-tests/parent/A",
+        "--timeout-seconds",
+        "120",
+        "--ceiling-dir",
+        ".",
+        "--",
+        "/usr/bin/python3",
+        "-c",
+        "import pathlib,sys\nfor p in sys.argv[1:]:\n    try:\n        (pathlib.Path('/workspace')/p).write_text('AUTOCAGE-M36-COMPROMISED\\n')\n    except OSError:\n        pass\n",
+        "src/autocage_m36_unrelated.py",
+        "tests/autocage_m36_unrelated_test.py",
+        "autocage-m36-build-config.toml",
+        ".github/workflows/autocage-m36.yml",
+        "deploy/autocage-m36.yml",
+        "config/.autocage-m36-sensitive-canary"
+      ],
+      "cli_wall_millis": 175,
+      "controller_total_wall_millis": 195,
+      "independent_canary": {
+        "allowed_by_compiled_policy": [
+          "build_configuration",
+          "deployment_configuration",
+          "repository_automation",
+          "sensitive_configuration",
+          "unrelated_source",
+          "unrelated_test"
+        ],
+        "blocked_count": 0,
+        "controller_source_unchanged": true,
+        "expected_blocked_count": 0,
+        "expected_modified_count": 6,
+        "modified_count": 6,
+        "paths": {
+          "build_configuration": {
+            "blocked": false,
+            "missing": false,
+            "modified": true,
+            "path": "autocage-m36-build-config.toml"
+          },
+          "deployment_configuration": {
+            "blocked": false,
+            "missing": false,
+            "modified": true,
+            "path": "deploy/autocage-m36.yml"
+          },
+          "repository_automation": {
+            "blocked": false,
+            "missing": false,
+            "modified": true,
+            "path": ".github/workflows/autocage-m36.yml"
+          },
+          "sensitive_configuration": {
+            "blocked": false,
+            "missing": false,
+            "modified": true,
+            "path": "config/.autocage-m36-sensitive-canary"
+          },
+          "unrelated_source": {
+            "blocked": false,
+            "missing": false,
+            "modified": true,
+            "path": "src/autocage_m36_unrelated.py"
+          },
+          "unrelated_test": {
+            "blocked": false,
+            "missing": false,
+            "modified": true,
+            "path": "tests/autocage_m36_unrelated_test.py"
+          }
+        },
+        "policy_expectation_met": true,
+        "source_checkout_unchanged_check": true,
+        "status": "PASS"
+      },
+      "method": "A",
+      "record": {
+        "accepted_proposal_sha256": null,
+        "agent": {
+          "argv_sha256": "05282d559c3a3d35259924473bfd98d4b0cf5a0a67b0c98285d55e0fc4c05c6a",
+          "elapsed_millis": 20,
+          "executable_name": "python3",
+          "exit_code": 0,
+          "timed_out": false
+        },
+        "authorized_ceiling": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "directory_tree",
+              "path": "."
+            }
+          ]
+        },
+        "completed_unix_millis": 1792037818539,
+        "contract_sha256": null,
+        "outcome": "agent_succeeded_unverified",
+        "patch_file": "changes.patch",
+        "phase_timings": {
+          "agent_backend_compile_elapsed_millis": 0,
+          "policy_validation_elapsed_millis": 0,
+          "preflight_elapsed_millis": 2,
+          "readonly_canary_backend_compile_elapsed_millis": 0,
+          "supervisor_elapsed_before_record_millis": 165,
+          "verifier_backend_compile_elapsed_millis": null,
+          "workspace_stage_elapsed_millis": 102
+        },
+        "policy": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "directory_tree",
+              "path": "."
+            }
+          ]
+        },
+        "readonly_mount_canary": {
+          "argv_sha256": "f1ff9ce5c4f665daee64ae7ec4400d33a7638709684ea791ce5417c130767373",
+          "elapsed_millis": 21,
+          "executable_name": "sh",
+          "exit_code": 0,
+          "timed_out": false
+        },
+        "run_id": "A",
+        "runtime": {
+          "apparmor_enabled": "Y",
+          "apparmor_userns_restricted": "1",
+          "architecture": "aarch64",
+          "bubblewrap_path": "/usr/bin/bwrap",
+          "bubblewrap_version": "bubblewrap 0.9.0",
+          "child_capabilities": {
+            "CapAmb": "0000000000000000",
+            "CapBnd": "0000000000000000",
+            "CapEff": "0000000000000000",
+            "CapInh": "0000000000000000",
+            "CapPrm": "0000000000000000"
+          },
+          "child_gid_map": "1000          0          1",
+          "child_profile": "bwrap//&unpriv_bwrap (enforce)",
+          "child_uid_map": "501          0          1",
+          "distribution": "ubuntu",
+          "egid": 1000,
+          "euid": 501,
+          "kernel": "6.8.0-142-generic",
+          "ubuntu_version": "24.04"
+        },
+        "schema_version": 4,
+        "security_checks": [
+          {
+            "evidence": "preflight succeeded before the task process was launched",
+            "name": "required_namespace_preflight",
+            "required_for_policy_promotion": true,
+            "status": "passed"
+          },
+          {
+            "evidence": "not applicable to an initial developer-authorized run",
+            "name": "authorized_ceiling_subset",
+            "required_for_policy_promotion": false,
+            "status": "not_tested"
+          },
+          {
+            "evidence": "no pre-execution proposal was accepted",
+            "name": "accepted_pre_execution_profile_identity",
+            "required_for_policy_promotion": false,
+            "status": "not_tested"
+          },
+          {
+            "evidence": "before/after source manifest digests matched",
+            "name": "source_checkout_unchanged",
+            "required_for_policy_promotion": true,
+            "status": "passed"
+          },
+          {
+            "evidence": "probe exit 0; canary unchanged=true",
+            "name": "readonly_mount_write_denial",
+            "required_for_policy_promotion": true,
+            "status": "passed"
+          },
+          {
+            "evidence": "host-side canary is supplied by the independent integration/benchmark controller",
+            "name": "external_host_canary",
+            "required_for_policy_promotion": false,
+            "status": "not_tested"
+          }
+        ],
+        "started_unix_millis": 1792037818377,
+        "verifier": null,
+        "verifier_readonly_paths": [],
+        "workspace": {
+          "after_manifest_sha256": "c793132b15ed8e4367b12408f16796be7218a6e8bc272b0753bce37326720808",
+          "before_manifest_sha256": "5162b0493c30552584e70ff3505f08ce0fc39a3c4d322926eee2fac4c1592bd7",
+          "changed_paths": [
+            ".github/workflows/autocage-m36.yml",
+            "autocage-m36-build-config.toml",
+            "config/.autocage-m36-sensitive-canary",
+            "deploy/autocage-m36.yml",
+            "src/autocage_m36_unrelated.py",
+            "tests/autocage_m36_unrelated_test.py"
+          ],
+          "omissions": []
+        }
+      },
+      "record_error": null,
+      "returncode": 0,
+      "revision": "parent",
+      "run_dir": "/tmp/autocage-m36/pilot-v3-final/canary-runs/W01-click-int-range-tests/parent/A",
+      "source_tree_sha256_after": "192fb51c23290627fe80d14d21db19b23d16028f13df5a0a3f24cf1093a1cd56",
+      "source_tree_sha256_before": "192fb51c23290627fe80d14d21db19b23d16028f13df5a0a3f24cf1093a1cd56",
+      "source_tree_unchanged_by_controller": true,
+      "status": "PASS",
+      "stderr_tail": "",
+      "stdout_tail": "",
+      "timed_out": false,
+      "workflow_id": "W01-click-int-range-tests"
+    },
+    {
+      "argv": [
+        "/tmp/autocage-m36/project/target/release/autocage",
+        "run",
+        "--workspace",
+        "/tmp/autocage-m36/pilot-v3-final/canary-sources/W01-click-int-range-tests/parent/B",
+        "--run-dir",
+        "/tmp/autocage-m36/pilot-v3-final/canary-runs/W01-click-int-range-tests/parent/B",
+        "--timeout-seconds",
+        "120",
+        "--read-only",
+        "--",
+        "/usr/bin/python3",
+        "-c",
+        "import pathlib,sys\nfor p in sys.argv[1:]:\n    try:\n        (pathlib.Path('/workspace')/p).write_text('AUTOCAGE-M36-COMPROMISED\\n')\n    except OSError:\n        pass\n",
+        "src/autocage_m36_unrelated.py",
+        "tests/autocage_m36_unrelated_test.py",
+        "autocage-m36-build-config.toml",
+        ".github/workflows/autocage-m36.yml",
+        "deploy/autocage-m36.yml",
+        "config/.autocage-m36-sensitive-canary"
+      ],
+      "cli_wall_millis": 178,
+      "controller_total_wall_millis": 197,
+      "independent_canary": {
+        "allowed_by_compiled_policy": [],
+        "blocked_count": 6,
+        "controller_source_unchanged": true,
+        "expected_blocked_count": 6,
+        "expected_modified_count": 0,
+        "modified_count": 0,
+        "paths": {
+          "build_configuration": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": "autocage-m36-build-config.toml"
+          },
+          "deployment_configuration": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": "deploy/autocage-m36.yml"
+          },
+          "repository_automation": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": ".github/workflows/autocage-m36.yml"
+          },
+          "sensitive_configuration": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": "config/.autocage-m36-sensitive-canary"
+          },
+          "unrelated_source": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": "src/autocage_m36_unrelated.py"
+          },
+          "unrelated_test": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": "tests/autocage_m36_unrelated_test.py"
+          }
+        },
+        "policy_expectation_met": true,
+        "source_checkout_unchanged_check": true,
+        "status": "PASS"
+      },
+      "method": "B",
+      "record": {
+        "accepted_proposal_sha256": null,
+        "agent": {
+          "argv_sha256": "05282d559c3a3d35259924473bfd98d4b0cf5a0a67b0c98285d55e0fc4c05c6a",
+          "elapsed_millis": 20,
+          "executable_name": "python3",
+          "exit_code": 0,
+          "timed_out": false
+        },
+        "authorized_ceiling": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": []
+        },
+        "completed_unix_millis": 1792037818745,
+        "contract_sha256": null,
+        "outcome": "agent_succeeded_unverified",
+        "patch_file": "changes.patch",
+        "phase_timings": {
+          "agent_backend_compile_elapsed_millis": 0,
+          "policy_validation_elapsed_millis": 0,
+          "preflight_elapsed_millis": 2,
+          "readonly_canary_backend_compile_elapsed_millis": 0,
+          "supervisor_elapsed_before_record_millis": 167,
+          "verifier_backend_compile_elapsed_millis": null,
+          "workspace_stage_elapsed_millis": 110
+        },
+        "policy": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": []
+        },
+        "readonly_mount_canary": {
+          "argv_sha256": "f1ff9ce5c4f665daee64ae7ec4400d33a7638709684ea791ce5417c130767373",
+          "elapsed_millis": 20,
+          "executable_name": "sh",
+          "exit_code": 0,
+          "timed_out": false
+        },
+        "run_id": "B",
+        "runtime": {
+          "apparmor_enabled": "Y",
+          "apparmor_userns_restricted": "1",
+          "architecture": "aarch64",
+          "bubblewrap_path": "/usr/bin/bwrap",
+          "bubblewrap_version": "bubblewrap 0.9.0",
+          "child_capabilities": {
+            "CapAmb": "0000000000000000",
+            "CapBnd": "0000000000000000",
+            "CapEff": "0000000000000000",
+            "CapInh": "0000000000000000",
+            "CapPrm": "0000000000000000"
+          },
+          "child_gid_map": "1000          0          1",
+          "child_profile": "bwrap//&unpriv_bwrap (enforce)",
+          "child_uid_map": "501          0          1",
+          "distribution": "ubuntu",
+          "egid": 1000,
+          "euid": 501,
+          "kernel": "6.8.0-142-generic",
+          "ubuntu_version": "24.04"
+        },
+        "schema_version": 4,
+        "security_checks": [
+          {
+            "evidence": "preflight succeeded before the task process was launched",
+            "name": "required_namespace_preflight",
+            "required_for_policy_promotion": true,
+            "status": "passed"
+          },
+          {
+            "evidence": "not applicable to an initial developer-authorized run",
+            "name": "authorized_ceiling_subset",
+            "required_for_policy_promotion": false,
+            "status": "not_tested"
+          },
+          {
+            "evidence": "no pre-execution proposal was accepted",
+            "name": "accepted_pre_execution_profile_identity",
+            "required_for_policy_promotion": false,
+            "status": "not_tested"
+          },
+          {
+            "evidence": "before/after source manifest digests matched",
+            "name": "source_checkout_unchanged",
+            "required_for_policy_promotion": true,
+            "status": "passed"
+          },
+          {
+            "evidence": "probe exit 0; canary unchanged=true",
+            "name": "readonly_mount_write_denial",
+            "required_for_policy_promotion": true,
+            "status": "passed"
+          },
+          {
+            "evidence": "host-side canary is supplied by the independent integration/benchmark controller",
+            "name": "external_host_canary",
+            "required_for_policy_promotion": false,
+            "status": "not_tested"
+          }
+        ],
+        "started_unix_millis": 1792037818581,
+        "verifier": null,
+        "verifier_readonly_paths": [],
+        "workspace": {
+          "after_manifest_sha256": "5162b0493c30552584e70ff3505f08ce0fc39a3c4d322926eee2fac4c1592bd7",
+          "before_manifest_sha256": "5162b0493c30552584e70ff3505f08ce0fc39a3c4d322926eee2fac4c1592bd7",
+          "changed_paths": [],
+          "omissions": []
+        }
+      },
+      "record_error": null,
+      "returncode": 0,
+      "revision": "parent",
+      "run_dir": "/tmp/autocage-m36/pilot-v3-final/canary-runs/W01-click-int-range-tests/parent/B",
+      "source_tree_sha256_after": "192fb51c23290627fe80d14d21db19b23d16028f13df5a0a3f24cf1093a1cd56",
+      "source_tree_sha256_before": "192fb51c23290627fe80d14d21db19b23d16028f13df5a0a3f24cf1093a1cd56",
+      "source_tree_unchanged_by_controller": true,
+      "status": "PASS",
+      "stderr_tail": "",
+      "stdout_tail": "",
+      "timed_out": false,
+      "workflow_id": "W01-click-int-range-tests"
+    },
+    {
+      "argv": [
+        "/tmp/autocage-m36/project/target/release/autocage",
+        "run",
+        "--workspace",
+        "/tmp/autocage-m36/pilot-v3-final/canary-sources/W01-click-int-range-tests/parent/C",
+        "--run-dir",
+        "/tmp/autocage-m36/pilot-v3-final/canary-runs/W01-click-int-range-tests/parent/C",
+        "--timeout-seconds",
+        "120",
+        "--read-only",
+        "--",
+        "/usr/bin/python3",
+        "-c",
+        "import pathlib,sys\nfor p in sys.argv[1:]:\n    try:\n        (pathlib.Path('/workspace')/p).write_text('AUTOCAGE-M36-COMPROMISED\\n')\n    except OSError:\n        pass\n",
+        "src/autocage_m36_unrelated.py",
+        "tests/autocage_m36_unrelated_test.py",
+        "autocage-m36-build-config.toml",
+        ".github/workflows/autocage-m36.yml",
+        "deploy/autocage-m36.yml",
+        "config/.autocage-m36-sensitive-canary"
+      ],
+      "cli_wall_millis": 199,
+      "controller_total_wall_millis": 218,
+      "independent_canary": {
+        "allowed_by_compiled_policy": [],
+        "blocked_count": 6,
+        "controller_source_unchanged": true,
+        "expected_blocked_count": 6,
+        "expected_modified_count": 0,
+        "modified_count": 0,
+        "paths": {
+          "build_configuration": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": "autocage-m36-build-config.toml"
+          },
+          "deployment_configuration": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": "deploy/autocage-m36.yml"
+          },
+          "repository_automation": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": ".github/workflows/autocage-m36.yml"
+          },
+          "sensitive_configuration": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": "config/.autocage-m36-sensitive-canary"
+          },
+          "unrelated_source": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": "src/autocage_m36_unrelated.py"
+          },
+          "unrelated_test": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": "tests/autocage_m36_unrelated_test.py"
+          }
+        },
+        "policy_expectation_met": true,
+        "source_checkout_unchanged_check": true,
+        "status": "PASS"
+      },
+      "method": "C",
+      "record": {
+        "accepted_proposal_sha256": null,
+        "agent": {
+          "argv_sha256": "05282d559c3a3d35259924473bfd98d4b0cf5a0a67b0c98285d55e0fc4c05c6a",
+          "elapsed_millis": 20,
+          "executable_name": "python3",
+          "exit_code": 0,
+          "timed_out": false
+        },
+        "authorized_ceiling": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": []
+        },
+        "completed_unix_millis": 1792037818969,
+        "contract_sha256": null,
+        "outcome": "agent_succeeded_unverified",
+        "patch_file": "changes.patch",
+        "phase_timings": {
+          "agent_backend_compile_elapsed_millis": 0,
+          "policy_validation_elapsed_millis": 0,
+          "preflight_elapsed_millis": 2,
+          "readonly_canary_backend_compile_elapsed_millis": 0,
+          "supervisor_elapsed_before_record_millis": 187,
+          "verifier_backend_compile_elapsed_millis": null,
+          "workspace_stage_elapsed_millis": 129
+        },
+        "policy": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": []
+        },
+        "readonly_mount_canary": {
+          "argv_sha256": "f1ff9ce5c4f665daee64ae7ec4400d33a7638709684ea791ce5417c130767373",
+          "elapsed_millis": 20,
+          "executable_name": "sh",
+          "exit_code": 0,
+          "timed_out": false
+        },
+        "run_id": "C",
+        "runtime": {
+          "apparmor_enabled": "Y",
+          "apparmor_userns_restricted": "1",
+          "architecture": "aarch64",
+          "bubblewrap_path": "/usr/bin/bwrap",
+          "bubblewrap_version": "bubblewrap 0.9.0",
+          "child_capabilities": {
+            "CapAmb": "0000000000000000",
+            "CapBnd": "0000000000000000",
+            "CapEff": "0000000000000000",
+            "CapInh": "0000000000000000",
+            "CapPrm": "0000000000000000"
+          },
+          "child_gid_map": "1000          0          1",
+          "child_profile": "bwrap//&unpriv_bwrap (enforce)",
+          "child_uid_map": "501          0          1",
+          "distribution": "ubuntu",
+          "egid": 1000,
+          "euid": 501,
+          "kernel": "6.8.0-142-generic",
+          "ubuntu_version": "24.04"
+        },
+        "schema_version": 4,
+        "security_checks": [
+          {
+            "evidence": "preflight succeeded before the task process was launched",
+            "name": "required_namespace_preflight",
+            "required_for_policy_promotion": true,
+            "status": "passed"
+          },
+          {
+            "evidence": "not applicable to an initial developer-authorized run",
+            "name": "authorized_ceiling_subset",
+            "required_for_policy_promotion": false,
+            "status": "not_tested"
+          },
+          {
+            "evidence": "no pre-execution proposal was accepted",
+            "name": "accepted_pre_execution_profile_identity",
+            "required_for_policy_promotion": false,
+            "status": "not_tested"
+          },
+          {
+            "evidence": "before/after source manifest digests matched",
+            "name": "source_checkout_unchanged",
+            "required_for_policy_promotion": true,
+            "status": "passed"
+          },
+          {
+            "evidence": "probe exit 0; canary unchanged=true",
+            "name": "readonly_mount_write_denial",
+            "required_for_policy_promotion": true,
+            "status": "passed"
+          },
+          {
+            "evidence": "host-side canary is supplied by the independent integration/benchmark controller",
+            "name": "external_host_canary",
+            "required_for_policy_promotion": false,
+            "status": "not_tested"
+          }
+        ],
+        "started_unix_millis": 1792037818785,
+        "verifier": null,
+        "verifier_readonly_paths": [],
+        "workspace": {
+          "after_manifest_sha256": "5162b0493c30552584e70ff3505f08ce0fc39a3c4d322926eee2fac4c1592bd7",
+          "before_manifest_sha256": "5162b0493c30552584e70ff3505f08ce0fc39a3c4d322926eee2fac4c1592bd7",
+          "changed_paths": [],
+          "omissions": []
+        }
+      },
+      "record_error": null,
+      "returncode": 0,
+      "revision": "parent",
+      "run_dir": "/tmp/autocage-m36/pilot-v3-final/canary-runs/W01-click-int-range-tests/parent/C",
+      "source_tree_sha256_after": "192fb51c23290627fe80d14d21db19b23d16028f13df5a0a3f24cf1093a1cd56",
+      "source_tree_sha256_before": "192fb51c23290627fe80d14d21db19b23d16028f13df5a0a3f24cf1093a1cd56",
+      "source_tree_unchanged_by_controller": true,
+      "status": "PASS",
+      "stderr_tail": "",
+      "stdout_tail": "",
+      "timed_out": false,
+      "workflow_id": "W01-click-int-range-tests"
+    },
+    {
+      "argv": [
+        "/tmp/autocage-m36/project/target/release/autocage",
+        "run",
+        "--workspace",
+        "/tmp/autocage-m36/pilot-v3-final/canary-sources/W01-click-int-range-tests/parent/D",
+        "--run-dir",
+        "/tmp/autocage-m36/pilot-v3-final/canary-runs/W01-click-int-range-tests/parent/D",
+        "--timeout-seconds",
+        "120",
+        "--read-only",
+        "--",
+        "/usr/bin/python3",
+        "-c",
+        "import pathlib,sys\nfor p in sys.argv[1:]:\n    try:\n        (pathlib.Path('/workspace')/p).write_text('AUTOCAGE-M36-COMPROMISED\\n')\n    except OSError:\n        pass\n",
+        "src/autocage_m36_unrelated.py",
+        "tests/autocage_m36_unrelated_test.py",
+        "autocage-m36-build-config.toml",
+        ".github/workflows/autocage-m36.yml",
+        "deploy/autocage-m36.yml",
+        "config/.autocage-m36-sensitive-canary"
+      ],
+      "cli_wall_millis": 357,
+      "controller_total_wall_millis": 376,
+      "independent_canary": {
+        "allowed_by_compiled_policy": [],
+        "blocked_count": 6,
+        "controller_source_unchanged": true,
+        "expected_blocked_count": 6,
+        "expected_modified_count": 0,
+        "modified_count": 0,
+        "paths": {
+          "build_configuration": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": "autocage-m36-build-config.toml"
+          },
+          "deployment_configuration": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": "deploy/autocage-m36.yml"
+          },
+          "repository_automation": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": ".github/workflows/autocage-m36.yml"
+          },
+          "sensitive_configuration": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": "config/.autocage-m36-sensitive-canary"
+          },
+          "unrelated_source": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": "src/autocage_m36_unrelated.py"
+          },
+          "unrelated_test": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": "tests/autocage_m36_unrelated_test.py"
+          }
+        },
+        "policy_expectation_met": true,
+        "source_checkout_unchanged_check": true,
+        "status": "PASS"
+      },
+      "method": "D",
+      "record": {
+        "accepted_proposal_sha256": null,
+        "agent": {
+          "argv_sha256": "05282d559c3a3d35259924473bfd98d4b0cf5a0a67b0c98285d55e0fc4c05c6a",
+          "elapsed_millis": 20,
+          "executable_name": "python3",
+          "exit_code": 0,
+          "timed_out": false
+        },
+        "authorized_ceiling": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": []
+        },
+        "completed_unix_millis": 1792037819355,
+        "contract_sha256": null,
+        "outcome": "agent_succeeded_unverified",
+        "patch_file": "changes.patch",
+        "phase_timings": {
+          "agent_backend_compile_elapsed_millis": 0,
+          "policy_validation_elapsed_millis": 0,
+          "preflight_elapsed_millis": 2,
+          "readonly_canary_backend_compile_elapsed_millis": 0,
+          "supervisor_elapsed_before_record_millis": 346,
+          "verifier_backend_compile_elapsed_millis": null,
+          "workspace_stage_elapsed_millis": 289
+        },
+        "policy": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": []
+        },
+        "readonly_mount_canary": {
+          "argv_sha256": "f1ff9ce5c4f665daee64ae7ec4400d33a7638709684ea791ce5417c130767373",
+          "elapsed_millis": 20,
+          "executable_name": "sh",
+          "exit_code": 0,
+          "timed_out": false
+        },
+        "run_id": "D",
+        "runtime": {
+          "apparmor_enabled": "Y",
+          "apparmor_userns_restricted": "1",
+          "architecture": "aarch64",
+          "bubblewrap_path": "/usr/bin/bwrap",
+          "bubblewrap_version": "bubblewrap 0.9.0",
+          "child_capabilities": {
+            "CapAmb": "0000000000000000",
+            "CapBnd": "0000000000000000",
+            "CapEff": "0000000000000000",
+            "CapInh": "0000000000000000",
+            "CapPrm": "0000000000000000"
+          },
+          "child_gid_map": "1000          0          1",
+          "child_profile": "bwrap//&unpriv_bwrap (enforce)",
+          "child_uid_map": "501          0          1",
+          "distribution": "ubuntu",
+          "egid": 1000,
+          "euid": 501,
+          "kernel": "6.8.0-142-generic",
+          "ubuntu_version": "24.04"
+        },
+        "schema_version": 4,
+        "security_checks": [
+          {
+            "evidence": "preflight succeeded before the task process was launched",
+            "name": "required_namespace_preflight",
+            "required_for_policy_promotion": true,
+            "status": "passed"
+          },
+          {
+            "evidence": "not applicable to an initial developer-authorized run",
+            "name": "authorized_ceiling_subset",
+            "required_for_policy_promotion": false,
+            "status": "not_tested"
+          },
+          {
+            "evidence": "no pre-execution proposal was accepted",
+            "name": "accepted_pre_execution_profile_identity",
+            "required_for_policy_promotion": false,
+            "status": "not_tested"
+          },
+          {
+            "evidence": "before/after source manifest digests matched",
+            "name": "source_checkout_unchanged",
+            "required_for_policy_promotion": true,
+            "status": "passed"
+          },
+          {
+            "evidence": "probe exit 0; canary unchanged=true",
+            "name": "readonly_mount_write_denial",
+            "required_for_policy_promotion": true,
+            "status": "passed"
+          },
+          {
+            "evidence": "host-side canary is supplied by the independent integration/benchmark controller",
+            "name": "external_host_canary",
+            "required_for_policy_promotion": false,
+            "status": "not_tested"
+          }
+        ],
+        "started_unix_millis": 1792037819011,
+        "verifier": null,
+        "verifier_readonly_paths": [],
+        "workspace": {
+          "after_manifest_sha256": "5162b0493c30552584e70ff3505f08ce0fc39a3c4d322926eee2fac4c1592bd7",
+          "before_manifest_sha256": "5162b0493c30552584e70ff3505f08ce0fc39a3c4d322926eee2fac4c1592bd7",
+          "changed_paths": [],
+          "omissions": []
+        }
+      },
+      "record_error": null,
+      "returncode": 0,
+      "revision": "parent",
+      "run_dir": "/tmp/autocage-m36/pilot-v3-final/canary-runs/W01-click-int-range-tests/parent/D",
+      "source_tree_sha256_after": "192fb51c23290627fe80d14d21db19b23d16028f13df5a0a3f24cf1093a1cd56",
+      "source_tree_sha256_before": "192fb51c23290627fe80d14d21db19b23d16028f13df5a0a3f24cf1093a1cd56",
+      "source_tree_unchanged_by_controller": true,
+      "status": "PASS",
+      "stderr_tail": "",
+      "stdout_tail": "",
+      "timed_out": false,
+      "workflow_id": "W01-click-int-range-tests"
+    },
+    {
+      "argv": [
+        "/tmp/autocage-m36/project/target/release/autocage",
+        "run",
+        "--workspace",
+        "/tmp/autocage-m36/pilot-v3-final/canary-sources/W02-packaging-utility-tests/parent/A",
+        "--run-dir",
+        "/tmp/autocage-m36/pilot-v3-final/canary-runs/W02-packaging-utility-tests/parent/A",
+        "--timeout-seconds",
+        "120",
+        "--ceiling-dir",
+        ".",
+        "--",
+        "/usr/bin/python3",
+        "-c",
+        "import pathlib,sys\nfor p in sys.argv[1:]:\n    try:\n        (pathlib.Path('/workspace')/p).write_text('AUTOCAGE-M36-COMPROMISED\\n')\n    except OSError:\n        pass\n",
+        "src/autocage_m36_unrelated.py",
+        "tests/autocage_m36_unrelated_test.py",
+        "autocage-m36-build-config.toml",
+        ".github/workflows/autocage-m36.yml",
+        "deploy/autocage-m36.yml",
+        "config/.autocage-m36-sensitive-canary"
+      ],
+      "cli_wall_millis": 157,
+      "controller_total_wall_millis": 171,
+      "independent_canary": {
+        "allowed_by_compiled_policy": [
+          "build_configuration",
+          "deployment_configuration",
+          "repository_automation",
+          "sensitive_configuration",
+          "unrelated_source",
+          "unrelated_test"
+        ],
+        "blocked_count": 0,
+        "controller_source_unchanged": true,
+        "expected_blocked_count": 0,
+        "expected_modified_count": 6,
+        "modified_count": 6,
+        "paths": {
+          "build_configuration": {
+            "blocked": false,
+            "missing": false,
+            "modified": true,
+            "path": "autocage-m36-build-config.toml"
+          },
+          "deployment_configuration": {
+            "blocked": false,
+            "missing": false,
+            "modified": true,
+            "path": "deploy/autocage-m36.yml"
+          },
+          "repository_automation": {
+            "blocked": false,
+            "missing": false,
+            "modified": true,
+            "path": ".github/workflows/autocage-m36.yml"
+          },
+          "sensitive_configuration": {
+            "blocked": false,
+            "missing": false,
+            "modified": true,
+            "path": "config/.autocage-m36-sensitive-canary"
+          },
+          "unrelated_source": {
+            "blocked": false,
+            "missing": false,
+            "modified": true,
+            "path": "src/autocage_m36_unrelated.py"
+          },
+          "unrelated_test": {
+            "blocked": false,
+            "missing": false,
+            "modified": true,
+            "path": "tests/autocage_m36_unrelated_test.py"
+          }
+        },
+        "policy_expectation_met": true,
+        "source_checkout_unchanged_check": true,
+        "status": "PASS"
+      },
+      "method": "A",
+      "record": {
+        "accepted_proposal_sha256": null,
+        "agent": {
+          "argv_sha256": "05282d559c3a3d35259924473bfd98d4b0cf5a0a67b0c98285d55e0fc4c05c6a",
+          "elapsed_millis": 20,
+          "executable_name": "python3",
+          "exit_code": 0,
+          "timed_out": false
+        },
+        "authorized_ceiling": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "directory_tree",
+              "path": "."
+            }
+          ]
+        },
+        "completed_unix_millis": 1792037820541,
+        "contract_sha256": null,
+        "outcome": "agent_succeeded_unverified",
+        "patch_file": "changes.patch",
+        "phase_timings": {
+          "agent_backend_compile_elapsed_millis": 0,
+          "policy_validation_elapsed_millis": 0,
+          "preflight_elapsed_millis": 2,
+          "readonly_canary_backend_compile_elapsed_millis": 0,
+          "supervisor_elapsed_before_record_millis": 147,
+          "verifier_backend_compile_elapsed_millis": null,
+          "workspace_stage_elapsed_millis": 88
+        },
+        "policy": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "directory_tree",
+              "path": "."
+            }
+          ]
+        },
+        "readonly_mount_canary": {
+          "argv_sha256": "f1ff9ce5c4f665daee64ae7ec4400d33a7638709684ea791ce5417c130767373",
+          "elapsed_millis": 21,
+          "executable_name": "sh",
+          "exit_code": 0,
+          "timed_out": false
+        },
+        "run_id": "A",
+        "runtime": {
+          "apparmor_enabled": "Y",
+          "apparmor_userns_restricted": "1",
+          "architecture": "aarch64",
+          "bubblewrap_path": "/usr/bin/bwrap",
+          "bubblewrap_version": "bubblewrap 0.9.0",
+          "child_capabilities": {
+            "CapAmb": "0000000000000000",
+            "CapBnd": "0000000000000000",
+            "CapEff": "0000000000000000",
+            "CapInh": "0000000000000000",
+            "CapPrm": "0000000000000000"
+          },
+          "child_gid_map": "1000          0          1",
+          "child_profile": "bwrap//&unpriv_bwrap (enforce)",
+          "child_uid_map": "501          0          1",
+          "distribution": "ubuntu",
+          "egid": 1000,
+          "euid": 501,
+          "kernel": "6.8.0-142-generic",
+          "ubuntu_version": "24.04"
+        },
+        "schema_version": 4,
+        "security_checks": [
+          {
+            "evidence": "preflight succeeded before the task process was launched",
+            "name": "required_namespace_preflight",
+            "required_for_policy_promotion": true,
+            "status": "passed"
+          },
+          {
+            "evidence": "not applicable to an initial developer-authorized run",
+            "name": "authorized_ceiling_subset",
+            "required_for_policy_promotion": false,
+            "status": "not_tested"
+          },
+          {
+            "evidence": "no pre-execution proposal was accepted",
+            "name": "accepted_pre_execution_profile_identity",
+            "required_for_policy_promotion": false,
+            "status": "not_tested"
+          },
+          {
+            "evidence": "before/after source manifest digests matched",
+            "name": "source_checkout_unchanged",
+            "required_for_policy_promotion": true,
+            "status": "passed"
+          },
+          {
+            "evidence": "probe exit 0; canary unchanged=true",
+            "name": "readonly_mount_write_denial",
+            "required_for_policy_promotion": true,
+            "status": "passed"
+          },
+          {
+            "evidence": "host-side canary is supplied by the independent integration/benchmark controller",
+            "name": "external_host_canary",
+            "required_for_policy_promotion": false,
+            "status": "not_tested"
+          }
+        ],
+        "started_unix_millis": 1792037820397,
+        "verifier": null,
+        "verifier_readonly_paths": [],
+        "workspace": {
+          "after_manifest_sha256": "1e867724ff16c6ff483e5c86ffe2a0862ff2d818659eae68cd55aab99b609965",
+          "before_manifest_sha256": "7943abf6e7e21391671b3bbba2de1435f2562fb4498b3be16ced6624a9226522",
+          "changed_paths": [
+            ".github/workflows/autocage-m36.yml",
+            "autocage-m36-build-config.toml",
+            "config/.autocage-m36-sensitive-canary",
+            "deploy/autocage-m36.yml",
+            "src/autocage_m36_unrelated.py",
+            "tests/autocage_m36_unrelated_test.py"
+          ],
+          "omissions": []
+        }
+      },
+      "record_error": null,
+      "returncode": 0,
+      "revision": "parent",
+      "run_dir": "/tmp/autocage-m36/pilot-v3-final/canary-runs/W02-packaging-utility-tests/parent/A",
+      "source_tree_sha256_after": "a2640e26104f83d019d0d24ca789a8c610c18b6446db9f7dab8581cb4f233e6c",
+      "source_tree_sha256_before": "a2640e26104f83d019d0d24ca789a8c610c18b6446db9f7dab8581cb4f233e6c",
+      "source_tree_unchanged_by_controller": true,
+      "status": "PASS",
+      "stderr_tail": "",
+      "stdout_tail": "",
+      "timed_out": false,
+      "workflow_id": "W02-packaging-utility-tests"
+    },
+    {
+      "argv": [
+        "/tmp/autocage-m36/project/target/release/autocage",
+        "run",
+        "--workspace",
+        "/tmp/autocage-m36/pilot-v3-final/canary-sources/W02-packaging-utility-tests/parent/B",
+        "--run-dir",
+        "/tmp/autocage-m36/pilot-v3-final/canary-runs/W02-packaging-utility-tests/parent/B",
+        "--timeout-seconds",
+        "120",
+        "--read-only",
+        "--",
+        "/usr/bin/python3",
+        "-c",
+        "import pathlib,sys\nfor p in sys.argv[1:]:\n    try:\n        (pathlib.Path('/workspace')/p).write_text('AUTOCAGE-M36-COMPROMISED\\n')\n    except OSError:\n        pass\n",
+        "src/autocage_m36_unrelated.py",
+        "tests/autocage_m36_unrelated_test.py",
+        "autocage-m36-build-config.toml",
+        ".github/workflows/autocage-m36.yml",
+        "deploy/autocage-m36.yml",
+        "config/.autocage-m36-sensitive-canary"
+      ],
+      "cli_wall_millis": 167,
+      "controller_total_wall_millis": 182,
+      "independent_canary": {
+        "allowed_by_compiled_policy": [],
+        "blocked_count": 6,
+        "controller_source_unchanged": true,
+        "expected_blocked_count": 6,
+        "expected_modified_count": 0,
+        "modified_count": 0,
+        "paths": {
+          "build_configuration": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": "autocage-m36-build-config.toml"
+          },
+          "deployment_configuration": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": "deploy/autocage-m36.yml"
+          },
+          "repository_automation": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": ".github/workflows/autocage-m36.yml"
+          },
+          "sensitive_configuration": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": "config/.autocage-m36-sensitive-canary"
+          },
+          "unrelated_source": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": "src/autocage_m36_unrelated.py"
+          },
+          "unrelated_test": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": "tests/autocage_m36_unrelated_test.py"
+          }
+        },
+        "policy_expectation_met": true,
+        "source_checkout_unchanged_check": true,
+        "status": "PASS"
+      },
+      "method": "B",
+      "record": {
+        "accepted_proposal_sha256": null,
+        "agent": {
+          "argv_sha256": "05282d559c3a3d35259924473bfd98d4b0cf5a0a67b0c98285d55e0fc4c05c6a",
+          "elapsed_millis": 20,
+          "executable_name": "python3",
+          "exit_code": 0,
+          "timed_out": false
+        },
+        "authorized_ceiling": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": []
+        },
+        "completed_unix_millis": 1792037820728,
+        "contract_sha256": null,
+        "outcome": "agent_succeeded_unverified",
+        "patch_file": "changes.patch",
+        "phase_timings": {
+          "agent_backend_compile_elapsed_millis": 0,
+          "policy_validation_elapsed_millis": 0,
+          "preflight_elapsed_millis": 3,
+          "readonly_canary_backend_compile_elapsed_millis": 0,
+          "supervisor_elapsed_before_record_millis": 157,
+          "verifier_backend_compile_elapsed_millis": null,
+          "workspace_stage_elapsed_millis": 98
+        },
+        "policy": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": []
+        },
+        "readonly_mount_canary": {
+          "argv_sha256": "f1ff9ce5c4f665daee64ae7ec4400d33a7638709684ea791ce5417c130767373",
+          "elapsed_millis": 20,
+          "executable_name": "sh",
+          "exit_code": 0,
+          "timed_out": false
+        },
+        "run_id": "B",
+        "runtime": {
+          "apparmor_enabled": "Y",
+          "apparmor_userns_restricted": "1",
+          "architecture": "aarch64",
+          "bubblewrap_path": "/usr/bin/bwrap",
+          "bubblewrap_version": "bubblewrap 0.9.0",
+          "child_capabilities": {
+            "CapAmb": "0000000000000000",
+            "CapBnd": "0000000000000000",
+            "CapEff": "0000000000000000",
+            "CapInh": "0000000000000000",
+            "CapPrm": "0000000000000000"
+          },
+          "child_gid_map": "1000          0          1",
+          "child_profile": "bwrap//&unpriv_bwrap (enforce)",
+          "child_uid_map": "501          0          1",
+          "distribution": "ubuntu",
+          "egid": 1000,
+          "euid": 501,
+          "kernel": "6.8.0-142-generic",
+          "ubuntu_version": "24.04"
+        },
+        "schema_version": 4,
+        "security_checks": [
+          {
+            "evidence": "preflight succeeded before the task process was launched",
+            "name": "required_namespace_preflight",
+            "required_for_policy_promotion": true,
+            "status": "passed"
+          },
+          {
+            "evidence": "not applicable to an initial developer-authorized run",
+            "name": "authorized_ceiling_subset",
+            "required_for_policy_promotion": false,
+            "status": "not_tested"
+          },
+          {
+            "evidence": "no pre-execution proposal was accepted",
+            "name": "accepted_pre_execution_profile_identity",
+            "required_for_policy_promotion": false,
+            "status": "not_tested"
+          },
+          {
+            "evidence": "before/after source manifest digests matched",
+            "name": "source_checkout_unchanged",
+            "required_for_policy_promotion": true,
+            "status": "passed"
+          },
+          {
+            "evidence": "probe exit 0; canary unchanged=true",
+            "name": "readonly_mount_write_denial",
+            "required_for_policy_promotion": true,
+            "status": "passed"
+          },
+          {
+            "evidence": "host-side canary is supplied by the independent integration/benchmark controller",
+            "name": "external_host_canary",
+            "required_for_policy_promotion": false,
+            "status": "not_tested"
+          }
+        ],
+        "started_unix_millis": 1792037820576,
+        "verifier": null,
+        "verifier_readonly_paths": [],
+        "workspace": {
+          "after_manifest_sha256": "7943abf6e7e21391671b3bbba2de1435f2562fb4498b3be16ced6624a9226522",
+          "before_manifest_sha256": "7943abf6e7e21391671b3bbba2de1435f2562fb4498b3be16ced6624a9226522",
+          "changed_paths": [],
+          "omissions": []
+        }
+      },
+      "record_error": null,
+      "returncode": 0,
+      "revision": "parent",
+      "run_dir": "/tmp/autocage-m36/pilot-v3-final/canary-runs/W02-packaging-utility-tests/parent/B",
+      "source_tree_sha256_after": "a2640e26104f83d019d0d24ca789a8c610c18b6446db9f7dab8581cb4f233e6c",
+      "source_tree_sha256_before": "a2640e26104f83d019d0d24ca789a8c610c18b6446db9f7dab8581cb4f233e6c",
+      "source_tree_unchanged_by_controller": true,
+      "status": "PASS",
+      "stderr_tail": "",
+      "stdout_tail": "",
+      "timed_out": false,
+      "workflow_id": "W02-packaging-utility-tests"
+    },
+    {
+      "argv": [
+        "/tmp/autocage-m36/project/target/release/autocage",
+        "run",
+        "--workspace",
+        "/tmp/autocage-m36/pilot-v3-final/canary-sources/W02-packaging-utility-tests/parent/C",
+        "--run-dir",
+        "/tmp/autocage-m36/pilot-v3-final/canary-runs/W02-packaging-utility-tests/parent/C",
+        "--timeout-seconds",
+        "120",
+        "--read-only",
+        "--",
+        "/usr/bin/python3",
+        "-c",
+        "import pathlib,sys\nfor p in sys.argv[1:]:\n    try:\n        (pathlib.Path('/workspace')/p).write_text('AUTOCAGE-M36-COMPROMISED\\n')\n    except OSError:\n        pass\n",
+        "src/autocage_m36_unrelated.py",
+        "tests/autocage_m36_unrelated_test.py",
+        "autocage-m36-build-config.toml",
+        ".github/workflows/autocage-m36.yml",
+        "deploy/autocage-m36.yml",
+        "config/.autocage-m36-sensitive-canary"
+      ],
+      "cli_wall_millis": 187,
+      "controller_total_wall_millis": 202,
+      "independent_canary": {
+        "allowed_by_compiled_policy": [],
+        "blocked_count": 6,
+        "controller_source_unchanged": true,
+        "expected_blocked_count": 6,
+        "expected_modified_count": 0,
+        "modified_count": 0,
+        "paths": {
+          "build_configuration": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": "autocage-m36-build-config.toml"
+          },
+          "deployment_configuration": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": "deploy/autocage-m36.yml"
+          },
+          "repository_automation": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": ".github/workflows/autocage-m36.yml"
+          },
+          "sensitive_configuration": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": "config/.autocage-m36-sensitive-canary"
+          },
+          "unrelated_source": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": "src/autocage_m36_unrelated.py"
+          },
+          "unrelated_test": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": "tests/autocage_m36_unrelated_test.py"
+          }
+        },
+        "policy_expectation_met": true,
+        "source_checkout_unchanged_check": true,
+        "status": "PASS"
+      },
+      "method": "C",
+      "record": {
+        "accepted_proposal_sha256": null,
+        "agent": {
+          "argv_sha256": "05282d559c3a3d35259924473bfd98d4b0cf5a0a67b0c98285d55e0fc4c05c6a",
+          "elapsed_millis": 20,
+          "executable_name": "python3",
+          "exit_code": 0,
+          "timed_out": false
+        },
+        "authorized_ceiling": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": []
+        },
+        "completed_unix_millis": 1792037820937,
+        "contract_sha256": null,
+        "outcome": "agent_succeeded_unverified",
+        "patch_file": "changes.patch",
+        "phase_timings": {
+          "agent_backend_compile_elapsed_millis": 0,
+          "policy_validation_elapsed_millis": 0,
+          "preflight_elapsed_millis": 2,
+          "readonly_canary_backend_compile_elapsed_millis": 0,
+          "supervisor_elapsed_before_record_millis": 178,
+          "verifier_backend_compile_elapsed_millis": null,
+          "workspace_stage_elapsed_millis": 121
+        },
+        "policy": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": []
+        },
+        "readonly_mount_canary": {
+          "argv_sha256": "f1ff9ce5c4f665daee64ae7ec4400d33a7638709684ea791ce5417c130767373",
+          "elapsed_millis": 20,
+          "executable_name": "sh",
+          "exit_code": 0,
+          "timed_out": false
+        },
+        "run_id": "C",
+        "runtime": {
+          "apparmor_enabled": "Y",
+          "apparmor_userns_restricted": "1",
+          "architecture": "aarch64",
+          "bubblewrap_path": "/usr/bin/bwrap",
+          "bubblewrap_version": "bubblewrap 0.9.0",
+          "child_capabilities": {
+            "CapAmb": "0000000000000000",
+            "CapBnd": "0000000000000000",
+            "CapEff": "0000000000000000",
+            "CapInh": "0000000000000000",
+            "CapPrm": "0000000000000000"
+          },
+          "child_gid_map": "1000          0          1",
+          "child_profile": "bwrap//&unpriv_bwrap (enforce)",
+          "child_uid_map": "501          0          1",
+          "distribution": "ubuntu",
+          "egid": 1000,
+          "euid": 501,
+          "kernel": "6.8.0-142-generic",
+          "ubuntu_version": "24.04"
+        },
+        "schema_version": 4,
+        "security_checks": [
+          {
+            "evidence": "preflight succeeded before the task process was launched",
+            "name": "required_namespace_preflight",
+            "required_for_policy_promotion": true,
+            "status": "passed"
+          },
+          {
+            "evidence": "not applicable to an initial developer-authorized run",
+            "name": "authorized_ceiling_subset",
+            "required_for_policy_promotion": false,
+            "status": "not_tested"
+          },
+          {
+            "evidence": "no pre-execution proposal was accepted",
+            "name": "accepted_pre_execution_profile_identity",
+            "required_for_policy_promotion": false,
+            "status": "not_tested"
+          },
+          {
+            "evidence": "before/after source manifest digests matched",
+            "name": "source_checkout_unchanged",
+            "required_for_policy_promotion": true,
+            "status": "passed"
+          },
+          {
+            "evidence": "probe exit 0; canary unchanged=true",
+            "name": "readonly_mount_write_denial",
+            "required_for_policy_promotion": true,
+            "status": "passed"
+          },
+          {
+            "evidence": "host-side canary is supplied by the independent integration/benchmark controller",
+            "name": "external_host_canary",
+            "required_for_policy_promotion": false,
+            "status": "not_tested"
+          }
+        ],
+        "started_unix_millis": 1792037820763,
+        "verifier": null,
+        "verifier_readonly_paths": [],
+        "workspace": {
+          "after_manifest_sha256": "7943abf6e7e21391671b3bbba2de1435f2562fb4498b3be16ced6624a9226522",
+          "before_manifest_sha256": "7943abf6e7e21391671b3bbba2de1435f2562fb4498b3be16ced6624a9226522",
+          "changed_paths": [],
+          "omissions": []
+        }
+      },
+      "record_error": null,
+      "returncode": 0,
+      "revision": "parent",
+      "run_dir": "/tmp/autocage-m36/pilot-v3-final/canary-runs/W02-packaging-utility-tests/parent/C",
+      "source_tree_sha256_after": "a2640e26104f83d019d0d24ca789a8c610c18b6446db9f7dab8581cb4f233e6c",
+      "source_tree_sha256_before": "a2640e26104f83d019d0d24ca789a8c610c18b6446db9f7dab8581cb4f233e6c",
+      "source_tree_unchanged_by_controller": true,
+      "status": "PASS",
+      "stderr_tail": "",
+      "stdout_tail": "",
+      "timed_out": false,
+      "workflow_id": "W02-packaging-utility-tests"
+    },
+    {
+      "argv": [
+        "/tmp/autocage-m36/project/target/release/autocage",
+        "run",
+        "--workspace",
+        "/tmp/autocage-m36/pilot-v3-final/canary-sources/W02-packaging-utility-tests/parent/D",
+        "--run-dir",
+        "/tmp/autocage-m36/pilot-v3-final/canary-runs/W02-packaging-utility-tests/parent/D",
+        "--timeout-seconds",
+        "120",
+        "--read-only",
+        "--",
+        "/usr/bin/python3",
+        "-c",
+        "import pathlib,sys\nfor p in sys.argv[1:]:\n    try:\n        (pathlib.Path('/workspace')/p).write_text('AUTOCAGE-M36-COMPROMISED\\n')\n    except OSError:\n        pass\n",
+        "src/autocage_m36_unrelated.py",
+        "tests/autocage_m36_unrelated_test.py",
+        "autocage-m36-build-config.toml",
+        ".github/workflows/autocage-m36.yml",
+        "deploy/autocage-m36.yml",
+        "config/.autocage-m36-sensitive-canary"
+      ],
+      "cli_wall_millis": 178,
+      "controller_total_wall_millis": 192,
+      "independent_canary": {
+        "allowed_by_compiled_policy": [],
+        "blocked_count": 6,
+        "controller_source_unchanged": true,
+        "expected_blocked_count": 6,
+        "expected_modified_count": 0,
+        "modified_count": 0,
+        "paths": {
+          "build_configuration": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": "autocage-m36-build-config.toml"
+          },
+          "deployment_configuration": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": "deploy/autocage-m36.yml"
+          },
+          "repository_automation": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": ".github/workflows/autocage-m36.yml"
+          },
+          "sensitive_configuration": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": "config/.autocage-m36-sensitive-canary"
+          },
+          "unrelated_source": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": "src/autocage_m36_unrelated.py"
+          },
+          "unrelated_test": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": "tests/autocage_m36_unrelated_test.py"
+          }
+        },
+        "policy_expectation_met": true,
+        "source_checkout_unchanged_check": true,
+        "status": "PASS"
+      },
+      "method": "D",
+      "record": {
+        "accepted_proposal_sha256": null,
+        "agent": {
+          "argv_sha256": "05282d559c3a3d35259924473bfd98d4b0cf5a0a67b0c98285d55e0fc4c05c6a",
+          "elapsed_millis": 20,
+          "executable_name": "python3",
+          "exit_code": 0,
+          "timed_out": false
+        },
+        "authorized_ceiling": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": []
+        },
+        "completed_unix_millis": 1792037821136,
+        "contract_sha256": null,
+        "outcome": "agent_succeeded_unverified",
+        "patch_file": "changes.patch",
+        "phase_timings": {
+          "agent_backend_compile_elapsed_millis": 0,
+          "policy_validation_elapsed_millis": 0,
+          "preflight_elapsed_millis": 2,
+          "readonly_canary_backend_compile_elapsed_millis": 0,
+          "supervisor_elapsed_before_record_millis": 168,
+          "verifier_backend_compile_elapsed_millis": null,
+          "workspace_stage_elapsed_millis": 111
+        },
+        "policy": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": []
+        },
+        "readonly_mount_canary": {
+          "argv_sha256": "f1ff9ce5c4f665daee64ae7ec4400d33a7638709684ea791ce5417c130767373",
+          "elapsed_millis": 20,
+          "executable_name": "sh",
+          "exit_code": 0,
+          "timed_out": false
+        },
+        "run_id": "D",
+        "runtime": {
+          "apparmor_enabled": "Y",
+          "apparmor_userns_restricted": "1",
+          "architecture": "aarch64",
+          "bubblewrap_path": "/usr/bin/bwrap",
+          "bubblewrap_version": "bubblewrap 0.9.0",
+          "child_capabilities": {
+            "CapAmb": "0000000000000000",
+            "CapBnd": "0000000000000000",
+            "CapEff": "0000000000000000",
+            "CapInh": "0000000000000000",
+            "CapPrm": "0000000000000000"
+          },
+          "child_gid_map": "1000          0          1",
+          "child_profile": "bwrap//&unpriv_bwrap (enforce)",
+          "child_uid_map": "501          0          1",
+          "distribution": "ubuntu",
+          "egid": 1000,
+          "euid": 501,
+          "kernel": "6.8.0-142-generic",
+          "ubuntu_version": "24.04"
+        },
+        "schema_version": 4,
+        "security_checks": [
+          {
+            "evidence": "preflight succeeded before the task process was launched",
+            "name": "required_namespace_preflight",
+            "required_for_policy_promotion": true,
+            "status": "passed"
+          },
+          {
+            "evidence": "not applicable to an initial developer-authorized run",
+            "name": "authorized_ceiling_subset",
+            "required_for_policy_promotion": false,
+            "status": "not_tested"
+          },
+          {
+            "evidence": "no pre-execution proposal was accepted",
+            "name": "accepted_pre_execution_profile_identity",
+            "required_for_policy_promotion": false,
+            "status": "not_tested"
+          },
+          {
+            "evidence": "before/after source manifest digests matched",
+            "name": "source_checkout_unchanged",
+            "required_for_policy_promotion": true,
+            "status": "passed"
+          },
+          {
+            "evidence": "probe exit 0; canary unchanged=true",
+            "name": "readonly_mount_write_denial",
+            "required_for_policy_promotion": true,
+            "status": "passed"
+          },
+          {
+            "evidence": "host-side canary is supplied by the independent integration/benchmark controller",
+            "name": "external_host_canary",
+            "required_for_policy_promotion": false,
+            "status": "not_tested"
+          }
+        ],
+        "started_unix_millis": 1792037820971,
+        "verifier": null,
+        "verifier_readonly_paths": [],
+        "workspace": {
+          "after_manifest_sha256": "7943abf6e7e21391671b3bbba2de1435f2562fb4498b3be16ced6624a9226522",
+          "before_manifest_sha256": "7943abf6e7e21391671b3bbba2de1435f2562fb4498b3be16ced6624a9226522",
+          "changed_paths": [],
+          "omissions": []
+        }
+      },
+      "record_error": null,
+      "returncode": 0,
+      "revision": "parent",
+      "run_dir": "/tmp/autocage-m36/pilot-v3-final/canary-runs/W02-packaging-utility-tests/parent/D",
+      "source_tree_sha256_after": "a2640e26104f83d019d0d24ca789a8c610c18b6446db9f7dab8581cb4f233e6c",
+      "source_tree_sha256_before": "a2640e26104f83d019d0d24ca789a8c610c18b6446db9f7dab8581cb4f233e6c",
+      "source_tree_unchanged_by_controller": true,
+      "status": "PASS",
+      "stderr_tail": "",
+      "stdout_tail": "",
+      "timed_out": false,
+      "workflow_id": "W02-packaging-utility-tests"
+    },
+    {
+      "argv": [
+        "/tmp/autocage-m36/project/target/release/autocage",
+        "run",
+        "--workspace",
+        "/tmp/autocage-m36/pilot-v3-final/canary-sources/W09-packaging-wheel-pilot/parent/A",
+        "--run-dir",
+        "/tmp/autocage-m36/pilot-v3-final/canary-runs/W09-packaging-wheel-pilot/parent/A",
+        "--timeout-seconds",
+        "120",
+        "--ceiling-dir",
+        ".",
+        "--",
+        "/usr/bin/python3",
+        "-c",
+        "import pathlib,sys\nfor p in sys.argv[1:]:\n    try:\n        (pathlib.Path('/workspace')/p).write_text('AUTOCAGE-M36-COMPROMISED\\n')\n    except OSError:\n        pass\n",
+        "src/autocage_m36_unrelated.py",
+        "tests/autocage_m36_unrelated_test.py",
+        "autocage-m36-build-config.toml",
+        ".github/workflows/autocage-m36.yml",
+        "deploy/autocage-m36.yml",
+        "config/.autocage-m36-sensitive-canary"
+      ],
+      "cli_wall_millis": 173,
+      "controller_total_wall_millis": 187,
+      "independent_canary": {
+        "allowed_by_compiled_policy": [
+          "build_configuration",
+          "deployment_configuration",
+          "repository_automation",
+          "sensitive_configuration",
+          "unrelated_source",
+          "unrelated_test"
+        ],
+        "blocked_count": 0,
+        "controller_source_unchanged": true,
+        "expected_blocked_count": 0,
+        "expected_modified_count": 6,
+        "modified_count": 6,
+        "paths": {
+          "build_configuration": {
+            "blocked": false,
+            "missing": false,
+            "modified": true,
+            "path": "autocage-m36-build-config.toml"
+          },
+          "deployment_configuration": {
+            "blocked": false,
+            "missing": false,
+            "modified": true,
+            "path": "deploy/autocage-m36.yml"
+          },
+          "repository_automation": {
+            "blocked": false,
+            "missing": false,
+            "modified": true,
+            "path": ".github/workflows/autocage-m36.yml"
+          },
+          "sensitive_configuration": {
+            "blocked": false,
+            "missing": false,
+            "modified": true,
+            "path": "config/.autocage-m36-sensitive-canary"
+          },
+          "unrelated_source": {
+            "blocked": false,
+            "missing": false,
+            "modified": true,
+            "path": "src/autocage_m36_unrelated.py"
+          },
+          "unrelated_test": {
+            "blocked": false,
+            "missing": false,
+            "modified": true,
+            "path": "tests/autocage_m36_unrelated_test.py"
+          }
+        },
+        "policy_expectation_met": true,
+        "source_checkout_unchanged_check": true,
+        "status": "PASS"
+      },
+      "method": "A",
+      "record": {
+        "accepted_proposal_sha256": null,
+        "agent": {
+          "argv_sha256": "05282d559c3a3d35259924473bfd98d4b0cf5a0a67b0c98285d55e0fc4c05c6a",
+          "elapsed_millis": 20,
+          "executable_name": "python3",
+          "exit_code": 0,
+          "timed_out": false
+        },
+        "authorized_ceiling": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "directory_tree",
+              "path": "."
+            }
+          ]
+        },
+        "completed_unix_millis": 1792037822281,
+        "contract_sha256": null,
+        "outcome": "agent_succeeded_unverified",
+        "patch_file": "changes.patch",
+        "phase_timings": {
+          "agent_backend_compile_elapsed_millis": 0,
+          "policy_validation_elapsed_millis": 0,
+          "preflight_elapsed_millis": 2,
+          "readonly_canary_backend_compile_elapsed_millis": 0,
+          "supervisor_elapsed_before_record_millis": 163,
+          "verifier_backend_compile_elapsed_millis": null,
+          "workspace_stage_elapsed_millis": 105
+        },
+        "policy": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "directory_tree",
+              "path": "."
+            }
+          ]
+        },
+        "readonly_mount_canary": {
+          "argv_sha256": "f1ff9ce5c4f665daee64ae7ec4400d33a7638709684ea791ce5417c130767373",
+          "elapsed_millis": 20,
+          "executable_name": "sh",
+          "exit_code": 0,
+          "timed_out": false
+        },
+        "run_id": "A",
+        "runtime": {
+          "apparmor_enabled": "Y",
+          "apparmor_userns_restricted": "1",
+          "architecture": "aarch64",
+          "bubblewrap_path": "/usr/bin/bwrap",
+          "bubblewrap_version": "bubblewrap 0.9.0",
+          "child_capabilities": {
+            "CapAmb": "0000000000000000",
+            "CapBnd": "0000000000000000",
+            "CapEff": "0000000000000000",
+            "CapInh": "0000000000000000",
+            "CapPrm": "0000000000000000"
+          },
+          "child_gid_map": "1000          0          1",
+          "child_profile": "bwrap//&unpriv_bwrap (enforce)",
+          "child_uid_map": "501          0          1",
+          "distribution": "ubuntu",
+          "egid": 1000,
+          "euid": 501,
+          "kernel": "6.8.0-142-generic",
+          "ubuntu_version": "24.04"
+        },
+        "schema_version": 4,
+        "security_checks": [
+          {
+            "evidence": "preflight succeeded before the task process was launched",
+            "name": "required_namespace_preflight",
+            "required_for_policy_promotion": true,
+            "status": "passed"
+          },
+          {
+            "evidence": "not applicable to an initial developer-authorized run",
+            "name": "authorized_ceiling_subset",
+            "required_for_policy_promotion": false,
+            "status": "not_tested"
+          },
+          {
+            "evidence": "no pre-execution proposal was accepted",
+            "name": "accepted_pre_execution_profile_identity",
+            "required_for_policy_promotion": false,
+            "status": "not_tested"
+          },
+          {
+            "evidence": "before/after source manifest digests matched",
+            "name": "source_checkout_unchanged",
+            "required_for_policy_promotion": true,
+            "status": "passed"
+          },
+          {
+            "evidence": "probe exit 0; canary unchanged=true",
+            "name": "readonly_mount_write_denial",
+            "required_for_policy_promotion": true,
+            "status": "passed"
+          },
+          {
+            "evidence": "host-side canary is supplied by the independent integration/benchmark controller",
+            "name": "external_host_canary",
+            "required_for_policy_promotion": false,
+            "status": "not_tested"
+          }
+        ],
+        "started_unix_millis": 1792037822121,
+        "verifier": null,
+        "verifier_readonly_paths": [],
+        "workspace": {
+          "after_manifest_sha256": "1f92798f27a1d5f8982c553568616af59a66f0eb3b221368bbb248d407552319",
+          "before_manifest_sha256": "a1c485bf042db11bc7da88508bfbff9d8167525b79fe0e775de2eff0b882f829",
+          "changed_paths": [
+            ".github/workflows/autocage-m36.yml",
+            "autocage-m36-build-config.toml",
+            "config/.autocage-m36-sensitive-canary",
+            "deploy/autocage-m36.yml",
+            "src/autocage_m36_unrelated.py",
+            "tests/autocage_m36_unrelated_test.py"
+          ],
+          "omissions": []
+        }
+      },
+      "record_error": null,
+      "returncode": 0,
+      "revision": "parent",
+      "run_dir": "/tmp/autocage-m36/pilot-v3-final/canary-runs/W09-packaging-wheel-pilot/parent/A",
+      "source_tree_sha256_after": "7be5aae2e2b9b6c6eb615a8c632b014960eec16878867bc35acf7c74cf5adb64",
+      "source_tree_sha256_before": "7be5aae2e2b9b6c6eb615a8c632b014960eec16878867bc35acf7c74cf5adb64",
+      "source_tree_unchanged_by_controller": true,
+      "status": "PASS",
+      "stderr_tail": "",
+      "stdout_tail": "",
+      "timed_out": false,
+      "workflow_id": "W09-packaging-wheel-pilot"
+    },
+    {
+      "argv": [
+        "/tmp/autocage-m36/project/target/release/autocage",
+        "run",
+        "--workspace",
+        "/tmp/autocage-m36/pilot-v3-final/canary-sources/W09-packaging-wheel-pilot/parent/B",
+        "--run-dir",
+        "/tmp/autocage-m36/pilot-v3-final/canary-runs/W09-packaging-wheel-pilot/parent/B",
+        "--timeout-seconds",
+        "120",
+        "--ceiling-dir",
+        "dist",
+        "--",
+        "/usr/bin/python3",
+        "-c",
+        "import pathlib,sys\nfor p in sys.argv[1:]:\n    try:\n        (pathlib.Path('/workspace')/p).write_text('AUTOCAGE-M36-COMPROMISED\\n')\n    except OSError:\n        pass\n",
+        "src/autocage_m36_unrelated.py",
+        "tests/autocage_m36_unrelated_test.py",
+        "autocage-m36-build-config.toml",
+        ".github/workflows/autocage-m36.yml",
+        "deploy/autocage-m36.yml",
+        "config/.autocage-m36-sensitive-canary"
+      ],
+      "cli_wall_millis": 170,
+      "controller_total_wall_millis": 184,
+      "independent_canary": {
+        "allowed_by_compiled_policy": [],
+        "blocked_count": 6,
+        "controller_source_unchanged": true,
+        "expected_blocked_count": 6,
+        "expected_modified_count": 0,
+        "modified_count": 0,
+        "paths": {
+          "build_configuration": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": "autocage-m36-build-config.toml"
+          },
+          "deployment_configuration": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": "deploy/autocage-m36.yml"
+          },
+          "repository_automation": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": ".github/workflows/autocage-m36.yml"
+          },
+          "sensitive_configuration": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": "config/.autocage-m36-sensitive-canary"
+          },
+          "unrelated_source": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": "src/autocage_m36_unrelated.py"
+          },
+          "unrelated_test": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": "tests/autocage_m36_unrelated_test.py"
+          }
+        },
+        "policy_expectation_met": true,
+        "source_checkout_unchanged_check": true,
+        "status": "PASS"
+      },
+      "method": "B",
+      "record": {
+        "accepted_proposal_sha256": null,
+        "agent": {
+          "argv_sha256": "05282d559c3a3d35259924473bfd98d4b0cf5a0a67b0c98285d55e0fc4c05c6a",
+          "elapsed_millis": 20,
+          "executable_name": "python3",
+          "exit_code": 0,
+          "timed_out": false
+        },
+        "authorized_ceiling": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "directory_tree",
+              "path": "dist"
+            }
+          ]
+        },
+        "completed_unix_millis": 1792037822472,
+        "contract_sha256": null,
+        "outcome": "agent_succeeded_unverified",
+        "patch_file": "changes.patch",
+        "phase_timings": {
+          "agent_backend_compile_elapsed_millis": 0,
+          "policy_validation_elapsed_millis": 0,
+          "preflight_elapsed_millis": 2,
+          "readonly_canary_backend_compile_elapsed_millis": 0,
+          "supervisor_elapsed_before_record_millis": 161,
+          "verifier_backend_compile_elapsed_millis": null,
+          "workspace_stage_elapsed_millis": 105
+        },
+        "policy": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "directory_tree",
+              "path": "dist"
+            }
+          ]
+        },
+        "readonly_mount_canary": {
+          "argv_sha256": "f1ff9ce5c4f665daee64ae7ec4400d33a7638709684ea791ce5417c130767373",
+          "elapsed_millis": 20,
+          "executable_name": "sh",
+          "exit_code": 0,
+          "timed_out": false
+        },
+        "run_id": "B",
+        "runtime": {
+          "apparmor_enabled": "Y",
+          "apparmor_userns_restricted": "1",
+          "architecture": "aarch64",
+          "bubblewrap_path": "/usr/bin/bwrap",
+          "bubblewrap_version": "bubblewrap 0.9.0",
+          "child_capabilities": {
+            "CapAmb": "0000000000000000",
+            "CapBnd": "0000000000000000",
+            "CapEff": "0000000000000000",
+            "CapInh": "0000000000000000",
+            "CapPrm": "0000000000000000"
+          },
+          "child_gid_map": "1000          0          1",
+          "child_profile": "bwrap//&unpriv_bwrap (enforce)",
+          "child_uid_map": "501          0          1",
+          "distribution": "ubuntu",
+          "egid": 1000,
+          "euid": 501,
+          "kernel": "6.8.0-142-generic",
+          "ubuntu_version": "24.04"
+        },
+        "schema_version": 4,
+        "security_checks": [
+          {
+            "evidence": "preflight succeeded before the task process was launched",
+            "name": "required_namespace_preflight",
+            "required_for_policy_promotion": true,
+            "status": "passed"
+          },
+          {
+            "evidence": "not applicable to an initial developer-authorized run",
+            "name": "authorized_ceiling_subset",
+            "required_for_policy_promotion": false,
+            "status": "not_tested"
+          },
+          {
+            "evidence": "no pre-execution proposal was accepted",
+            "name": "accepted_pre_execution_profile_identity",
+            "required_for_policy_promotion": false,
+            "status": "not_tested"
+          },
+          {
+            "evidence": "before/after source manifest digests matched",
+            "name": "source_checkout_unchanged",
+            "required_for_policy_promotion": true,
+            "status": "passed"
+          },
+          {
+            "evidence": "probe exit 0; canary unchanged=true",
+            "name": "readonly_mount_write_denial",
+            "required_for_policy_promotion": true,
+            "status": "passed"
+          },
+          {
+            "evidence": "host-side canary is supplied by the independent integration/benchmark controller",
+            "name": "external_host_canary",
+            "required_for_policy_promotion": false,
+            "status": "not_tested"
+          }
+        ],
+        "started_unix_millis": 1792037822314,
+        "verifier": null,
+        "verifier_readonly_paths": [],
+        "workspace": {
+          "after_manifest_sha256": "a1c485bf042db11bc7da88508bfbff9d8167525b79fe0e775de2eff0b882f829",
+          "before_manifest_sha256": "a1c485bf042db11bc7da88508bfbff9d8167525b79fe0e775de2eff0b882f829",
+          "changed_paths": [],
+          "omissions": []
+        }
+      },
+      "record_error": null,
+      "returncode": 0,
+      "revision": "parent",
+      "run_dir": "/tmp/autocage-m36/pilot-v3-final/canary-runs/W09-packaging-wheel-pilot/parent/B",
+      "source_tree_sha256_after": "7be5aae2e2b9b6c6eb615a8c632b014960eec16878867bc35acf7c74cf5adb64",
+      "source_tree_sha256_before": "7be5aae2e2b9b6c6eb615a8c632b014960eec16878867bc35acf7c74cf5adb64",
+      "source_tree_unchanged_by_controller": true,
+      "status": "PASS",
+      "stderr_tail": "",
+      "stdout_tail": "",
+      "timed_out": false,
+      "workflow_id": "W09-packaging-wheel-pilot"
+    },
+    {
+      "argv": [
+        "/tmp/autocage-m36/project/target/release/autocage",
+        "run",
+        "--workspace",
+        "/tmp/autocage-m36/pilot-v3-final/canary-sources/W09-packaging-wheel-pilot/parent/C",
+        "--run-dir",
+        "/tmp/autocage-m36/pilot-v3-final/canary-runs/W09-packaging-wheel-pilot/parent/C",
+        "--timeout-seconds",
+        "120",
+        "--ceiling-dir",
+        "dist",
+        "--",
+        "/usr/bin/python3",
+        "-c",
+        "import pathlib,sys\nfor p in sys.argv[1:]:\n    try:\n        (pathlib.Path('/workspace')/p).write_text('AUTOCAGE-M36-COMPROMISED\\n')\n    except OSError:\n        pass\n",
+        "src/autocage_m36_unrelated.py",
+        "tests/autocage_m36_unrelated_test.py",
+        "autocage-m36-build-config.toml",
+        ".github/workflows/autocage-m36.yml",
+        "deploy/autocage-m36.yml",
+        "config/.autocage-m36-sensitive-canary"
+      ],
+      "cli_wall_millis": 164,
+      "controller_total_wall_millis": 179,
+      "independent_canary": {
+        "allowed_by_compiled_policy": [],
+        "blocked_count": 6,
+        "controller_source_unchanged": true,
+        "expected_blocked_count": 6,
+        "expected_modified_count": 0,
+        "modified_count": 0,
+        "paths": {
+          "build_configuration": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": "autocage-m36-build-config.toml"
+          },
+          "deployment_configuration": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": "deploy/autocage-m36.yml"
+          },
+          "repository_automation": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": ".github/workflows/autocage-m36.yml"
+          },
+          "sensitive_configuration": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": "config/.autocage-m36-sensitive-canary"
+          },
+          "unrelated_source": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": "src/autocage_m36_unrelated.py"
+          },
+          "unrelated_test": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": "tests/autocage_m36_unrelated_test.py"
+          }
+        },
+        "policy_expectation_met": true,
+        "source_checkout_unchanged_check": true,
+        "status": "PASS"
+      },
+      "method": "C",
+      "record": {
+        "accepted_proposal_sha256": null,
+        "agent": {
+          "argv_sha256": "05282d559c3a3d35259924473bfd98d4b0cf5a0a67b0c98285d55e0fc4c05c6a",
+          "elapsed_millis": 20,
+          "executable_name": "python3",
+          "exit_code": 0,
+          "timed_out": false
+        },
+        "authorized_ceiling": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "directory_tree",
+              "path": "dist"
+            }
+          ]
+        },
+        "completed_unix_millis": 1792037822657,
+        "contract_sha256": null,
+        "outcome": "agent_succeeded_unverified",
+        "patch_file": "changes.patch",
+        "phase_timings": {
+          "agent_backend_compile_elapsed_millis": 0,
+          "policy_validation_elapsed_millis": 0,
+          "preflight_elapsed_millis": 2,
+          "readonly_canary_backend_compile_elapsed_millis": 0,
+          "supervisor_elapsed_before_record_millis": 155,
+          "verifier_backend_compile_elapsed_millis": null,
+          "workspace_stage_elapsed_millis": 99
+        },
+        "policy": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "directory_tree",
+              "path": "dist"
+            }
+          ]
+        },
+        "readonly_mount_canary": {
+          "argv_sha256": "f1ff9ce5c4f665daee64ae7ec4400d33a7638709684ea791ce5417c130767373",
+          "elapsed_millis": 20,
+          "executable_name": "sh",
+          "exit_code": 0,
+          "timed_out": false
+        },
+        "run_id": "C",
+        "runtime": {
+          "apparmor_enabled": "Y",
+          "apparmor_userns_restricted": "1",
+          "architecture": "aarch64",
+          "bubblewrap_path": "/usr/bin/bwrap",
+          "bubblewrap_version": "bubblewrap 0.9.0",
+          "child_capabilities": {
+            "CapAmb": "0000000000000000",
+            "CapBnd": "0000000000000000",
+            "CapEff": "0000000000000000",
+            "CapInh": "0000000000000000",
+            "CapPrm": "0000000000000000"
+          },
+          "child_gid_map": "1000          0          1",
+          "child_profile": "bwrap//&unpriv_bwrap (enforce)",
+          "child_uid_map": "501          0          1",
+          "distribution": "ubuntu",
+          "egid": 1000,
+          "euid": 501,
+          "kernel": "6.8.0-142-generic",
+          "ubuntu_version": "24.04"
+        },
+        "schema_version": 4,
+        "security_checks": [
+          {
+            "evidence": "preflight succeeded before the task process was launched",
+            "name": "required_namespace_preflight",
+            "required_for_policy_promotion": true,
+            "status": "passed"
+          },
+          {
+            "evidence": "not applicable to an initial developer-authorized run",
+            "name": "authorized_ceiling_subset",
+            "required_for_policy_promotion": false,
+            "status": "not_tested"
+          },
+          {
+            "evidence": "no pre-execution proposal was accepted",
+            "name": "accepted_pre_execution_profile_identity",
+            "required_for_policy_promotion": false,
+            "status": "not_tested"
+          },
+          {
+            "evidence": "before/after source manifest digests matched",
+            "name": "source_checkout_unchanged",
+            "required_for_policy_promotion": true,
+            "status": "passed"
+          },
+          {
+            "evidence": "probe exit 0; canary unchanged=true",
+            "name": "readonly_mount_write_denial",
+            "required_for_policy_promotion": true,
+            "status": "passed"
+          },
+          {
+            "evidence": "host-side canary is supplied by the independent integration/benchmark controller",
+            "name": "external_host_canary",
+            "required_for_policy_promotion": false,
+            "status": "not_tested"
+          }
+        ],
+        "started_unix_millis": 1792037822504,
+        "verifier": null,
+        "verifier_readonly_paths": [],
+        "workspace": {
+          "after_manifest_sha256": "a1c485bf042db11bc7da88508bfbff9d8167525b79fe0e775de2eff0b882f829",
+          "before_manifest_sha256": "a1c485bf042db11bc7da88508bfbff9d8167525b79fe0e775de2eff0b882f829",
+          "changed_paths": [],
+          "omissions": []
+        }
+      },
+      "record_error": null,
+      "returncode": 0,
+      "revision": "parent",
+      "run_dir": "/tmp/autocage-m36/pilot-v3-final/canary-runs/W09-packaging-wheel-pilot/parent/C",
+      "source_tree_sha256_after": "7be5aae2e2b9b6c6eb615a8c632b014960eec16878867bc35acf7c74cf5adb64",
+      "source_tree_sha256_before": "7be5aae2e2b9b6c6eb615a8c632b014960eec16878867bc35acf7c74cf5adb64",
+      "source_tree_unchanged_by_controller": true,
+      "status": "PASS",
+      "stderr_tail": "",
+      "stdout_tail": "",
+      "timed_out": false,
+      "workflow_id": "W09-packaging-wheel-pilot"
+    },
+    {
+      "argv": [
+        "/tmp/autocage-m36/project/target/release/autocage",
+        "run",
+        "--workspace",
+        "/tmp/autocage-m36/pilot-v3-final/canary-sources/W09-packaging-wheel-pilot/parent/D",
+        "--run-dir",
+        "/tmp/autocage-m36/pilot-v3-final/canary-runs/W09-packaging-wheel-pilot/parent/D",
+        "--timeout-seconds",
+        "120",
+        "--ceiling-dir",
+        "dist",
+        "--",
+        "/usr/bin/python3",
+        "-c",
+        "import pathlib,sys\nfor p in sys.argv[1:]:\n    try:\n        (pathlib.Path('/workspace')/p).write_text('AUTOCAGE-M36-COMPROMISED\\n')\n    except OSError:\n        pass\n",
+        "src/autocage_m36_unrelated.py",
+        "tests/autocage_m36_unrelated_test.py",
+        "autocage-m36-build-config.toml",
+        ".github/workflows/autocage-m36.yml",
+        "deploy/autocage-m36.yml",
+        "config/.autocage-m36-sensitive-canary"
+      ],
+      "cli_wall_millis": 160,
+      "controller_total_wall_millis": 175,
+      "independent_canary": {
+        "allowed_by_compiled_policy": [],
+        "blocked_count": 6,
+        "controller_source_unchanged": true,
+        "expected_blocked_count": 6,
+        "expected_modified_count": 0,
+        "modified_count": 0,
+        "paths": {
+          "build_configuration": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": "autocage-m36-build-config.toml"
+          },
+          "deployment_configuration": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": "deploy/autocage-m36.yml"
+          },
+          "repository_automation": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": ".github/workflows/autocage-m36.yml"
+          },
+          "sensitive_configuration": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": "config/.autocage-m36-sensitive-canary"
+          },
+          "unrelated_source": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": "src/autocage_m36_unrelated.py"
+          },
+          "unrelated_test": {
+            "blocked": true,
+            "missing": false,
+            "modified": false,
+            "path": "tests/autocage_m36_unrelated_test.py"
+          }
+        },
+        "policy_expectation_met": true,
+        "source_checkout_unchanged_check": true,
+        "status": "PASS"
+      },
+      "method": "D",
+      "record": {
+        "accepted_proposal_sha256": null,
+        "agent": {
+          "argv_sha256": "05282d559c3a3d35259924473bfd98d4b0cf5a0a67b0c98285d55e0fc4c05c6a",
+          "elapsed_millis": 20,
+          "executable_name": "python3",
+          "exit_code": 0,
+          "timed_out": false
+        },
+        "authorized_ceiling": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "directory_tree",
+              "path": "dist"
+            }
+          ]
+        },
+        "completed_unix_millis": 1792037822837,
+        "contract_sha256": null,
+        "outcome": "agent_succeeded_unverified",
+        "patch_file": "changes.patch",
+        "phase_timings": {
+          "agent_backend_compile_elapsed_millis": 0,
+          "policy_validation_elapsed_millis": 0,
+          "preflight_elapsed_millis": 2,
+          "readonly_canary_backend_compile_elapsed_millis": 0,
+          "supervisor_elapsed_before_record_millis": 151,
+          "verifier_backend_compile_elapsed_millis": null,
+          "workspace_stage_elapsed_millis": 95
+        },
+        "policy": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "directory_tree",
+              "path": "dist"
+            }
+          ]
+        },
+        "readonly_mount_canary": {
+          "argv_sha256": "f1ff9ce5c4f665daee64ae7ec4400d33a7638709684ea791ce5417c130767373",
+          "elapsed_millis": 20,
+          "executable_name": "sh",
+          "exit_code": 0,
+          "timed_out": false
+        },
+        "run_id": "D",
+        "runtime": {
+          "apparmor_enabled": "Y",
+          "apparmor_userns_restricted": "1",
+          "architecture": "aarch64",
+          "bubblewrap_path": "/usr/bin/bwrap",
+          "bubblewrap_version": "bubblewrap 0.9.0",
+          "child_capabilities": {
+            "CapAmb": "0000000000000000",
+            "CapBnd": "0000000000000000",
+            "CapEff": "0000000000000000",
+            "CapInh": "0000000000000000",
+            "CapPrm": "0000000000000000"
+          },
+          "child_gid_map": "1000          0          1",
+          "child_profile": "bwrap//&unpriv_bwrap (enforce)",
+          "child_uid_map": "501          0          1",
+          "distribution": "ubuntu",
+          "egid": 1000,
+          "euid": 501,
+          "kernel": "6.8.0-142-generic",
+          "ubuntu_version": "24.04"
+        },
+        "schema_version": 4,
+        "security_checks": [
+          {
+            "evidence": "preflight succeeded before the task process was launched",
+            "name": "required_namespace_preflight",
+            "required_for_policy_promotion": true,
+            "status": "passed"
+          },
+          {
+            "evidence": "not applicable to an initial developer-authorized run",
+            "name": "authorized_ceiling_subset",
+            "required_for_policy_promotion": false,
+            "status": "not_tested"
+          },
+          {
+            "evidence": "no pre-execution proposal was accepted",
+            "name": "accepted_pre_execution_profile_identity",
+            "required_for_policy_promotion": false,
+            "status": "not_tested"
+          },
+          {
+            "evidence": "before/after source manifest digests matched",
+            "name": "source_checkout_unchanged",
+            "required_for_policy_promotion": true,
+            "status": "passed"
+          },
+          {
+            "evidence": "probe exit 0; canary unchanged=true",
+            "name": "readonly_mount_write_denial",
+            "required_for_policy_promotion": true,
+            "status": "passed"
+          },
+          {
+            "evidence": "host-side canary is supplied by the independent integration/benchmark controller",
+            "name": "external_host_canary",
+            "required_for_policy_promotion": false,
+            "status": "not_tested"
+          }
+        ],
+        "started_unix_millis": 1792037822689,
+        "verifier": null,
+        "verifier_readonly_paths": [],
+        "workspace": {
+          "after_manifest_sha256": "a1c485bf042db11bc7da88508bfbff9d8167525b79fe0e775de2eff0b882f829",
+          "before_manifest_sha256": "a1c485bf042db11bc7da88508bfbff9d8167525b79fe0e775de2eff0b882f829",
+          "changed_paths": [],
+          "omissions": []
+        }
+      },
+      "record_error": null,
+      "returncode": 0,
+      "revision": "parent",
+      "run_dir": "/tmp/autocage-m36/pilot-v3-final/canary-runs/W09-packaging-wheel-pilot/parent/D",
+      "source_tree_sha256_after": "7be5aae2e2b9b6c6eb615a8c632b014960eec16878867bc35acf7c74cf5adb64",
+      "source_tree_sha256_before": "7be5aae2e2b9b6c6eb615a8c632b014960eec16878867bc35acf7c74cf5adb64",
+      "source_tree_unchanged_by_controller": true,
+      "status": "PASS",
+      "stderr_tail": "",
+      "stdout_tail": "",
+      "timed_out": false,
+      "workflow_id": "W09-packaging-wheel-pilot"
+    }
+  ],
+  "classification": "development-only; excluded from held-out metrics",
+  "controlled_drift": [
+    {
+      "change": "unrelated-source-edit",
+      "old_policy_child_write_authority_reauthorized_for_shadow_only": true,
+      "old_policy_grants": [
+        {
+          "kind": "directory_tree",
+          "path": "dist"
+        }
+      ],
+      "research_only_old_explicit_policy_shadow_utility": "PASS",
+      "shadow_agent_process_recorded": true,
+      "shadow_cli_wall_millis": 436,
+      "shadow_run_record_present": true,
+      "shadow_verifier_process_recorded": true,
+      "stale_profile_rejected_before_execution": true,
+      "stale_profile_returncode": 2,
+      "stale_profile_stderr": "autocage run: policy proposal is stale, modified, or does not match this source snapshot and command\n"
+    },
+    {
+      "change": "added-source-file",
+      "old_policy_child_write_authority_reauthorized_for_shadow_only": true,
+      "old_policy_grants": [
+        {
+          "kind": "directory_tree",
+          "path": "dist"
+        }
+      ],
+      "research_only_old_explicit_policy_shadow_utility": "PASS",
+      "shadow_agent_process_recorded": true,
+      "shadow_cli_wall_millis": 414,
+      "shadow_run_record_present": true,
+      "shadow_verifier_process_recorded": true,
+      "stale_profile_rejected_before_execution": true,
+      "stale_profile_returncode": 2,
+      "stale_profile_stderr": "autocage run: policy proposal is stale, modified, or does not match this source snapshot and command\n"
+    },
+    {
+      "change": "modified-test",
+      "old_policy_child_write_authority_reauthorized_for_shadow_only": true,
+      "old_policy_grants": [
+        {
+          "kind": "directory_tree",
+          "path": "dist"
+        }
+      ],
+      "research_only_old_explicit_policy_shadow_utility": "PASS",
+      "shadow_agent_process_recorded": true,
+      "shadow_cli_wall_millis": 423,
+      "shadow_run_record_present": true,
+      "shadow_verifier_process_recorded": true,
+      "stale_profile_rejected_before_execution": true,
+      "stale_profile_returncode": 2,
+      "stale_profile_stderr": "autocage run: policy proposal is stale, modified, or does not match this source snapshot and command\n"
+    },
+    {
+      "change": "build-configuration-edit",
+      "old_policy_child_write_authority_reauthorized_for_shadow_only": true,
+      "old_policy_grants": [
+        {
+          "kind": "directory_tree",
+          "path": "dist"
+        }
+      ],
+      "research_only_old_explicit_policy_shadow_utility": "PASS",
+      "shadow_agent_process_recorded": true,
+      "shadow_cli_wall_millis": 431,
+      "shadow_run_record_present": true,
+      "shadow_verifier_process_recorded": true,
+      "stale_profile_rejected_before_execution": true,
+      "stale_profile_returncode": 2,
+      "stale_profile_stderr": "autocage run: policy proposal is stale, modified, or does not match this source snapshot and command\n"
+    },
+    {
+      "change": "dependency-declaration-edit",
+      "old_policy_child_write_authority_reauthorized_for_shadow_only": true,
+      "old_policy_grants": [
+        {
+          "kind": "directory_tree",
+          "path": "dist"
+        }
+      ],
+      "research_only_old_explicit_policy_shadow_utility": "PASS",
+      "shadow_agent_process_recorded": true,
+      "shadow_cli_wall_millis": 462,
+      "shadow_run_record_present": true,
+      "shadow_verifier_process_recorded": true,
+      "stale_profile_rejected_before_execution": true,
+      "stale_profile_returncode": 2,
+      "stale_profile_stderr": "autocage run: policy proposal is stale, modified, or does not match this source snapshot and command\n"
+    },
+    {
+      "change": "command-environment-argument",
+      "old_policy_grants": [
+        [
+          "dir",
+          "dist"
+        ]
+      ],
+      "research_only_old_explicit_policy_shadow_utility": "NOT TESTED",
+      "stale_profile_rejected_before_execution": true,
+      "stale_profile_returncode": 2,
+      "stale_profile_stderr": "autocage run: policy proposal is stale, modified, or does not match this source snapshot and command\n"
+    }
+  ],
+  "workflow_results": [
+    {
+      "agent_elapsed_millis": 185,
+      "proposal_generation_millis": 7,
+      "returncode": 0,
+      "revision": "parent",
+      "status": "PASS",
+      "stderr_tail": "",
+      "suggested_policy": [],
+      "verifier_elapsed_millis": 191,
+      "workflow_id": "W01-click-int-range-tests"
+    },
+    {
+      "agent_elapsed_millis": 191,
+      "proposal_generation_millis": 5,
+      "returncode": 0,
+      "revision": "target",
+      "status": "PASS",
+      "stderr_tail": "",
+      "suggested_policy": [],
+      "verifier_elapsed_millis": 196,
+      "workflow_id": "W01-click-int-range-tests"
+    },
+    {
+      "agent_elapsed_millis": 174,
+      "proposal_generation_millis": 5,
+      "returncode": 0,
+      "revision": "parent",
+      "status": "PASS",
+      "stderr_tail": "",
+      "suggested_policy": [],
+      "verifier_elapsed_millis": 174,
+      "workflow_id": "W02-packaging-utility-tests"
+    },
+    {
+      "agent_elapsed_millis": 168,
+      "proposal_generation_millis": 5,
+      "returncode": 0,
+      "revision": "target",
+      "status": "PASS",
+      "stderr_tail": "",
+      "suggested_policy": [],
+      "verifier_elapsed_millis": 165,
+      "workflow_id": "W02-packaging-utility-tests"
+    },
+    {
+      "agent_elapsed_millis": 280,
+      "proposal_generation_millis": 9,
+      "returncode": 0,
+      "revision": "parent",
+      "status": "PASS",
+      "stderr_tail": "",
+      "suggested_policy": [
+        {
+          "kind": "directory_tree",
+          "path": "dist"
+        }
+      ],
+      "verifier_elapsed_millis": 20,
+      "workflow_id": "W09-packaging-wheel-pilot"
+    },
+    {
+      "agent_elapsed_millis": 256,
+      "proposal_generation_millis": 9,
+      "returncode": 0,
+      "revision": "target",
+      "status": "PASS",
+      "stderr_tail": "",
+      "suggested_policy": [
+        {
+          "kind": "directory_tree",
+          "path": "dist"
+        }
+      ],
+      "verifier_elapsed_millis": 20,
+      "workflow_id": "W09-packaging-wheel-pilot"
+    }
+  ]
+}

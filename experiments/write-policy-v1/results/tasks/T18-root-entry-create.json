@@ -1,0 +1,697 @@
+{
+  "baselines": {
+    "A": {
+      "agent_exit": 0,
+      "agent_timed_out": false,
+      "cost": {
+        "directory_entry_weight_total": 160,
+        "file_weight_total": 37,
+        "permission_rules": 1,
+        "recursive_directory_grants": 1,
+        "weighted_writable_exposure": 197,
+        "writable_directories": 16,
+        "writable_regular_files": 19
+      },
+      "elapsed_seconds": 0.0948223710001912,
+      "exit": 0,
+      "outcome": "verified",
+      "policy": [
+        [
+          "directory_tree",
+          "."
+        ]
+      ],
+      "replays": 1,
+      "run_dir": "/tmp/autocage-write-policy-v1-final-20261011-r2/runs/T18-root-entry-create/A-broad",
+      "security": {
+        "host_access_probe": "PASS",
+        "host_access_probe_blocked": true,
+        "host_canary_unchanged": true,
+        "original_source_write_probe": "PASS",
+        "original_source_write_probe_blocked": true,
+        "pass": true,
+        "source_unchanged": true,
+        "status": "PASS",
+        "verifier_readonly_probe": "PASS",
+        "verifier_readonly_probe_blocked": true,
+        "verifier_snapshot_unchanged": true
+      },
+      "stderr": "",
+      "utility_pass": true,
+      "verifier_exit": 0,
+      "verifier_timed_out": false
+    },
+    "B": {
+      "agent_exit": 1,
+      "agent_timed_out": false,
+      "cost": {
+        "directory_entry_weight_total": 50,
+        "file_weight_total": 10,
+        "permission_rules": 2,
+        "recursive_directory_grants": 2,
+        "weighted_writable_exposure": 60,
+        "writable_directories": 5,
+        "writable_regular_files": 10
+      },
+      "elapsed_seconds": 0.04023285199946258,
+      "exit": 1,
+      "outcome": "agent_failed",
+      "policy": [
+        [
+          "directory_tree",
+          "src"
+        ],
+        [
+          "directory_tree",
+          "tests"
+        ]
+      ],
+      "replays": 1,
+      "run_dir": "/tmp/autocage-write-policy-v1-final-20261011-r2/runs/T18-root-entry-create/B-static",
+      "security": {
+        "host_access_probe": "PASS",
+        "host_access_probe_blocked": true,
+        "host_canary_unchanged": true,
+        "original_source_write_probe": "PASS",
+        "original_source_write_probe_blocked": true,
+        "pass": false,
+        "source_unchanged": true,
+        "status": "NOT_TESTED",
+        "verifier_readonly_probe": "NOT_TESTED",
+        "verifier_readonly_probe_blocked": false,
+        "verifier_snapshot_unchanged": true
+      },
+      "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 20, in <module>\nOSError: [Errno 30] Read-only file system: '/workspace/root-output.txt'\n",
+      "utility_pass": false,
+      "verifier_exit": null,
+      "verifier_timed_out": null
+    },
+    "C": {
+      "agent_exit": 0,
+      "agent_timed_out": false,
+      "cost": {
+        "directory_entry_weight_total": 160,
+        "file_weight_total": 37,
+        "permission_rules": 1,
+        "recursive_directory_grants": 1,
+        "weighted_writable_exposure": 197,
+        "writable_directories": 16,
+        "writable_regular_files": 19
+      },
+      "elapsed_seconds": 0.05963334500120254,
+      "exit": 0,
+      "outcome": "verified",
+      "policy": [
+        [
+          "directory_tree",
+          "."
+        ]
+      ],
+      "replays": 1,
+      "run_dir": "/tmp/autocage-write-policy-v1-final-20261011-r2/runs/T18-root-entry-create/C-naive",
+      "security": {
+        "host_access_probe": "PASS",
+        "host_access_probe_blocked": true,
+        "host_canary_unchanged": true,
+        "original_source_write_probe": "PASS",
+        "original_source_write_probe_blocked": true,
+        "pass": true,
+        "source_unchanged": true,
+        "status": "PASS",
+        "verifier_readonly_probe": "PASS",
+        "verifier_readonly_probe_blocked": true,
+        "verifier_snapshot_unchanged": true
+      },
+      "stderr": "",
+      "utility_pass": true,
+      "verifier_exit": 0,
+      "verifier_timed_out": false
+    },
+    "M": {
+      "agent_exit": 0,
+      "agent_timed_out": false,
+      "cost": {
+        "directory_entry_weight_total": 160,
+        "file_weight_total": 37,
+        "permission_rules": 1,
+        "recursive_directory_grants": 1,
+        "weighted_writable_exposure": 197,
+        "writable_directories": 16,
+        "writable_regular_files": 19
+      },
+      "elapsed_seconds": 0.05973588900087634,
+      "exit": 0,
+      "outcome": "verified",
+      "policy": [
+        [
+          "directory_tree",
+          "."
+        ]
+      ],
+      "replays": 1,
+      "run_dir": "/tmp/autocage-write-policy-v1-final-20261011-r2/runs/T18-root-entry-create/M-manual-oracle",
+      "security": {
+        "host_access_probe": "PASS",
+        "host_access_probe_blocked": true,
+        "host_canary_unchanged": true,
+        "original_source_write_probe": "PASS",
+        "original_source_write_probe_blocked": true,
+        "pass": true,
+        "source_unchanged": true,
+        "status": "PASS",
+        "verifier_readonly_probe": "PASS",
+        "verifier_readonly_probe_blocked": true,
+        "verifier_snapshot_unchanged": true
+      },
+      "stderr": "",
+      "utility_pass": true,
+      "verifier_exit": 0,
+      "verifier_timed_out": false
+    }
+  },
+  "optimizers": {
+    "D-greedy": {
+      "cost": {
+        "directory_entry_weight_total": 160,
+        "file_weight_total": 37,
+        "permission_rules": 1,
+        "recursive_directory_grants": 1,
+        "schema": "weighted-write-surface-v1",
+        "weighted_writable_exposure": 197,
+        "writable_directories": 16,
+        "writable_regular_files": 19
+      },
+      "elapsed_seconds": 0.13751219700134243,
+      "exit": 0,
+      "initial_broad_runs": 1,
+      "optimizer": {
+        "authorized_ceiling": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "directory_tree",
+              "path": "."
+            }
+          ]
+        },
+        "best_cost": {
+          "directory_entry_weight_total": 160,
+          "file_weight_total": 37,
+          "permission_rules": 1,
+          "recursive_directory_grants": 1,
+          "schema": "weighted-write-surface-v1",
+          "weighted_writable_exposure": 197,
+          "writable_directories": 16,
+          "writable_regular_files": 19
+        },
+        "best_policy": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "directory_tree",
+              "path": "."
+            }
+          ]
+        },
+        "ceiling_cost": {
+          "directory_entry_weight_total": 160,
+          "file_weight_total": 37,
+          "permission_rules": 1,
+          "recursive_directory_grants": 1,
+          "schema": "weighted-write-surface-v1",
+          "weighted_writable_exposure": 197,
+          "writable_directories": 16,
+          "writable_regular_files": 19
+        },
+        "optimization_elapsed_millis": 89,
+        "rejected_trials": 2,
+        "search_replays": 2,
+        "status": "inconclusive",
+        "strategy": "greedy",
+        "total_replays": 2,
+        "trials": [
+          {
+            "classification": "trial-000:agent_failed_exit_1:verifier_readonly_canary_not_tested",
+            "cost": {
+              "directory_entry_weight_total": 150,
+              "file_weight_total": 37,
+              "permission_rules": 11,
+              "recursive_directory_grants": 8,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 187,
+              "writable_directories": 15,
+              "writable_regular_files": 19
+            },
+            "elapsed_millis": 41,
+            "passed": false,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "README.md"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "oracle.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "package.json"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": ".github"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "build"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "cache"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "config"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "docs"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "lib"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "src"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "tests"
+                }
+              ]
+            },
+            "security_canaries_passed": false
+          },
+          {
+            "classification": "trial-001:agent_failed_exit_1:verifier_readonly_canary_not_tested",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 0,
+              "permission_rules": 0,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 0,
+              "writable_directories": 0,
+              "writable_regular_files": 0
+            },
+            "elapsed_millis": 47,
+            "passed": false,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": []
+            },
+            "security_canaries_passed": false
+          }
+        ],
+        "validation_replays": 0
+      },
+      "policy": [
+        {
+          "kind": "directory_tree",
+          "path": "."
+        }
+      ],
+      "search_replays": 2,
+      "security_canaries_passed": true,
+      "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 20, in <module>\nOSError: [Errno 30] Read-only file system: '/workspace/root-output.txt'\nTraceback (most recent call last):\n  File \"<string>\", line 20, in <module>\nOSError: [Errno 30] Read-only file system: '/workspace/root-output.txt'\n",
+      "stdout": "optimizer: greedy (inconclusive)\nweighted writable exposure: 197 -> 197 (0.0% reduction)\nauthorized ceiling: directory-tree:.\nretained writes: directory-tree:.\nwritable files: 19, recursive directory grants: 1, policy rules: 1\nreplays: 2 search + 0 final validation = 2; elapsed: 89 ms\n",
+      "total_executions_including_initial_broad": 3,
+      "total_optimizer_replays": 2,
+      "utility_pass": true,
+      "validation_replays": 0
+    },
+    "E-random": {
+      "cost": {
+        "directory_entry_weight_total": 160,
+        "file_weight_total": 37,
+        "permission_rules": 1,
+        "recursive_directory_grants": 1,
+        "schema": "weighted-write-surface-v1",
+        "weighted_writable_exposure": 197,
+        "writable_directories": 16,
+        "writable_regular_files": 19
+      },
+      "elapsed_seconds": 0.12575996599844075,
+      "exit": 0,
+      "initial_broad_runs": 1,
+      "optimizer": {
+        "authorized_ceiling": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "directory_tree",
+              "path": "."
+            }
+          ]
+        },
+        "best_cost": {
+          "directory_entry_weight_total": 160,
+          "file_weight_total": 37,
+          "permission_rules": 1,
+          "recursive_directory_grants": 1,
+          "schema": "weighted-write-surface-v1",
+          "weighted_writable_exposure": 197,
+          "writable_directories": 16,
+          "writable_regular_files": 19
+        },
+        "best_policy": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "directory_tree",
+              "path": "."
+            }
+          ]
+        },
+        "ceiling_cost": {
+          "directory_entry_weight_total": 160,
+          "file_weight_total": 37,
+          "permission_rules": 1,
+          "recursive_directory_grants": 1,
+          "schema": "weighted-write-surface-v1",
+          "weighted_writable_exposure": 197,
+          "writable_directories": 16,
+          "writable_regular_files": 19
+        },
+        "optimization_elapsed_millis": 78,
+        "rejected_trials": 2,
+        "search_replays": 2,
+        "status": "inconclusive",
+        "strategy": "random",
+        "total_replays": 2,
+        "trials": [
+          {
+            "classification": "trial-000:agent_failed_exit_1:verifier_readonly_canary_not_tested",
+            "cost": {
+              "directory_entry_weight_total": 150,
+              "file_weight_total": 37,
+              "permission_rules": 11,
+              "recursive_directory_grants": 8,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 187,
+              "writable_directories": 15,
+              "writable_regular_files": 19
+            },
+            "elapsed_millis": 40,
+            "passed": false,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "README.md"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "oracle.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "package.json"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": ".github"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "build"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "cache"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "config"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "docs"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "lib"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "src"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "tests"
+                }
+              ]
+            },
+            "security_canaries_passed": false
+          },
+          {
+            "classification": "trial-001:agent_failed_exit_1:verifier_readonly_canary_not_tested",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 0,
+              "permission_rules": 0,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 0,
+              "writable_directories": 0,
+              "writable_regular_files": 0
+            },
+            "elapsed_millis": 37,
+            "passed": false,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": []
+            },
+            "security_canaries_passed": false
+          }
+        ],
+        "validation_replays": 0
+      },
+      "policy": [
+        {
+          "kind": "directory_tree",
+          "path": "."
+        }
+      ],
+      "search_replays": 2,
+      "security_canaries_passed": true,
+      "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 20, in <module>\nOSError: [Errno 30] Read-only file system: '/workspace/root-output.txt'\nTraceback (most recent call last):\n  File \"<string>\", line 20, in <module>\nOSError: [Errno 30] Read-only file system: '/workspace/root-output.txt'\n",
+      "stdout": "optimizer: random (inconclusive)\nweighted writable exposure: 197 -> 197 (0.0% reduction)\nauthorized ceiling: directory-tree:.\nretained writes: directory-tree:.\nwritable files: 19, recursive directory grants: 1, policy rules: 1\nreplays: 2 search + 0 final validation = 2; elapsed: 78 ms\n",
+      "total_executions_including_initial_broad": 3,
+      "total_optimizer_replays": 2,
+      "utility_pass": true,
+      "validation_replays": 0
+    },
+    "F-hierarchical": {
+      "cost": {
+        "directory_entry_weight_total": 160,
+        "file_weight_total": 37,
+        "permission_rules": 1,
+        "recursive_directory_grants": 1,
+        "schema": "weighted-write-surface-v1",
+        "weighted_writable_exposure": 197,
+        "writable_directories": 16,
+        "writable_regular_files": 19
+      },
+      "elapsed_seconds": 0.12901483300083783,
+      "exit": 0,
+      "initial_broad_runs": 1,
+      "optimizer": {
+        "authorized_ceiling": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "directory_tree",
+              "path": "."
+            }
+          ]
+        },
+        "best_cost": {
+          "directory_entry_weight_total": 160,
+          "file_weight_total": 37,
+          "permission_rules": 1,
+          "recursive_directory_grants": 1,
+          "schema": "weighted-write-surface-v1",
+          "weighted_writable_exposure": 197,
+          "writable_directories": 16,
+          "writable_regular_files": 19
+        },
+        "best_policy": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "directory_tree",
+              "path": "."
+            }
+          ]
+        },
+        "ceiling_cost": {
+          "directory_entry_weight_total": 160,
+          "file_weight_total": 37,
+          "permission_rules": 1,
+          "recursive_directory_grants": 1,
+          "schema": "weighted-write-surface-v1",
+          "weighted_writable_exposure": 197,
+          "writable_directories": 16,
+          "writable_regular_files": 19
+        },
+        "optimization_elapsed_millis": 79,
+        "rejected_trials": 2,
+        "search_replays": 2,
+        "status": "inconclusive",
+        "strategy": "hierarchical",
+        "total_replays": 2,
+        "trials": [
+          {
+            "classification": "trial-000:agent_failed_exit_1:verifier_readonly_canary_not_tested",
+            "cost": {
+              "directory_entry_weight_total": 150,
+              "file_weight_total": 37,
+              "permission_rules": 11,
+              "recursive_directory_grants": 8,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 187,
+              "writable_directories": 15,
+              "writable_regular_files": 19
+            },
+            "elapsed_millis": 37,
+            "passed": false,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "README.md"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "oracle.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "package.json"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": ".github"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "build"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "cache"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "config"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "docs"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "lib"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "src"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "tests"
+                }
+              ]
+            },
+            "security_canaries_passed": false
+          },
+          {
+            "classification": "trial-001:agent_failed_exit_1:verifier_readonly_canary_not_tested",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 0,
+              "permission_rules": 0,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 0,
+              "writable_directories": 0,
+              "writable_regular_files": 0
+            },
+            "elapsed_millis": 41,
+            "passed": false,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": []
+            },
+            "security_canaries_passed": false
+          }
+        ],
+        "validation_replays": 0
+      },
+      "policy": [
+        {
+          "kind": "directory_tree",
+          "path": "."
+        }
+      ],
+      "search_replays": 2,
+      "security_canaries_passed": true,
+      "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 20, in <module>\nOSError: [Errno 30] Read-only file system: '/workspace/root-output.txt'\nTraceback (most recent call last):\n  File \"<string>\", line 20, in <module>\nOSError: [Errno 30] Read-only file system: '/workspace/root-output.txt'\n",
+      "stdout": "optimizer: hierarchical (inconclusive)\nweighted writable exposure: 197 -> 197 (0.0% reduction)\nauthorized ceiling: directory-tree:.\nretained writes: directory-tree:.\nwritable files: 19, recursive directory grants: 1, policy rules: 1\nreplays: 2 search + 0 final validation = 2; elapsed: 79 ms\n",
+      "total_executions_including_initial_broad": 3,
+      "total_optimizer_replays": 2,
+      "utility_pass": true,
+      "validation_replays": 0
+    }
+  },
+  "task": {
+    "expected_effects": [
+      "create:root-output.txt"
+    ],
+    "family": "root-entry",
+    "held_out": true,
+    "initial_source_sha256": "8196bec3523a9c0f8db243a385bc2712365f11b7544dadb6e44d84b682b7c18d",
+    "notes": "Root-level entry creation requires a root recursive grant.",
+    "task_id": "T18-root-entry-create"
+  }
+}

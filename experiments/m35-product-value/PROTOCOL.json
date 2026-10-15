@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "suite_id": "autocage-m35-repeatable-workflow-v1",
+  "status": "frozen-before-final-comparison",
+  "freeze_note": "Controller hash updated after three pre-final harness attempts exposed (1) an argument-count bug in the contract-drift call, (2) a nonportable assumption that the click snapshot has README.rst, and (3) regeneration of a different loopback port during drift checks. Each stopped before a task result was written. Drift checks now mutate an unmodified pinned Python source and reuse the exact agent/verifier argv captured by the broad run. No workload, metric, baseline, threshold, or budget changed.",
+  "historical_m3_protocol_sha256": "11117c95fa81ead2805505030f283518ae399d20d70ec4bf2938e3a7b0ab472b",
+  "workflow_manifest": "workflows.json",
+  "workflow_manifest_sha256": "c0dc064f3ec462d8519f757782b4cec970c37c2e8a0f7f6ef097f9c7c004e144",
+  "controller_sha256": "c1627f3cb428b9aa475a5b35375a145b0fad504b15698dc71a07a3fe0b1adf8d",
+  "rr03_diagnostic_sha256": "7d2f7e9b64dde62f025607076c509ae7955e9104faa75b61429a169442c5c3a7",
+  "autocage_release_binary_sha256": "7ac1e971284de4ff4229a30902f22abbb29fc79746e109bd0b94077b76e44b39",
+  "cargo_manifest_sha256": "8c7dcbf8e6735cb753c048da8e28dc70a5ddfbcb237575ca75ed6422990a934a",
+  "cargo_lock_sha256": "b5520e4344c9878a7eebd3495a14f25b29c098c8b943dbaa435a692a7c8c0eea",
+  "optimizer_test_source_sha256": "c577e5d463bc0d9b1ea4b5d7abd9e216b8bf1250e8ea528fa87120a140e0f04e",
+  "rust_toolchain": {"rustc": "rustc 1.75.0 (82e1608df 2023-12-21) (built from a source tarball)", "cargo": "cargo 1.75.0"},
+  "workflow_selection": {
+    "task_count": 11,
+    "repository_count": 7,
+    "development_tasks": 4,
+    "held_out_tasks": 7,
+    "selection_rule": "All frozen M3 tasks, with two declared deterministic standard-library workflow extensions. No task, split, verifier, policy weight, or budget may be changed after final comparison begins."
+  },
+  "methods": {
+    "A": "Broad recursive writable workspace ceiling; one initial run per workflow.",
+    "B": "M3 frozen conventional static policy.",
+    "C": "M3 final changed-path policy inferred from the A run.",
+    "D": "M3 fixed-order greedy optimizer, 12 replay cap including three validations.",
+    "E": "M3 seeded random optimizer, seed 0x4155544f43414745, same cap.",
+    "F": "M3 hierarchical optimizer, same cap.",
+    "reuse": "For every broad-utility-passing workflow, run B three additional times. For every validated F policy, first require `inspect` to report SEALED and reusable_policy=true, then explicitly reapply its sealed grants through `run` against identical source/agent/verifier/runtime three additional times from fresh stages. This experimental harness does not add a production policy loader or relax contract checks.",
+    "stale_policy_shadow": "Research-only, no record contract and no promotion: test old F candidates after controlled source/workflow drift; production `tune` must first reject the changed contract."
+  },
+  "controlled_changes": [
+    "unrelated Python source comment",
+    "added source file",
+    "modified verifier test",
+    "modified build configuration",
+    "modified dependency declaration",
+    "changed verifier argv",
+    "changed agent argv",
+    "changed AutoCage runtime binary fingerprint"
+  ],
+  "security_scenario": {
+    "attack": "Separately attempt to create a synthetic file under the existing tests directory in the disposable staged workspace. The controller checks the actual staged filesystem after each run; agent stdout/exit claims alone do not establish blocking.",
+    "methods": ["A", "B", "C", "D", "E", "F"],
+    "positive_control": "The A broad ceiling must create the canary file in the stage.",
+    "negative_control": "For each claimed block, the canary must be absent in the stage and the original checkout unchanged. Host, verifier, and network controls remain independently checked."
+  },
+  "cost_schema": {
+    "primary": "weighted-write-surface-v1 unchanged from M2/M3",
+    "additional": ["exact-file grant count", "recursive-directory grant count", "existing files covered", "existing directory entries covered", "grant depth and breadth", "high-impact path coverage", "future child creation allowed", "actual unauthorized operations blocked"],
+    "interpretation": "Structural counts and blocked operations are reported separately; no score is an exploit probability. A recursive directory grant permits future child creation even when current-tree cost is small."
+  },
+  "timing": {
+    "record_schema": 3,
+    "required": ["initial broad execution", "search executions", "fresh validation executions", "agent and verifier executions", "CLI wall time", "workspace staging time", "Bubblewrap argv compilation time", "policy validation time", "subsequent B and F run time"],
+    "amortization_repetitions": [1, 3, 10, 50],
+    "limitations": "Bubblewrap argv construction timing excludes process startup, kernel mount work, and syscall cost. Agent/verifier elapsed time is recorded independently; CLI wall includes preflight, staging, mount execution, record/diff persistence, and controller overhead."
+  },
+  "scaling_microbenchmark": {
+    "candidate_atom_counts": [4, 8, 16, 32, 64],
+    "strategies": ["greedy", "random", "hierarchical"],
+    "layouts": ["required atoms clustered by directory", "required atoms dispersed across directories"],
+    "required_fraction": 0.25,
+    "maximum_replays_including_validation": 100,
+    "success_condition": "All required synthetic permissions retained and all removable permissions removed or bounded by the common replay cap; same simulated verifier for all strategies.",
+    "claimed_hierarchy_advantage_threshold": "At least 20% lower median replay count than both simpler strategies at atom counts 16, 32, and 64, with equal validated utility in both layouts. Otherwise no hierarchy advantage is claimed."
+  },
+  "predeclared_success_criteria": {
+    "mandatory_security": "Every applicable control executes; all expected denies and positive controls pass. Any mandatory NOT TESTED result is not a pass.",
+    "contract_drift": "All eight incompatible source, verifier, command, and runtime changes are rejected before candidate execution or tuning replay.",
+    "exact_reuse_utility": "Every promoted F policy passes all three fresh exact-contract repeats, with independent canaries passing.",
+    "policy_value": "At least 8 of the 10 F-promoted workflows improve weighted surface by at least 20 percentage points over B, and F blocks at least 80% of staged test-canary creation attempts with at least a 50-point block-rate improvement over B.",
+    "amortized_cost": "At 10 subsequent identical executions, median incremental tuning wall time per protected execution is no greater than the median measured B run wall time.",
+    "utility_preservation": "Every broad-baseline-passing workflow either has a validated narrow policy preserving utility or is explicitly reported as inconclusive with the broad result retained. No fallback counts as optimization success."
+  },
+  "decision_rules": {
+    "A_continue_to_m4": "All security, contract, utility, policy-value, and amortized-cost criteria pass, and source-drift shadow results show a credible workflow category whose policy remains sufficient without weakening production identity checks.",
+    "B_narrow_to_reusable_workflows": "Exact repeated workflows gain concrete staged-write protection and amortize cost, but ordinary source changes invalidate evidence or shadow sufficiency is limited. Keep M4 focused on pinned, owner-configured repository workflows.",
+    "C_pivot_policy_learning": "Narrowing works but repeated-task economics or exact-contract constraints make the resulting policy unusable for a stable workflow class; investigate pre-execution developer-authored profiles instead of generalizing reuse unsafely.",
+    "D_reconsider_write_only_optimization": "Optimized policies do not materially improve on B in actual blocked operations or policy surface, or static isolation/review provides essentially the same practical value."
+  },
+  "frozen_weights_and_budgets": {
+    "cost_schema": "weighted-write-surface-v1",
+    "directory_entry_weight": 10,
+    "high_impact_prefixes": [".github/workflows/", "deploy/", "deployment/", "scripts/", "package.json", "pyproject.toml", "cargo.toml"],
+    "search_budget": 12,
+    "fresh_validations": 3,
+    "workflow_repeat_count": 3,
+    "workflow_timeout_seconds": 120
+  }
+}

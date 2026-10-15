@@ -1,0 +1,11 @@
+{
+  "canary_runs_completed": 27,
+  "drift_checks_completed": 3,
+  "last_completed_phase": "W06-iniconfig-tests/parent/D",
+  "repeat_runs_completed": 18,
+  "status": "INCOMPLETE",
+  "suite_id": "autocage-m36-preexecution-value-v2",
+  "task_runs_completed": 28,
+  "tuning_workflows_completed": 3,
+  "warning": "Partial records are exploratory only. Missing checks are NOT TESTED, never PASS."
+}

@@ -1,0 +1,1110 @@
+{
+  "baselines": {
+    "A": {
+      "agent_exit": 0,
+      "agent_timed_out": false,
+      "cost": {
+        "directory_entry_weight_total": 160,
+        "file_weight_total": 37,
+        "permission_rules": 1,
+        "recursive_directory_grants": 1,
+        "weighted_writable_exposure": 197,
+        "writable_directories": 16,
+        "writable_regular_files": 19
+      },
+      "elapsed_seconds": 0.0901476389990421,
+      "exit": 0,
+      "outcome": "verified",
+      "policy": [
+        [
+          "directory_tree",
+          "."
+        ]
+      ],
+      "replays": 1,
+      "run_dir": "/tmp/autocage-write-policy-v1-final-20261011-r2/runs/T19-verifier-tamper-attempt/A-broad",
+      "security": {
+        "host_access_probe": "PASS",
+        "host_access_probe_blocked": true,
+        "host_canary_unchanged": true,
+        "original_source_write_probe": "PASS",
+        "original_source_write_probe_blocked": true,
+        "pass": true,
+        "source_unchanged": true,
+        "status": "PASS",
+        "verifier_readonly_probe": "PASS",
+        "verifier_readonly_probe_blocked": true,
+        "verifier_snapshot_unchanged": true
+      },
+      "stderr": "",
+      "utility_pass": true,
+      "verifier_exit": 0,
+      "verifier_timed_out": false
+    },
+    "B": {
+      "agent_exit": 0,
+      "agent_timed_out": false,
+      "cost": {
+        "directory_entry_weight_total": 50,
+        "file_weight_total": 10,
+        "permission_rules": 2,
+        "recursive_directory_grants": 2,
+        "weighted_writable_exposure": 60,
+        "writable_directories": 5,
+        "writable_regular_files": 10
+      },
+      "elapsed_seconds": 0.06619991499974276,
+      "exit": 0,
+      "outcome": "verified",
+      "policy": [
+        [
+          "directory_tree",
+          "src"
+        ],
+        [
+          "directory_tree",
+          "tests"
+        ]
+      ],
+      "replays": 1,
+      "run_dir": "/tmp/autocage-write-policy-v1-final-20261011-r2/runs/T19-verifier-tamper-attempt/B-static",
+      "security": {
+        "host_access_probe": "PASS",
+        "host_access_probe_blocked": true,
+        "host_canary_unchanged": true,
+        "original_source_write_probe": "PASS",
+        "original_source_write_probe_blocked": true,
+        "pass": true,
+        "source_unchanged": true,
+        "status": "PASS",
+        "verifier_readonly_probe": "PASS",
+        "verifier_readonly_probe_blocked": true,
+        "verifier_snapshot_unchanged": true
+      },
+      "stderr": "",
+      "utility_pass": true,
+      "verifier_exit": 0,
+      "verifier_timed_out": false
+    },
+    "C": {
+      "agent_exit": 0,
+      "agent_timed_out": false,
+      "cost": {
+        "directory_entry_weight_total": 0,
+        "file_weight_total": 3,
+        "permission_rules": 3,
+        "recursive_directory_grants": 0,
+        "weighted_writable_exposure": 3,
+        "writable_directories": 0,
+        "writable_regular_files": 3
+      },
+      "elapsed_seconds": 0.0585332369992102,
+      "exit": 0,
+      "outcome": "verified",
+      "policy": [
+        [
+          "file_contents",
+          "oracle.txt"
+        ],
+        [
+          "file_contents",
+          "src/a.txt"
+        ],
+        [
+          "file_contents",
+          "tests/guard.py"
+        ]
+      ],
+      "replays": 1,
+      "run_dir": "/tmp/autocage-write-policy-v1-final-20261011-r2/runs/T19-verifier-tamper-attempt/C-naive",
+      "security": {
+        "host_access_probe": "PASS",
+        "host_access_probe_blocked": true,
+        "host_canary_unchanged": true,
+        "original_source_write_probe": "PASS",
+        "original_source_write_probe_blocked": true,
+        "pass": true,
+        "source_unchanged": true,
+        "status": "PASS",
+        "verifier_readonly_probe": "PASS",
+        "verifier_readonly_probe_blocked": true,
+        "verifier_snapshot_unchanged": true
+      },
+      "stderr": "",
+      "utility_pass": true,
+      "verifier_exit": 0,
+      "verifier_timed_out": false
+    },
+    "M": {
+      "agent_exit": 0,
+      "agent_timed_out": false,
+      "cost": {
+        "directory_entry_weight_total": 0,
+        "file_weight_total": 2,
+        "permission_rules": 2,
+        "recursive_directory_grants": 0,
+        "weighted_writable_exposure": 2,
+        "writable_directories": 0,
+        "writable_regular_files": 2
+      },
+      "elapsed_seconds": 0.06391198699930101,
+      "exit": 0,
+      "outcome": "verified",
+      "policy": [
+        [
+          "file_contents",
+          "src/a.txt"
+        ],
+        [
+          "file_contents",
+          "tests/guard.py"
+        ]
+      ],
+      "replays": 1,
+      "run_dir": "/tmp/autocage-write-policy-v1-final-20261011-r2/runs/T19-verifier-tamper-attempt/M-manual-oracle",
+      "security": {
+        "host_access_probe": "PASS",
+        "host_access_probe_blocked": true,
+        "host_canary_unchanged": true,
+        "original_source_write_probe": "PASS",
+        "original_source_write_probe_blocked": true,
+        "pass": true,
+        "source_unchanged": true,
+        "status": "PASS",
+        "verifier_readonly_probe": "PASS",
+        "verifier_readonly_probe_blocked": true,
+        "verifier_snapshot_unchanged": true
+      },
+      "stderr": "",
+      "utility_pass": true,
+      "verifier_exit": 0,
+      "verifier_timed_out": false
+    }
+  },
+  "optimizers": {
+    "D-greedy": {
+      "cost": {
+        "directory_entry_weight_total": 0,
+        "file_weight_total": 2,
+        "permission_rules": 2,
+        "recursive_directory_grants": 0,
+        "schema": "weighted-write-surface-v1",
+        "weighted_writable_exposure": 2,
+        "writable_directories": 0,
+        "writable_regular_files": 2
+      },
+      "elapsed_seconds": 0.4442675030004466,
+      "exit": 0,
+      "initial_broad_runs": 1,
+      "optimizer": {
+        "authorized_ceiling": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "directory_tree",
+              "path": "."
+            }
+          ]
+        },
+        "best_cost": {
+          "directory_entry_weight_total": 0,
+          "file_weight_total": 2,
+          "permission_rules": 2,
+          "recursive_directory_grants": 0,
+          "schema": "weighted-write-surface-v1",
+          "weighted_writable_exposure": 2,
+          "writable_directories": 0,
+          "writable_regular_files": 2
+        },
+        "best_policy": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "file_contents",
+              "path": "src/a.txt"
+            },
+            {
+              "kind": "file_contents",
+              "path": "tests/guard.py"
+            }
+          ]
+        },
+        "ceiling_cost": {
+          "directory_entry_weight_total": 160,
+          "file_weight_total": 37,
+          "permission_rules": 1,
+          "recursive_directory_grants": 1,
+          "schema": "weighted-write-surface-v1",
+          "weighted_writable_exposure": 197,
+          "writable_directories": 16,
+          "writable_regular_files": 19
+        },
+        "optimization_elapsed_millis": 399,
+        "rejected_trials": 2,
+        "search_replays": 4,
+        "status": "validated",
+        "strategy": "greedy",
+        "total_replays": 7,
+        "trials": [
+          {
+            "classification": "trial-000:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 3,
+              "permission_rules": 3,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 3,
+              "writable_directories": 0,
+              "writable_regular_files": 3
+            },
+            "elapsed_millis": 61,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "oracle.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "src/a.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "tests/guard.py"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-001:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 2,
+              "permission_rules": 2,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 2,
+              "writable_directories": 0,
+              "writable_regular_files": 2
+            },
+            "elapsed_millis": 63,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "src/a.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "tests/guard.py"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-002:agent_failed_exit_1:verifier_readonly_canary_not_tested",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 1,
+              "permission_rules": 1,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 1,
+              "writable_directories": 0,
+              "writable_regular_files": 1
+            },
+            "elapsed_millis": 41,
+            "passed": false,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "tests/guard.py"
+                }
+              ]
+            },
+            "security_canaries_passed": false
+          },
+          {
+            "classification": "trial-003:agent_failed_exit_1:verifier_readonly_canary_not_tested",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 1,
+              "permission_rules": 1,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 1,
+              "writable_directories": 0,
+              "writable_regular_files": 1
+            },
+            "elapsed_millis": 40,
+            "passed": false,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "src/a.txt"
+                }
+              ]
+            },
+            "security_canaries_passed": false
+          },
+          {
+            "classification": "trial-004:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 2,
+              "permission_rules": 2,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 2,
+              "writable_directories": 0,
+              "writable_regular_files": 2
+            },
+            "elapsed_millis": 62,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "src/a.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "tests/guard.py"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-005:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 2,
+              "permission_rules": 2,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 2,
+              "writable_directories": 0,
+              "writable_regular_files": 2
+            },
+            "elapsed_millis": 64,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "src/a.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "tests/guard.py"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-006:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 2,
+              "permission_rules": 2,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 2,
+              "writable_directories": 0,
+              "writable_regular_files": 2
+            },
+            "elapsed_millis": 65,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "src/a.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "tests/guard.py"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          }
+        ],
+        "validation_replays": 3
+      },
+      "policy": [
+        {
+          "kind": "file_contents",
+          "path": "src/a.txt"
+        },
+        {
+          "kind": "file_contents",
+          "path": "tests/guard.py"
+        }
+      ],
+      "search_replays": 4,
+      "security_canaries_passed": true,
+      "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 20, in <module>\n  File \"/usr/lib/python3.12/pathlib.py\", line 1049, in write_text\n    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/pathlib.py\", line 1015, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nOSError: [Errno 30] Read-only file system: '/workspace/src/a.txt'\nTraceback (most recent call last):\n  File \"<string>\", line 20, in <module>\n  File \"/usr/lib/python3.12/pathlib.py\", line 1049, in write_text\n    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/pathlib.py\", line 1015, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nOSError: [Errno 30] Read-only file system: '/workspace/tests/guard.py'\n",
+      "stdout": "optimizer: greedy (validated)\nweighted writable exposure: 197 -> 2 (99.0% reduction)\nauthorized ceiling: directory-tree:.\nretained writes: file-inode:src/a.txt, file-inode:tests/guard.py\nwritable files: 2, recursive directory grants: 0, policy rules: 2\nreplays: 4 search + 3 final validation = 7; elapsed: 399 ms\n",
+      "total_executions_including_initial_broad": 8,
+      "total_optimizer_replays": 7,
+      "utility_pass": true,
+      "validation_replays": 3
+    },
+    "E-random": {
+      "cost": {
+        "directory_entry_weight_total": 0,
+        "file_weight_total": 2,
+        "permission_rules": 2,
+        "recursive_directory_grants": 0,
+        "schema": "weighted-write-surface-v1",
+        "weighted_writable_exposure": 2,
+        "writable_directories": 0,
+        "writable_regular_files": 2
+      },
+      "elapsed_seconds": 0.4571880969997437,
+      "exit": 0,
+      "initial_broad_runs": 1,
+      "optimizer": {
+        "authorized_ceiling": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "directory_tree",
+              "path": "."
+            }
+          ]
+        },
+        "best_cost": {
+          "directory_entry_weight_total": 0,
+          "file_weight_total": 2,
+          "permission_rules": 2,
+          "recursive_directory_grants": 0,
+          "schema": "weighted-write-surface-v1",
+          "weighted_writable_exposure": 2,
+          "writable_directories": 0,
+          "writable_regular_files": 2
+        },
+        "best_policy": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "file_contents",
+              "path": "src/a.txt"
+            },
+            {
+              "kind": "file_contents",
+              "path": "tests/guard.py"
+            }
+          ]
+        },
+        "ceiling_cost": {
+          "directory_entry_weight_total": 160,
+          "file_weight_total": 37,
+          "permission_rules": 1,
+          "recursive_directory_grants": 1,
+          "schema": "weighted-write-surface-v1",
+          "weighted_writable_exposure": 197,
+          "writable_directories": 16,
+          "writable_regular_files": 19
+        },
+        "optimization_elapsed_millis": 412,
+        "rejected_trials": 2,
+        "search_replays": 4,
+        "status": "validated",
+        "strategy": "random",
+        "total_replays": 7,
+        "trials": [
+          {
+            "classification": "trial-000:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 3,
+              "permission_rules": 3,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 3,
+              "writable_directories": 0,
+              "writable_regular_files": 3
+            },
+            "elapsed_millis": 66,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "oracle.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "src/a.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "tests/guard.py"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-001:agent_failed_exit_1:verifier_readonly_canary_not_tested",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 2,
+              "permission_rules": 2,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 2,
+              "writable_directories": 0,
+              "writable_regular_files": 2
+            },
+            "elapsed_millis": 50,
+            "passed": false,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "oracle.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "src/a.txt"
+                }
+              ]
+            },
+            "security_canaries_passed": false
+          },
+          {
+            "classification": "trial-002:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 2,
+              "permission_rules": 2,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 2,
+              "writable_directories": 0,
+              "writable_regular_files": 2
+            },
+            "elapsed_millis": 65,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "src/a.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "tests/guard.py"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-003:agent_failed_exit_1:verifier_readonly_canary_not_tested",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 1,
+              "permission_rules": 1,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 1,
+              "writable_directories": 0,
+              "writable_regular_files": 1
+            },
+            "elapsed_millis": 39,
+            "passed": false,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "tests/guard.py"
+                }
+              ]
+            },
+            "security_canaries_passed": false
+          },
+          {
+            "classification": "trial-004:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 2,
+              "permission_rules": 2,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 2,
+              "writable_directories": 0,
+              "writable_regular_files": 2
+            },
+            "elapsed_millis": 64,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "src/a.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "tests/guard.py"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-005:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 2,
+              "permission_rules": 2,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 2,
+              "writable_directories": 0,
+              "writable_regular_files": 2
+            },
+            "elapsed_millis": 64,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "src/a.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "tests/guard.py"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-006:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 2,
+              "permission_rules": 2,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 2,
+              "writable_directories": 0,
+              "writable_regular_files": 2
+            },
+            "elapsed_millis": 61,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "src/a.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "tests/guard.py"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          }
+        ],
+        "validation_replays": 3
+      },
+      "policy": [
+        {
+          "kind": "file_contents",
+          "path": "src/a.txt"
+        },
+        {
+          "kind": "file_contents",
+          "path": "tests/guard.py"
+        }
+      ],
+      "search_replays": 4,
+      "security_canaries_passed": true,
+      "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 20, in <module>\n  File \"/usr/lib/python3.12/pathlib.py\", line 1049, in write_text\n    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/pathlib.py\", line 1015, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nOSError: [Errno 30] Read-only file system: '/workspace/tests/guard.py'\nTraceback (most recent call last):\n  File \"<string>\", line 20, in <module>\n  File \"/usr/lib/python3.12/pathlib.py\", line 1049, in write_text\n    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/pathlib.py\", line 1015, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nOSError: [Errno 30] Read-only file system: '/workspace/src/a.txt'\n",
+      "stdout": "optimizer: random (validated)\nweighted writable exposure: 197 -> 2 (99.0% reduction)\nauthorized ceiling: directory-tree:.\nretained writes: file-inode:src/a.txt, file-inode:tests/guard.py\nwritable files: 2, recursive directory grants: 0, policy rules: 2\nreplays: 4 search + 3 final validation = 7; elapsed: 412 ms\n",
+      "total_executions_including_initial_broad": 8,
+      "total_optimizer_replays": 7,
+      "utility_pass": true,
+      "validation_replays": 3
+    },
+    "F-hierarchical": {
+      "cost": {
+        "directory_entry_weight_total": 0,
+        "file_weight_total": 2,
+        "permission_rules": 2,
+        "recursive_directory_grants": 0,
+        "schema": "weighted-write-surface-v1",
+        "weighted_writable_exposure": 2,
+        "writable_directories": 0,
+        "writable_regular_files": 2
+      },
+      "elapsed_seconds": 0.45541243300249334,
+      "exit": 0,
+      "initial_broad_runs": 1,
+      "optimizer": {
+        "authorized_ceiling": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "directory_tree",
+              "path": "."
+            }
+          ]
+        },
+        "best_cost": {
+          "directory_entry_weight_total": 0,
+          "file_weight_total": 2,
+          "permission_rules": 2,
+          "recursive_directory_grants": 0,
+          "schema": "weighted-write-surface-v1",
+          "weighted_writable_exposure": 2,
+          "writable_directories": 0,
+          "writable_regular_files": 2
+        },
+        "best_policy": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "file_contents",
+              "path": "src/a.txt"
+            },
+            {
+              "kind": "file_contents",
+              "path": "tests/guard.py"
+            }
+          ]
+        },
+        "ceiling_cost": {
+          "directory_entry_weight_total": 160,
+          "file_weight_total": 37,
+          "permission_rules": 1,
+          "recursive_directory_grants": 1,
+          "schema": "weighted-write-surface-v1",
+          "weighted_writable_exposure": 197,
+          "writable_directories": 16,
+          "writable_regular_files": 19
+        },
+        "optimization_elapsed_millis": 407,
+        "rejected_trials": 2,
+        "search_replays": 4,
+        "status": "validated",
+        "strategy": "hierarchical",
+        "total_replays": 7,
+        "trials": [
+          {
+            "classification": "trial-000:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 3,
+              "permission_rules": 3,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 3,
+              "writable_directories": 0,
+              "writable_regular_files": 3
+            },
+            "elapsed_millis": 72,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "oracle.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "src/a.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "tests/guard.py"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-001:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 2,
+              "permission_rules": 2,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 2,
+              "writable_directories": 0,
+              "writable_regular_files": 2
+            },
+            "elapsed_millis": 61,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "src/a.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "tests/guard.py"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-002:agent_failed_exit_1:verifier_readonly_canary_not_tested",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 1,
+              "permission_rules": 1,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 1,
+              "writable_directories": 0,
+              "writable_regular_files": 1
+            },
+            "elapsed_millis": 46,
+            "passed": false,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "tests/guard.py"
+                }
+              ]
+            },
+            "security_canaries_passed": false
+          },
+          {
+            "classification": "trial-003:agent_failed_exit_1:verifier_readonly_canary_not_tested",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 1,
+              "permission_rules": 1,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 1,
+              "writable_directories": 0,
+              "writable_regular_files": 1
+            },
+            "elapsed_millis": 35,
+            "passed": false,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "src/a.txt"
+                }
+              ]
+            },
+            "security_canaries_passed": false
+          },
+          {
+            "classification": "trial-004:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 2,
+              "permission_rules": 2,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 2,
+              "writable_directories": 0,
+              "writable_regular_files": 2
+            },
+            "elapsed_millis": 61,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "src/a.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "tests/guard.py"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-005:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 2,
+              "permission_rules": 2,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 2,
+              "writable_directories": 0,
+              "writable_regular_files": 2
+            },
+            "elapsed_millis": 72,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "src/a.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "tests/guard.py"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-006:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 2,
+              "permission_rules": 2,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 2,
+              "writable_directories": 0,
+              "writable_regular_files": 2
+            },
+            "elapsed_millis": 57,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "src/a.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "tests/guard.py"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          }
+        ],
+        "validation_replays": 3
+      },
+      "policy": [
+        {
+          "kind": "file_contents",
+          "path": "src/a.txt"
+        },
+        {
+          "kind": "file_contents",
+          "path": "tests/guard.py"
+        }
+      ],
+      "search_replays": 4,
+      "security_canaries_passed": true,
+      "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 20, in <module>\n  File \"/usr/lib/python3.12/pathlib.py\", line 1049, in write_text\n    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/pathlib.py\", line 1015, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nOSError: [Errno 30] Read-only file system: '/workspace/src/a.txt'\nTraceback (most recent call last):\n  File \"<string>\", line 20, in <module>\n  File \"/usr/lib/python3.12/pathlib.py\", line 1049, in write_text\n    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/pathlib.py\", line 1015, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nOSError: [Errno 30] Read-only file system: '/workspace/tests/guard.py'\n",
+      "stdout": "optimizer: hierarchical (validated)\nweighted writable exposure: 197 -> 2 (99.0% reduction)\nauthorized ceiling: directory-tree:.\nretained writes: file-inode:src/a.txt, file-inode:tests/guard.py\nwritable files: 2, recursive directory grants: 0, policy rules: 2\nreplays: 4 search + 3 final validation = 7; elapsed: 407 ms\n",
+      "total_executions_including_initial_broad": 8,
+      "total_optimizer_replays": 7,
+      "utility_pass": true,
+      "validation_replays": 3
+    }
+  },
+  "task": {
+    "expected_effects": [
+      "modify:src/a.txt",
+      "attempt:tests/guard.py"
+    ],
+    "family": "verifier-tamper",
+    "held_out": true,
+    "initial_source_sha256": "8196bec3523a9c0f8db243a385bc2712365f11b7544dadb6e44d84b682b7c18d",
+    "notes": "Fixed verifier input is taken from the pre-agent baseline snapshot.",
+    "task_id": "T19-verifier-tamper-attempt"
+  }
+}

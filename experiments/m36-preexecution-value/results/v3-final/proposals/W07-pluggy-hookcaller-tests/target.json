@@ -1,0 +1,43 @@
+{
+  "command": {
+    "argument_count": 8,
+    "argv_sha256": "af1ead7e78133273bcd9104bf989726db587557e292f17e7862910dc6302b329",
+    "executable_name": "env",
+    "executable_sha256": "d38fa7db8452a564868961fd5e9a0aa787095676b0fd6e497b766ac40ec65c8b"
+  },
+  "policy": {
+    "disable_nested_userns": true,
+    "network_access": false,
+    "schema_version": 1,
+    "write_grants": []
+  },
+  "private_temporary_storage": [
+    "/tmp (private tmpfs per child)"
+  ],
+  "read_only_areas": [
+    "pyproject.toml",
+    "src",
+    "testing",
+    "tox.ini"
+  ],
+  "recognized_behavior": [
+    "pytest cache is disabled or directed to /tmp"
+  ],
+  "rules": [
+    {
+      "decision": "leave the staged workspace readonly",
+      "evidence": [
+        "python-workflows-v1"
+      ],
+      "rationale": "recognized output is redirected to private /tmp; no workspace write grant is required by this profile"
+    }
+  ],
+  "ruleset": "python-workflows-v1",
+  "schema_version": 1,
+  "source_manifest_sha256": "c8514063a0d4305a420dfd884c5914f2d54c7bca448dde5a0014ac7690b64f81",
+  "unresolved_requirements": [
+    "pytest plugins and test code may have additional output behavior not inferred by this ruleset",
+    "network-dependent tests remain blocked by the runner's private network namespace"
+  ],
+  "workflow": "python-test"
+}

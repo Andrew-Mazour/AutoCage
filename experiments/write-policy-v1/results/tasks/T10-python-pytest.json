@@ -1,0 +1,917 @@
+{
+  "baselines": {
+    "A": {
+      "agent_exit": 0,
+      "agent_timed_out": false,
+      "cost": {
+        "directory_entry_weight_total": 160,
+        "file_weight_total": 37,
+        "permission_rules": 1,
+        "recursive_directory_grants": 1,
+        "weighted_writable_exposure": 197,
+        "writable_directories": 16,
+        "writable_regular_files": 19
+      },
+      "elapsed_seconds": 0.23163326199937728,
+      "exit": 0,
+      "outcome": "verified",
+      "policy": [
+        [
+          "directory_tree",
+          "."
+        ]
+      ],
+      "replays": 1,
+      "run_dir": "/tmp/autocage-write-policy-v1-final-20261011-r2/runs/T10-python-pytest/A-broad",
+      "security": {
+        "host_access_probe": "PASS",
+        "host_access_probe_blocked": true,
+        "host_canary_unchanged": true,
+        "original_source_write_probe": "PASS",
+        "original_source_write_probe_blocked": true,
+        "pass": true,
+        "source_unchanged": true,
+        "status": "PASS",
+        "verifier_readonly_probe": "PASS",
+        "verifier_readonly_probe_blocked": true,
+        "verifier_snapshot_unchanged": true
+      },
+      "stderr": "",
+      "utility_pass": true,
+      "verifier_exit": 0,
+      "verifier_timed_out": false
+    },
+    "B": {
+      "agent_exit": 0,
+      "agent_timed_out": false,
+      "cost": {
+        "directory_entry_weight_total": 50,
+        "file_weight_total": 10,
+        "permission_rules": 2,
+        "recursive_directory_grants": 2,
+        "weighted_writable_exposure": 60,
+        "writable_directories": 5,
+        "writable_regular_files": 10
+      },
+      "elapsed_seconds": 0.1810116359993117,
+      "exit": 0,
+      "outcome": "verified",
+      "policy": [
+        [
+          "directory_tree",
+          "src"
+        ],
+        [
+          "directory_tree",
+          "tests"
+        ]
+      ],
+      "replays": 1,
+      "run_dir": "/tmp/autocage-write-policy-v1-final-20261011-r2/runs/T10-python-pytest/B-static",
+      "security": {
+        "host_access_probe": "PASS",
+        "host_access_probe_blocked": true,
+        "host_canary_unchanged": true,
+        "original_source_write_probe": "PASS",
+        "original_source_write_probe_blocked": true,
+        "pass": true,
+        "source_unchanged": true,
+        "status": "PASS",
+        "verifier_readonly_probe": "PASS",
+        "verifier_readonly_probe_blocked": true,
+        "verifier_snapshot_unchanged": true
+      },
+      "stderr": "",
+      "utility_pass": true,
+      "verifier_exit": 0,
+      "verifier_timed_out": false
+    },
+    "C": {
+      "agent_exit": 0,
+      "agent_timed_out": false,
+      "cost": {
+        "directory_entry_weight_total": 0,
+        "file_weight_total": 2,
+        "permission_rules": 2,
+        "recursive_directory_grants": 0,
+        "weighted_writable_exposure": 2,
+        "writable_directories": 0,
+        "writable_regular_files": 2
+      },
+      "elapsed_seconds": 0.18586087199946633,
+      "exit": 0,
+      "outcome": "verified",
+      "policy": [
+        [
+          "file_contents",
+          "oracle.txt"
+        ],
+        [
+          "file_contents",
+          "src/mathops.py"
+        ]
+      ],
+      "replays": 1,
+      "run_dir": "/tmp/autocage-write-policy-v1-final-20261011-r2/runs/T10-python-pytest/C-naive",
+      "security": {
+        "host_access_probe": "PASS",
+        "host_access_probe_blocked": true,
+        "host_canary_unchanged": true,
+        "original_source_write_probe": "PASS",
+        "original_source_write_probe_blocked": true,
+        "pass": true,
+        "source_unchanged": true,
+        "status": "PASS",
+        "verifier_readonly_probe": "PASS",
+        "verifier_readonly_probe_blocked": true,
+        "verifier_snapshot_unchanged": true
+      },
+      "stderr": "",
+      "utility_pass": true,
+      "verifier_exit": 0,
+      "verifier_timed_out": false
+    },
+    "M": {
+      "agent_exit": 0,
+      "agent_timed_out": false,
+      "cost": {
+        "directory_entry_weight_total": 0,
+        "file_weight_total": 1,
+        "permission_rules": 1,
+        "recursive_directory_grants": 0,
+        "weighted_writable_exposure": 1,
+        "writable_directories": 0,
+        "writable_regular_files": 1
+      },
+      "elapsed_seconds": 0.18177123699933873,
+      "exit": 0,
+      "outcome": "verified",
+      "policy": [
+        [
+          "file_contents",
+          "src/mathops.py"
+        ]
+      ],
+      "replays": 1,
+      "run_dir": "/tmp/autocage-write-policy-v1-final-20261011-r2/runs/T10-python-pytest/M-manual-oracle",
+      "security": {
+        "host_access_probe": "PASS",
+        "host_access_probe_blocked": true,
+        "host_canary_unchanged": true,
+        "original_source_write_probe": "PASS",
+        "original_source_write_probe_blocked": true,
+        "pass": true,
+        "source_unchanged": true,
+        "status": "PASS",
+        "verifier_readonly_probe": "PASS",
+        "verifier_readonly_probe_blocked": true,
+        "verifier_snapshot_unchanged": true
+      },
+      "stderr": "",
+      "utility_pass": true,
+      "verifier_exit": 0,
+      "verifier_timed_out": false
+    }
+  },
+  "optimizers": {
+    "D-greedy": {
+      "cost": {
+        "directory_entry_weight_total": 0,
+        "file_weight_total": 1,
+        "permission_rules": 1,
+        "recursive_directory_grants": 0,
+        "schema": "weighted-write-surface-v1",
+        "weighted_writable_exposure": 1,
+        "writable_directories": 0,
+        "writable_regular_files": 1
+      },
+      "elapsed_seconds": 1.0241859379966627,
+      "exit": 0,
+      "initial_broad_runs": 1,
+      "optimizer": {
+        "authorized_ceiling": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "directory_tree",
+              "path": "."
+            }
+          ]
+        },
+        "best_cost": {
+          "directory_entry_weight_total": 0,
+          "file_weight_total": 1,
+          "permission_rules": 1,
+          "recursive_directory_grants": 0,
+          "schema": "weighted-write-surface-v1",
+          "weighted_writable_exposure": 1,
+          "writable_directories": 0,
+          "writable_regular_files": 1
+        },
+        "best_policy": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "file_contents",
+              "path": "src/mathops.py"
+            }
+          ]
+        },
+        "ceiling_cost": {
+          "directory_entry_weight_total": 160,
+          "file_weight_total": 37,
+          "permission_rules": 1,
+          "recursive_directory_grants": 1,
+          "schema": "weighted-write-surface-v1",
+          "weighted_writable_exposure": 197,
+          "writable_directories": 16,
+          "writable_regular_files": 19
+        },
+        "optimization_elapsed_millis": 978,
+        "rejected_trials": 1,
+        "search_replays": 3,
+        "status": "validated",
+        "strategy": "greedy",
+        "total_replays": 6,
+        "trials": [
+          {
+            "classification": "trial-000:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 2,
+              "permission_rules": 2,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 2,
+              "writable_directories": 0,
+              "writable_regular_files": 2
+            },
+            "elapsed_millis": 182,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "oracle.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "src/mathops.py"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-001:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 1,
+              "permission_rules": 1,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 1,
+              "writable_directories": 0,
+              "writable_regular_files": 1
+            },
+            "elapsed_millis": 183,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "src/mathops.py"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-002:agent_failed_exit_1:verifier_readonly_canary_not_tested",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 0,
+              "permission_rules": 0,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 0,
+              "writable_directories": 0,
+              "writable_regular_files": 0
+            },
+            "elapsed_millis": 39,
+            "passed": false,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": []
+            },
+            "security_canaries_passed": false
+          },
+          {
+            "classification": "trial-003:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 1,
+              "permission_rules": 1,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 1,
+              "writable_directories": 0,
+              "writable_regular_files": 1
+            },
+            "elapsed_millis": 180,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "src/mathops.py"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-004:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 1,
+              "permission_rules": 1,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 1,
+              "writable_directories": 0,
+              "writable_regular_files": 1
+            },
+            "elapsed_millis": 189,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "src/mathops.py"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-005:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 1,
+              "permission_rules": 1,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 1,
+              "writable_directories": 0,
+              "writable_regular_files": 1
+            },
+            "elapsed_millis": 202,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "src/mathops.py"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          }
+        ],
+        "validation_replays": 3
+      },
+      "policy": [
+        {
+          "kind": "file_contents",
+          "path": "src/mathops.py"
+        }
+      ],
+      "search_replays": 3,
+      "security_canaries_passed": true,
+      "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 20, in <module>\n  File \"/usr/lib/python3.12/pathlib.py\", line 1049, in write_text\n    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/pathlib.py\", line 1015, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nOSError: [Errno 30] Read-only file system: '/workspace/src/mathops.py'\n",
+      "stdout": ".                                                                        [100%]\n1 passed in 0.00s\n.                                                                        [100%]\n1 passed in 0.00s\n.                                                                        [100%]\n1 passed in 0.00s\n.                                                                        [100%]\n1 passed in 0.00s\n.                                                                        [100%]\n1 passed in 0.00s\n.                                                                        [100%]\n1 passed in 0.00s\n.                                                                        [100%]\n1 passed in 0.00s\n.                                                                        [100%]\n1 passed in 0.00s\n.                                                                        [100%]\n1 passed in 0.00s\n.                                                                        [100%]\n1 passed in 0.00s\noptimizer: greedy (validated)\nweighted writable exposure: 197 -> 1 (99.5% reduction)\nauthorized ceiling: directory-tree:.\nretained writes: file-inode:src/mathops.py\nwritable files: 1, recursive directory grants: 0, policy rules: 1\nreplays: 3 search + 3 final validation = 6; elapsed: 978 ms\n",
+      "total_executions_including_initial_broad": 7,
+      "total_optimizer_replays": 6,
+      "utility_pass": true,
+      "validation_replays": 3
+    },
+    "E-random": {
+      "cost": {
+        "directory_entry_weight_total": 0,
+        "file_weight_total": 1,
+        "permission_rules": 1,
+        "recursive_directory_grants": 0,
+        "schema": "weighted-write-surface-v1",
+        "weighted_writable_exposure": 1,
+        "writable_directories": 0,
+        "writable_regular_files": 1
+      },
+      "elapsed_seconds": 1.0097366579975642,
+      "exit": 0,
+      "initial_broad_runs": 1,
+      "optimizer": {
+        "authorized_ceiling": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "directory_tree",
+              "path": "."
+            }
+          ]
+        },
+        "best_cost": {
+          "directory_entry_weight_total": 0,
+          "file_weight_total": 1,
+          "permission_rules": 1,
+          "recursive_directory_grants": 0,
+          "schema": "weighted-write-surface-v1",
+          "weighted_writable_exposure": 1,
+          "writable_directories": 0,
+          "writable_regular_files": 1
+        },
+        "best_policy": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "file_contents",
+              "path": "src/mathops.py"
+            }
+          ]
+        },
+        "ceiling_cost": {
+          "directory_entry_weight_total": 160,
+          "file_weight_total": 37,
+          "permission_rules": 1,
+          "recursive_directory_grants": 1,
+          "schema": "weighted-write-surface-v1",
+          "weighted_writable_exposure": 197,
+          "writable_directories": 16,
+          "writable_regular_files": 19
+        },
+        "optimization_elapsed_millis": 964,
+        "rejected_trials": 1,
+        "search_replays": 3,
+        "status": "validated",
+        "strategy": "random",
+        "total_replays": 6,
+        "trials": [
+          {
+            "classification": "trial-000:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 2,
+              "permission_rules": 2,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 2,
+              "writable_directories": 0,
+              "writable_regular_files": 2
+            },
+            "elapsed_millis": 184,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "oracle.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "src/mathops.py"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-001:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 1,
+              "permission_rules": 1,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 1,
+              "writable_directories": 0,
+              "writable_regular_files": 1
+            },
+            "elapsed_millis": 181,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "src/mathops.py"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-002:agent_failed_exit_1:verifier_readonly_canary_not_tested",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 0,
+              "permission_rules": 0,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 0,
+              "writable_directories": 0,
+              "writable_regular_files": 0
+            },
+            "elapsed_millis": 39,
+            "passed": false,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": []
+            },
+            "security_canaries_passed": false
+          },
+          {
+            "classification": "trial-003:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 1,
+              "permission_rules": 1,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 1,
+              "writable_directories": 0,
+              "writable_regular_files": 1
+            },
+            "elapsed_millis": 181,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "src/mathops.py"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-004:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 1,
+              "permission_rules": 1,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 1,
+              "writable_directories": 0,
+              "writable_regular_files": 1
+            },
+            "elapsed_millis": 183,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "src/mathops.py"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-005:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 1,
+              "permission_rules": 1,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 1,
+              "writable_directories": 0,
+              "writable_regular_files": 1
+            },
+            "elapsed_millis": 193,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "src/mathops.py"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          }
+        ],
+        "validation_replays": 3
+      },
+      "policy": [
+        {
+          "kind": "file_contents",
+          "path": "src/mathops.py"
+        }
+      ],
+      "search_replays": 3,
+      "security_canaries_passed": true,
+      "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 20, in <module>\n  File \"/usr/lib/python3.12/pathlib.py\", line 1049, in write_text\n    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/pathlib.py\", line 1015, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nOSError: [Errno 30] Read-only file system: '/workspace/src/mathops.py'\n",
+      "stdout": ".                                                                        [100%]\n1 passed in 0.00s\n.                                                                        [100%]\n1 passed in 0.00s\n.                                                                        [100%]\n1 passed in 0.00s\n.                                                                        [100%]\n1 passed in 0.00s\n.                                                                        [100%]\n1 passed in 0.00s\n.                                                                        [100%]\n1 passed in 0.00s\n.                                                                        [100%]\n1 passed in 0.00s\n.                                                                        [100%]\n1 passed in 0.00s\n.                                                                        [100%]\n1 passed in 0.00s\n.                                                                        [100%]\n1 passed in 0.00s\noptimizer: random (validated)\nweighted writable exposure: 197 -> 1 (99.5% reduction)\nauthorized ceiling: directory-tree:.\nretained writes: file-inode:src/mathops.py\nwritable files: 1, recursive directory grants: 0, policy rules: 1\nreplays: 3 search + 3 final validation = 6; elapsed: 964 ms\n",
+      "total_executions_including_initial_broad": 7,
+      "total_optimizer_replays": 6,
+      "utility_pass": true,
+      "validation_replays": 3
+    },
+    "F-hierarchical": {
+      "cost": {
+        "directory_entry_weight_total": 0,
+        "file_weight_total": 1,
+        "permission_rules": 1,
+        "recursive_directory_grants": 0,
+        "schema": "weighted-write-surface-v1",
+        "weighted_writable_exposure": 1,
+        "writable_directories": 0,
+        "writable_regular_files": 1
+      },
+      "elapsed_seconds": 1.0202928719991178,
+      "exit": 0,
+      "initial_broad_runs": 1,
+      "optimizer": {
+        "authorized_ceiling": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "directory_tree",
+              "path": "."
+            }
+          ]
+        },
+        "best_cost": {
+          "directory_entry_weight_total": 0,
+          "file_weight_total": 1,
+          "permission_rules": 1,
+          "recursive_directory_grants": 0,
+          "schema": "weighted-write-surface-v1",
+          "weighted_writable_exposure": 1,
+          "writable_directories": 0,
+          "writable_regular_files": 1
+        },
+        "best_policy": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "file_contents",
+              "path": "src/mathops.py"
+            }
+          ]
+        },
+        "ceiling_cost": {
+          "directory_entry_weight_total": 160,
+          "file_weight_total": 37,
+          "permission_rules": 1,
+          "recursive_directory_grants": 1,
+          "schema": "weighted-write-surface-v1",
+          "weighted_writable_exposure": 197,
+          "writable_directories": 16,
+          "writable_regular_files": 19
+        },
+        "optimization_elapsed_millis": 976,
+        "rejected_trials": 1,
+        "search_replays": 3,
+        "status": "validated",
+        "strategy": "hierarchical",
+        "total_replays": 6,
+        "trials": [
+          {
+            "classification": "trial-000:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 2,
+              "permission_rules": 2,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 2,
+              "writable_directories": 0,
+              "writable_regular_files": 2
+            },
+            "elapsed_millis": 181,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "oracle.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "src/mathops.py"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-001:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 1,
+              "permission_rules": 1,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 1,
+              "writable_directories": 0,
+              "writable_regular_files": 1
+            },
+            "elapsed_millis": 182,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "src/mathops.py"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-002:agent_failed_exit_1:verifier_readonly_canary_not_tested",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 0,
+              "permission_rules": 0,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 0,
+              "writable_directories": 0,
+              "writable_regular_files": 0
+            },
+            "elapsed_millis": 38,
+            "passed": false,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": []
+            },
+            "security_canaries_passed": false
+          },
+          {
+            "classification": "trial-003:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 1,
+              "permission_rules": 1,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 1,
+              "writable_directories": 0,
+              "writable_regular_files": 1
+            },
+            "elapsed_millis": 183,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "src/mathops.py"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-004:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 1,
+              "permission_rules": 1,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 1,
+              "writable_directories": 0,
+              "writable_regular_files": 1
+            },
+            "elapsed_millis": 203,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "src/mathops.py"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-005:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 1,
+              "permission_rules": 1,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 1,
+              "writable_directories": 0,
+              "writable_regular_files": 1
+            },
+            "elapsed_millis": 187,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "src/mathops.py"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          }
+        ],
+        "validation_replays": 3
+      },
+      "policy": [
+        {
+          "kind": "file_contents",
+          "path": "src/mathops.py"
+        }
+      ],
+      "search_replays": 3,
+      "security_canaries_passed": true,
+      "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 20, in <module>\n  File \"/usr/lib/python3.12/pathlib.py\", line 1049, in write_text\n    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/pathlib.py\", line 1015, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nOSError: [Errno 30] Read-only file system: '/workspace/src/mathops.py'\n",
+      "stdout": ".                                                                        [100%]\n1 passed in 0.00s\n.                                                                        [100%]\n1 passed in 0.00s\n.                                                                        [100%]\n1 passed in 0.00s\n.                                                                        [100%]\n1 passed in 0.00s\n.                                                                        [100%]\n1 passed in 0.00s\n.                                                                        [100%]\n1 passed in 0.00s\n.                                                                        [100%]\n1 passed in 0.00s\n.                                                                        [100%]\n1 passed in 0.00s\n.                                                                        [100%]\n1 passed in 0.00s\n.                                                                        [100%]\n1 passed in 0.00s\noptimizer: hierarchical (validated)\nweighted writable exposure: 197 -> 1 (99.5% reduction)\nauthorized ceiling: directory-tree:.\nretained writes: file-inode:src/mathops.py\nwritable files: 1, recursive directory grants: 0, policy rules: 1\nreplays: 3 search + 3 final validation = 6; elapsed: 976 ms\n",
+      "total_executions_including_initial_broad": 7,
+      "total_optimizer_replays": 6,
+      "utility_pass": true,
+      "validation_replays": 3
+    }
+  },
+  "task": {
+    "expected_effects": [
+      "modify:src/mathops.py"
+    ],
+    "family": "python-tests",
+    "held_out": false,
+    "initial_source_sha256": "8196bec3523a9c0f8db243a385bc2712365f11b7544dadb6e44d84b682b7c18d",
+    "notes": "Runs a real pytest suite inside both task and verifier.",
+    "task_id": "T10-python-pytest"
+  }
+}

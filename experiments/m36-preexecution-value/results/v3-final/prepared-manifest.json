@@ -1,0 +1,285 @@
+{
+  "archive_extraction": "Git archive bytes only; extracted with the M3 reviewed safe extractor; no repository code imported or executed",
+  "schema_version": 1,
+  "snapshots": [
+    {
+      "commit": "6d5bac5c712195cbfa9666ba0ecbf0573cdea356",
+      "experiment_fixture_additions": [],
+      "license": "BSD-3-Clause",
+      "repository": "click",
+      "revision": "parent",
+      "snapshot_path": "/tmp/autocage-m36/evaluation-v3-final/workspaces/W01-click-int-range-tests/parent",
+      "snapshot_sha256": "bd3bcaa1f93a4744002aad3a7ad73d8cb167e3d73ae2fe8d985452140db32dbe",
+      "task_id": "RR01-click-short-help",
+      "url": "https://github.com/pallets/click.git",
+      "workflow_id": "W01-click-int-range-tests"
+    },
+    {
+      "commit": "f67c2bb6c2f055c1c7a57cd46c3697fc26a7742e",
+      "experiment_fixture_additions": [],
+      "license": "BSD-3-Clause",
+      "repository": "click",
+      "revision": "target",
+      "snapshot_path": "/tmp/autocage-m36/evaluation-v3-final/workspaces/W01-click-int-range-tests/target",
+      "snapshot_sha256": "f9b3251767fcebd3ccdfa2493b130a0d320e47fc6ec425d35dd76dacf731bb15",
+      "task_id": "RR01-click-short-help",
+      "url": "https://github.com/pallets/click.git",
+      "workflow_id": "W01-click-int-range-tests"
+    },
+    {
+      "commit": "2aada00b158feb36109d77dc91d62baa91f7d400",
+      "experiment_fixture_additions": [],
+      "license": "Apache-2.0 OR BSD-2-Clause",
+      "repository": "packaging",
+      "revision": "parent",
+      "snapshot_path": "/tmp/autocage-m36/evaluation-v3-final/workspaces/W02-packaging-utility-tests/parent",
+      "snapshot_sha256": "ce810b56d5b4ca7efd7e015c1a3df932325a68cec0bb5dfc023112598c7cfa5f",
+      "task_id": "RR03-packaging-pylock-separators",
+      "url": "https://github.com/pypa/packaging.git",
+      "workflow_id": "W02-packaging-utility-tests"
+    },
+    {
+      "commit": "fa52d7237a74effdadd4ad2627d4ca413234cac2",
+      "experiment_fixture_additions": [],
+      "license": "Apache-2.0 OR BSD-2-Clause",
+      "repository": "packaging",
+      "revision": "target",
+      "snapshot_path": "/tmp/autocage-m36/evaluation-v3-final/workspaces/W02-packaging-utility-tests/target",
+      "snapshot_sha256": "42359dca443ca64087b4796f40ee849d7eb63c4c36a4d52138057b26c068507a",
+      "task_id": "RR03-packaging-pylock-separators",
+      "url": "https://github.com/pypa/packaging.git",
+      "workflow_id": "W02-packaging-utility-tests"
+    },
+    {
+      "commit": "791414804eff08a23f0b7970968e1717e3b28e66",
+      "experiment_fixture_additions": [],
+      "license": "BSD-3-Clause",
+      "repository": "python-dotenv",
+      "revision": "parent",
+      "snapshot_path": "/tmp/autocage-m36/evaluation-v3-final/workspaces/W03-dotenv-parser-tests/parent",
+      "snapshot_sha256": "32bda672ead2c45a79ea682d27a8f71b0d3835d7ab24365a60625fbad3b45d93",
+      "task_id": "RR05-dotenv-expand-home",
+      "url": "https://github.com/theskumar/python-dotenv.git",
+      "workflow_id": "W03-dotenv-parser-tests"
+    },
+    {
+      "commit": "0b2880591780a426b0551436f47a17e7a76d954f",
+      "experiment_fixture_additions": [],
+      "license": "BSD-3-Clause",
+      "repository": "python-dotenv",
+      "revision": "target",
+      "snapshot_path": "/tmp/autocage-m36/evaluation-v3-final/workspaces/W03-dotenv-parser-tests/target",
+      "snapshot_sha256": "793c0bf1cf30aed81c8ef598607e1fe32bafa026cbdfddf46078e5d475363578",
+      "task_id": "RR05-dotenv-expand-home",
+      "url": "https://github.com/theskumar/python-dotenv.git",
+      "workflow_id": "W03-dotenv-parser-tests"
+    },
+    {
+      "commit": "f616f732c6c5f87a8f7a762176422baed250a6be",
+      "experiment_fixture_additions": [],
+      "license": "MIT",
+      "repository": "attrs",
+      "revision": "parent",
+      "snapshot_path": "/tmp/autocage-m36/evaluation-v3-final/workspaces/W04-attrs-filter-tests/parent",
+      "snapshot_sha256": "c0c524e0f1d5d2aa7f7878f785e5c56aa2944d5d2e3df0ac1cce22104171db4b",
+      "task_id": "RR07-attrs-ne-validator",
+      "url": "https://github.com/python-attrs/attrs.git",
+      "workflow_id": "W04-attrs-filter-tests"
+    },
+    {
+      "commit": "5aa76a4450c311d87eda43946ec0ecd743572649",
+      "experiment_fixture_additions": [],
+      "license": "MIT",
+      "repository": "attrs",
+      "revision": "target",
+      "snapshot_path": "/tmp/autocage-m36/evaluation-v3-final/workspaces/W04-attrs-filter-tests/target",
+      "snapshot_sha256": "5b2833e0af742116d72347c3d82d28e4ab1fdf51dc6d66309bb9ffbf9ffcee57",
+      "task_id": "RR07-attrs-ne-validator",
+      "url": "https://github.com/python-attrs/attrs.git",
+      "workflow_id": "W04-attrs-filter-tests"
+    },
+    {
+      "commit": "4c6f32f2797b2883bbcb0cca1ee81211d3e09c12",
+      "experiment_fixture_additions": [],
+      "license": "MIT",
+      "repository": "filelock",
+      "revision": "parent",
+      "snapshot_path": "/tmp/autocage-m36/evaluation-v3-final/workspaces/W05-filelock-compileall/parent",
+      "snapshot_sha256": "5b18998e82cf467eec3fbdcded1322d2b1ccd039b59cf53375537230210a5a18",
+      "task_id": "RR08-filelock-hostile-pid",
+      "url": "https://github.com/tox-dev/filelock.git",
+      "workflow_id": "W05-filelock-compileall"
+    },
+    {
+      "commit": "a5fb607a8655035bb6d5ae4326637e25cf1af849",
+      "experiment_fixture_additions": [],
+      "license": "MIT",
+      "repository": "filelock",
+      "revision": "target",
+      "snapshot_path": "/tmp/autocage-m36/evaluation-v3-final/workspaces/W05-filelock-compileall/target",
+      "snapshot_sha256": "fb6b11a01745a96ef2d772cf8fd0cdabeeca7dc8b2bace97a005e785bed9d333",
+      "task_id": "RR08-filelock-hostile-pid",
+      "url": "https://github.com/tox-dev/filelock.git",
+      "workflow_id": "W05-filelock-compileall"
+    },
+    {
+      "commit": "40d8c03a1553953350d787e45f1cb768e2c14e6a",
+      "experiment_fixture_additions": [],
+      "license": "MIT",
+      "repository": "iniconfig",
+      "revision": "parent",
+      "snapshot_path": "/tmp/autocage-m36/evaluation-v3-final/workspaces/W06-iniconfig-tests/parent",
+      "snapshot_sha256": "ffa432a560c553b09e359986ba8b7a3e0adda189d2ba141a625e680aa1eefbb4",
+      "task_id": "RR09-iniconfig-strip-bom",
+      "url": "https://github.com/pytest-dev/iniconfig.git",
+      "workflow_id": "W06-iniconfig-tests"
+    },
+    {
+      "commit": "d2dcb7289291e7e7019c183659814d42f7264b2d",
+      "experiment_fixture_additions": [],
+      "license": "MIT",
+      "repository": "iniconfig",
+      "revision": "target",
+      "snapshot_path": "/tmp/autocage-m36/evaluation-v3-final/workspaces/W06-iniconfig-tests/target",
+      "snapshot_sha256": "757dabc426d08351c30fc278097f46dba5d75fbf793d4dd7384f7978662f1354",
+      "task_id": "RR09-iniconfig-strip-bom",
+      "url": "https://github.com/pytest-dev/iniconfig.git",
+      "workflow_id": "W06-iniconfig-tests"
+    },
+    {
+      "commit": "0b7e46a29a5bc853b9b465f235175464fef740a0",
+      "experiment_fixture_additions": [],
+      "license": "MIT",
+      "repository": "pluggy",
+      "revision": "parent",
+      "snapshot_path": "/tmp/autocage-m36/evaluation-v3-final/workspaces/W07-pluggy-hookcaller-tests/parent",
+      "snapshot_sha256": "14da20393f303efb2dc1b92361089508e7a7fa62b3630b33da3eeff1de5844b3",
+      "task_id": "RR10-pluggy-falsy-plugin",
+      "url": "https://github.com/pytest-dev/pluggy.git",
+      "workflow_id": "W07-pluggy-hookcaller-tests"
+    },
+    {
+      "commit": "44474dd303ede8f22db180ca0a74e255b1fcfb2e",
+      "experiment_fixture_additions": [],
+      "license": "MIT",
+      "repository": "pluggy",
+      "revision": "target",
+      "snapshot_path": "/tmp/autocage-m36/evaluation-v3-final/workspaces/W07-pluggy-hookcaller-tests/target",
+      "snapshot_sha256": "0304bcc6fc02b816765abf0ecc883f1ea1fe0c02880efa8859f1c1418bd5f83e",
+      "task_id": "RR10-pluggy-falsy-plugin",
+      "url": "https://github.com/pytest-dev/pluggy.git",
+      "workflow_id": "W07-pluggy-hookcaller-tests"
+    },
+    {
+      "commit": "f616f732c6c5f87a8f7a762176422baed250a6be",
+      "experiment_fixture_additions": [],
+      "license": "MIT",
+      "repository": "attrs",
+      "revision": "parent",
+      "snapshot_path": "/tmp/autocage-m36/evaluation-v3-final/workspaces/W08-attrs-compileall/parent",
+      "snapshot_sha256": "c0c524e0f1d5d2aa7f7878f785e5c56aa2944d5d2e3df0ac1cce22104171db4b",
+      "task_id": "RR07-attrs-ne-validator",
+      "url": "https://github.com/python-attrs/attrs.git",
+      "workflow_id": "W08-attrs-compileall"
+    },
+    {
+      "commit": "5aa76a4450c311d87eda43946ec0ecd743572649",
+      "experiment_fixture_additions": [],
+      "license": "MIT",
+      "repository": "attrs",
+      "revision": "target",
+      "snapshot_path": "/tmp/autocage-m36/evaluation-v3-final/workspaces/W08-attrs-compileall/target",
+      "snapshot_sha256": "5b2833e0af742116d72347c3d82d28e4ab1fdf51dc6d66309bb9ffbf9ffcee57",
+      "task_id": "RR07-attrs-ne-validator",
+      "url": "https://github.com/python-attrs/attrs.git",
+      "workflow_id": "W08-attrs-compileall"
+    },
+    {
+      "commit": "2aada00b158feb36109d77dc91d62baa91f7d400",
+      "experiment_fixture_additions": [
+        "dist/: pre-created declared wheel output directory for the pinned local build command",
+        "tests/autocage_m36_verify_wheel.py: trusted read-only controller verifier"
+      ],
+      "license": "Apache-2.0 OR BSD-2-Clause",
+      "repository": "packaging",
+      "revision": "parent",
+      "snapshot_path": "/tmp/autocage-m36/evaluation-v3-final/workspaces/W09-packaging-wheel-pilot/parent",
+      "snapshot_sha256": "687861fda9398c16aa16ddadd580c56f59f1f058d7b4022227f64fe266f1ae55",
+      "task_id": "RR03-packaging-pylock-separators",
+      "url": "https://github.com/pypa/packaging.git",
+      "workflow_id": "W09-packaging-wheel-pilot"
+    },
+    {
+      "commit": "fa52d7237a74effdadd4ad2627d4ca413234cac2",
+      "experiment_fixture_additions": [
+        "dist/: pre-created declared wheel output directory for the pinned local build command",
+        "tests/autocage_m36_verify_wheel.py: trusted read-only controller verifier"
+      ],
+      "license": "Apache-2.0 OR BSD-2-Clause",
+      "repository": "packaging",
+      "revision": "target",
+      "snapshot_path": "/tmp/autocage-m36/evaluation-v3-final/workspaces/W09-packaging-wheel-pilot/target",
+      "snapshot_sha256": "324998a6efa81712bde9714e82778fe4fe3b6078d63407dd866590527734c450",
+      "task_id": "RR03-packaging-pylock-separators",
+      "url": "https://github.com/pypa/packaging.git",
+      "workflow_id": "W09-packaging-wheel-pilot"
+    },
+    {
+      "commit": "6d5bac5c712195cbfa9666ba0ecbf0573cdea356",
+      "experiment_fixture_additions": [
+        "dist/: pre-created declared wheel output directory for the pinned local build command",
+        "tests/autocage_m36_verify_wheel.py: trusted read-only controller verifier"
+      ],
+      "license": "BSD-3-Clause",
+      "repository": "click",
+      "revision": "parent",
+      "snapshot_path": "/tmp/autocage-m36/evaluation-v3-final/workspaces/W10-click-wheel/parent",
+      "snapshot_sha256": "e67531a4cde8c5027176d2734261b9f57e7d5a22a0cd757162f5ecaa8515c7ad",
+      "task_id": "RR01-click-short-help",
+      "url": "https://github.com/pallets/click.git",
+      "workflow_id": "W10-click-wheel"
+    },
+    {
+      "commit": "f67c2bb6c2f055c1c7a57cd46c3697fc26a7742e",
+      "experiment_fixture_additions": [
+        "dist/: pre-created declared wheel output directory for the pinned local build command",
+        "tests/autocage_m36_verify_wheel.py: trusted read-only controller verifier"
+      ],
+      "license": "BSD-3-Clause",
+      "repository": "click",
+      "revision": "target",
+      "snapshot_path": "/tmp/autocage-m36/evaluation-v3-final/workspaces/W10-click-wheel/target",
+      "snapshot_sha256": "005c8f44e4c107cbd00b18dc2708df5001cb9c293c2f03227ff8192b6f1a23b0",
+      "task_id": "RR01-click-short-help",
+      "url": "https://github.com/pallets/click.git",
+      "workflow_id": "W10-click-wheel"
+    },
+    {
+      "commit": "f616f732c6c5f87a8f7a762176422baed250a6be",
+      "experiment_fixture_additions": [],
+      "license": "MIT",
+      "repository": "attrs",
+      "revision": "parent",
+      "snapshot_path": "/tmp/autocage-m36/evaluation-v3-final/workspaces/W11-attrs-validator-tests/parent",
+      "snapshot_sha256": "c0c524e0f1d5d2aa7f7878f785e5c56aa2944d5d2e3df0ac1cce22104171db4b",
+      "task_id": "RR07-attrs-ne-validator",
+      "url": "https://github.com/python-attrs/attrs.git",
+      "workflow_id": "W11-attrs-validator-tests"
+    },
+    {
+      "commit": "5aa76a4450c311d87eda43946ec0ecd743572649",
+      "experiment_fixture_additions": [],
+      "license": "MIT",
+      "repository": "attrs",
+      "revision": "target",
+      "snapshot_path": "/tmp/autocage-m36/evaluation-v3-final/workspaces/W11-attrs-validator-tests/target",
+      "snapshot_sha256": "5b2833e0af742116d72347c3d82d28e4ab1fdf51dc6d66309bb9ffbf9ffcee57",
+      "task_id": "RR07-attrs-ne-validator",
+      "url": "https://github.com/python-attrs/attrs.git",
+      "workflow_id": "W11-attrs-validator-tests"
+    }
+  ],
+  "source_task_manifest_sha256": "4c4e846d0f89517a3a10e3fe4f64b53c00e489a10bf5c29a47f85c77b4ea690b",
+  "suite_id": "autocage-m36-preexecution-value-v3",
+  "workflow_plan_sha256": "b28c07408485f750dae26b7312ce9d357e12b924a1c06b15378565c1ee684f11"
+}

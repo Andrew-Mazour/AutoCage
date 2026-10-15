@@ -1,0 +1,1226 @@
+[
+  {
+    "atom_count": 4,
+    "best_weighted_exposure": 11,
+    "ceiling_weighted_exposure": 54,
+    "grants": [
+      {
+        "kind": "directory_tree",
+        "path": "atom00"
+      }
+    ],
+    "layout": "clustered",
+    "reduction_percent": 79.62962962962963,
+    "required_atom_count": 1,
+    "search_replays": 5,
+    "status": "validated",
+    "strategy": "greedy",
+    "total_replays": 8,
+    "utility_validated": true,
+    "validation_replays": 3
+  },
+  {
+    "atom_count": 4,
+    "best_weighted_exposure": 11,
+    "ceiling_weighted_exposure": 54,
+    "grants": [
+      {
+        "kind": "directory_tree",
+        "path": "atom00"
+      }
+    ],
+    "layout": "clustered",
+    "reduction_percent": 79.62962962962963,
+    "required_atom_count": 1,
+    "search_replays": 5,
+    "status": "validated",
+    "strategy": "random",
+    "total_replays": 8,
+    "utility_validated": true,
+    "validation_replays": 3
+  },
+  {
+    "atom_count": 4,
+    "best_weighted_exposure": 1,
+    "ceiling_weighted_exposure": 54,
+    "grants": [
+      {
+        "kind": "file_contents",
+        "path": "atom00/payload.txt"
+      }
+    ],
+    "layout": "clustered",
+    "reduction_percent": 98.14814814814815,
+    "required_atom_count": 1,
+    "search_replays": 4,
+    "status": "validated",
+    "strategy": "hierarchical",
+    "total_replays": 7,
+    "utility_validated": true,
+    "validation_replays": 3
+  },
+  {
+    "atom_count": 4,
+    "best_weighted_exposure": 11,
+    "ceiling_weighted_exposure": 54,
+    "grants": [
+      {
+        "kind": "directory_tree",
+        "path": "atom00"
+      }
+    ],
+    "layout": "dispersed",
+    "reduction_percent": 79.62962962962963,
+    "required_atom_count": 1,
+    "search_replays": 5,
+    "status": "validated",
+    "strategy": "greedy",
+    "total_replays": 8,
+    "utility_validated": true,
+    "validation_replays": 3
+  },
+  {
+    "atom_count": 4,
+    "best_weighted_exposure": 11,
+    "ceiling_weighted_exposure": 54,
+    "grants": [
+      {
+        "kind": "directory_tree",
+        "path": "atom00"
+      }
+    ],
+    "layout": "dispersed",
+    "reduction_percent": 79.62962962962963,
+    "required_atom_count": 1,
+    "search_replays": 5,
+    "status": "validated",
+    "strategy": "random",
+    "total_replays": 8,
+    "utility_validated": true,
+    "validation_replays": 3
+  },
+  {
+    "atom_count": 4,
+    "best_weighted_exposure": 1,
+    "ceiling_weighted_exposure": 54,
+    "grants": [
+      {
+        "kind": "file_contents",
+        "path": "atom00/payload.txt"
+      }
+    ],
+    "layout": "dispersed",
+    "reduction_percent": 98.14814814814815,
+    "required_atom_count": 1,
+    "search_replays": 4,
+    "status": "validated",
+    "strategy": "hierarchical",
+    "total_replays": 7,
+    "utility_validated": true,
+    "validation_replays": 3
+  },
+  {
+    "atom_count": 8,
+    "best_weighted_exposure": 22,
+    "ceiling_weighted_exposure": 98,
+    "grants": [
+      {
+        "kind": "directory_tree",
+        "path": "atom00"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom01"
+      }
+    ],
+    "layout": "clustered",
+    "reduction_percent": 77.55102040816327,
+    "required_atom_count": 2,
+    "search_replays": 9,
+    "status": "validated",
+    "strategy": "greedy",
+    "total_replays": 12,
+    "utility_validated": true,
+    "validation_replays": 3
+  },
+  {
+    "atom_count": 8,
+    "best_weighted_exposure": 22,
+    "ceiling_weighted_exposure": 98,
+    "grants": [
+      {
+        "kind": "directory_tree",
+        "path": "atom00"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom01"
+      }
+    ],
+    "layout": "clustered",
+    "reduction_percent": 77.55102040816327,
+    "required_atom_count": 2,
+    "search_replays": 9,
+    "status": "validated",
+    "strategy": "random",
+    "total_replays": 12,
+    "utility_validated": true,
+    "validation_replays": 3
+  },
+  {
+    "atom_count": 8,
+    "best_weighted_exposure": 12,
+    "ceiling_weighted_exposure": 98,
+    "grants": [
+      {
+        "kind": "file_contents",
+        "path": "atom00/payload.txt"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom01"
+      }
+    ],
+    "layout": "clustered",
+    "reduction_percent": 87.75510204081633,
+    "required_atom_count": 2,
+    "search_replays": 8,
+    "status": "validated",
+    "strategy": "hierarchical",
+    "total_replays": 11,
+    "utility_validated": true,
+    "validation_replays": 3
+  },
+  {
+    "atom_count": 8,
+    "best_weighted_exposure": 22,
+    "ceiling_weighted_exposure": 98,
+    "grants": [
+      {
+        "kind": "directory_tree",
+        "path": "atom00"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom04"
+      }
+    ],
+    "layout": "dispersed",
+    "reduction_percent": 77.55102040816327,
+    "required_atom_count": 2,
+    "search_replays": 9,
+    "status": "validated",
+    "strategy": "greedy",
+    "total_replays": 12,
+    "utility_validated": true,
+    "validation_replays": 3
+  },
+  {
+    "atom_count": 8,
+    "best_weighted_exposure": 22,
+    "ceiling_weighted_exposure": 98,
+    "grants": [
+      {
+        "kind": "directory_tree",
+        "path": "atom00"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom04"
+      }
+    ],
+    "layout": "dispersed",
+    "reduction_percent": 77.55102040816327,
+    "required_atom_count": 2,
+    "search_replays": 9,
+    "status": "validated",
+    "strategy": "random",
+    "total_replays": 12,
+    "utility_validated": true,
+    "validation_replays": 3
+  },
+  {
+    "atom_count": 8,
+    "best_weighted_exposure": 12,
+    "ceiling_weighted_exposure": 98,
+    "grants": [
+      {
+        "kind": "file_contents",
+        "path": "atom00/payload.txt"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom04"
+      }
+    ],
+    "layout": "dispersed",
+    "reduction_percent": 87.75510204081633,
+    "required_atom_count": 2,
+    "search_replays": 10,
+    "status": "validated",
+    "strategy": "hierarchical",
+    "total_replays": 13,
+    "utility_validated": true,
+    "validation_replays": 3
+  },
+  {
+    "atom_count": 16,
+    "best_weighted_exposure": 44,
+    "ceiling_weighted_exposure": 186,
+    "grants": [
+      {
+        "kind": "directory_tree",
+        "path": "atom00"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom01"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom02"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom03"
+      }
+    ],
+    "layout": "clustered",
+    "reduction_percent": 76.34408602150538,
+    "required_atom_count": 4,
+    "search_replays": 17,
+    "status": "validated",
+    "strategy": "greedy",
+    "total_replays": 20,
+    "utility_validated": true,
+    "validation_replays": 3
+  },
+  {
+    "atom_count": 16,
+    "best_weighted_exposure": 44,
+    "ceiling_weighted_exposure": 186,
+    "grants": [
+      {
+        "kind": "directory_tree",
+        "path": "atom00"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom01"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom02"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom03"
+      }
+    ],
+    "layout": "clustered",
+    "reduction_percent": 76.34408602150538,
+    "required_atom_count": 4,
+    "search_replays": 17,
+    "status": "validated",
+    "strategy": "random",
+    "total_replays": 20,
+    "utility_validated": true,
+    "validation_replays": 3
+  },
+  {
+    "atom_count": 16,
+    "best_weighted_exposure": 34,
+    "ceiling_weighted_exposure": 186,
+    "grants": [
+      {
+        "kind": "file_contents",
+        "path": "atom00/payload.txt"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom01"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom02"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom03"
+      }
+    ],
+    "layout": "clustered",
+    "reduction_percent": 81.72043010752688,
+    "required_atom_count": 4,
+    "search_replays": 12,
+    "status": "validated",
+    "strategy": "hierarchical",
+    "total_replays": 15,
+    "utility_validated": true,
+    "validation_replays": 3
+  },
+  {
+    "atom_count": 16,
+    "best_weighted_exposure": 44,
+    "ceiling_weighted_exposure": 186,
+    "grants": [
+      {
+        "kind": "directory_tree",
+        "path": "atom00"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom04"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom08"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom12"
+      }
+    ],
+    "layout": "dispersed",
+    "reduction_percent": 76.34408602150538,
+    "required_atom_count": 4,
+    "search_replays": 17,
+    "status": "validated",
+    "strategy": "greedy",
+    "total_replays": 20,
+    "utility_validated": true,
+    "validation_replays": 3
+  },
+  {
+    "atom_count": 16,
+    "best_weighted_exposure": 44,
+    "ceiling_weighted_exposure": 186,
+    "grants": [
+      {
+        "kind": "directory_tree",
+        "path": "atom00"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom04"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom08"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom12"
+      }
+    ],
+    "layout": "dispersed",
+    "reduction_percent": 76.34408602150538,
+    "required_atom_count": 4,
+    "search_replays": 17,
+    "status": "validated",
+    "strategy": "random",
+    "total_replays": 20,
+    "utility_validated": true,
+    "validation_replays": 3
+  },
+  {
+    "atom_count": 16,
+    "best_weighted_exposure": 34,
+    "ceiling_weighted_exposure": 186,
+    "grants": [
+      {
+        "kind": "file_contents",
+        "path": "atom00/payload.txt"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom04"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom08"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom12"
+      }
+    ],
+    "layout": "dispersed",
+    "reduction_percent": 81.72043010752688,
+    "required_atom_count": 4,
+    "search_replays": 22,
+    "status": "validated",
+    "strategy": "hierarchical",
+    "total_replays": 25,
+    "utility_validated": true,
+    "validation_replays": 3
+  },
+  {
+    "atom_count": 32,
+    "best_weighted_exposure": 88,
+    "ceiling_weighted_exposure": 362,
+    "grants": [
+      {
+        "kind": "directory_tree",
+        "path": "atom00"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom01"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom02"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom03"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom04"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom05"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom06"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom07"
+      }
+    ],
+    "layout": "clustered",
+    "reduction_percent": 75.69060773480663,
+    "required_atom_count": 8,
+    "search_replays": 33,
+    "status": "validated",
+    "strategy": "greedy",
+    "total_replays": 36,
+    "utility_validated": true,
+    "validation_replays": 3
+  },
+  {
+    "atom_count": 32,
+    "best_weighted_exposure": 88,
+    "ceiling_weighted_exposure": 362,
+    "grants": [
+      {
+        "kind": "directory_tree",
+        "path": "atom00"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom01"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom02"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom03"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom04"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom05"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom06"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom07"
+      }
+    ],
+    "layout": "clustered",
+    "reduction_percent": 75.69060773480663,
+    "required_atom_count": 8,
+    "search_replays": 33,
+    "status": "validated",
+    "strategy": "random",
+    "total_replays": 36,
+    "utility_validated": true,
+    "validation_replays": 3
+  },
+  {
+    "atom_count": 32,
+    "best_weighted_exposure": 78,
+    "ceiling_weighted_exposure": 362,
+    "grants": [
+      {
+        "kind": "file_contents",
+        "path": "atom00/payload.txt"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom01"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom02"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom03"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom04"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom05"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom06"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom07"
+      }
+    ],
+    "layout": "clustered",
+    "reduction_percent": 78.45303867403315,
+    "required_atom_count": 8,
+    "search_replays": 20,
+    "status": "validated",
+    "strategy": "hierarchical",
+    "total_replays": 23,
+    "utility_validated": true,
+    "validation_replays": 3
+  },
+  {
+    "atom_count": 32,
+    "best_weighted_exposure": 88,
+    "ceiling_weighted_exposure": 362,
+    "grants": [
+      {
+        "kind": "directory_tree",
+        "path": "atom00"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom04"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom08"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom12"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom16"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom20"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom24"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom28"
+      }
+    ],
+    "layout": "dispersed",
+    "reduction_percent": 75.69060773480663,
+    "required_atom_count": 8,
+    "search_replays": 33,
+    "status": "validated",
+    "strategy": "greedy",
+    "total_replays": 36,
+    "utility_validated": true,
+    "validation_replays": 3
+  },
+  {
+    "atom_count": 32,
+    "best_weighted_exposure": 88,
+    "ceiling_weighted_exposure": 362,
+    "grants": [
+      {
+        "kind": "directory_tree",
+        "path": "atom00"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom04"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom08"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom12"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom16"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom20"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom24"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom28"
+      }
+    ],
+    "layout": "dispersed",
+    "reduction_percent": 75.69060773480663,
+    "required_atom_count": 8,
+    "search_replays": 33,
+    "status": "validated",
+    "strategy": "random",
+    "total_replays": 36,
+    "utility_validated": true,
+    "validation_replays": 3
+  },
+  {
+    "atom_count": 32,
+    "best_weighted_exposure": 78,
+    "ceiling_weighted_exposure": 362,
+    "grants": [
+      {
+        "kind": "file_contents",
+        "path": "atom00/payload.txt"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom04"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom08"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom12"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom16"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom20"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom24"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom28"
+      }
+    ],
+    "layout": "dispersed",
+    "reduction_percent": 78.45303867403315,
+    "required_atom_count": 8,
+    "search_replays": 46,
+    "status": "validated",
+    "strategy": "hierarchical",
+    "total_replays": 49,
+    "utility_validated": true,
+    "validation_replays": 3
+  },
+  {
+    "atom_count": 64,
+    "best_weighted_exposure": 176,
+    "ceiling_weighted_exposure": 714,
+    "grants": [
+      {
+        "kind": "directory_tree",
+        "path": "atom00"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom01"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom02"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom03"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom04"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom05"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom06"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom07"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom08"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom09"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom10"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom11"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom12"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom13"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom14"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom15"
+      }
+    ],
+    "layout": "clustered",
+    "reduction_percent": 75.35014005602241,
+    "required_atom_count": 16,
+    "search_replays": 65,
+    "status": "validated",
+    "strategy": "greedy",
+    "total_replays": 68,
+    "utility_validated": true,
+    "validation_replays": 3
+  },
+  {
+    "atom_count": 64,
+    "best_weighted_exposure": 176,
+    "ceiling_weighted_exposure": 714,
+    "grants": [
+      {
+        "kind": "directory_tree",
+        "path": "atom00"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom01"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom02"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom03"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom04"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom05"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom06"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom07"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom08"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom09"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom10"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom11"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom12"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom13"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom14"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom15"
+      }
+    ],
+    "layout": "clustered",
+    "reduction_percent": 75.35014005602241,
+    "required_atom_count": 16,
+    "search_replays": 65,
+    "status": "validated",
+    "strategy": "random",
+    "total_replays": 68,
+    "utility_validated": true,
+    "validation_replays": 3
+  },
+  {
+    "atom_count": 64,
+    "best_weighted_exposure": 166,
+    "ceiling_weighted_exposure": 714,
+    "grants": [
+      {
+        "kind": "file_contents",
+        "path": "atom00/payload.txt"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom01"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom02"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom03"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom04"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom05"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom06"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom07"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom08"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom09"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom10"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom11"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom12"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom13"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom14"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom15"
+      }
+    ],
+    "layout": "clustered",
+    "reduction_percent": 76.75070028011204,
+    "required_atom_count": 16,
+    "search_replays": 36,
+    "status": "validated",
+    "strategy": "hierarchical",
+    "total_replays": 39,
+    "utility_validated": true,
+    "validation_replays": 3
+  },
+  {
+    "atom_count": 64,
+    "best_weighted_exposure": 176,
+    "ceiling_weighted_exposure": 714,
+    "grants": [
+      {
+        "kind": "directory_tree",
+        "path": "atom00"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom04"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom08"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom12"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom16"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom20"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom24"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom28"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom32"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom36"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom40"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom44"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom48"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom52"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom56"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom60"
+      }
+    ],
+    "layout": "dispersed",
+    "reduction_percent": 75.35014005602241,
+    "required_atom_count": 16,
+    "search_replays": 65,
+    "status": "validated",
+    "strategy": "greedy",
+    "total_replays": 68,
+    "utility_validated": true,
+    "validation_replays": 3
+  },
+  {
+    "atom_count": 64,
+    "best_weighted_exposure": 176,
+    "ceiling_weighted_exposure": 714,
+    "grants": [
+      {
+        "kind": "directory_tree",
+        "path": "atom00"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom04"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom08"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom12"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom16"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom20"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom24"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom28"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom32"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom36"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom40"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom44"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom48"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom52"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom56"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom60"
+      }
+    ],
+    "layout": "dispersed",
+    "reduction_percent": 75.35014005602241,
+    "required_atom_count": 16,
+    "search_replays": 65,
+    "status": "validated",
+    "strategy": "random",
+    "total_replays": 68,
+    "utility_validated": true,
+    "validation_replays": 3
+  },
+  {
+    "atom_count": 64,
+    "best_weighted_exposure": 166,
+    "ceiling_weighted_exposure": 714,
+    "grants": [
+      {
+        "kind": "file_contents",
+        "path": "atom00/payload.txt"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom04"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom08"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom12"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom16"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom20"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom24"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom28"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom32"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom36"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom40"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom44"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom48"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom52"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom56"
+      },
+      {
+        "kind": "directory_tree",
+        "path": "atom60"
+      }
+    ],
+    "layout": "dispersed",
+    "reduction_percent": 76.75070028011204,
+    "required_atom_count": 16,
+    "search_replays": 94,
+    "status": "validated",
+    "strategy": "hierarchical",
+    "total_replays": 97,
+    "utility_validated": true,
+    "validation_replays": 3
+  }
+]

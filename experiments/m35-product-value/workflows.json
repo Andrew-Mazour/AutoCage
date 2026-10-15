@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "suite_id": "autocage-m35-repeatable-workflow-v1",
+  "source_task_manifest": "../real-repository-v1/tasks.json",
+  "source_task_manifest_sha256": "4c4e846d0f89517a3a10e3fe4f64b53c00e489a10bf5c29a47f85c77b4ea690b",
+  "workflow_definition": "A deterministic repository-maintenance transformation from a pinned parent commit to a pinned target change, followed by that repository's declared pinned pytest tests. Every repeat starts from a fresh copy of the same parent snapshot. The scripts test filesystem-policy behavior; they do not test patch discovery or model coding ability.",
+  "workflows": [
+    {"id": "W01", "task_id": "RR01-click-short-help", "operations": [], "class": ["single-source-edit", "pytest"]},
+    {"id": "W02", "task_id": "RR02-click-parameter-spec", "operations": [{"kind": "source-archive", "directory": "src/click", "output": "build/click-source.tar"}], "class": ["multi-directory-edit", "packaging-artifact", "pytest"]},
+    {"id": "W03", "task_id": "RR03-packaging-pylock-separators", "operations": [], "class": ["single-source-edit", "pytest-workspace-cache", "rr03-diagnostic"]},
+    {"id": "W04", "task_id": "RR04-packaging-empty-versions", "operations": [{"kind": "compileall", "directory": "src/packaging"}], "class": ["source-edit", "bytecode-generation", "pytest"]},
+    {"id": "W05", "task_id": "RR05-dotenv-expand-home", "operations": [], "class": ["single-source-edit", "pytest"]},
+    {"id": "W06", "task_id": "RR06-dotenv-write-error-paths", "operations": [], "class": ["multi-file-edit", "atomic-replacement", "pytest"]},
+    {"id": "W07", "task_id": "RR07-attrs-ne-validator", "operations": [], "class": ["multi-directory-edit", "create-file", "pytest"]},
+    {"id": "W08", "task_id": "RR08-filelock-hostile-pid", "operations": [], "class": ["source-edit", "transient-create-rename-delete", "pytest"]},
+    {"id": "W09", "task_id": "RR09-iniconfig-strip-bom", "operations": [], "class": ["single-source-edit", "pytest"]},
+    {"id": "W10", "task_id": "RR10-pluggy-falsy-plugin", "operations": [], "class": ["multi-file-edit", "transient-create-delete", "pytest"]},
+    {"id": "W11", "task_id": "RR11-iniconfig-inline-types-delete-stub", "operations": [], "class": ["metadata-edit", "delete-file", "path-state-dependent-write", "pytest"]}
+  ],
+  "grouping": "11 workflows across seven repository groups: click (W01-W02), packaging (W03-W04), python-dotenv (W05-W06), attrs (W07), filelock (W08), iniconfig (W09 and W11), pluggy (W10). They are not 11 independent repositories.",
+  "deferred_representation": "The selected repositories expose no pinned, dependency-light project-native source-code generator with a stable command across the suite. W04 uses Python compileall as deterministic generated-artifact coverage; it is bytecode compilation, not source-code generation. W02 builds a deterministic source archive with the standard library, not the repository's official release backend. These limits will be stated in the report."
+}

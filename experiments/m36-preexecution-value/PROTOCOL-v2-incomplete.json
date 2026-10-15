@@ -1,0 +1,169 @@
+{
+  "schema_version": 2,
+  "suite_id": "autocage-m36-preexecution-value-v2",
+  "status": "frozen-before-final-evaluation",
+  "freeze_note": "Protocol v2: eight held-out recurring workflows across six pinned public Python repositories, each evaluated at both parent and target commits. W01, W02, and W09 are development-only. V1 stopped before completing W05: direct pytest collection in the pinned filelock archive lacked its build-generated src/filelock/version.py, and the controller then crashed while accounting for the agent failure. The W05 test was replaced with source compileall, which validates the real tree without executing unavailable packaging setup. The null-verifier accounting path is hardened. V1's protocol, plan, partial progress, and diagnostic evidence are preserved separately. No completed v1 aggregate is claimed.",
+  "workflow_plan": "workflow-plan.json",
+  "workflow_selection": {
+    "workflow_count": 8,
+    "repository_group_count": 6,
+    "source_revision_count_per_workflow": 2,
+    "held_out_workflow_ids": [
+      "W03-dotenv-parser-tests",
+      "W04-attrs-filter-tests",
+      "W05-filelock-compileall",
+      "W06-iniconfig-tests",
+      "W07-pluggy-hookcaller-tests",
+      "W08-attrs-compileall",
+      "W10-click-wheel",
+      "W11-attrs-validator-tests"
+    ],
+    "development_only_workflow_ids": [
+      "W01-click-int-range-tests",
+      "W02-packaging-utility-tests",
+      "W09-packaging-wheel-pilot"
+    ],
+    "revision_note": "Parent and target commits form paired source revisions, not independent repositories or statistical samples. No scripted patch application is used as the primary task command. W05 compiles the pinned Filelock src/ tree because direct pytest collection in v1 failed before tests ran: the archive omits build-generated src/filelock/version.py."
+  },
+  "workflow_execution": {
+    "test": "Run the declared real pytest selection with cache output redirected to private /tmp; repeat it as the trusted utility verifier with the relevant test root mounted read-only.",
+    "compileall": "Run Python compileall with PYTHONPYCACHEPREFIX under private /tmp; repeat under the same fixed command as verifier.",
+    "wheel": "Run local pip wheel with dependencies and build isolation disabled, writing to the pre-created dist directory; a pinned read-only verifier checks that exactly one wheel has WHEEL and METADATA entries.",
+    "dependencies": "Use only the previously pinned Ubuntu runtime, M3 Python test packages, and hash-pinned flit_core 3.12.0 build backend prepared outside sandboxed task execution. Workflow children have no network grant.",
+    "timeout_seconds": 120
+  },
+  "methods": {
+    "A": "Broad workspace ceiling: one recursive write grant for the whole staged workspace.",
+    "B": "Competently authored static policy: no workspace writes for pytest/compileall, exact recursive dist output grant for wheels.",
+    "C": "Developer-authored task-specific profile: explicitly authored per-workflow grants identical in meaning to B; duplicates are retained to expose their equal enforcement outcomes.",
+    "D": "Pre-execution suggestion: deterministic python-workflows-v1 proposal generated from the declared workflow kind, source manifest, and exact command, then accepted with an independently provided workspace-root ceiling.",
+    "E": "Existing post-run greedy optimizer with a four-replay total cap, including its three fresh validation replays; run only for the target revision after the broad task and verifier pass. The broad execution is shared with A and counted once."
+  },
+  "policy_cost": {
+    "primary_schema": "weighted-write-surface-v1 unchanged from M2/M3/M3.5",
+    "directory_entry_weight": 10,
+    "ordinary_existing_file_weight": 1,
+    "high_impact_file_weight": 10,
+    "high_impact_prefixes": [
+      ".github/workflows/",
+      "deploy/",
+      "deployment/",
+      "scripts/",
+      "package.json",
+      "pyproject.toml",
+      "cargo.toml"
+    ],
+    "supplemental_counts": [
+      "exact-file grants",
+      "recursive directory grants",
+      "existing regular files covered",
+      "existing writable directory entries",
+      "grant depth and immediate breadth",
+      "high-impact files covered",
+      "future child creation under recursive grants",
+      "independent unauthorized operations actually blocked"
+    ],
+    "interpretation": "The weighted score is a transparent heuristic, not a calibrated risk or exploit probability. A recursive grant also allows future children absent from the current-tree score; report its scope separately. Historical frozen scores are not changed."
+  },
+  "security_canaries": {
+    "targets": {
+      "unrelated_source": "src/autocage_m36_unrelated.py",
+      "unrelated_test": "tests/autocage_m36_unrelated_test.py",
+      "build_configuration": "autocage-m36-build-config.toml",
+      "repository_automation": ".github/workflows/autocage-m36.yml",
+      "deployment_configuration": "deploy/autocage-m36.yml",
+      "sensitive_configuration": "config/.autocage-m36-sensitive-canary"
+    },
+    "operation": "Each policy runs one bounded process that attempts in-place replacement of every pre-existing synthetic canary. The trusted controller independently checks staged file contents, source hashes before/after, and the per-run readonly-mount check.",
+    "methods": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "positive_control": "A must modify all six synthetic canary files in its isolated stage.",
+    "negative_control": "B, C, and D must block all six writes for every workflow/revision. Any unexecuted check, changed source, or mismatch between observed and compiled-policy behavior fails the mandatory security gate.",
+    "optimizer_control": "E is measured on the target-revision canary arm; its expected allowed set is derived from the optimizer's actual compiled grant list and is reported separately from B-D."
+  },
+  "reuse_and_revision_scenarios": {
+    "exact_contract_repeats": 3,
+    "repetition_source": "Each D profile is applied to three fresh stages from the exact same source snapshot and command; the suggestion is revalidated by the production runner each time.",
+    "natural_revision_drift": "Every parent-revision D proposal is offered once against its paired target source. It must be rejected before task execution. A freshly generated target proposal is evaluated separately.",
+    "controlled_drift": [
+      "unrelated source edit",
+      "added source file",
+      "modified test",
+      "build configuration edit",
+      "dependency declaration edit",
+      "command environment argument change"
+    ],
+    "shadow": "For the five source edits, a research-only run explicitly reauthorizes the prior policy under the current source ceiling to test empirical sufficiency. This is not policy reuse or promotion; command drift has no shadow execution. Verifier/runtime/executable invalidation for empirical learned-policy records remains covered by the existing M3 contract regression suite."
+  },
+  "timing_and_accounting": {
+    "count_separately": [
+      "proposal generation",
+      "initial task and verifier executions",
+      "exact-contract repeated executions",
+      "optimizer search and final validation executions",
+      "independent canary executions",
+      "verifier process executions",
+      "workspace staging",
+      "Bubblewrap argument compilation",
+      "AutoCage CLI wall time",
+      "controller wall time including source fingerprints"
+    ],
+    "agent_model_cost": "No model inference is used. Timings of these deterministic commands must not be extrapolated to claim affordability for model-backed agent replays.",
+    "human_effort": "No participant timing study is included; policy inputs, explicit acceptance, rule counts, and zero/nonzero repairs are proxies. Human authoring/review seconds are NOT TESTED, not estimated."
+  },
+  "predeclared_decision_criteria": {
+    "mandatory_security": "Every expected A positive control and B/C/D negative control executes and matches observed staged contents. All source snapshots remain unchanged. Any failure or NOT TESTED mandatory item prevents a pass.",
+    "utility": "The broad baseline must pass each declared workflow/revision. D must pass every broad-passing case without repair; every one of the three exact-contract repeats must pass. Any no-policy fallback or failed/untested task is reported separately, not counted as suggestion success.",
+    "first_run_and_replay": "D must require zero full task replays before its first protected execution. Median deterministic profile-generation overhead must be at most 1 second. Profile acceptance and the developer ceiling must remain explicit.",
+    "source_revisions": "All eight stale parent-to-target suggestions and all six controlled source/command-drift suggestions must reject before task execution. Freshly generated target suggestions must preserve baseline utility.",
+    "minimum_differentiation_for_A": "At equal utility, D must either block at least 20 percentage points more of the common unauthorized canary operations than the competent B policy, or demonstrate at least 50% fewer human policy-authoring decisions with a separately measured median profile review below 60 seconds. Rule-count proxies alone do not satisfy the human-effort branch. If B/C and D compile equivalent grants and block the same operations, automated suggestions have not shown sufficient differentiation regardless of passing tests.",
+    "practicality": "Report the complete command/verifier and optimizer costs, not just proposal CPU time. Do not call amortized overhead a latency break-even. No affordability claim for model-backed tasks is supported by this scripted study.",
+    "sample_limit": "Eight workflow types and paired revisions are a feasibility/product signal only; do not claim statistical significance or broad repository generalization."
+  },
+  "decision_rules": {
+    "A_continue_with_preexecution_and_start_M4": "All security, utility, replay, source revision, and minimum-differentiation criteria pass; the first real-agent prototype must then prove first-run utility plus independent unauthorized-write blocking on a local scripted/open model-compatible path.",
+    "B_keep_profiles_as_infrastructure_and_pivot_innovation": "Profiles enforce useful restrictions but do not beat a competent static policy on real blocked operations or demonstrably reduce measured user effort. Keep the rules engine small and use the sandbox for one clearly specified agent-security/evaluation contribution.",
+    "C_release_validated_research_tool": "The broader security utility is not supported and no credible adjacent research question can be bounded without expanding the project; ship the tested runner, optimizer, contracts, and reproducible evidence as a scoped research tool."
+  },
+  "historical_results": "M2, M3, and M3.5 reports, protocols, thresholds, and raw results remain frozen and are not recomputed or relabeled by M3.6.",
+  "supersedes_protocol_sha256": "24e141c1f7d53649867d5b4078c3af23e40a99ec9d064fadbf664b1d92370e43",
+  "protocol_revision_audit": "V2 replaces the failed, incomplete pre-execution attempt before any aggregate results were produced. The held-out task set changes only W05 from direct filelock pytest collection to filelock source compileall; all thresholds, cost weights, methods, other tasks, controls, and security criteria remain unchanged.",
+  "workflow_plan_sha256": "312e2d4356e3400cd56f03db7cf76a5a17823b0990c4b9c0ec7a29dc172cc8f8",
+  "controller_sha256": "802f343f81011133a9d3f16aa2b1f116a5a813e63ec6dbd6bdfbaf474973bd00",
+  "workflow_task_manifest_sha256": "4c4e846d0f89517a3a10e3fe4f64b53c00e489a10bf5c29a47f85c77b4ea690b",
+  "m3_prepare_sha256": "db5631b8b58867f69ea237fd3500e589db922403aeb70d4d41ae8e2585a839eb",
+  "m3_runtime_lock_sha256": "845581b07e7b93b4b2e7c82af787be4b8046a28bd5182dcf2f6c3640f9d24450",
+  "m36_prepare_sha256": "16aaa970279a878674047cac8e31ad9e86d4c438fe986bb3ddb70865a0dad1bb",
+  "m36_build_lock_sha256": "a00091e8ad959114008465bfa6a2198dade3e7af6d925ec817ee3d1a96d36d69",
+  "m36_download_setup_sha256": "a364e00e1b6c5b8b929011a4d7cf6b09851627a517e53fcf0628668cc5f6cdd2",
+  "m36_install_setup_sha256": "8f9803020dba72301ee758023265911b0c17c429012179f95cf1553d7b063596",
+  "profile_source_sha256": "b9e882a77e79d812d36d74154ae7fc37c478aa259f2813afe4b9faa8dd6e0fab",
+  "policy_source_sha256": "44bd276fd171be0450508d9c4ff965e183f65df71baf2d62d7cf65fa843d6bdf",
+  "bubblewrap_source_sha256": "5004daf89634670923b2713d0bba3e8bdecb48fb522d7bce8319fad0f59cabbf",
+  "linux_test_source_sha256": "3803155086054f0349f6c22ba41c4cb6d9e2aca3cffa6638f5d07b72eac4ab11",
+  "m2_frozen_manifest_sha256": "12682de6720783fe3234ad6201933b8528fe12a30500137fa4afe6e323b95d50",
+  "m2_report_sha256": "b55eb50176ba1477181cf808043ff561e9a352b38be3f8aa22bef445cc98ce72",
+  "m3_protocol_sha256": "11117c95fa81ead2805505030f283518ae399d20d70ec4bf2938e3a7b0ab472b",
+  "m35_protocol_sha256": "903e3682216b46246febe39c94c2ac92c533893e0a5759cb66ea15f390ddf86d",
+  "m35_report_sha256": "767b808fee0f82e1884c837f5ea19f28d182bcf05d51a7fdfab9682e481f5c3c",
+  "autocage_release_binary_sha256": "26699de49e90737a63403273b5c9310b50977cfe32546a77e349007e7a2b6bf9",
+  "cargo_manifest_sha256": "8c7dcbf8e6735cb753c048da8e28dc70a5ddfbcb237575ca75ed6422990a934a",
+  "cargo_lock_sha256": "b5520e4344c9878a7eebd3495a14f25b29c098c8b943dbaa435a692a7c8c0eea",
+  "runtime": {
+    "platform": {
+      "kernel": "6.8.0-142-generic",
+      "architecture": "aarch64",
+      "python": "Python 3.12.3",
+      "bubblewrap": "bubblewrap 0.9.0",
+      "rustc": "rustc 1.75.0 (82e1608df 2023-12-21) (built from a source tarball)",
+      "cargo": "cargo 1.75.0"
+    },
+    "python_build_backend": "flit_core 3.12.0 at /usr/local/lib/autocage-m36-build-site",
+    "test_runtime": "M3 python-requirements.lock installed at /usr/local/lib/autocage-m3-site-v2",
+    "network": "No task-time egress; dependency preparation is separate and hash-pinned"
+  }
+}

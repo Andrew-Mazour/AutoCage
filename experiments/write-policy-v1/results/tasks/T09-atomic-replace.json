@@ -1,0 +1,2290 @@
+{
+  "baselines": {
+    "A": {
+      "agent_exit": 0,
+      "agent_timed_out": false,
+      "cost": {
+        "directory_entry_weight_total": 160,
+        "file_weight_total": 37,
+        "permission_rules": 1,
+        "recursive_directory_grants": 1,
+        "weighted_writable_exposure": 197,
+        "writable_directories": 16,
+        "writable_regular_files": 19
+      },
+      "elapsed_seconds": 0.08846878900294541,
+      "exit": 0,
+      "outcome": "verified",
+      "policy": [
+        [
+          "directory_tree",
+          "."
+        ]
+      ],
+      "replays": 1,
+      "run_dir": "/tmp/autocage-write-policy-v1-final-20261011-r2/runs/T09-atomic-replace/A-broad",
+      "security": {
+        "host_access_probe": "PASS",
+        "host_access_probe_blocked": true,
+        "host_canary_unchanged": true,
+        "original_source_write_probe": "PASS",
+        "original_source_write_probe_blocked": true,
+        "pass": true,
+        "source_unchanged": true,
+        "status": "PASS",
+        "verifier_readonly_probe": "PASS",
+        "verifier_readonly_probe_blocked": true,
+        "verifier_snapshot_unchanged": true
+      },
+      "stderr": "",
+      "utility_pass": true,
+      "verifier_exit": 0,
+      "verifier_timed_out": false
+    },
+    "B": {
+      "agent_exit": 0,
+      "agent_timed_out": false,
+      "cost": {
+        "directory_entry_weight_total": 50,
+        "file_weight_total": 10,
+        "permission_rules": 2,
+        "recursive_directory_grants": 2,
+        "weighted_writable_exposure": 60,
+        "writable_directories": 5,
+        "writable_regular_files": 10
+      },
+      "elapsed_seconds": 0.059658166999724926,
+      "exit": 0,
+      "outcome": "verified",
+      "policy": [
+        [
+          "directory_tree",
+          "src"
+        ],
+        [
+          "directory_tree",
+          "tests"
+        ]
+      ],
+      "replays": 1,
+      "run_dir": "/tmp/autocage-write-policy-v1-final-20261011-r2/runs/T09-atomic-replace/B-static",
+      "security": {
+        "host_access_probe": "PASS",
+        "host_access_probe_blocked": true,
+        "host_canary_unchanged": true,
+        "original_source_write_probe": "PASS",
+        "original_source_write_probe_blocked": true,
+        "pass": true,
+        "source_unchanged": true,
+        "status": "PASS",
+        "verifier_readonly_probe": "PASS",
+        "verifier_readonly_probe_blocked": true,
+        "verifier_snapshot_unchanged": true
+      },
+      "stderr": "",
+      "utility_pass": true,
+      "verifier_exit": 0,
+      "verifier_timed_out": false
+    },
+    "C": {
+      "agent_exit": 1,
+      "agent_timed_out": false,
+      "cost": {
+        "directory_entry_weight_total": 0,
+        "file_weight_total": 2,
+        "permission_rules": 2,
+        "recursive_directory_grants": 0,
+        "weighted_writable_exposure": 2,
+        "writable_directories": 0,
+        "writable_regular_files": 2
+      },
+      "elapsed_seconds": 0.037427278999530245,
+      "exit": 1,
+      "outcome": "agent_failed",
+      "policy": [
+        [
+          "file_contents",
+          "oracle.txt"
+        ],
+        [
+          "file_contents",
+          "src/a.txt"
+        ]
+      ],
+      "replays": 1,
+      "run_dir": "/tmp/autocage-write-policy-v1-final-20261011-r2/runs/T09-atomic-replace/C-naive",
+      "security": {
+        "host_access_probe": "PASS",
+        "host_access_probe_blocked": true,
+        "host_canary_unchanged": true,
+        "original_source_write_probe": "PASS",
+        "original_source_write_probe_blocked": true,
+        "pass": false,
+        "source_unchanged": true,
+        "status": "NOT_TESTED",
+        "verifier_readonly_probe": "NOT_TESTED",
+        "verifier_readonly_probe_blocked": false,
+        "verifier_snapshot_unchanged": true
+      },
+      "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 20, in <module>\n  File \"/usr/lib/python3.12/pathlib.py\", line 1049, in write_text\n    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/pathlib.py\", line 1015, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nOSError: [Errno 30] Read-only file system: '/workspace/src/.save.tmp'\n",
+      "utility_pass": false,
+      "verifier_exit": null,
+      "verifier_timed_out": null
+    },
+    "M": {
+      "agent_exit": 0,
+      "agent_timed_out": false,
+      "cost": {
+        "directory_entry_weight_total": 40,
+        "file_weight_total": 8,
+        "permission_rules": 1,
+        "recursive_directory_grants": 1,
+        "weighted_writable_exposure": 48,
+        "writable_directories": 4,
+        "writable_regular_files": 8
+      },
+      "elapsed_seconds": 0.05853143300191732,
+      "exit": 0,
+      "outcome": "verified",
+      "policy": [
+        [
+          "directory_tree",
+          "src"
+        ]
+      ],
+      "replays": 1,
+      "run_dir": "/tmp/autocage-write-policy-v1-final-20261011-r2/runs/T09-atomic-replace/M-manual-oracle",
+      "security": {
+        "host_access_probe": "PASS",
+        "host_access_probe_blocked": true,
+        "host_canary_unchanged": true,
+        "original_source_write_probe": "PASS",
+        "original_source_write_probe_blocked": true,
+        "pass": true,
+        "source_unchanged": true,
+        "status": "PASS",
+        "verifier_readonly_probe": "PASS",
+        "verifier_readonly_probe_blocked": true,
+        "verifier_snapshot_unchanged": true
+      },
+      "stderr": "",
+      "utility_pass": true,
+      "verifier_exit": 0,
+      "verifier_timed_out": false
+    }
+  },
+  "optimizers": {
+    "D-greedy": {
+      "cost": {
+        "directory_entry_weight_total": 80,
+        "file_weight_total": 12,
+        "permission_rules": 4,
+        "recursive_directory_grants": 4,
+        "schema": "weighted-write-surface-v1",
+        "weighted_writable_exposure": 92,
+        "writable_directories": 8,
+        "writable_regular_files": 12
+      },
+      "elapsed_seconds": 0.7500268330004474,
+      "exit": 0,
+      "initial_broad_runs": 1,
+      "optimizer": {
+        "authorized_ceiling": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "directory_tree",
+              "path": "."
+            }
+          ]
+        },
+        "best_cost": {
+          "directory_entry_weight_total": 80,
+          "file_weight_total": 12,
+          "permission_rules": 4,
+          "recursive_directory_grants": 4,
+          "schema": "weighted-write-surface-v1",
+          "weighted_writable_exposure": 92,
+          "writable_directories": 8,
+          "writable_regular_files": 12
+        },
+        "best_policy": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "directory_tree",
+              "path": "docs"
+            },
+            {
+              "kind": "directory_tree",
+              "path": "lib"
+            },
+            {
+              "kind": "directory_tree",
+              "path": "src"
+            },
+            {
+              "kind": "directory_tree",
+              "path": "tests"
+            }
+          ]
+        },
+        "ceiling_cost": {
+          "directory_entry_weight_total": 160,
+          "file_weight_total": 37,
+          "permission_rules": 1,
+          "recursive_directory_grants": 1,
+          "schema": "weighted-write-surface-v1",
+          "weighted_writable_exposure": 197,
+          "writable_directories": 16,
+          "writable_regular_files": 19
+        },
+        "optimization_elapsed_millis": 697,
+        "rejected_trials": 1,
+        "search_replays": 9,
+        "status": "validated",
+        "strategy": "greedy",
+        "total_replays": 12,
+        "trials": [
+          {
+            "classification": "trial-000:agent_failed_exit_1:verifier_readonly_canary_not_tested",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 2,
+              "permission_rules": 2,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 2,
+              "writable_directories": 0,
+              "writable_regular_files": 2
+            },
+            "elapsed_millis": 39,
+            "passed": false,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "oracle.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "src/a.txt"
+                }
+              ]
+            },
+            "security_canaries_passed": false
+          },
+          {
+            "classification": "trial-001:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 150,
+              "file_weight_total": 37,
+              "permission_rules": 11,
+              "recursive_directory_grants": 8,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 187,
+              "writable_directories": 15,
+              "writable_regular_files": 19
+            },
+            "elapsed_millis": 59,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "README.md"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "oracle.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "package.json"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": ".github"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "build"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "cache"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "config"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "docs"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "lib"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "src"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "tests"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-002:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 150,
+              "file_weight_total": 36,
+              "permission_rules": 10,
+              "recursive_directory_grants": 8,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 186,
+              "writable_directories": 15,
+              "writable_regular_files": 18
+            },
+            "elapsed_millis": 61,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "oracle.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "package.json"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": ".github"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "build"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "cache"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "config"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "docs"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "lib"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "src"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "tests"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-003:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 150,
+              "file_weight_total": 35,
+              "permission_rules": 9,
+              "recursive_directory_grants": 8,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 185,
+              "writable_directories": 15,
+              "writable_regular_files": 17
+            },
+            "elapsed_millis": 58,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "package.json"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": ".github"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "build"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "cache"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "config"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "docs"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "lib"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "src"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "tests"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-004:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 150,
+              "file_weight_total": 25,
+              "permission_rules": 8,
+              "recursive_directory_grants": 8,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 175,
+              "writable_directories": 15,
+              "writable_regular_files": 16
+            },
+            "elapsed_millis": 58,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "directory_tree",
+                  "path": ".github"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "build"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "cache"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "config"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "docs"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "lib"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "src"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "tests"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-005:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 130,
+              "file_weight_total": 15,
+              "permission_rules": 7,
+              "recursive_directory_grants": 7,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 145,
+              "writable_directories": 13,
+              "writable_regular_files": 15
+            },
+            "elapsed_millis": 61,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "directory_tree",
+                  "path": "build"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "cache"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "config"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "docs"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "lib"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "src"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "tests"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-006:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 110,
+              "file_weight_total": 14,
+              "permission_rules": 6,
+              "recursive_directory_grants": 6,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 124,
+              "writable_directories": 11,
+              "writable_regular_files": 14
+            },
+            "elapsed_millis": 60,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "directory_tree",
+                  "path": "cache"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "config"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "docs"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "lib"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "src"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "tests"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-007:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 90,
+              "file_weight_total": 13,
+              "permission_rules": 5,
+              "recursive_directory_grants": 5,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 103,
+              "writable_directories": 9,
+              "writable_regular_files": 13
+            },
+            "elapsed_millis": 59,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "directory_tree",
+                  "path": "config"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "docs"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "lib"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "src"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "tests"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-008:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 80,
+              "file_weight_total": 12,
+              "permission_rules": 4,
+              "recursive_directory_grants": 4,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 92,
+              "writable_directories": 8,
+              "writable_regular_files": 12
+            },
+            "elapsed_millis": 60,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "directory_tree",
+                  "path": "docs"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "lib"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "src"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "tests"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-009:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 80,
+              "file_weight_total": 12,
+              "permission_rules": 4,
+              "recursive_directory_grants": 4,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 92,
+              "writable_directories": 8,
+              "writable_regular_files": 12
+            },
+            "elapsed_millis": 60,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "directory_tree",
+                  "path": "docs"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "lib"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "src"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "tests"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-010:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 80,
+              "file_weight_total": 12,
+              "permission_rules": 4,
+              "recursive_directory_grants": 4,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 92,
+              "writable_directories": 8,
+              "writable_regular_files": 12
+            },
+            "elapsed_millis": 59,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "directory_tree",
+                  "path": "docs"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "lib"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "src"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "tests"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-011:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 80,
+              "file_weight_total": 12,
+              "permission_rules": 4,
+              "recursive_directory_grants": 4,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 92,
+              "writable_directories": 8,
+              "writable_regular_files": 12
+            },
+            "elapsed_millis": 57,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "directory_tree",
+                  "path": "docs"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "lib"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "src"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "tests"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          }
+        ],
+        "validation_replays": 3
+      },
+      "policy": [
+        {
+          "kind": "directory_tree",
+          "path": "docs"
+        },
+        {
+          "kind": "directory_tree",
+          "path": "lib"
+        },
+        {
+          "kind": "directory_tree",
+          "path": "src"
+        },
+        {
+          "kind": "directory_tree",
+          "path": "tests"
+        }
+      ],
+      "search_replays": 9,
+      "security_canaries_passed": true,
+      "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 20, in <module>\n  File \"/usr/lib/python3.12/pathlib.py\", line 1049, in write_text\n    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/pathlib.py\", line 1015, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nOSError: [Errno 30] Read-only file system: '/workspace/src/.save.tmp'\n",
+      "stdout": "optimizer: greedy (validated)\nweighted writable exposure: 197 -> 92 (53.3% reduction)\nauthorized ceiling: directory-tree:.\nretained writes: directory-tree:docs, directory-tree:lib, directory-tree:src, directory-tree:tests\nwritable files: 12, recursive directory grants: 4, policy rules: 4\nreplays: 9 search + 3 final validation = 12; elapsed: 697 ms\n",
+      "total_executions_including_initial_broad": 13,
+      "total_optimizer_replays": 12,
+      "utility_pass": true,
+      "validation_replays": 3
+    },
+    "E-random": {
+      "cost": {
+        "directory_entry_weight_total": 70,
+        "file_weight_total": 20,
+        "permission_rules": 4,
+        "recursive_directory_grants": 3,
+        "schema": "weighted-write-surface-v1",
+        "weighted_writable_exposure": 90,
+        "writable_directories": 7,
+        "writable_regular_files": 11
+      },
+      "elapsed_seconds": 0.7504128469990974,
+      "exit": 0,
+      "initial_broad_runs": 1,
+      "optimizer": {
+        "authorized_ceiling": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "directory_tree",
+              "path": "."
+            }
+          ]
+        },
+        "best_cost": {
+          "directory_entry_weight_total": 70,
+          "file_weight_total": 20,
+          "permission_rules": 4,
+          "recursive_directory_grants": 3,
+          "schema": "weighted-write-surface-v1",
+          "weighted_writable_exposure": 90,
+          "writable_directories": 7,
+          "writable_regular_files": 11
+        },
+        "best_policy": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "file_contents",
+              "path": "package.json"
+            },
+            {
+              "kind": "directory_tree",
+              "path": "build"
+            },
+            {
+              "kind": "directory_tree",
+              "path": "config"
+            },
+            {
+              "kind": "directory_tree",
+              "path": "src"
+            }
+          ]
+        },
+        "ceiling_cost": {
+          "directory_entry_weight_total": 160,
+          "file_weight_total": 37,
+          "permission_rules": 1,
+          "recursive_directory_grants": 1,
+          "schema": "weighted-write-surface-v1",
+          "weighted_writable_exposure": 197,
+          "writable_directories": 16,
+          "writable_regular_files": 19
+        },
+        "optimization_elapsed_millis": 705,
+        "rejected_trials": 1,
+        "search_replays": 9,
+        "status": "validated",
+        "strategy": "random",
+        "total_replays": 12,
+        "trials": [
+          {
+            "classification": "trial-000:agent_failed_exit_1:verifier_readonly_canary_not_tested",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 2,
+              "permission_rules": 2,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 2,
+              "writable_directories": 0,
+              "writable_regular_files": 2
+            },
+            "elapsed_millis": 40,
+            "passed": false,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "oracle.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "src/a.txt"
+                }
+              ]
+            },
+            "security_canaries_passed": false
+          },
+          {
+            "classification": "trial-001:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 150,
+              "file_weight_total": 37,
+              "permission_rules": 11,
+              "recursive_directory_grants": 8,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 187,
+              "writable_directories": 15,
+              "writable_regular_files": 19
+            },
+            "elapsed_millis": 61,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "README.md"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "oracle.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "package.json"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": ".github"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "build"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "cache"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "config"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "docs"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "lib"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "src"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "tests"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-002:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 130,
+              "file_weight_total": 27,
+              "permission_rules": 10,
+              "recursive_directory_grants": 7,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 157,
+              "writable_directories": 13,
+              "writable_regular_files": 18
+            },
+            "elapsed_millis": 59,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "README.md"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "oracle.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "package.json"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "build"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "cache"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "config"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "docs"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "lib"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "src"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "tests"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-003:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 120,
+              "file_weight_total": 26,
+              "permission_rules": 9,
+              "recursive_directory_grants": 6,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 146,
+              "writable_directories": 12,
+              "writable_regular_files": 17
+            },
+            "elapsed_millis": 59,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "README.md"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "oracle.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "package.json"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "build"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "cache"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "config"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "docs"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "src"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "tests"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-004:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 100,
+              "file_weight_total": 25,
+              "permission_rules": 8,
+              "recursive_directory_grants": 5,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 125,
+              "writable_directories": 10,
+              "writable_regular_files": 16
+            },
+            "elapsed_millis": 59,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "README.md"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "oracle.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "package.json"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "build"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "config"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "docs"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "src"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "tests"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-005:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 90,
+              "file_weight_total": 23,
+              "permission_rules": 7,
+              "recursive_directory_grants": 4,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 113,
+              "writable_directories": 9,
+              "writable_regular_files": 14
+            },
+            "elapsed_millis": 58,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "README.md"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "oracle.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "package.json"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "build"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "config"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "docs"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "src"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-006:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 90,
+              "file_weight_total": 22,
+              "permission_rules": 6,
+              "recursive_directory_grants": 4,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 112,
+              "writable_directories": 9,
+              "writable_regular_files": 13
+            },
+            "elapsed_millis": 60,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "README.md"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "package.json"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "build"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "config"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "docs"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "src"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-007:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 70,
+              "file_weight_total": 21,
+              "permission_rules": 5,
+              "recursive_directory_grants": 3,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 91,
+              "writable_directories": 7,
+              "writable_regular_files": 12
+            },
+            "elapsed_millis": 60,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "README.md"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "package.json"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "build"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "config"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "src"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-008:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 70,
+              "file_weight_total": 20,
+              "permission_rules": 4,
+              "recursive_directory_grants": 3,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 90,
+              "writable_directories": 7,
+              "writable_regular_files": 11
+            },
+            "elapsed_millis": 60,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "package.json"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "build"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "config"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "src"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-009:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 70,
+              "file_weight_total": 20,
+              "permission_rules": 4,
+              "recursive_directory_grants": 3,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 90,
+              "writable_directories": 7,
+              "writable_regular_files": 11
+            },
+            "elapsed_millis": 61,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "package.json"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "build"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "config"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "src"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-010:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 70,
+              "file_weight_total": 20,
+              "permission_rules": 4,
+              "recursive_directory_grants": 3,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 90,
+              "writable_directories": 7,
+              "writable_regular_files": 11
+            },
+            "elapsed_millis": 61,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "package.json"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "build"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "config"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "src"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-011:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 70,
+              "file_weight_total": 20,
+              "permission_rules": 4,
+              "recursive_directory_grants": 3,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 90,
+              "writable_directories": 7,
+              "writable_regular_files": 11
+            },
+            "elapsed_millis": 59,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "package.json"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "build"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "config"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "src"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          }
+        ],
+        "validation_replays": 3
+      },
+      "policy": [
+        {
+          "kind": "file_contents",
+          "path": "package.json"
+        },
+        {
+          "kind": "directory_tree",
+          "path": "build"
+        },
+        {
+          "kind": "directory_tree",
+          "path": "config"
+        },
+        {
+          "kind": "directory_tree",
+          "path": "src"
+        }
+      ],
+      "search_replays": 9,
+      "security_canaries_passed": true,
+      "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 20, in <module>\n  File \"/usr/lib/python3.12/pathlib.py\", line 1049, in write_text\n    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/pathlib.py\", line 1015, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nOSError: [Errno 30] Read-only file system: '/workspace/src/.save.tmp'\n",
+      "stdout": "optimizer: random (validated)\nweighted writable exposure: 197 -> 90 (54.3% reduction)\nauthorized ceiling: directory-tree:.\nretained writes: file-inode:package.json, directory-tree:build, directory-tree:config, directory-tree:src\nwritable files: 11, recursive directory grants: 3, policy rules: 4\nreplays: 9 search + 3 final validation = 12; elapsed: 705 ms\n",
+      "total_executions_including_initial_broad": 13,
+      "total_optimizer_replays": 12,
+      "utility_pass": true,
+      "validation_replays": 3
+    },
+    "F-hierarchical": {
+      "cost": {
+        "directory_entry_weight_total": 60,
+        "file_weight_total": 32,
+        "permission_rules": 6,
+        "recursive_directory_grants": 3,
+        "schema": "weighted-write-surface-v1",
+        "weighted_writable_exposure": 92,
+        "writable_directories": 6,
+        "writable_regular_files": 14
+      },
+      "elapsed_seconds": 0.6735525789990788,
+      "exit": 0,
+      "initial_broad_runs": 1,
+      "optimizer": {
+        "authorized_ceiling": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "directory_tree",
+              "path": "."
+            }
+          ]
+        },
+        "best_cost": {
+          "directory_entry_weight_total": 60,
+          "file_weight_total": 32,
+          "permission_rules": 6,
+          "recursive_directory_grants": 3,
+          "schema": "weighted-write-surface-v1",
+          "weighted_writable_exposure": 92,
+          "writable_directories": 6,
+          "writable_regular_files": 14
+        },
+        "best_policy": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "file_contents",
+              "path": "README.md"
+            },
+            {
+              "kind": "file_contents",
+              "path": "oracle.txt"
+            },
+            {
+              "kind": "file_contents",
+              "path": "package.json"
+            },
+            {
+              "kind": "directory_tree",
+              "path": ".github/workflows"
+            },
+            {
+              "kind": "directory_tree",
+              "path": "src"
+            },
+            {
+              "kind": "directory_tree",
+              "path": "tests"
+            }
+          ]
+        },
+        "ceiling_cost": {
+          "directory_entry_weight_total": 160,
+          "file_weight_total": 37,
+          "permission_rules": 1,
+          "recursive_directory_grants": 1,
+          "schema": "weighted-write-surface-v1",
+          "weighted_writable_exposure": 197,
+          "writable_directories": 16,
+          "writable_regular_files": 19
+        },
+        "optimization_elapsed_millis": 622,
+        "rejected_trials": 5,
+        "search_replays": 9,
+        "status": "validated",
+        "strategy": "hierarchical",
+        "total_replays": 12,
+        "trials": [
+          {
+            "classification": "trial-000:agent_failed_exit_1:verifier_readonly_canary_not_tested",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 2,
+              "permission_rules": 2,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 2,
+              "writable_directories": 0,
+              "writable_regular_files": 2
+            },
+            "elapsed_millis": 47,
+            "passed": false,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "oracle.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "src/a.txt"
+                }
+              ]
+            },
+            "security_canaries_passed": false
+          },
+          {
+            "classification": "trial-001:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 150,
+              "file_weight_total": 37,
+              "permission_rules": 11,
+              "recursive_directory_grants": 8,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 187,
+              "writable_directories": 15,
+              "writable_regular_files": 19
+            },
+            "elapsed_millis": 61,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "README.md"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "oracle.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "package.json"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": ".github"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "build"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "cache"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "config"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "docs"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "lib"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "src"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "tests"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-002:agent_failed_exit_1:verifier_readonly_canary_not_tested",
+            "cost": {
+              "directory_entry_weight_total": 140,
+              "file_weight_total": 37,
+              "permission_rules": 19,
+              "recursive_directory_grants": 9,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 177,
+              "writable_directories": 14,
+              "writable_regular_files": 19
+            },
+            "elapsed_millis": 38,
+            "passed": false,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "README.md"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "oracle.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "package.json"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "src/a.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "src/b.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "src/fallback.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "src/mathops.py"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "src/old.py"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "src/preferred.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "src/remove.txt"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": ".github"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "build"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "cache"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "config"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "docs"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "lib"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "src/empty"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "src/pkg"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "tests"
+                }
+              ]
+            },
+            "security_canaries_passed": false
+          },
+          {
+            "classification": "trial-003:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 140,
+              "file_weight_total": 37,
+              "permission_rules": 11,
+              "recursive_directory_grants": 8,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 177,
+              "writable_directories": 14,
+              "writable_regular_files": 19
+            },
+            "elapsed_millis": 59,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "README.md"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "oracle.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "package.json"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": ".github/workflows"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "build"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "cache"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "config"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "docs"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "lib"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "src"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "tests"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-004:agent_failed_exit_1:verifier_readonly_canary_not_tested",
+            "cost": {
+              "directory_entry_weight_total": 10,
+              "file_weight_total": 22,
+              "permission_rules": 4,
+              "recursive_directory_grants": 1,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 32,
+              "writable_directories": 1,
+              "writable_regular_files": 4
+            },
+            "elapsed_millis": 37,
+            "passed": false,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "README.md"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "oracle.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "package.json"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": ".github/workflows"
+                }
+              ]
+            },
+            "security_canaries_passed": false
+          },
+          {
+            "classification": "trial-005:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 90,
+              "file_weight_total": 34,
+              "permission_rules": 8,
+              "recursive_directory_grants": 5,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 124,
+              "writable_directories": 9,
+              "writable_regular_files": 16
+            },
+            "elapsed_millis": 60,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "README.md"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "oracle.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "package.json"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": ".github/workflows"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "docs"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "lib"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "src"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "tests"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-006:agent_failed_exit_1:verifier_readonly_canary_not_tested",
+            "cost": {
+              "directory_entry_weight_total": 10,
+              "file_weight_total": 22,
+              "permission_rules": 4,
+              "recursive_directory_grants": 1,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 32,
+              "writable_directories": 1,
+              "writable_regular_files": 4
+            },
+            "elapsed_millis": 38,
+            "passed": false,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "README.md"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "oracle.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "package.json"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": ".github/workflows"
+                }
+              ]
+            },
+            "security_canaries_passed": false
+          },
+          {
+            "classification": "trial-007:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 60,
+              "file_weight_total": 32,
+              "permission_rules": 6,
+              "recursive_directory_grants": 3,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 92,
+              "writable_directories": 6,
+              "writable_regular_files": 14
+            },
+            "elapsed_millis": 60,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "README.md"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "oracle.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "package.json"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": ".github/workflows"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "src"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "tests"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-008:agent_failed_exit_1:verifier_readonly_canary_not_tested",
+            "cost": {
+              "directory_entry_weight_total": 10,
+              "file_weight_total": 22,
+              "permission_rules": 4,
+              "recursive_directory_grants": 1,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 32,
+              "writable_directories": 1,
+              "writable_regular_files": 4
+            },
+            "elapsed_millis": 39,
+            "passed": false,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "README.md"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "oracle.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "package.json"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": ".github/workflows"
+                }
+              ]
+            },
+            "security_canaries_passed": false
+          },
+          {
+            "classification": "trial-009:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 60,
+              "file_weight_total": 32,
+              "permission_rules": 6,
+              "recursive_directory_grants": 3,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 92,
+              "writable_directories": 6,
+              "writable_regular_files": 14
+            },
+            "elapsed_millis": 59,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "README.md"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "oracle.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "package.json"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": ".github/workflows"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "src"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "tests"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-010:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 60,
+              "file_weight_total": 32,
+              "permission_rules": 6,
+              "recursive_directory_grants": 3,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 92,
+              "writable_directories": 6,
+              "writable_regular_files": 14
+            },
+            "elapsed_millis": 60,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "README.md"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "oracle.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "package.json"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": ".github/workflows"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "src"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "tests"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-011:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 60,
+              "file_weight_total": 32,
+              "permission_rules": 6,
+              "recursive_directory_grants": 3,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 92,
+              "writable_directories": 6,
+              "writable_regular_files": 14
+            },
+            "elapsed_millis": 58,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "README.md"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "oracle.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "package.json"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": ".github/workflows"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "src"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "tests"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          }
+        ],
+        "validation_replays": 3
+      },
+      "policy": [
+        {
+          "kind": "file_contents",
+          "path": "README.md"
+        },
+        {
+          "kind": "file_contents",
+          "path": "oracle.txt"
+        },
+        {
+          "kind": "file_contents",
+          "path": "package.json"
+        },
+        {
+          "kind": "directory_tree",
+          "path": ".github/workflows"
+        },
+        {
+          "kind": "directory_tree",
+          "path": "src"
+        },
+        {
+          "kind": "directory_tree",
+          "path": "tests"
+        }
+      ],
+      "search_replays": 9,
+      "security_canaries_passed": true,
+      "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 20, in <module>\n  File \"/usr/lib/python3.12/pathlib.py\", line 1049, in write_text\n    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/pathlib.py\", line 1015, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nOSError: [Errno 30] Read-only file system: '/workspace/src/.save.tmp'\nTraceback (most recent call last):\n  File \"<string>\", line 20, in <module>\n  File \"/usr/lib/python3.12/pathlib.py\", line 1049, in write_text\n    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/pathlib.py\", line 1015, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nOSError: [Errno 30] Read-only file system: '/workspace/src/.save.tmp'\nTraceback (most recent call last):\n  File \"<string>\", line 20, in <module>\n  File \"/usr/lib/python3.12/pathlib.py\", line 1049, in write_text\n    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/pathlib.py\", line 1015, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nOSError: [Errno 30] Read-only file system: '/workspace/src/.save.tmp'\nTraceback (most recent call last):\n  File \"<string>\", line 20, in <module>\n  File \"/usr/lib/python3.12/pathlib.py\", line 1049, in write_text\n    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/pathlib.py\", line 1015, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nOSError: [Errno 30] Read-only file system: '/workspace/src/.save.tmp'\nTraceback (most recent call last):\n  File \"<string>\", line 20, in <module>\n  File \"/usr/lib/python3.12/pathlib.py\", line 1049, in write_text\n    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/pathlib.py\", line 1015, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nOSError: [Errno 30] Read-only file system: '/workspace/src/.save.tmp'\n",
+      "stdout": "optimizer: hierarchical (validated)\nweighted writable exposure: 197 -> 92 (53.3% reduction)\nauthorized ceiling: directory-tree:.\nretained writes: file-inode:README.md, file-inode:oracle.txt, file-inode:package.json, directory-tree:.github/workflows, directory-tree:src, directory-tree:tests\nwritable files: 14, recursive directory grants: 3, policy rules: 6\nreplays: 9 search + 3 final validation = 12; elapsed: 622 ms\n",
+      "total_executions_including_initial_broad": 13,
+      "total_optimizer_replays": 12,
+      "utility_pass": true,
+      "validation_replays": 3
+    }
+  },
+  "task": {
+    "expected_effects": [
+      "replace:src/a.txt"
+    ],
+    "family": "atomic-replace",
+    "held_out": false,
+    "initial_source_sha256": "8196bec3523a9c0f8db243a385bc2712365f11b7544dadb6e44d84b682b7c18d",
+    "notes": "",
+    "task_id": "T09-atomic-replace"
+  }
+}

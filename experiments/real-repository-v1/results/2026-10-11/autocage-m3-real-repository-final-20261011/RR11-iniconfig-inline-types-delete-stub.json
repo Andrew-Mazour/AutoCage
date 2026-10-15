@@ -1,0 +1,3094 @@
+{
+  "authorized_ceiling": [
+    {
+      "kind": "directory_tree",
+      "path": "."
+    }
+  ],
+  "baseline_A": {
+    "agent_executions_including_shared_setup": 1,
+    "agent_exit_code": 0,
+    "agent_timed_out": false,
+    "cli_return_code": 0,
+    "controller_overhead_seconds_estimate": 0.08601857399783332,
+    "cost": {
+      "directory_entry_weight_total": 60,
+      "file_weight_total": 45,
+      "permission_rules": 1,
+      "recursive_directory_grants": 1,
+      "schema": "weighted-write-surface-v1",
+      "weighted_writable_exposure": 105,
+      "writable_directories": 6,
+      "writable_regular_files": 18
+    },
+    "fresh_validation_replays": 0,
+    "full_corpus_reduction_percent": 0.0,
+    "optimizer_total_replays": 0,
+    "optimizer_trials": [],
+    "outcome": "verified",
+    "policy": [
+      {
+        "kind": "directory_tree",
+        "path": "."
+      }
+    ],
+    "promotable": true,
+    "rejected_trials": 0,
+    "replay_security_not_tested": 0,
+    "replay_security_passes": 0,
+    "search_replays": 0,
+    "security": {
+      "agent_canary_exit": 0,
+      "agent_escape_probe": "PASS",
+      "host_canary_controller": "PASS",
+      "network_positive_control": "PASS",
+      "network_sandbox_connections": 0,
+      "original_source_controller": "PASS",
+      "readonly_mount_runtime_probe": "PASSED",
+      "status": "PASS",
+      "verifier_executed": true,
+      "verifier_fixture_controller": "PASS"
+    },
+    "status": "verified",
+    "stderr_sha256": "509f405d5cb21881c89d089bdfefb5ca2134786724ec055ce4b049523c8b5042",
+    "strategy": "A",
+    "successful_task_reduction_percent": 0.0,
+    "task_process_seconds": 0.02,
+    "timeouts": 0,
+    "trial_failures": 0,
+    "utility_pass": true,
+    "verifier_executions_including_shared_setup": 1,
+    "verifier_exit_code": 0,
+    "verifier_process_seconds": 0.102,
+    "verifier_timed_out": false,
+    "wall_seconds_attributed": 0.2080185739978333
+  },
+  "baseline_cost": {
+    "directory_entry_weight_total": 60,
+    "file_weight_total": 45,
+    "permission_rules": 1,
+    "recursive_directory_grants": 1,
+    "schema": "weighted-write-surface-v1",
+    "weighted_writable_exposure": 105,
+    "writable_directories": 6,
+    "writable_regular_files": 18
+  },
+  "baselines": {
+    "A": {
+      "agent_executions_including_shared_setup": 1,
+      "agent_exit_code": 0,
+      "agent_timed_out": false,
+      "cli_return_code": 0,
+      "controller_overhead_seconds_estimate": 0.08601857399783332,
+      "cost": {
+        "directory_entry_weight_total": 60,
+        "file_weight_total": 45,
+        "permission_rules": 1,
+        "recursive_directory_grants": 1,
+        "schema": "weighted-write-surface-v1",
+        "weighted_writable_exposure": 105,
+        "writable_directories": 6,
+        "writable_regular_files": 18
+      },
+      "fresh_validation_replays": 0,
+      "full_corpus_reduction_percent": 0.0,
+      "optimizer_total_replays": 0,
+      "optimizer_trials": [],
+      "outcome": "verified",
+      "policy": [
+        {
+          "kind": "directory_tree",
+          "path": "."
+        }
+      ],
+      "promotable": true,
+      "rejected_trials": 0,
+      "replay_security_not_tested": 0,
+      "replay_security_passes": 0,
+      "search_replays": 0,
+      "security": {
+        "agent_canary_exit": 0,
+        "agent_escape_probe": "PASS",
+        "host_canary_controller": "PASS",
+        "network_positive_control": "PASS",
+        "network_sandbox_connections": 0,
+        "original_source_controller": "PASS",
+        "readonly_mount_runtime_probe": "PASSED",
+        "status": "PASS",
+        "verifier_executed": true,
+        "verifier_fixture_controller": "PASS"
+      },
+      "status": "verified",
+      "stderr_sha256": "509f405d5cb21881c89d089bdfefb5ca2134786724ec055ce4b049523c8b5042",
+      "strategy": "A",
+      "successful_task_reduction_percent": 0.0,
+      "task_process_seconds": 0.02,
+      "timeouts": 0,
+      "trial_failures": 0,
+      "utility_pass": true,
+      "verifier_executions_including_shared_setup": 1,
+      "verifier_exit_code": 0,
+      "verifier_process_seconds": 0.102,
+      "verifier_timed_out": false,
+      "wall_seconds_attributed": 0.2080185739978333
+    },
+    "B": {
+      "agent_executions_including_shared_setup": 1,
+      "agent_exit_code": 0,
+      "agent_timed_out": false,
+      "cli_return_code": 0,
+      "controller_overhead_seconds_estimate": 0.04401374499523082,
+      "cost": {
+        "directory_entry_weight_total": 30,
+        "file_weight_total": 20,
+        "permission_rules": 8,
+        "recursive_directory_grants": 2,
+        "schema": "weighted-write-surface-v1",
+        "weighted_writable_exposure": 50,
+        "writable_directories": 3,
+        "writable_regular_files": 11
+      },
+      "fresh_validation_replays": 0,
+      "full_corpus_reduction_percent": 52.38095238095239,
+      "optimizer_total_replays": 0,
+      "optimizer_trials": [],
+      "outcome": "verified",
+      "policy": [
+        {
+          "kind": "file_contents",
+          "path": "MANIFEST.in"
+        },
+        {
+          "kind": "file_contents",
+          "path": "README.rst"
+        },
+        {
+          "kind": "file_contents",
+          "path": "pyproject.toml"
+        },
+        {
+          "kind": "file_contents",
+          "path": "setup.cfg"
+        },
+        {
+          "kind": "file_contents",
+          "path": "setup.py"
+        },
+        {
+          "kind": "file_contents",
+          "path": "tox.ini"
+        },
+        {
+          "kind": "directory_tree",
+          "path": "src"
+        },
+        {
+          "kind": "directory_tree",
+          "path": "testing"
+        }
+      ],
+      "promotable": true,
+      "rejected_trials": 0,
+      "replay_security_not_tested": 0,
+      "replay_security_passes": 0,
+      "search_replays": 0,
+      "security": {
+        "agent_canary_exit": 0,
+        "agent_escape_probe": "PASS",
+        "host_canary_controller": "PASS",
+        "network_positive_control": "PASS",
+        "network_sandbox_connections": 0,
+        "original_source_controller": "PASS",
+        "readonly_mount_runtime_probe": "PASSED",
+        "status": "PASS",
+        "verifier_executed": true,
+        "verifier_fixture_controller": "PASS"
+      },
+      "status": "verified",
+      "stderr_sha256": "509f405d5cb21881c89d089bdfefb5ca2134786724ec055ce4b049523c8b5042",
+      "strategy": "B",
+      "successful_task_reduction_percent": 52.38095238095239,
+      "task_process_seconds": 0.02,
+      "timeouts": 0,
+      "trial_failures": 0,
+      "utility_pass": true,
+      "verifier_executions_including_shared_setup": 1,
+      "verifier_exit_code": 0,
+      "verifier_process_seconds": 0.106,
+      "verifier_timed_out": false,
+      "wall_seconds_attributed": 0.1700137449952308
+    },
+    "C": {
+      "agent_executions_including_shared_setup": 2,
+      "agent_exit_code": 0,
+      "agent_timed_out": false,
+      "cli_return_code": 0,
+      "controller_overhead_seconds_estimate": 0.25726526699448005,
+      "cost": {
+        "directory_entry_weight_total": 10,
+        "file_weight_total": 15,
+        "permission_rules": 4,
+        "recursive_directory_grants": 1,
+        "schema": "weighted-write-surface-v1",
+        "weighted_writable_exposure": 25,
+        "writable_directories": 1,
+        "writable_regular_files": 6
+      },
+      "fresh_validation_replays": 0,
+      "full_corpus_reduction_percent": 76.19047619047619,
+      "optimizer_total_replays": 0,
+      "optimizer_trials": [],
+      "outcome": "verified",
+      "policy": [
+        {
+          "kind": "file_contents",
+          "path": "MANIFEST.in"
+        },
+        {
+          "kind": "file_contents",
+          "path": "pyproject.toml"
+        },
+        {
+          "kind": "file_contents",
+          "path": "setup.py"
+        },
+        {
+          "kind": "directory_tree",
+          "path": "src/iniconfig"
+        }
+      ],
+      "promotable": true,
+      "rejected_trials": 0,
+      "replay_security_not_tested": 0,
+      "replay_security_passes": 0,
+      "search_replays": 0,
+      "security": {
+        "agent_canary_exit": 0,
+        "agent_escape_probe": "PASS",
+        "host_canary_controller": "PASS",
+        "network_positive_control": "PASS",
+        "network_sandbox_connections": 0,
+        "original_source_controller": "PASS",
+        "readonly_mount_runtime_probe": "PASSED",
+        "status": "PASS",
+        "verifier_executed": true,
+        "verifier_fixture_controller": "PASS"
+      },
+      "status": "verified",
+      "stderr_sha256": "509f405d5cb21881c89d089bdfefb5ca2134786724ec055ce4b049523c8b5042",
+      "strategy": "C",
+      "successful_task_reduction_percent": 76.19047619047619,
+      "task_process_seconds": 0.02,
+      "timeouts": 0,
+      "trial_failures": 0,
+      "utility_pass": true,
+      "verifier_executions_including_shared_setup": 2,
+      "verifier_exit_code": 0,
+      "verifier_process_seconds": 0.102,
+      "verifier_timed_out": false,
+      "wall_seconds_attributed": 0.37926526699448004
+    },
+    "M": {
+      "agent_executions_including_shared_setup": 1,
+      "agent_exit_code": 0,
+      "agent_timed_out": false,
+      "cli_return_code": 0,
+      "controller_overhead_seconds_estimate": 0.046208576993900366,
+      "cost": {
+        "directory_entry_weight_total": 10,
+        "file_weight_total": 15,
+        "permission_rules": 4,
+        "recursive_directory_grants": 1,
+        "schema": "weighted-write-surface-v1",
+        "weighted_writable_exposure": 25,
+        "writable_directories": 1,
+        "writable_regular_files": 6
+      },
+      "fresh_validation_replays": 0,
+      "full_corpus_reduction_percent": 76.19047619047619,
+      "optimizer_total_replays": 0,
+      "optimizer_trials": [],
+      "outcome": "verified",
+      "policy": [
+        {
+          "kind": "file_contents",
+          "path": "MANIFEST.in"
+        },
+        {
+          "kind": "file_contents",
+          "path": "pyproject.toml"
+        },
+        {
+          "kind": "file_contents",
+          "path": "setup.py"
+        },
+        {
+          "kind": "directory_tree",
+          "path": "src/iniconfig"
+        }
+      ],
+      "promotable": true,
+      "rejected_trials": 0,
+      "replay_security_not_tested": 0,
+      "replay_security_passes": 0,
+      "search_replays": 0,
+      "security": {
+        "agent_canary_exit": 0,
+        "agent_escape_probe": "PASS",
+        "host_canary_controller": "PASS",
+        "network_positive_control": "PASS",
+        "network_sandbox_connections": 0,
+        "original_source_controller": "PASS",
+        "readonly_mount_runtime_probe": "PASSED",
+        "status": "PASS",
+        "verifier_executed": true,
+        "verifier_fixture_controller": "PASS"
+      },
+      "status": "verified",
+      "stderr_sha256": "509f405d5cb21881c89d089bdfefb5ca2134786724ec055ce4b049523c8b5042",
+      "strategy": "M",
+      "successful_task_reduction_percent": 76.19047619047619,
+      "task_process_seconds": 0.02,
+      "timeouts": 0,
+      "trial_failures": 0,
+      "utility_pass": true,
+      "verifier_executions_including_shared_setup": 1,
+      "verifier_exit_code": 0,
+      "verifier_process_seconds": 0.104,
+      "verifier_timed_out": false,
+      "wall_seconds_attributed": 0.17020857699390035
+    }
+  },
+  "execution_status": "COMPLETED",
+  "host_loopback_positive_control": "PASS",
+  "independent_controller_checks": {
+    "host_canary_unchanged": "PASS",
+    "source_unchanged": "PASS",
+    "verifier_fixture_unchanged": "PASS"
+  },
+  "input_tree_sha256": "d7b49b9f94b9a0d601f963a35916898bfe10a588dbb758b41cab1a25ff0d53e9",
+  "license": "MIT",
+  "manual_policy": [
+    {
+      "kind": "directory_tree",
+      "path": "src/iniconfig"
+    },
+    {
+      "kind": "file_contents",
+      "path": "MANIFEST.in"
+    },
+    {
+      "kind": "file_contents",
+      "path": "pyproject.toml"
+    },
+    {
+      "kind": "file_contents",
+      "path": "setup.py"
+    }
+  ],
+  "naive_changed_policy": [
+    {
+      "kind": "directory_tree",
+      "path": "src/iniconfig"
+    },
+    {
+      "kind": "file_contents",
+      "path": "MANIFEST.in"
+    },
+    {
+      "kind": "file_contents",
+      "path": "pyproject.toml"
+    },
+    {
+      "kind": "file_contents",
+      "path": "setup.py"
+    }
+  ],
+  "optimizers": {
+    "D": {
+      "agent_executions_including_shared_setup": 9,
+      "agent_exit_code": null,
+      "agent_timed_out": null,
+      "cli_return_code": 0,
+      "controller_overhead_seconds_estimate": 0.5184494980024756,
+      "cost": {
+        "directory_entry_weight_total": 10,
+        "file_weight_total": 15,
+        "permission_rules": 4,
+        "recursive_directory_grants": 1,
+        "schema": "weighted-write-surface-v1",
+        "weighted_writable_exposure": 25,
+        "writable_directories": 1,
+        "writable_regular_files": 6
+      },
+      "fresh_validation_replays": 3,
+      "full_corpus_reduction_percent": 76.19047619047619,
+      "optimizer_total_replays": 8,
+      "optimizer_trials": [
+        {
+          "classification": "trial-000:verified:required_security_checks_passed",
+          "cost": {
+            "directory_entry_weight_total": 10,
+            "file_weight_total": 15,
+            "permission_rules": 4,
+            "recursive_directory_grants": 1,
+            "schema": "weighted-write-surface-v1",
+            "weighted_writable_exposure": 25,
+            "writable_directories": 1,
+            "writable_regular_files": 6
+          },
+          "elapsed_millis": 173,
+          "passed": true,
+          "policy": {
+            "disable_nested_userns": true,
+            "network_access": false,
+            "schema_version": 1,
+            "write_grants": [
+              {
+                "kind": "file_contents",
+                "path": "MANIFEST.in"
+              },
+              {
+                "kind": "file_contents",
+                "path": "pyproject.toml"
+              },
+              {
+                "kind": "file_contents",
+                "path": "setup.py"
+              },
+              {
+                "kind": "directory_tree",
+                "path": "src/iniconfig"
+              }
+            ]
+          },
+          "security_canaries_passed": true,
+          "security_checks": [
+            {
+              "evidence": "preflight succeeded before the task process was launched",
+              "name": "required_namespace_preflight",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "candidate policy was checked against the recorded ceiling",
+              "name": "authorized_ceiling_subset",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "before/after source manifest digests matched",
+              "name": "source_checkout_unchanged",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "probe exit 0; canary unchanged=true",
+              "name": "readonly_mount_write_denial",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "host-side canary is supplied by the independent integration/benchmark controller",
+              "name": "external_host_canary",
+              "required_for_policy_promotion": false,
+              "status": "not_tested"
+            }
+          ]
+        },
+        {
+          "classification": "trial-001:agent_failed_exit_1:required_security_checks_passed",
+          "cost": {
+            "directory_entry_weight_total": 10,
+            "file_weight_total": 14,
+            "permission_rules": 3,
+            "recursive_directory_grants": 1,
+            "schema": "weighted-write-surface-v1",
+            "weighted_writable_exposure": 24,
+            "writable_directories": 1,
+            "writable_regular_files": 5
+          },
+          "elapsed_millis": 64,
+          "passed": false,
+          "policy": {
+            "disable_nested_userns": true,
+            "network_access": false,
+            "schema_version": 1,
+            "write_grants": [
+              {
+                "kind": "file_contents",
+                "path": "pyproject.toml"
+              },
+              {
+                "kind": "file_contents",
+                "path": "setup.py"
+              },
+              {
+                "kind": "directory_tree",
+                "path": "src/iniconfig"
+              }
+            ]
+          },
+          "security_canaries_passed": true,
+          "security_checks": [
+            {
+              "evidence": "preflight succeeded before the task process was launched",
+              "name": "required_namespace_preflight",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "candidate policy was checked against the recorded ceiling",
+              "name": "authorized_ceiling_subset",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "before/after source manifest digests matched",
+              "name": "source_checkout_unchanged",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "probe exit 0; canary unchanged=true",
+              "name": "readonly_mount_write_denial",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "host-side canary is supplied by the independent integration/benchmark controller",
+              "name": "external_host_canary",
+              "required_for_policy_promotion": false,
+              "status": "not_tested"
+            }
+          ]
+        },
+        {
+          "classification": "trial-002:agent_failed_exit_1:required_security_checks_passed",
+          "cost": {
+            "directory_entry_weight_total": 10,
+            "file_weight_total": 5,
+            "permission_rules": 3,
+            "recursive_directory_grants": 1,
+            "schema": "weighted-write-surface-v1",
+            "weighted_writable_exposure": 15,
+            "writable_directories": 1,
+            "writable_regular_files": 5
+          },
+          "elapsed_millis": 63,
+          "passed": false,
+          "policy": {
+            "disable_nested_userns": true,
+            "network_access": false,
+            "schema_version": 1,
+            "write_grants": [
+              {
+                "kind": "file_contents",
+                "path": "MANIFEST.in"
+              },
+              {
+                "kind": "file_contents",
+                "path": "setup.py"
+              },
+              {
+                "kind": "directory_tree",
+                "path": "src/iniconfig"
+              }
+            ]
+          },
+          "security_canaries_passed": true,
+          "security_checks": [
+            {
+              "evidence": "preflight succeeded before the task process was launched",
+              "name": "required_namespace_preflight",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "candidate policy was checked against the recorded ceiling",
+              "name": "authorized_ceiling_subset",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "before/after source manifest digests matched",
+              "name": "source_checkout_unchanged",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "probe exit 0; canary unchanged=true",
+              "name": "readonly_mount_write_denial",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "host-side canary is supplied by the independent integration/benchmark controller",
+              "name": "external_host_canary",
+              "required_for_policy_promotion": false,
+              "status": "not_tested"
+            }
+          ]
+        },
+        {
+          "classification": "trial-003:agent_failed_exit_1:required_security_checks_passed",
+          "cost": {
+            "directory_entry_weight_total": 10,
+            "file_weight_total": 14,
+            "permission_rules": 3,
+            "recursive_directory_grants": 1,
+            "schema": "weighted-write-surface-v1",
+            "weighted_writable_exposure": 24,
+            "writable_directories": 1,
+            "writable_regular_files": 5
+          },
+          "elapsed_millis": 64,
+          "passed": false,
+          "policy": {
+            "disable_nested_userns": true,
+            "network_access": false,
+            "schema_version": 1,
+            "write_grants": [
+              {
+                "kind": "file_contents",
+                "path": "MANIFEST.in"
+              },
+              {
+                "kind": "file_contents",
+                "path": "pyproject.toml"
+              },
+              {
+                "kind": "directory_tree",
+                "path": "src/iniconfig"
+              }
+            ]
+          },
+          "security_canaries_passed": true,
+          "security_checks": [
+            {
+              "evidence": "preflight succeeded before the task process was launched",
+              "name": "required_namespace_preflight",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "candidate policy was checked against the recorded ceiling",
+              "name": "authorized_ceiling_subset",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "before/after source manifest digests matched",
+              "name": "source_checkout_unchanged",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "probe exit 0; canary unchanged=true",
+              "name": "readonly_mount_write_denial",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "host-side canary is supplied by the independent integration/benchmark controller",
+              "name": "external_host_canary",
+              "required_for_policy_promotion": false,
+              "status": "not_tested"
+            }
+          ]
+        },
+        {
+          "classification": "trial-004:agent_failed_exit_1:required_security_checks_passed",
+          "cost": {
+            "directory_entry_weight_total": 0,
+            "file_weight_total": 12,
+            "permission_rules": 3,
+            "recursive_directory_grants": 0,
+            "schema": "weighted-write-surface-v1",
+            "weighted_writable_exposure": 12,
+            "writable_directories": 0,
+            "writable_regular_files": 3
+          },
+          "elapsed_millis": 64,
+          "passed": false,
+          "policy": {
+            "disable_nested_userns": true,
+            "network_access": false,
+            "schema_version": 1,
+            "write_grants": [
+              {
+                "kind": "file_contents",
+                "path": "MANIFEST.in"
+              },
+              {
+                "kind": "file_contents",
+                "path": "pyproject.toml"
+              },
+              {
+                "kind": "file_contents",
+                "path": "setup.py"
+              }
+            ]
+          },
+          "security_canaries_passed": true,
+          "security_checks": [
+            {
+              "evidence": "preflight succeeded before the task process was launched",
+              "name": "required_namespace_preflight",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "candidate policy was checked against the recorded ceiling",
+              "name": "authorized_ceiling_subset",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "before/after source manifest digests matched",
+              "name": "source_checkout_unchanged",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "probe exit 0; canary unchanged=true",
+              "name": "readonly_mount_write_denial",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "host-side canary is supplied by the independent integration/benchmark controller",
+              "name": "external_host_canary",
+              "required_for_policy_promotion": false,
+              "status": "not_tested"
+            }
+          ]
+        },
+        {
+          "classification": "trial-005:verified:required_security_checks_passed",
+          "cost": {
+            "directory_entry_weight_total": 10,
+            "file_weight_total": 15,
+            "permission_rules": 4,
+            "recursive_directory_grants": 1,
+            "schema": "weighted-write-surface-v1",
+            "weighted_writable_exposure": 25,
+            "writable_directories": 1,
+            "writable_regular_files": 6
+          },
+          "elapsed_millis": 168,
+          "passed": true,
+          "policy": {
+            "disable_nested_userns": true,
+            "network_access": false,
+            "schema_version": 1,
+            "write_grants": [
+              {
+                "kind": "file_contents",
+                "path": "MANIFEST.in"
+              },
+              {
+                "kind": "file_contents",
+                "path": "pyproject.toml"
+              },
+              {
+                "kind": "file_contents",
+                "path": "setup.py"
+              },
+              {
+                "kind": "directory_tree",
+                "path": "src/iniconfig"
+              }
+            ]
+          },
+          "security_canaries_passed": true,
+          "security_checks": [
+            {
+              "evidence": "preflight succeeded before the task process was launched",
+              "name": "required_namespace_preflight",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "candidate policy was checked against the recorded ceiling",
+              "name": "authorized_ceiling_subset",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "before/after source manifest digests matched",
+              "name": "source_checkout_unchanged",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "probe exit 0; canary unchanged=true",
+              "name": "readonly_mount_write_denial",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "host-side canary is supplied by the independent integration/benchmark controller",
+              "name": "external_host_canary",
+              "required_for_policy_promotion": false,
+              "status": "not_tested"
+            }
+          ]
+        },
+        {
+          "classification": "trial-006:verified:required_security_checks_passed",
+          "cost": {
+            "directory_entry_weight_total": 10,
+            "file_weight_total": 15,
+            "permission_rules": 4,
+            "recursive_directory_grants": 1,
+            "schema": "weighted-write-surface-v1",
+            "weighted_writable_exposure": 25,
+            "writable_directories": 1,
+            "writable_regular_files": 6
+          },
+          "elapsed_millis": 173,
+          "passed": true,
+          "policy": {
+            "disable_nested_userns": true,
+            "network_access": false,
+            "schema_version": 1,
+            "write_grants": [
+              {
+                "kind": "file_contents",
+                "path": "MANIFEST.in"
+              },
+              {
+                "kind": "file_contents",
+                "path": "pyproject.toml"
+              },
+              {
+                "kind": "file_contents",
+                "path": "setup.py"
+              },
+              {
+                "kind": "directory_tree",
+                "path": "src/iniconfig"
+              }
+            ]
+          },
+          "security_canaries_passed": true,
+          "security_checks": [
+            {
+              "evidence": "preflight succeeded before the task process was launched",
+              "name": "required_namespace_preflight",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "candidate policy was checked against the recorded ceiling",
+              "name": "authorized_ceiling_subset",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "before/after source manifest digests matched",
+              "name": "source_checkout_unchanged",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "probe exit 0; canary unchanged=true",
+              "name": "readonly_mount_write_denial",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "host-side canary is supplied by the independent integration/benchmark controller",
+              "name": "external_host_canary",
+              "required_for_policy_promotion": false,
+              "status": "not_tested"
+            }
+          ]
+        },
+        {
+          "classification": "trial-007:verified:required_security_checks_passed",
+          "cost": {
+            "directory_entry_weight_total": 10,
+            "file_weight_total": 15,
+            "permission_rules": 4,
+            "recursive_directory_grants": 1,
+            "schema": "weighted-write-surface-v1",
+            "weighted_writable_exposure": 25,
+            "writable_directories": 1,
+            "writable_regular_files": 6
+          },
+          "elapsed_millis": 171,
+          "passed": true,
+          "policy": {
+            "disable_nested_userns": true,
+            "network_access": false,
+            "schema_version": 1,
+            "write_grants": [
+              {
+                "kind": "file_contents",
+                "path": "MANIFEST.in"
+              },
+              {
+                "kind": "file_contents",
+                "path": "pyproject.toml"
+              },
+              {
+                "kind": "file_contents",
+                "path": "setup.py"
+              },
+              {
+                "kind": "directory_tree",
+                "path": "src/iniconfig"
+              }
+            ]
+          },
+          "security_canaries_passed": true,
+          "security_checks": [
+            {
+              "evidence": "preflight succeeded before the task process was launched",
+              "name": "required_namespace_preflight",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "candidate policy was checked against the recorded ceiling",
+              "name": "authorized_ceiling_subset",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "before/after source manifest digests matched",
+              "name": "source_checkout_unchanged",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "probe exit 0; canary unchanged=true",
+              "name": "readonly_mount_write_denial",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "host-side canary is supplied by the independent integration/benchmark controller",
+              "name": "external_host_canary",
+              "required_for_policy_promotion": false,
+              "status": "not_tested"
+            }
+          ]
+        }
+      ],
+      "outcome": "optimizer_trials",
+      "policy": [
+        {
+          "kind": "file_contents",
+          "path": "MANIFEST.in"
+        },
+        {
+          "kind": "file_contents",
+          "path": "pyproject.toml"
+        },
+        {
+          "kind": "file_contents",
+          "path": "setup.py"
+        },
+        {
+          "kind": "directory_tree",
+          "path": "src/iniconfig"
+        }
+      ],
+      "promotable": true,
+      "rejected_trials": 4,
+      "replay_security": [
+        {
+          "agent_canary_exit": 0,
+          "agent_escape_probe": "PASS",
+          "agent_exit_code": 0,
+          "host_canary_controller": "PASS",
+          "network_positive_control": "PASS",
+          "network_sandbox_connections": 0,
+          "original_source_controller": "PASS",
+          "readonly_mount_runtime_probe": "PASSED",
+          "run_outcome": "verified",
+          "status": "PASS",
+          "trial": "trial-000",
+          "verifier_executed": true,
+          "verifier_exit_code": 0,
+          "verifier_fixture_controller": "PASS"
+        },
+        {
+          "agent_canary_exit": 1,
+          "agent_escape_probe": "PASS",
+          "agent_exit_code": 1,
+          "host_canary_controller": "PASS",
+          "network_positive_control": "PASS",
+          "network_sandbox_connections": 0,
+          "original_source_controller": "PASS",
+          "readonly_mount_runtime_probe": "PASSED",
+          "run_outcome": "agent_failed",
+          "status": "NOT_TESTED",
+          "trial": "trial-001",
+          "verifier_executed": false,
+          "verifier_exit_code": null,
+          "verifier_fixture_controller": "PASS"
+        },
+        {
+          "agent_canary_exit": 1,
+          "agent_escape_probe": "PASS",
+          "agent_exit_code": 1,
+          "host_canary_controller": "PASS",
+          "network_positive_control": "PASS",
+          "network_sandbox_connections": 0,
+          "original_source_controller": "PASS",
+          "readonly_mount_runtime_probe": "PASSED",
+          "run_outcome": "agent_failed",
+          "status": "NOT_TESTED",
+          "trial": "trial-002",
+          "verifier_executed": false,
+          "verifier_exit_code": null,
+          "verifier_fixture_controller": "PASS"
+        },
+        {
+          "agent_canary_exit": 1,
+          "agent_escape_probe": "PASS",
+          "agent_exit_code": 1,
+          "host_canary_controller": "PASS",
+          "network_positive_control": "PASS",
+          "network_sandbox_connections": 0,
+          "original_source_controller": "PASS",
+          "readonly_mount_runtime_probe": "PASSED",
+          "run_outcome": "agent_failed",
+          "status": "NOT_TESTED",
+          "trial": "trial-003",
+          "verifier_executed": false,
+          "verifier_exit_code": null,
+          "verifier_fixture_controller": "PASS"
+        },
+        {
+          "agent_canary_exit": 1,
+          "agent_escape_probe": "PASS",
+          "agent_exit_code": 1,
+          "host_canary_controller": "PASS",
+          "network_positive_control": "PASS",
+          "network_sandbox_connections": 0,
+          "original_source_controller": "PASS",
+          "readonly_mount_runtime_probe": "PASSED",
+          "run_outcome": "agent_failed",
+          "status": "NOT_TESTED",
+          "trial": "trial-004",
+          "verifier_executed": false,
+          "verifier_exit_code": null,
+          "verifier_fixture_controller": "PASS"
+        },
+        {
+          "agent_canary_exit": 0,
+          "agent_escape_probe": "PASS",
+          "agent_exit_code": 0,
+          "host_canary_controller": "PASS",
+          "network_positive_control": "PASS",
+          "network_sandbox_connections": 0,
+          "original_source_controller": "PASS",
+          "readonly_mount_runtime_probe": "PASSED",
+          "run_outcome": "verified",
+          "status": "PASS",
+          "trial": "trial-005",
+          "verifier_executed": true,
+          "verifier_exit_code": 0,
+          "verifier_fixture_controller": "PASS"
+        },
+        {
+          "agent_canary_exit": 0,
+          "agent_escape_probe": "PASS",
+          "agent_exit_code": 0,
+          "host_canary_controller": "PASS",
+          "network_positive_control": "PASS",
+          "network_sandbox_connections": 0,
+          "original_source_controller": "PASS",
+          "readonly_mount_runtime_probe": "PASSED",
+          "run_outcome": "verified",
+          "status": "PASS",
+          "trial": "trial-006",
+          "verifier_executed": true,
+          "verifier_exit_code": 0,
+          "verifier_fixture_controller": "PASS"
+        },
+        {
+          "agent_canary_exit": 0,
+          "agent_escape_probe": "PASS",
+          "agent_exit_code": 0,
+          "host_canary_controller": "PASS",
+          "network_positive_control": "PASS",
+          "network_sandbox_connections": 0,
+          "original_source_controller": "PASS",
+          "readonly_mount_runtime_probe": "PASSED",
+          "run_outcome": "verified",
+          "status": "PASS",
+          "trial": "trial-007",
+          "verifier_executed": true,
+          "verifier_exit_code": 0,
+          "verifier_fixture_controller": "PASS"
+        }
+      ],
+      "replay_security_not_tested": 4,
+      "replay_security_passes": 4,
+      "search_replays": 5,
+      "security": {
+        "evidence": [
+          {
+            "agent_canary_exit": 0,
+            "agent_escape_probe": "PASS",
+            "agent_exit_code": 0,
+            "host_canary_controller": "PASS",
+            "network_positive_control": "PASS",
+            "network_sandbox_connections": 0,
+            "original_source_controller": "PASS",
+            "readonly_mount_runtime_probe": "PASSED",
+            "run_outcome": "verified",
+            "status": "PASS",
+            "trial": "trial-005",
+            "verifier_executed": true,
+            "verifier_exit_code": 0,
+            "verifier_fixture_controller": "PASS"
+          },
+          {
+            "agent_canary_exit": 0,
+            "agent_escape_probe": "PASS",
+            "agent_exit_code": 0,
+            "host_canary_controller": "PASS",
+            "network_positive_control": "PASS",
+            "network_sandbox_connections": 0,
+            "original_source_controller": "PASS",
+            "readonly_mount_runtime_probe": "PASSED",
+            "run_outcome": "verified",
+            "status": "PASS",
+            "trial": "trial-006",
+            "verifier_executed": true,
+            "verifier_exit_code": 0,
+            "verifier_fixture_controller": "PASS"
+          },
+          {
+            "agent_canary_exit": 0,
+            "agent_escape_probe": "PASS",
+            "agent_exit_code": 0,
+            "host_canary_controller": "PASS",
+            "network_positive_control": "PASS",
+            "network_sandbox_connections": 0,
+            "original_source_controller": "PASS",
+            "readonly_mount_runtime_probe": "PASSED",
+            "run_outcome": "verified",
+            "status": "PASS",
+            "trial": "trial-007",
+            "verifier_executed": true,
+            "verifier_exit_code": 0,
+            "verifier_fixture_controller": "PASS"
+          }
+        ],
+        "fresh_validation_canaries": 3,
+        "status": "PASS"
+      },
+      "status": "validated",
+      "stderr_sha256": "9505929bf98550c2f7538564ec8fdd56294b712bf9468fba5f0573f9a93b0372",
+      "strategy": "D",
+      "successful_task_reduction_percent": 76.19047619047619,
+      "task_process_seconds": 0.18,
+      "timeouts": 0,
+      "trial_failures": 4,
+      "utility_pass": true,
+      "verifier_executions_including_shared_setup": 5,
+      "verifier_exit_code": null,
+      "verifier_process_seconds": 0.518,
+      "verifier_timed_out": null,
+      "wall_seconds_attributed": 1.2164494980024756
+    },
+    "E": {
+      "agent_executions_including_shared_setup": 9,
+      "agent_exit_code": null,
+      "agent_timed_out": null,
+      "cli_return_code": 0,
+      "controller_overhead_seconds_estimate": 0.5346970929942909,
+      "cost": {
+        "directory_entry_weight_total": 10,
+        "file_weight_total": 15,
+        "permission_rules": 4,
+        "recursive_directory_grants": 1,
+        "schema": "weighted-write-surface-v1",
+        "weighted_writable_exposure": 25,
+        "writable_directories": 1,
+        "writable_regular_files": 6
+      },
+      "fresh_validation_replays": 3,
+      "full_corpus_reduction_percent": 76.19047619047619,
+      "optimizer_total_replays": 8,
+      "optimizer_trials": [
+        {
+          "classification": "trial-000:verified:required_security_checks_passed",
+          "cost": {
+            "directory_entry_weight_total": 10,
+            "file_weight_total": 15,
+            "permission_rules": 4,
+            "recursive_directory_grants": 1,
+            "schema": "weighted-write-surface-v1",
+            "weighted_writable_exposure": 25,
+            "writable_directories": 1,
+            "writable_regular_files": 6
+          },
+          "elapsed_millis": 177,
+          "passed": true,
+          "policy": {
+            "disable_nested_userns": true,
+            "network_access": false,
+            "schema_version": 1,
+            "write_grants": [
+              {
+                "kind": "file_contents",
+                "path": "MANIFEST.in"
+              },
+              {
+                "kind": "file_contents",
+                "path": "pyproject.toml"
+              },
+              {
+                "kind": "file_contents",
+                "path": "setup.py"
+              },
+              {
+                "kind": "directory_tree",
+                "path": "src/iniconfig"
+              }
+            ]
+          },
+          "security_canaries_passed": true,
+          "security_checks": [
+            {
+              "evidence": "preflight succeeded before the task process was launched",
+              "name": "required_namespace_preflight",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "candidate policy was checked against the recorded ceiling",
+              "name": "authorized_ceiling_subset",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "before/after source manifest digests matched",
+              "name": "source_checkout_unchanged",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "probe exit 0; canary unchanged=true",
+              "name": "readonly_mount_write_denial",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "host-side canary is supplied by the independent integration/benchmark controller",
+              "name": "external_host_canary",
+              "required_for_policy_promotion": false,
+              "status": "not_tested"
+            }
+          ]
+        },
+        {
+          "classification": "trial-001:agent_failed_exit_1:required_security_checks_passed",
+          "cost": {
+            "directory_entry_weight_total": 10,
+            "file_weight_total": 14,
+            "permission_rules": 3,
+            "recursive_directory_grants": 1,
+            "schema": "weighted-write-surface-v1",
+            "weighted_writable_exposure": 24,
+            "writable_directories": 1,
+            "writable_regular_files": 5
+          },
+          "elapsed_millis": 64,
+          "passed": false,
+          "policy": {
+            "disable_nested_userns": true,
+            "network_access": false,
+            "schema_version": 1,
+            "write_grants": [
+              {
+                "kind": "file_contents",
+                "path": "pyproject.toml"
+              },
+              {
+                "kind": "file_contents",
+                "path": "setup.py"
+              },
+              {
+                "kind": "directory_tree",
+                "path": "src/iniconfig"
+              }
+            ]
+          },
+          "security_canaries_passed": true,
+          "security_checks": [
+            {
+              "evidence": "preflight succeeded before the task process was launched",
+              "name": "required_namespace_preflight",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "candidate policy was checked against the recorded ceiling",
+              "name": "authorized_ceiling_subset",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "before/after source manifest digests matched",
+              "name": "source_checkout_unchanged",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "probe exit 0; canary unchanged=true",
+              "name": "readonly_mount_write_denial",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "host-side canary is supplied by the independent integration/benchmark controller",
+              "name": "external_host_canary",
+              "required_for_policy_promotion": false,
+              "status": "not_tested"
+            }
+          ]
+        },
+        {
+          "classification": "trial-002:agent_failed_exit_1:required_security_checks_passed",
+          "cost": {
+            "directory_entry_weight_total": 0,
+            "file_weight_total": 12,
+            "permission_rules": 3,
+            "recursive_directory_grants": 0,
+            "schema": "weighted-write-surface-v1",
+            "weighted_writable_exposure": 12,
+            "writable_directories": 0,
+            "writable_regular_files": 3
+          },
+          "elapsed_millis": 63,
+          "passed": false,
+          "policy": {
+            "disable_nested_userns": true,
+            "network_access": false,
+            "schema_version": 1,
+            "write_grants": [
+              {
+                "kind": "file_contents",
+                "path": "MANIFEST.in"
+              },
+              {
+                "kind": "file_contents",
+                "path": "pyproject.toml"
+              },
+              {
+                "kind": "file_contents",
+                "path": "setup.py"
+              }
+            ]
+          },
+          "security_canaries_passed": true,
+          "security_checks": [
+            {
+              "evidence": "preflight succeeded before the task process was launched",
+              "name": "required_namespace_preflight",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "candidate policy was checked against the recorded ceiling",
+              "name": "authorized_ceiling_subset",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "before/after source manifest digests matched",
+              "name": "source_checkout_unchanged",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "probe exit 0; canary unchanged=true",
+              "name": "readonly_mount_write_denial",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "host-side canary is supplied by the independent integration/benchmark controller",
+              "name": "external_host_canary",
+              "required_for_policy_promotion": false,
+              "status": "not_tested"
+            }
+          ]
+        },
+        {
+          "classification": "trial-003:agent_failed_exit_1:required_security_checks_passed",
+          "cost": {
+            "directory_entry_weight_total": 10,
+            "file_weight_total": 14,
+            "permission_rules": 3,
+            "recursive_directory_grants": 1,
+            "schema": "weighted-write-surface-v1",
+            "weighted_writable_exposure": 24,
+            "writable_directories": 1,
+            "writable_regular_files": 5
+          },
+          "elapsed_millis": 66,
+          "passed": false,
+          "policy": {
+            "disable_nested_userns": true,
+            "network_access": false,
+            "schema_version": 1,
+            "write_grants": [
+              {
+                "kind": "file_contents",
+                "path": "MANIFEST.in"
+              },
+              {
+                "kind": "file_contents",
+                "path": "pyproject.toml"
+              },
+              {
+                "kind": "directory_tree",
+                "path": "src/iniconfig"
+              }
+            ]
+          },
+          "security_canaries_passed": true,
+          "security_checks": [
+            {
+              "evidence": "preflight succeeded before the task process was launched",
+              "name": "required_namespace_preflight",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "candidate policy was checked against the recorded ceiling",
+              "name": "authorized_ceiling_subset",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "before/after source manifest digests matched",
+              "name": "source_checkout_unchanged",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "probe exit 0; canary unchanged=true",
+              "name": "readonly_mount_write_denial",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "host-side canary is supplied by the independent integration/benchmark controller",
+              "name": "external_host_canary",
+              "required_for_policy_promotion": false,
+              "status": "not_tested"
+            }
+          ]
+        },
+        {
+          "classification": "trial-004:agent_failed_exit_1:required_security_checks_passed",
+          "cost": {
+            "directory_entry_weight_total": 10,
+            "file_weight_total": 5,
+            "permission_rules": 3,
+            "recursive_directory_grants": 1,
+            "schema": "weighted-write-surface-v1",
+            "weighted_writable_exposure": 15,
+            "writable_directories": 1,
+            "writable_regular_files": 5
+          },
+          "elapsed_millis": 63,
+          "passed": false,
+          "policy": {
+            "disable_nested_userns": true,
+            "network_access": false,
+            "schema_version": 1,
+            "write_grants": [
+              {
+                "kind": "file_contents",
+                "path": "MANIFEST.in"
+              },
+              {
+                "kind": "file_contents",
+                "path": "setup.py"
+              },
+              {
+                "kind": "directory_tree",
+                "path": "src/iniconfig"
+              }
+            ]
+          },
+          "security_canaries_passed": true,
+          "security_checks": [
+            {
+              "evidence": "preflight succeeded before the task process was launched",
+              "name": "required_namespace_preflight",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "candidate policy was checked against the recorded ceiling",
+              "name": "authorized_ceiling_subset",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "before/after source manifest digests matched",
+              "name": "source_checkout_unchanged",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "probe exit 0; canary unchanged=true",
+              "name": "readonly_mount_write_denial",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "host-side canary is supplied by the independent integration/benchmark controller",
+              "name": "external_host_canary",
+              "required_for_policy_promotion": false,
+              "status": "not_tested"
+            }
+          ]
+        },
+        {
+          "classification": "trial-005:verified:required_security_checks_passed",
+          "cost": {
+            "directory_entry_weight_total": 10,
+            "file_weight_total": 15,
+            "permission_rules": 4,
+            "recursive_directory_grants": 1,
+            "schema": "weighted-write-surface-v1",
+            "weighted_writable_exposure": 25,
+            "writable_directories": 1,
+            "writable_regular_files": 6
+          },
+          "elapsed_millis": 181,
+          "passed": true,
+          "policy": {
+            "disable_nested_userns": true,
+            "network_access": false,
+            "schema_version": 1,
+            "write_grants": [
+              {
+                "kind": "file_contents",
+                "path": "MANIFEST.in"
+              },
+              {
+                "kind": "file_contents",
+                "path": "pyproject.toml"
+              },
+              {
+                "kind": "file_contents",
+                "path": "setup.py"
+              },
+              {
+                "kind": "directory_tree",
+                "path": "src/iniconfig"
+              }
+            ]
+          },
+          "security_canaries_passed": true,
+          "security_checks": [
+            {
+              "evidence": "preflight succeeded before the task process was launched",
+              "name": "required_namespace_preflight",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "candidate policy was checked against the recorded ceiling",
+              "name": "authorized_ceiling_subset",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "before/after source manifest digests matched",
+              "name": "source_checkout_unchanged",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "probe exit 0; canary unchanged=true",
+              "name": "readonly_mount_write_denial",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "host-side canary is supplied by the independent integration/benchmark controller",
+              "name": "external_host_canary",
+              "required_for_policy_promotion": false,
+              "status": "not_tested"
+            }
+          ]
+        },
+        {
+          "classification": "trial-006:verified:required_security_checks_passed",
+          "cost": {
+            "directory_entry_weight_total": 10,
+            "file_weight_total": 15,
+            "permission_rules": 4,
+            "recursive_directory_grants": 1,
+            "schema": "weighted-write-surface-v1",
+            "weighted_writable_exposure": 25,
+            "writable_directories": 1,
+            "writable_regular_files": 6
+          },
+          "elapsed_millis": 167,
+          "passed": true,
+          "policy": {
+            "disable_nested_userns": true,
+            "network_access": false,
+            "schema_version": 1,
+            "write_grants": [
+              {
+                "kind": "file_contents",
+                "path": "MANIFEST.in"
+              },
+              {
+                "kind": "file_contents",
+                "path": "pyproject.toml"
+              },
+              {
+                "kind": "file_contents",
+                "path": "setup.py"
+              },
+              {
+                "kind": "directory_tree",
+                "path": "src/iniconfig"
+              }
+            ]
+          },
+          "security_canaries_passed": true,
+          "security_checks": [
+            {
+              "evidence": "preflight succeeded before the task process was launched",
+              "name": "required_namespace_preflight",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "candidate policy was checked against the recorded ceiling",
+              "name": "authorized_ceiling_subset",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "before/after source manifest digests matched",
+              "name": "source_checkout_unchanged",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "probe exit 0; canary unchanged=true",
+              "name": "readonly_mount_write_denial",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "host-side canary is supplied by the independent integration/benchmark controller",
+              "name": "external_host_canary",
+              "required_for_policy_promotion": false,
+              "status": "not_tested"
+            }
+          ]
+        },
+        {
+          "classification": "trial-007:verified:required_security_checks_passed",
+          "cost": {
+            "directory_entry_weight_total": 10,
+            "file_weight_total": 15,
+            "permission_rules": 4,
+            "recursive_directory_grants": 1,
+            "schema": "weighted-write-surface-v1",
+            "weighted_writable_exposure": 25,
+            "writable_directories": 1,
+            "writable_regular_files": 6
+          },
+          "elapsed_millis": 169,
+          "passed": true,
+          "policy": {
+            "disable_nested_userns": true,
+            "network_access": false,
+            "schema_version": 1,
+            "write_grants": [
+              {
+                "kind": "file_contents",
+                "path": "MANIFEST.in"
+              },
+              {
+                "kind": "file_contents",
+                "path": "pyproject.toml"
+              },
+              {
+                "kind": "file_contents",
+                "path": "setup.py"
+              },
+              {
+                "kind": "directory_tree",
+                "path": "src/iniconfig"
+              }
+            ]
+          },
+          "security_canaries_passed": true,
+          "security_checks": [
+            {
+              "evidence": "preflight succeeded before the task process was launched",
+              "name": "required_namespace_preflight",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "candidate policy was checked against the recorded ceiling",
+              "name": "authorized_ceiling_subset",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "before/after source manifest digests matched",
+              "name": "source_checkout_unchanged",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "probe exit 0; canary unchanged=true",
+              "name": "readonly_mount_write_denial",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "host-side canary is supplied by the independent integration/benchmark controller",
+              "name": "external_host_canary",
+              "required_for_policy_promotion": false,
+              "status": "not_tested"
+            }
+          ]
+        }
+      ],
+      "outcome": "optimizer_trials",
+      "policy": [
+        {
+          "kind": "file_contents",
+          "path": "MANIFEST.in"
+        },
+        {
+          "kind": "file_contents",
+          "path": "pyproject.toml"
+        },
+        {
+          "kind": "file_contents",
+          "path": "setup.py"
+        },
+        {
+          "kind": "directory_tree",
+          "path": "src/iniconfig"
+        }
+      ],
+      "promotable": true,
+      "rejected_trials": 4,
+      "replay_security": [
+        {
+          "agent_canary_exit": 0,
+          "agent_escape_probe": "PASS",
+          "agent_exit_code": 0,
+          "host_canary_controller": "PASS",
+          "network_positive_control": "PASS",
+          "network_sandbox_connections": 0,
+          "original_source_controller": "PASS",
+          "readonly_mount_runtime_probe": "PASSED",
+          "run_outcome": "verified",
+          "status": "PASS",
+          "trial": "trial-000",
+          "verifier_executed": true,
+          "verifier_exit_code": 0,
+          "verifier_fixture_controller": "PASS"
+        },
+        {
+          "agent_canary_exit": 1,
+          "agent_escape_probe": "PASS",
+          "agent_exit_code": 1,
+          "host_canary_controller": "PASS",
+          "network_positive_control": "PASS",
+          "network_sandbox_connections": 0,
+          "original_source_controller": "PASS",
+          "readonly_mount_runtime_probe": "PASSED",
+          "run_outcome": "agent_failed",
+          "status": "NOT_TESTED",
+          "trial": "trial-001",
+          "verifier_executed": false,
+          "verifier_exit_code": null,
+          "verifier_fixture_controller": "PASS"
+        },
+        {
+          "agent_canary_exit": 1,
+          "agent_escape_probe": "PASS",
+          "agent_exit_code": 1,
+          "host_canary_controller": "PASS",
+          "network_positive_control": "PASS",
+          "network_sandbox_connections": 0,
+          "original_source_controller": "PASS",
+          "readonly_mount_runtime_probe": "PASSED",
+          "run_outcome": "agent_failed",
+          "status": "NOT_TESTED",
+          "trial": "trial-002",
+          "verifier_executed": false,
+          "verifier_exit_code": null,
+          "verifier_fixture_controller": "PASS"
+        },
+        {
+          "agent_canary_exit": 1,
+          "agent_escape_probe": "PASS",
+          "agent_exit_code": 1,
+          "host_canary_controller": "PASS",
+          "network_positive_control": "PASS",
+          "network_sandbox_connections": 0,
+          "original_source_controller": "PASS",
+          "readonly_mount_runtime_probe": "PASSED",
+          "run_outcome": "agent_failed",
+          "status": "NOT_TESTED",
+          "trial": "trial-003",
+          "verifier_executed": false,
+          "verifier_exit_code": null,
+          "verifier_fixture_controller": "PASS"
+        },
+        {
+          "agent_canary_exit": 1,
+          "agent_escape_probe": "PASS",
+          "agent_exit_code": 1,
+          "host_canary_controller": "PASS",
+          "network_positive_control": "PASS",
+          "network_sandbox_connections": 0,
+          "original_source_controller": "PASS",
+          "readonly_mount_runtime_probe": "PASSED",
+          "run_outcome": "agent_failed",
+          "status": "NOT_TESTED",
+          "trial": "trial-004",
+          "verifier_executed": false,
+          "verifier_exit_code": null,
+          "verifier_fixture_controller": "PASS"
+        },
+        {
+          "agent_canary_exit": 0,
+          "agent_escape_probe": "PASS",
+          "agent_exit_code": 0,
+          "host_canary_controller": "PASS",
+          "network_positive_control": "PASS",
+          "network_sandbox_connections": 0,
+          "original_source_controller": "PASS",
+          "readonly_mount_runtime_probe": "PASSED",
+          "run_outcome": "verified",
+          "status": "PASS",
+          "trial": "trial-005",
+          "verifier_executed": true,
+          "verifier_exit_code": 0,
+          "verifier_fixture_controller": "PASS"
+        },
+        {
+          "agent_canary_exit": 0,
+          "agent_escape_probe": "PASS",
+          "agent_exit_code": 0,
+          "host_canary_controller": "PASS",
+          "network_positive_control": "PASS",
+          "network_sandbox_connections": 0,
+          "original_source_controller": "PASS",
+          "readonly_mount_runtime_probe": "PASSED",
+          "run_outcome": "verified",
+          "status": "PASS",
+          "trial": "trial-006",
+          "verifier_executed": true,
+          "verifier_exit_code": 0,
+          "verifier_fixture_controller": "PASS"
+        },
+        {
+          "agent_canary_exit": 0,
+          "agent_escape_probe": "PASS",
+          "agent_exit_code": 0,
+          "host_canary_controller": "PASS",
+          "network_positive_control": "PASS",
+          "network_sandbox_connections": 0,
+          "original_source_controller": "PASS",
+          "readonly_mount_runtime_probe": "PASSED",
+          "run_outcome": "verified",
+          "status": "PASS",
+          "trial": "trial-007",
+          "verifier_executed": true,
+          "verifier_exit_code": 0,
+          "verifier_fixture_controller": "PASS"
+        }
+      ],
+      "replay_security_not_tested": 4,
+      "replay_security_passes": 4,
+      "search_replays": 5,
+      "security": {
+        "evidence": [
+          {
+            "agent_canary_exit": 0,
+            "agent_escape_probe": "PASS",
+            "agent_exit_code": 0,
+            "host_canary_controller": "PASS",
+            "network_positive_control": "PASS",
+            "network_sandbox_connections": 0,
+            "original_source_controller": "PASS",
+            "readonly_mount_runtime_probe": "PASSED",
+            "run_outcome": "verified",
+            "status": "PASS",
+            "trial": "trial-005",
+            "verifier_executed": true,
+            "verifier_exit_code": 0,
+            "verifier_fixture_controller": "PASS"
+          },
+          {
+            "agent_canary_exit": 0,
+            "agent_escape_probe": "PASS",
+            "agent_exit_code": 0,
+            "host_canary_controller": "PASS",
+            "network_positive_control": "PASS",
+            "network_sandbox_connections": 0,
+            "original_source_controller": "PASS",
+            "readonly_mount_runtime_probe": "PASSED",
+            "run_outcome": "verified",
+            "status": "PASS",
+            "trial": "trial-006",
+            "verifier_executed": true,
+            "verifier_exit_code": 0,
+            "verifier_fixture_controller": "PASS"
+          },
+          {
+            "agent_canary_exit": 0,
+            "agent_escape_probe": "PASS",
+            "agent_exit_code": 0,
+            "host_canary_controller": "PASS",
+            "network_positive_control": "PASS",
+            "network_sandbox_connections": 0,
+            "original_source_controller": "PASS",
+            "readonly_mount_runtime_probe": "PASSED",
+            "run_outcome": "verified",
+            "status": "PASS",
+            "trial": "trial-007",
+            "verifier_executed": true,
+            "verifier_exit_code": 0,
+            "verifier_fixture_controller": "PASS"
+          }
+        ],
+        "fresh_validation_canaries": 3,
+        "status": "PASS"
+      },
+      "status": "validated",
+      "stderr_sha256": "385bd7ca9b68a58f4ad7d6db2cd2928d506848c47f5fadb48885fff015d31456",
+      "strategy": "E",
+      "successful_task_reduction_percent": 76.19047619047619,
+      "task_process_seconds": 0.18,
+      "timeouts": 0,
+      "trial_failures": 4,
+      "utility_pass": true,
+      "verifier_executions_including_shared_setup": 5,
+      "verifier_exit_code": null,
+      "verifier_process_seconds": 0.522,
+      "verifier_timed_out": null,
+      "wall_seconds_attributed": 1.2366970929942909
+    },
+    "F": {
+      "agent_executions_including_shared_setup": 12,
+      "agent_exit_code": null,
+      "agent_timed_out": null,
+      "cli_return_code": 0,
+      "controller_overhead_seconds_estimate": 0.6753362069913419,
+      "cost": {
+        "directory_entry_weight_total": 10,
+        "file_weight_total": 15,
+        "permission_rules": 4,
+        "recursive_directory_grants": 1,
+        "schema": "weighted-write-surface-v1",
+        "weighted_writable_exposure": 25,
+        "writable_directories": 1,
+        "writable_regular_files": 6
+      },
+      "fresh_validation_replays": 3,
+      "full_corpus_reduction_percent": 76.19047619047619,
+      "optimizer_total_replays": 11,
+      "optimizer_trials": [
+        {
+          "classification": "trial-000:verified:required_security_checks_passed",
+          "cost": {
+            "directory_entry_weight_total": 10,
+            "file_weight_total": 15,
+            "permission_rules": 4,
+            "recursive_directory_grants": 1,
+            "schema": "weighted-write-surface-v1",
+            "weighted_writable_exposure": 25,
+            "writable_directories": 1,
+            "writable_regular_files": 6
+          },
+          "elapsed_millis": 177,
+          "passed": true,
+          "policy": {
+            "disable_nested_userns": true,
+            "network_access": false,
+            "schema_version": 1,
+            "write_grants": [
+              {
+                "kind": "file_contents",
+                "path": "MANIFEST.in"
+              },
+              {
+                "kind": "file_contents",
+                "path": "pyproject.toml"
+              },
+              {
+                "kind": "file_contents",
+                "path": "setup.py"
+              },
+              {
+                "kind": "directory_tree",
+                "path": "src/iniconfig"
+              }
+            ]
+          },
+          "security_canaries_passed": true,
+          "security_checks": [
+            {
+              "evidence": "preflight succeeded before the task process was launched",
+              "name": "required_namespace_preflight",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "candidate policy was checked against the recorded ceiling",
+              "name": "authorized_ceiling_subset",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "before/after source manifest digests matched",
+              "name": "source_checkout_unchanged",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "probe exit 0; canary unchanged=true",
+              "name": "readonly_mount_write_denial",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "host-side canary is supplied by the independent integration/benchmark controller",
+              "name": "external_host_canary",
+              "required_for_policy_promotion": false,
+              "status": "not_tested"
+            }
+          ]
+        },
+        {
+          "classification": "trial-001:agent_failed_exit_1:required_security_checks_passed",
+          "cost": {
+            "directory_entry_weight_total": 0,
+            "file_weight_total": 15,
+            "permission_rules": 6,
+            "recursive_directory_grants": 0,
+            "schema": "weighted-write-surface-v1",
+            "weighted_writable_exposure": 15,
+            "writable_directories": 0,
+            "writable_regular_files": 6
+          },
+          "elapsed_millis": 67,
+          "passed": false,
+          "policy": {
+            "disable_nested_userns": true,
+            "network_access": false,
+            "schema_version": 1,
+            "write_grants": [
+              {
+                "kind": "file_contents",
+                "path": "MANIFEST.in"
+              },
+              {
+                "kind": "file_contents",
+                "path": "pyproject.toml"
+              },
+              {
+                "kind": "file_contents",
+                "path": "setup.py"
+              },
+              {
+                "kind": "file_contents",
+                "path": "src/iniconfig/__init__.py"
+              },
+              {
+                "kind": "file_contents",
+                "path": "src/iniconfig/__init__.pyi"
+              },
+              {
+                "kind": "file_contents",
+                "path": "src/iniconfig/py.typed"
+              }
+            ]
+          },
+          "security_canaries_passed": true,
+          "security_checks": [
+            {
+              "evidence": "preflight succeeded before the task process was launched",
+              "name": "required_namespace_preflight",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "candidate policy was checked against the recorded ceiling",
+              "name": "authorized_ceiling_subset",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "before/after source manifest digests matched",
+              "name": "source_checkout_unchanged",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "probe exit 0; canary unchanged=true",
+              "name": "readonly_mount_write_denial",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "host-side canary is supplied by the independent integration/benchmark controller",
+              "name": "external_host_canary",
+              "required_for_policy_promotion": false,
+              "status": "not_tested"
+            }
+          ]
+        },
+        {
+          "classification": "trial-002:agent_failed_exit_1:required_security_checks_passed",
+          "cost": {
+            "directory_entry_weight_total": 0,
+            "file_weight_total": 12,
+            "permission_rules": 3,
+            "recursive_directory_grants": 0,
+            "schema": "weighted-write-surface-v1",
+            "weighted_writable_exposure": 12,
+            "writable_directories": 0,
+            "writable_regular_files": 3
+          },
+          "elapsed_millis": 64,
+          "passed": false,
+          "policy": {
+            "disable_nested_userns": true,
+            "network_access": false,
+            "schema_version": 1,
+            "write_grants": [
+              {
+                "kind": "file_contents",
+                "path": "MANIFEST.in"
+              },
+              {
+                "kind": "file_contents",
+                "path": "pyproject.toml"
+              },
+              {
+                "kind": "file_contents",
+                "path": "setup.py"
+              }
+            ]
+          },
+          "security_canaries_passed": true,
+          "security_checks": [
+            {
+              "evidence": "preflight succeeded before the task process was launched",
+              "name": "required_namespace_preflight",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "candidate policy was checked against the recorded ceiling",
+              "name": "authorized_ceiling_subset",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "before/after source manifest digests matched",
+              "name": "source_checkout_unchanged",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "probe exit 0; canary unchanged=true",
+              "name": "readonly_mount_write_denial",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "host-side canary is supplied by the independent integration/benchmark controller",
+              "name": "external_host_canary",
+              "required_for_policy_promotion": false,
+              "status": "not_tested"
+            }
+          ]
+        },
+        {
+          "classification": "trial-003:agent_failed_exit_1:required_security_checks_passed",
+          "cost": {
+            "directory_entry_weight_total": 10,
+            "file_weight_total": 3,
+            "permission_rules": 1,
+            "recursive_directory_grants": 1,
+            "schema": "weighted-write-surface-v1",
+            "weighted_writable_exposure": 13,
+            "writable_directories": 1,
+            "writable_regular_files": 3
+          },
+          "elapsed_millis": 64,
+          "passed": false,
+          "policy": {
+            "disable_nested_userns": true,
+            "network_access": false,
+            "schema_version": 1,
+            "write_grants": [
+              {
+                "kind": "directory_tree",
+                "path": "src/iniconfig"
+              }
+            ]
+          },
+          "security_canaries_passed": true,
+          "security_checks": [
+            {
+              "evidence": "preflight succeeded before the task process was launched",
+              "name": "required_namespace_preflight",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "candidate policy was checked against the recorded ceiling",
+              "name": "authorized_ceiling_subset",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "before/after source manifest digests matched",
+              "name": "source_checkout_unchanged",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "probe exit 0; canary unchanged=true",
+              "name": "readonly_mount_write_denial",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "host-side canary is supplied by the independent integration/benchmark controller",
+              "name": "external_host_canary",
+              "required_for_policy_promotion": false,
+              "status": "not_tested"
+            }
+          ]
+        },
+        {
+          "classification": "trial-004:agent_failed_exit_1:required_security_checks_passed",
+          "cost": {
+            "directory_entry_weight_total": 10,
+            "file_weight_total": 14,
+            "permission_rules": 3,
+            "recursive_directory_grants": 1,
+            "schema": "weighted-write-surface-v1",
+            "weighted_writable_exposure": 24,
+            "writable_directories": 1,
+            "writable_regular_files": 5
+          },
+          "elapsed_millis": 64,
+          "passed": false,
+          "policy": {
+            "disable_nested_userns": true,
+            "network_access": false,
+            "schema_version": 1,
+            "write_grants": [
+              {
+                "kind": "file_contents",
+                "path": "pyproject.toml"
+              },
+              {
+                "kind": "file_contents",
+                "path": "setup.py"
+              },
+              {
+                "kind": "directory_tree",
+                "path": "src/iniconfig"
+              }
+            ]
+          },
+          "security_canaries_passed": true,
+          "security_checks": [
+            {
+              "evidence": "preflight succeeded before the task process was launched",
+              "name": "required_namespace_preflight",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "candidate policy was checked against the recorded ceiling",
+              "name": "authorized_ceiling_subset",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "before/after source manifest digests matched",
+              "name": "source_checkout_unchanged",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "probe exit 0; canary unchanged=true",
+              "name": "readonly_mount_write_denial",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "host-side canary is supplied by the independent integration/benchmark controller",
+              "name": "external_host_canary",
+              "required_for_policy_promotion": false,
+              "status": "not_tested"
+            }
+          ]
+        },
+        {
+          "classification": "trial-005:agent_failed_exit_1:required_security_checks_passed",
+          "cost": {
+            "directory_entry_weight_total": 10,
+            "file_weight_total": 4,
+            "permission_rules": 2,
+            "recursive_directory_grants": 1,
+            "schema": "weighted-write-surface-v1",
+            "weighted_writable_exposure": 14,
+            "writable_directories": 1,
+            "writable_regular_files": 4
+          },
+          "elapsed_millis": 64,
+          "passed": false,
+          "policy": {
+            "disable_nested_userns": true,
+            "network_access": false,
+            "schema_version": 1,
+            "write_grants": [
+              {
+                "kind": "file_contents",
+                "path": "MANIFEST.in"
+              },
+              {
+                "kind": "directory_tree",
+                "path": "src/iniconfig"
+              }
+            ]
+          },
+          "security_canaries_passed": true,
+          "security_checks": [
+            {
+              "evidence": "preflight succeeded before the task process was launched",
+              "name": "required_namespace_preflight",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "candidate policy was checked against the recorded ceiling",
+              "name": "authorized_ceiling_subset",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "before/after source manifest digests matched",
+              "name": "source_checkout_unchanged",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "probe exit 0; canary unchanged=true",
+              "name": "readonly_mount_write_denial",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "host-side canary is supplied by the independent integration/benchmark controller",
+              "name": "external_host_canary",
+              "required_for_policy_promotion": false,
+              "status": "not_tested"
+            }
+          ]
+        },
+        {
+          "classification": "trial-006:agent_failed_exit_1:required_security_checks_passed",
+          "cost": {
+            "directory_entry_weight_total": 10,
+            "file_weight_total": 5,
+            "permission_rules": 3,
+            "recursive_directory_grants": 1,
+            "schema": "weighted-write-surface-v1",
+            "weighted_writable_exposure": 15,
+            "writable_directories": 1,
+            "writable_regular_files": 5
+          },
+          "elapsed_millis": 66,
+          "passed": false,
+          "policy": {
+            "disable_nested_userns": true,
+            "network_access": false,
+            "schema_version": 1,
+            "write_grants": [
+              {
+                "kind": "file_contents",
+                "path": "MANIFEST.in"
+              },
+              {
+                "kind": "file_contents",
+                "path": "setup.py"
+              },
+              {
+                "kind": "directory_tree",
+                "path": "src/iniconfig"
+              }
+            ]
+          },
+          "security_canaries_passed": true,
+          "security_checks": [
+            {
+              "evidence": "preflight succeeded before the task process was launched",
+              "name": "required_namespace_preflight",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "candidate policy was checked against the recorded ceiling",
+              "name": "authorized_ceiling_subset",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "before/after source manifest digests matched",
+              "name": "source_checkout_unchanged",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "probe exit 0; canary unchanged=true",
+              "name": "readonly_mount_write_denial",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "host-side canary is supplied by the independent integration/benchmark controller",
+              "name": "external_host_canary",
+              "required_for_policy_promotion": false,
+              "status": "not_tested"
+            }
+          ]
+        },
+        {
+          "classification": "trial-007:agent_failed_exit_1:required_security_checks_passed",
+          "cost": {
+            "directory_entry_weight_total": 10,
+            "file_weight_total": 14,
+            "permission_rules": 3,
+            "recursive_directory_grants": 1,
+            "schema": "weighted-write-surface-v1",
+            "weighted_writable_exposure": 24,
+            "writable_directories": 1,
+            "writable_regular_files": 5
+          },
+          "elapsed_millis": 67,
+          "passed": false,
+          "policy": {
+            "disable_nested_userns": true,
+            "network_access": false,
+            "schema_version": 1,
+            "write_grants": [
+              {
+                "kind": "file_contents",
+                "path": "MANIFEST.in"
+              },
+              {
+                "kind": "file_contents",
+                "path": "pyproject.toml"
+              },
+              {
+                "kind": "directory_tree",
+                "path": "src/iniconfig"
+              }
+            ]
+          },
+          "security_canaries_passed": true,
+          "security_checks": [
+            {
+              "evidence": "preflight succeeded before the task process was launched",
+              "name": "required_namespace_preflight",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "candidate policy was checked against the recorded ceiling",
+              "name": "authorized_ceiling_subset",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "before/after source manifest digests matched",
+              "name": "source_checkout_unchanged",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "probe exit 0; canary unchanged=true",
+              "name": "readonly_mount_write_denial",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "host-side canary is supplied by the independent integration/benchmark controller",
+              "name": "external_host_canary",
+              "required_for_policy_promotion": false,
+              "status": "not_tested"
+            }
+          ]
+        },
+        {
+          "classification": "trial-008:verified:required_security_checks_passed",
+          "cost": {
+            "directory_entry_weight_total": 10,
+            "file_weight_total": 15,
+            "permission_rules": 4,
+            "recursive_directory_grants": 1,
+            "schema": "weighted-write-surface-v1",
+            "weighted_writable_exposure": 25,
+            "writable_directories": 1,
+            "writable_regular_files": 6
+          },
+          "elapsed_millis": 169,
+          "passed": true,
+          "policy": {
+            "disable_nested_userns": true,
+            "network_access": false,
+            "schema_version": 1,
+            "write_grants": [
+              {
+                "kind": "file_contents",
+                "path": "MANIFEST.in"
+              },
+              {
+                "kind": "file_contents",
+                "path": "pyproject.toml"
+              },
+              {
+                "kind": "file_contents",
+                "path": "setup.py"
+              },
+              {
+                "kind": "directory_tree",
+                "path": "src/iniconfig"
+              }
+            ]
+          },
+          "security_canaries_passed": true,
+          "security_checks": [
+            {
+              "evidence": "preflight succeeded before the task process was launched",
+              "name": "required_namespace_preflight",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "candidate policy was checked against the recorded ceiling",
+              "name": "authorized_ceiling_subset",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "before/after source manifest digests matched",
+              "name": "source_checkout_unchanged",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "probe exit 0; canary unchanged=true",
+              "name": "readonly_mount_write_denial",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "host-side canary is supplied by the independent integration/benchmark controller",
+              "name": "external_host_canary",
+              "required_for_policy_promotion": false,
+              "status": "not_tested"
+            }
+          ]
+        },
+        {
+          "classification": "trial-009:verified:required_security_checks_passed",
+          "cost": {
+            "directory_entry_weight_total": 10,
+            "file_weight_total": 15,
+            "permission_rules": 4,
+            "recursive_directory_grants": 1,
+            "schema": "weighted-write-surface-v1",
+            "weighted_writable_exposure": 25,
+            "writable_directories": 1,
+            "writable_regular_files": 6
+          },
+          "elapsed_millis": 170,
+          "passed": true,
+          "policy": {
+            "disable_nested_userns": true,
+            "network_access": false,
+            "schema_version": 1,
+            "write_grants": [
+              {
+                "kind": "file_contents",
+                "path": "MANIFEST.in"
+              },
+              {
+                "kind": "file_contents",
+                "path": "pyproject.toml"
+              },
+              {
+                "kind": "file_contents",
+                "path": "setup.py"
+              },
+              {
+                "kind": "directory_tree",
+                "path": "src/iniconfig"
+              }
+            ]
+          },
+          "security_canaries_passed": true,
+          "security_checks": [
+            {
+              "evidence": "preflight succeeded before the task process was launched",
+              "name": "required_namespace_preflight",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "candidate policy was checked against the recorded ceiling",
+              "name": "authorized_ceiling_subset",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "before/after source manifest digests matched",
+              "name": "source_checkout_unchanged",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "probe exit 0; canary unchanged=true",
+              "name": "readonly_mount_write_denial",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "host-side canary is supplied by the independent integration/benchmark controller",
+              "name": "external_host_canary",
+              "required_for_policy_promotion": false,
+              "status": "not_tested"
+            }
+          ]
+        },
+        {
+          "classification": "trial-010:verified:required_security_checks_passed",
+          "cost": {
+            "directory_entry_weight_total": 10,
+            "file_weight_total": 15,
+            "permission_rules": 4,
+            "recursive_directory_grants": 1,
+            "schema": "weighted-write-surface-v1",
+            "weighted_writable_exposure": 25,
+            "writable_directories": 1,
+            "writable_regular_files": 6
+          },
+          "elapsed_millis": 167,
+          "passed": true,
+          "policy": {
+            "disable_nested_userns": true,
+            "network_access": false,
+            "schema_version": 1,
+            "write_grants": [
+              {
+                "kind": "file_contents",
+                "path": "MANIFEST.in"
+              },
+              {
+                "kind": "file_contents",
+                "path": "pyproject.toml"
+              },
+              {
+                "kind": "file_contents",
+                "path": "setup.py"
+              },
+              {
+                "kind": "directory_tree",
+                "path": "src/iniconfig"
+              }
+            ]
+          },
+          "security_canaries_passed": true,
+          "security_checks": [
+            {
+              "evidence": "preflight succeeded before the task process was launched",
+              "name": "required_namespace_preflight",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "candidate policy was checked against the recorded ceiling",
+              "name": "authorized_ceiling_subset",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "before/after source manifest digests matched",
+              "name": "source_checkout_unchanged",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "probe exit 0; canary unchanged=true",
+              "name": "readonly_mount_write_denial",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "host-side canary is supplied by the independent integration/benchmark controller",
+              "name": "external_host_canary",
+              "required_for_policy_promotion": false,
+              "status": "not_tested"
+            }
+          ]
+        }
+      ],
+      "outcome": "optimizer_trials",
+      "policy": [
+        {
+          "kind": "file_contents",
+          "path": "MANIFEST.in"
+        },
+        {
+          "kind": "file_contents",
+          "path": "pyproject.toml"
+        },
+        {
+          "kind": "file_contents",
+          "path": "setup.py"
+        },
+        {
+          "kind": "directory_tree",
+          "path": "src/iniconfig"
+        }
+      ],
+      "promotable": true,
+      "rejected_trials": 7,
+      "replay_security": [
+        {
+          "agent_canary_exit": 0,
+          "agent_escape_probe": "PASS",
+          "agent_exit_code": 0,
+          "host_canary_controller": "PASS",
+          "network_positive_control": "PASS",
+          "network_sandbox_connections": 0,
+          "original_source_controller": "PASS",
+          "readonly_mount_runtime_probe": "PASSED",
+          "run_outcome": "verified",
+          "status": "PASS",
+          "trial": "trial-000",
+          "verifier_executed": true,
+          "verifier_exit_code": 0,
+          "verifier_fixture_controller": "PASS"
+        },
+        {
+          "agent_canary_exit": 1,
+          "agent_escape_probe": "PASS",
+          "agent_exit_code": 1,
+          "host_canary_controller": "PASS",
+          "network_positive_control": "PASS",
+          "network_sandbox_connections": 0,
+          "original_source_controller": "PASS",
+          "readonly_mount_runtime_probe": "PASSED",
+          "run_outcome": "agent_failed",
+          "status": "NOT_TESTED",
+          "trial": "trial-001",
+          "verifier_executed": false,
+          "verifier_exit_code": null,
+          "verifier_fixture_controller": "PASS"
+        },
+        {
+          "agent_canary_exit": 1,
+          "agent_escape_probe": "PASS",
+          "agent_exit_code": 1,
+          "host_canary_controller": "PASS",
+          "network_positive_control": "PASS",
+          "network_sandbox_connections": 0,
+          "original_source_controller": "PASS",
+          "readonly_mount_runtime_probe": "PASSED",
+          "run_outcome": "agent_failed",
+          "status": "NOT_TESTED",
+          "trial": "trial-002",
+          "verifier_executed": false,
+          "verifier_exit_code": null,
+          "verifier_fixture_controller": "PASS"
+        },
+        {
+          "agent_canary_exit": 1,
+          "agent_escape_probe": "PASS",
+          "agent_exit_code": 1,
+          "host_canary_controller": "PASS",
+          "network_positive_control": "PASS",
+          "network_sandbox_connections": 0,
+          "original_source_controller": "PASS",
+          "readonly_mount_runtime_probe": "PASSED",
+          "run_outcome": "agent_failed",
+          "status": "NOT_TESTED",
+          "trial": "trial-003",
+          "verifier_executed": false,
+          "verifier_exit_code": null,
+          "verifier_fixture_controller": "PASS"
+        },
+        {
+          "agent_canary_exit": 1,
+          "agent_escape_probe": "PASS",
+          "agent_exit_code": 1,
+          "host_canary_controller": "PASS",
+          "network_positive_control": "PASS",
+          "network_sandbox_connections": 0,
+          "original_source_controller": "PASS",
+          "readonly_mount_runtime_probe": "PASSED",
+          "run_outcome": "agent_failed",
+          "status": "NOT_TESTED",
+          "trial": "trial-004",
+          "verifier_executed": false,
+          "verifier_exit_code": null,
+          "verifier_fixture_controller": "PASS"
+        },
+        {
+          "agent_canary_exit": 1,
+          "agent_escape_probe": "PASS",
+          "agent_exit_code": 1,
+          "host_canary_controller": "PASS",
+          "network_positive_control": "PASS",
+          "network_sandbox_connections": 0,
+          "original_source_controller": "PASS",
+          "readonly_mount_runtime_probe": "PASSED",
+          "run_outcome": "agent_failed",
+          "status": "NOT_TESTED",
+          "trial": "trial-005",
+          "verifier_executed": false,
+          "verifier_exit_code": null,
+          "verifier_fixture_controller": "PASS"
+        },
+        {
+          "agent_canary_exit": 1,
+          "agent_escape_probe": "PASS",
+          "agent_exit_code": 1,
+          "host_canary_controller": "PASS",
+          "network_positive_control": "PASS",
+          "network_sandbox_connections": 0,
+          "original_source_controller": "PASS",
+          "readonly_mount_runtime_probe": "PASSED",
+          "run_outcome": "agent_failed",
+          "status": "NOT_TESTED",
+          "trial": "trial-006",
+          "verifier_executed": false,
+          "verifier_exit_code": null,
+          "verifier_fixture_controller": "PASS"
+        },
+        {
+          "agent_canary_exit": 1,
+          "agent_escape_probe": "PASS",
+          "agent_exit_code": 1,
+          "host_canary_controller": "PASS",
+          "network_positive_control": "PASS",
+          "network_sandbox_connections": 0,
+          "original_source_controller": "PASS",
+          "readonly_mount_runtime_probe": "PASSED",
+          "run_outcome": "agent_failed",
+          "status": "NOT_TESTED",
+          "trial": "trial-007",
+          "verifier_executed": false,
+          "verifier_exit_code": null,
+          "verifier_fixture_controller": "PASS"
+        },
+        {
+          "agent_canary_exit": 0,
+          "agent_escape_probe": "PASS",
+          "agent_exit_code": 0,
+          "host_canary_controller": "PASS",
+          "network_positive_control": "PASS",
+          "network_sandbox_connections": 0,
+          "original_source_controller": "PASS",
+          "readonly_mount_runtime_probe": "PASSED",
+          "run_outcome": "verified",
+          "status": "PASS",
+          "trial": "trial-008",
+          "verifier_executed": true,
+          "verifier_exit_code": 0,
+          "verifier_fixture_controller": "PASS"
+        },
+        {
+          "agent_canary_exit": 0,
+          "agent_escape_probe": "PASS",
+          "agent_exit_code": 0,
+          "host_canary_controller": "PASS",
+          "network_positive_control": "PASS",
+          "network_sandbox_connections": 0,
+          "original_source_controller": "PASS",
+          "readonly_mount_runtime_probe": "PASSED",
+          "run_outcome": "verified",
+          "status": "PASS",
+          "trial": "trial-009",
+          "verifier_executed": true,
+          "verifier_exit_code": 0,
+          "verifier_fixture_controller": "PASS"
+        },
+        {
+          "agent_canary_exit": 0,
+          "agent_escape_probe": "PASS",
+          "agent_exit_code": 0,
+          "host_canary_controller": "PASS",
+          "network_positive_control": "PASS",
+          "network_sandbox_connections": 0,
+          "original_source_controller": "PASS",
+          "readonly_mount_runtime_probe": "PASSED",
+          "run_outcome": "verified",
+          "status": "PASS",
+          "trial": "trial-010",
+          "verifier_executed": true,
+          "verifier_exit_code": 0,
+          "verifier_fixture_controller": "PASS"
+        }
+      ],
+      "replay_security_not_tested": 7,
+      "replay_security_passes": 4,
+      "search_replays": 8,
+      "security": {
+        "evidence": [
+          {
+            "agent_canary_exit": 0,
+            "agent_escape_probe": "PASS",
+            "agent_exit_code": 0,
+            "host_canary_controller": "PASS",
+            "network_positive_control": "PASS",
+            "network_sandbox_connections": 0,
+            "original_source_controller": "PASS",
+            "readonly_mount_runtime_probe": "PASSED",
+            "run_outcome": "verified",
+            "status": "PASS",
+            "trial": "trial-008",
+            "verifier_executed": true,
+            "verifier_exit_code": 0,
+            "verifier_fixture_controller": "PASS"
+          },
+          {
+            "agent_canary_exit": 0,
+            "agent_escape_probe": "PASS",
+            "agent_exit_code": 0,
+            "host_canary_controller": "PASS",
+            "network_positive_control": "PASS",
+            "network_sandbox_connections": 0,
+            "original_source_controller": "PASS",
+            "readonly_mount_runtime_probe": "PASSED",
+            "run_outcome": "verified",
+            "status": "PASS",
+            "trial": "trial-009",
+            "verifier_executed": true,
+            "verifier_exit_code": 0,
+            "verifier_fixture_controller": "PASS"
+          },
+          {
+            "agent_canary_exit": 0,
+            "agent_escape_probe": "PASS",
+            "agent_exit_code": 0,
+            "host_canary_controller": "PASS",
+            "network_positive_control": "PASS",
+            "network_sandbox_connections": 0,
+            "original_source_controller": "PASS",
+            "readonly_mount_runtime_probe": "PASSED",
+            "run_outcome": "verified",
+            "status": "PASS",
+            "trial": "trial-010",
+            "verifier_executed": true,
+            "verifier_exit_code": 0,
+            "verifier_fixture_controller": "PASS"
+          }
+        ],
+        "fresh_validation_canaries": 3,
+        "status": "PASS"
+      },
+      "status": "validated",
+      "stderr_sha256": "176b893a4af99a124bbfd4e238f39da37077feaee82a2c610e52c6d20b598650",
+      "strategy": "F",
+      "successful_task_reduction_percent": 76.19047619047619,
+      "task_process_seconds": 0.24,
+      "timeouts": 0,
+      "trial_failures": 7,
+      "utility_pass": true,
+      "verifier_executions_including_shared_setup": 5,
+      "verifier_exit_code": null,
+      "verifier_process_seconds": 0.515,
+      "verifier_timed_out": null,
+      "wall_seconds_attributed": 1.430336206991342
+    }
+  },
+  "parent_commit": "6bc5528789498c360577770cbb4bb779134ffce1",
+  "patch_sha256": "6a250ef27dd8570f9f9fb767cfa97e911ac41349305a27d8018dfaf19648d343",
+  "pytest_cache": "private-tmp",
+  "repository": "iniconfig",
+  "source_tree_stats": {
+    "bytes": 22405,
+    "directories": 5,
+    "regular_files": 18
+  },
+  "split": "held-out",
+  "static_policy": [
+    {
+      "kind": "directory_tree",
+      "path": "src"
+    },
+    {
+      "kind": "directory_tree",
+      "path": "testing"
+    },
+    {
+      "kind": "file_contents",
+      "path": "MANIFEST.in"
+    },
+    {
+      "kind": "file_contents",
+      "path": "README.rst"
+    },
+    {
+      "kind": "file_contents",
+      "path": "pyproject.toml"
+    },
+    {
+      "kind": "file_contents",
+      "path": "setup.cfg"
+    },
+    {
+      "kind": "file_contents",
+      "path": "setup.py"
+    },
+    {
+      "kind": "file_contents",
+      "path": "tox.ini"
+    }
+  ],
+  "target_commit": "f1d822822a10caa2999d3a9ec7ff13f849cae90d",
+  "task_id": "RR11-iniconfig-inline-types-delete-stub",
+  "task_operations": [],
+  "verifier_tests": [
+    "testing/test_iniconfig.py"
+  ],
+  "verifier_tree_sha256": "e3acfe8c63655e9db4d1feabfbaef885394cc55d774d34ff24856062b89d8c1c"
+}

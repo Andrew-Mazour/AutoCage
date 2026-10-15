@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "suite_id": "autocage-m36-preexecution-value-v3",
+  "state": "frozen-before-final-evaluation",
+  "source_task_manifest": "../real-repository-v1/tasks.json",
+  "source_revisions": ["parent", "target"],
+  "workflows": [
+    {
+      "id": "W01-click-int-range-tests",
+      "task_id": "RR01-click-short-help",
+      "split": "development",
+      "kind": "python-test",
+      "test_path": "tests/test_types/test_IntRange.py",
+      "pytest_extra_args": []
+    },
+    {
+      "id": "W02-packaging-utility-tests",
+      "task_id": "RR03-packaging-pylock-separators",
+      "split": "development",
+      "kind": "python-test",
+      "test_path": "tests/test_utils.py",
+      "pytest_extra_args": []
+    },
+    {
+      "id": "W03-dotenv-parser-tests",
+      "task_id": "RR05-dotenv-expand-home",
+      "split": "held-out",
+      "kind": "python-test",
+      "test_path": "tests/test_parser.py",
+      "pytest_extra_args": []
+    },
+    {
+      "id": "W04-attrs-filter-tests",
+      "task_id": "RR07-attrs-ne-validator",
+      "split": "held-out",
+      "kind": "python-test",
+      "test_path": "tests/test_filters.py",
+      "pytest_extra_args": []
+    },
+    {
+      "id": "W05-filelock-compileall",
+      "task_id": "RR08-filelock-hostile-pid",
+      "split": "held-out",
+      "kind": "python-compileall",
+      "target": "src"
+    },
+    {
+      "id": "W06-iniconfig-tests",
+      "task_id": "RR09-iniconfig-strip-bom",
+      "split": "held-out",
+      "kind": "python-test",
+      "test_path": "testing/test_iniconfig.py",
+      "pytest_extra_args": ["-k", "not bom"]
+    },
+    {
+      "id": "W07-pluggy-hookcaller-tests",
+      "task_id": "RR10-pluggy-falsy-plugin",
+      "split": "held-out",
+      "kind": "python-test",
+      "test_path": "testing/test_hookcaller.py",
+      "pytest_extra_args": []
+    },
+    {
+      "id": "W08-attrs-compileall",
+      "task_id": "RR07-attrs-ne-validator",
+      "split": "held-out",
+      "kind": "python-compileall",
+      "target": "src"
+    },
+    {
+      "id": "W09-packaging-wheel-pilot",
+      "task_id": "RR03-packaging-pylock-separators",
+      "split": "development",
+      "kind": "python-wheel",
+      "project": "."
+    },
+    {
+      "id": "W10-click-wheel",
+      "task_id": "RR01-click-short-help",
+      "split": "held-out",
+      "kind": "python-wheel",
+      "project": "."
+    },
+    {
+      "id": "W11-attrs-validator-tests",
+      "task_id": "RR07-attrs-ne-validator",
+      "split": "held-out",
+      "kind": "python-test",
+      "test_path": "tests/test_validators.py",
+      "pytest_extra_args": []
+    }
+  ],
+  "revision_pairing_note": "Each workflow uses complete pinned parent and target Git archives from the corresponding M3 task, including each revision's own tests. Parent/target pairs are repeated observations of the same workflow, not independent repositories. W01, W02, and W09 are development-only; W03-W08, W10, and W11 are the eight held-out workflows. W09 was classified as development before final protocol freeze because its target-revision wheel path was exercised during initial implementation validation. Protocol v2 replaces W05's direct pytest invocation with source compileall after v1 stopped before completing W05: the pinned filelock archive lacked the build-generated src/filelock/version.py required for direct test collection. The compileall workflow uses the existing private bytecode-cache configuration and makes no source modifications."
+}

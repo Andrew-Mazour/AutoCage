@@ -1,0 +1,172 @@
+# AutoCage architecture
+
+**Status (2026-10-15):** M0–M3.6 implementation and evaluation are complete for their declared scope. M3's original result remains inconclusive because RR03 did not produce a validated narrow policy under its frozen verifier. M3.6 found that the experimental pre-execution profiles preserve utility and block selected writes, but match a competent static policy exactly; human-effort advantage was not measured. Recommendation B is to retain profiles as experimental infrastructure and pivot the primary contribution to an agent-containment evaluation prototype. No real-agent performance evidence or cross-snapshot policy loader exists. See the [M3.5 report](../experiments/m35-product-value/REPORT.md) and [M3.6 report/protocol/results](../experiments/m36-preexecution-value/REPORT.md).
+
+## Product boundary
+
+AutoCage is a systems-security research tool around an existing Linux boundary, not a new container runtime. It uses Bubblewrap to enforce a developer-authorized ceiling, runs commands and verifiers in disposable copies, and records utility/security evidence. It also has an experimental deterministic ruleset that suggests policies for a few declared Python workflows. M3.6 did not show that the suggestion rules outperform a competent static policy. The next primary question is whether the existing boundary measurably contains untrusted agent/tool behavior while retaining legitimate task utility.
+
+The original policy-learning question remains deliberately narrow, and its practical advantage is not established:
+
+> Given a developer-authorized staged-workspace write ceiling, can AutoCage find a materially smaller directory/file write policy that repeatedly preserves a fixed task verifier, with lower exposure than a static workspace-write sandbox and acceptable rerun cost?
+
+The result is sufficient only for a specified command, task, repository snapshot, runtime, and verifier. M3.6 demonstrated a useful restriction for its selected workflows, but the same policy is easy to write statically; it does not establish lower user effort or value for arbitrary coding-agent tasks. It is not a proof of all possible task behavior, a security proof, or a global permission minimum.
+
+## Product phases
+
+1. **First working milestone (M1, complete):** a non-interactive command runs in a private copied project with a read-only `/usr` runtime, recursive write access to the stage only, private temporary storage, a private network namespace, and a cleared environment. A verifier can receive selected read-only snapshots. Scripted canaries exercise the boundary. No policy search or hosted inference.
+2. **Research MVP (M2, complete):** versioned write policies, exact-file and recursive-directory Bubblewrap mounts, immutable replay contracts, three-pass candidate validation, and 22 deterministic scripted tasks. The experiment met the predeclared reduction, utility, canary, and replay thresholds. It did not show that hierarchical search outperforms simple greedy/random removal; see the report before extending the algorithm.
+3. **M3, complete:** versioned execution contracts and evidence seals, source/runtime/executable/verifier-root identity checks, fail-closed record recovery, redaction, and real-repository benchmarking. The held-out numeric reduction/replay gates passed, but RR03 prevented satisfying the strict all-task utility gate. The experiment did not establish practical cross-task policy reuse or hierarchical superiority. See the M3 report before deciding whether to integrate a real agent.
+4. **M3.5, complete:** 11 scripted real-source patch-and-verify tasks across seven repository groups, exact-source repeats, eight contract-drift attempts, independent test-root write canaries, RR03 diagnosis, and a 4–64 permission-atom scaling matrix. F validated nine narrow policies, retained the known-good broad result on two, and blocked 8/11 test-root canaries versus static B's 0/11. Its policy-value and 10-repeat amortization thresholds did not pass. The study did not directly test recurring test/build commands across normal source revisions. See the [M3.5 report](../experiments/m35-product-value/REPORT.md).
+5. **M3.6, complete:** v3 tested eight real recurring workflows at parent/target revisions across six Python repositories. Static B, authored C, and suggested D passed 16/16 and blocked the same 96/96 canary operations; all compiled grants were identical. Profile generation had a 4.5 ms median and required no full-task replay. The user-effort criterion was not tested. Recommendation B: profile suggestions remain experimental; they do not distinguish AutoCage from a competent static policy. See the [M3.6 report](../experiments/m36-preexecution-value/REPORT.md).
+6. **M4 — agent-containment evaluation prototype (recommended next; not started):** evaluate whether the existing OS boundary contains malicious repository/tool instructions or agent attempts to modify out-of-scope files while preserving a benign task. Start with deterministic executable fixtures and independent canaries; use a no-cost local model only if practical. Do not infer broad agent utility from scripted runs.
+
+No inference provider is required for the core, benchmarks, or CI.
+
+## Competitive position and reuse
+
+AutoCage should not be selected merely to get a sandbox:
+
+- NVIDIA OpenShell already combines filesystem enforcement, per-binary network rules, credential mediation, agent network proposals requiring review by default, and an SMT policy-boundary check. The prover checks modeled policy containment; it does not establish that a task needs those permissions or that they are minimal. Reuse its design/evaluation lessons; do not rebuild its gateway or credential system.
+- nono is a Rust agent launcher with Linux Landlock and macOS Seatbelt paths, profiles, and network/credential brokering. It is a better starting point for developers who need a ready-made remote-inference broker. AutoCage's proposed difference is fixed-verifier-driven optimization, not broader sandbox coverage.
+- Sandlock is direct prior art for unprivileged Linux agent containment and dynamic access control. It makes “we built a Linux agent sandbox” an especially weak originality claim. Compare it as an enforcement baseline; do not copy its runtime into the MVP.
+- AppArmor aa-genprof profiles observed activity in complain mode and asks an operator to review it. Observation is useful evidence, but allowed observations are not a proof of necessity.
+- AuthBench is the closest overlap: it evaluates task-level file read/write/execute permission generation and constrained task replay on 120 tasks. AutoCage cannot claim to be first to connect policies with task outcomes. The narrower proposed contribution is bounded search over a pre-authorized write ceiling, cost-aware path grouping, repeated fixed-verifier trials, and reusable evidence tied to an exact run contract. That contribution is a hypothesis until benchmarked.
+
+M3.6 did not establish that the automatic suggestion is meaningfully better than a static policy. For general agent sandboxing or remote credential/network mediation, developers should compare existing tools such as nono or OpenShell. AutoCage's next differentiating claim must come from measured agent-containment behavior and reproducible evaluation, not a new interface around Bubblewrap.
+
+Primary sources: [OpenShell policy overview](https://docs.nvidia.com/openshell/latest/how-it-works/policies/overview), [OpenShell policy prover](https://docs.nvidia.com/openshell/latest/how-it-works/policies/prover), [nono](https://github.com/nolabs-ai/nono), [Sandlock paper](https://arxiv.org/abs/2605.26298), [AppArmor aa-genprof](https://man.he.net/man8/aa-genprof), [AuthBench paper](https://arxiv.org/abs/2605.14859) and [benchmark repository](https://github.com/evolvent-ai/Authbench).
+
+## Trust boundaries
+
+Trusted: the developer and explicit CLI ceiling; AutoCage supervisor and policy validator; installed Bubblewrap binary, host kernel, and read-only runtime files; verifier identity and fixed command for utility measurement only.
+
+Untrusted: agent process, model output, repository content/instructions, dependencies, build scripts, and repository tests. The agent receives every file copied into its staged workspace. Common credential/config locations and Git metadata are omitted, but AutoCage cannot detect secrets embedded in arbitrary project files. Remote model providers receive whatever repository/task content the agent sends; the first release avoids this path with local inference.
+
+## Policy vocabulary (M2 implementation)
+
+M2's versioned `ExecutionPolicy` represents an authorized ceiling and narrower candidates:
+
+- **Ceiling:** maximum staged-workspace write authority explicitly set by CLI flags or the broad workspace default. Private `/tmp` remains available separately. Network is denied; nested user namespaces remain disabled. The optimizer cannot add a write path outside this ceiling.
+- **Candidate policy:** a normalized subset of the ceiling. `FileContents(path)` permits operations on the named existing regular-file inode, including content and owner-permitted inode metadata changes. It does not permit changing that directory entry. `DirectoryTree(path)` grants recursive writes, including create/delete/rename/atomic replacement below that directory.
+
+Paths are normalized relative paths. The policy validator rejects absolute paths, parent traversal, duplicate or subsumed serialized entries, paths outside the stage, symlink components, and grants whose target type does not match the rule. Candidates are checked against the authorized ceiling before compilation. Bubblewrap mounts the staged workspace readonly, layers each authorized writable bind over it, then mounts verifier snapshots readonly. Compilation errors fail closed; no fallback changes a grant's meaning.
+
+Bubblewrap does not provide a semantic executable allowlist: a permitted interpreter can access or execute any file visible in the sandbox. This version cannot synthesize executable, network, or credential permissions. M2 does not include a separate repository analyzer; the optimizer uses staged file/directory manifests only. Future metadata analysis may prioritize candidate boundaries, but cannot add authority. No task-text LLM is used.
+
+## Linux execution boundary
+
+**M0 compatibility gate:** stock Bubblewrap 0.9.0 initially failed on Ubuntu 24.04.5 because the enabled `kernel.apparmor_restrict_unprivileged_userns=1` restriction routed it into the distro `unprivileged_userns` profile, which denied writes to `/proc/<pid>/uid_map`; the kernel audit log confirmed that denial. Installing Ubuntu's `apparmor-profiles` and `apparmor-utils` packages, then loading the packaged `/usr/share/apparmor/extra-profiles/bwrap-userns-restrict` profile, allowed the required unprivileged namespaces without changing the global setting or making Bubblewrap setuid. M0 verified the `bwrap` and stacked `unpriv_bwrap` profiles in enforce mode; the sandbox child reported `NoNewPrivs=1` and zero effective, permitted, bounding, inheritable, and ambient capabilities. The profile is specific to `/usr/bin/bwrap`, but its child rules are broad for file, mount, network, and userns operations; Bubblewrap's private namespaces, mount plan, `--disable-userns`, and `--assert-userns-disabled` remain mandatory parts of the boundary. This evidence is specific to the tested guest and is not a general AppArmor/Bubblewrap security proof.
+
+The supervisor stages the project in a private per-run directory. It omits .git, root-level agent/cloud credential directories, .env files other than example/sample templates, package-manager auth files, and recognized private-key filenames; it reports every omission. It does not scan arbitrary source contents for secrets, and v1 has no silent bypass for omitted paths. It copies file contents to break source hard links, rejects special files, and preserves only symlinks whose resolved target remains within the staged tree. Stage creation uses no-follow traversal so repository symlinks cannot make the supervisor copy host files.
+
+Bubblewrap starts from its empty mount namespace and receives only explicit mounts:
+
+- Read-only system runtime roots required by selected commands.
+- **M1/M2 baseline:** the copied stage is mounted recursively writable as `/workspace`; the original checkout is never mounted. For a candidate policy, the stage is mounted readonly first, followed by explicit writable exact-file or directory binds. Readonly verifier snapshots are mounted last so they override broader write mounts.
+- Fresh tmpfs mounts for /tmp and an empty HOME.
+- A new /proc for the PID namespace and a fresh minimal /dev; no host /run, /var/run, /sys, home, agent config, or host socket mount.
+- A cleared environment plus the fixed M1 values PATH, HOME, TMPDIR, PWD, LANG, and `PYTHONDONTWRITEBYTECODE`; no caller-provided variables or TERM are passed through.
+- Required user, mount, PID, IPC, UTS, and network namespaces. Every required namespace flag must fail the run if unavailable; no try-fallback and no network-sharing fallback. Use `--disable-userns --assert-userns-disabled`; M0 confirmed a nested user namespace succeeds without the flag and fails with it. Verify the UID/GID map is limited to the unprivileged caller and record capability sets.
+- Ubuntu 24.04's `kernel.apparmor_restrict_unprivileged_userns=1` requires an AppArmor policy explicitly authorizing the namespace-creating Bubblewrap executable. On the tested image, use only the official `apparmor-profiles` package's `bwrap-userns-restrict` profile and fail closed if it is absent, cannot be loaded in enforce mode, or the global setting is not `1`. Never set Bubblewrap setuid or disable the global restriction. The package profile authorizes namespace setup for `/usr/bin/bwrap` and stacks its command/descendants into `unpriv_bwrap`, which denies capabilities; M0 observed zero child capability sets and `NoNewPrivs=1`. The profile itself is not a substitute for Bubblewrap's mount and network namespace policy.
+- Parent-death/session controls and a supervisor timeout. Only standard input/output/error are inherited; other descriptors are closed before launch.
+
+Bubblewrap preserves arbitrary descriptors deliberately passed to it. M0 demonstrated that a passed synthetic host-canary FD is readable by the sandbox child. A `close_fds` launch blocked that canary. The production supervisor must close every unapproved descriptor before starting Bubblewrap and pass only explicitly reviewed descriptors.
+
+The mount, PID, and network namespaces and sanitized environment are inherited by descendants. Set PWD to the in-sandbox working directory after clearing the environment. M0 observed sandbox children using `bwrap//&unpriv_bwrap (enforce)`, with all five capability sets zero and `NoNewPrivs=1`; these are bounded observations on this guest, not proof that the profile or kernel is free of defects. The host kernel and Bubblewrap remain trusted components.
+
+Bubblewrap provides path-prefix mount controls, not a per-process policy engine. M0 and M2 measured the following semantics: an exact regular-file bind over a read-only workspace permits in-place inode writes (the M2 integration test also changed the mode to `0600`) but the read-only parent prevents unlink, rename, atomic replacement, and sibling creation. A writable directory bind permits create, modify, delete, rename, and atomic replacement recursively. A nested read-only file bind over a writable directory takes precedence and denies writes to that file while neighboring writes succeed. Therefore the policy model distinguishes **file-inode writes** from **directory-entry operations**; an exact-file grant is not equivalent to normal editor write access. Tasks needing atomic-save/create/delete/rename semantics require parent-directory authority. Candidate policies that cannot be compiled without changing their meaning fail closed. These are tested mount observations, not a proof against other path races or kernel escape. There is no executable allowlist, hostname-aware egress, credential broker, or resource containment in the initial policy.
+
+Landlock is deferred. It is plausible defense in depth, but adds ABI probing and a second policy compiler. Bubblewrap mounts are the first enforcement mechanism and must pass the Linux canary before another layer is added. seccomp is also deferred; it does not implement pathname or hostname policy. Bubblewrap startup or policy compilation failure is fatal.
+
+## Runtime and staging
+
+The source checkout is never bind-mounted. AutoCage makes a fresh copy so writes cannot alter the original checkout, Git object store, or host hard-link inodes. Copying file bytes does not remove content already present through a hard link in the checkout; such content is treated like any other staged repository content. It records a manifest and computes a diff against the initial copy. The first version emits a patch/result directory for review; it does not silently copy changes back.
+
+Runtime roots are explicit and read-only. M0's minimal pytest fixture passed with `/usr` mounted read-only, runtime aliases, minimal `/dev`, fresh `/proc`, and private `/tmp`, both with and without `/etc`. M1 uses `/usr` and those aliases/devices/proc/tmp mounts but omits `/etc`; its Python command and pytest verifier passed. This is one measured Ubuntu layout, not a claim that arbitrary project runtimes work. A project-specific virtual environment can run only if its dependencies are staged and its interpreter paths work within this mount layout; package installation and network downloads are unsupported.
+
+Git metadata is not shared. If an agent requires Git commands, a later integration may create a synthetic repository inside the stage with a baseline commit; it must never point to the host .git directory.
+
+## Run lifecycle
+
+1. **check** verifies the exact supported OS/kernel/AppArmor preconditions, root ownership and non-writable/non-setuid modes for Bubblewrap and `diff`, and launches a disposable child probe using every required namespace. It refuses root, requires enforced `bwrap//&unpriv_bwrap`, zero child capability sets, `NoNewPrivs`, the expected caller-only UID/GID maps, nested-userns denial and no default route. There is no unsandboxed fallback.
+2. **run** validates source/run paths, allocates a 0700 private run directory outside the source, copies the project without following symlinks, omits selected credential/config patterns and `.git`, breaks hard links by copying file bytes, and records before/after manifests.
+3. The M1 policy is fixed: recursive writes to the private stage, private tmpfs, read-only `/usr`, and no network. Bubblewrap gets user, mount, PID, IPC, UTS and network namespaces, `--disable-userns --assert-userns-disabled`, an empty environment with a small internal allowlist, and only the requested executable argv. Non-stdio descriptors are close-on-exec before Bubblewrap.
+4. The command and descendants run to completion or the wall-clock deadline. Timeout kills the outer process group; `--die-with-parent` and the PID namespace also tear down descendants that start a new session. M1 tested this canary. This is not an aggregate resource limit.
+5. After a successful command, an optional verifier runs with the same baseline policy. Each `--verify-readonly` path is taken from the immutable baseline copy and mounted read-only after the writable stage. Verifier code can still modify other stage paths; verifier success is utility evidence, never a security signal.
+6. AutoCage creates a manifest-based review patch and mode-0600 JSON record. It does not apply changes to the original checkout or capture command output in the record.
+7. **tune:** requires an opt-in replay contract and an initially verified run; validates source, agent/verifier executable, and runtime identities; then searches only within the recorded ceiling using fresh stages. A narrow candidate needs three fresh verifier and security-canary passes. The replay cap includes those validation runs. If search is incomplete, preserve the known successful broad ceiling and report inconclusive. A denied operation alone never expands policy.
+
+## M2 narrowing algorithm
+
+Search occurs after a successful run, not live during execution. Dynamic grants create authority-expansion and TOCTOU hazards and are unnecessary for the first experiment.
+
+**Inputs:** immutable staged source snapshot and agent argv; verifier program/argv and readonly roots; authorized ceiling; initial before/after manifest; fixed search strategy and replay budget.
+
+The optimizer does not rely on syscall tracing in this version. It uses the before/after staged-file manifest to seed write candidates. A denied attempt may appear in command output but is not needed to construct a grant; later tracing can improve diagnostics, never authorization.
+
+**Candidate construction:**
+
+1. Compare immutable initial and broad-run final manifests to identify modified, created, and deleted paths. Existing changed regular files become exact-file grants; entry changes map to the nearest existing parent directory. Transient writes that leave no final delta cannot be observed here.
+2. When the changed-path seed fails, use manifest directory decomposition as a *candidate* inside the already-authorized ceiling. A failed/denied attempt alone never contributes authority.
+3. Normalize candidates and reject anything outside the ceiling or whose path is absent, symlinked, or the wrong filesystem type.
+
+**Optimization:**
+
+- Minimize `weighted-write-surface-v1`: ordinary existing writable files weigh 1; `.github/workflows/`, `deploy/`, `deployment/`, `infra/`, `scripts/`, and root package lifecycle manifests weigh 10; each existing directory entry writable under recursive grants, including stage root for `DirectoryTree(".")`, weighs 10. Report raw writable file/directory/rule counts separately. Weights are heuristics, not exploitation probabilities. M3.5 also reports recursive-grant count and scope because this score only counts existing entries: a recursive grant permits creating future children not represented in its initial-tree count.
+- Hierarchical mode splits the current recursive grant with the highest estimated exposure reduction, then performs deterministic sibling-group removal and bisection; fixed greedy and seeded random modes attempt atom removals. When a changed-path seed fails, all strategies use the same first-level manifest decomposition before searching. M2's measured result did not show an efficiency advantage for hierarchical search: its median replay count was one higher than both baselines, with the same median final cost.
+- Re-run each candidate from the same source snapshot and fixed external verifier. A narrow candidate is promoted only after three successful fresh validations with independent canaries. The replay budget includes those three passes. If search or validation evidence is insufficient, return the known successful broad ceiling and mark the optimization inconclusive.
+- A verifier pass establishes only that this command passed in these tested runs. It does not show general correctness, all task-required behavior, or globally minimal/safe permissions. “Minimal” is relative to the policy vocabulary, cost, search budget, and verifier.
+
+The verifier establishes only that the measured task outcome passed in tested runs. It cannot establish all legitimate behavior, hidden tests, or that removed permissions are unnecessary for other tasks. “Minimal” means minimal relative to candidate vocabulary, cost, trials, and verifier.
+
+This is black-box constrained search, not a globally optimal algorithm. Final manifests miss temporary files, path-dependent behavior, and unsuccessful operations. In M2, hierarchical search kept utility on the transient-write fixtures but did not find a narrower policy as cheaply as greedy or random removal. Root-level create/atomic-replace tasks remained at the broad root grant because Bubblewrap cannot separately grant only the root file's directory-entry operations.
+
+The research MVP promotes only deterministic/replayable candidates after three fresh passes. A stochastic candidate remains exploratory until at least 20 paired trials and a predeclared 95% paired confidence interval establishes no more than a five-percentage-point pass-rate regression. The 12-replay default budget applies to deterministic search; stochastic promotion needs an explicitly larger budget and may return inconclusive.
+
+For research fixtures, the verifier and canaries live outside the agent-writable stage. For developer runs, every replayable `--record-contract` requires at least one declared `--verify-readonly` root. Each declared root is copied into the immutable baseline, fingerprinted, and mounted separately for verification. Existing workspace paths named in verifier argv are normalized against the sandbox `/workspace`; files, directories, and resolved in-stage targets must be covered by a declared root. The contract hashes the verifier executable and argv, but does not persist raw argument values. It also binds the source snapshot, workspace path, runtime/package/backend/environment fingerprints, timeout, policy ceiling, and root manifests. The caller must include verifier inputs that are loaded implicitly (imports, pytest plugins/configuration, and similar files); AutoCage cannot prove the declaration complete. Contract runs with no readonly roots are rejected, and no policy is promoted from them.
+
+First-run benefit is safe staging and fixed no-egress isolation. The M3.6 prototype can run supported pytest/compileall commands with no workspace write grant when output is redirected to private /tmp, or allow only dist/ for the declared wheel command. Across 16 workflow/revision cases these policies matched the static baseline exactly; profile generation had a 4.5 ms median, but human authoring/review time was not measured. Post-run tuning still happens after a broad task run and adds full task replays. Reuse of learned evidence is allowed only for an exact run contract: changed source, argv, verifier root, executable, or runtime invalidates it. M3.5 repeats re-supplied grants and were not full-contract reuse. Dividing the measured one-time tuning cost over about 16 hypothetical runs is overhead allocation, not a latency break-even: no later-run speedup or recovered time was measured. M3.6 rejected all eight paired-source stale proposals and six controlled drift proposals; no production cross-snapshot profile loader exists.
+
+## Rust module boundaries
+
+M1 enforces one narrow target: Ubuntu 24.04 ARM64, Linux 6.8+, unprivileged user namespaces, enabled AppArmor global restriction, the enforced official Bubblewrap profile, Bubblewrap >=0.9, and the required namespaces. The check probes these operations rather than trusting package presence. This is not yet a portable multi-distro backend.
+
+The first implementation is one Rust binary, not a multi-crate workspace.
+
+- **cli.rs:** parses `check`, `run`, `tune`, and `inspect` while preserving argv boundaries.
+- **preflight.rs:** detect Linux/Bubblewrap and run fail-closed namespace probes.
+- **workspace.rs:** safe stage copy, omission report, manifest, diff, patch.
+- **policy.rs:** versioned write grants, normalization, relative-path/symlink/type checks, global network/nested-userns invariants, and candidate-subset-of-ceiling validation.
+- **backend/bubblewrap.rs:** deterministic argument-vector compilation and launch; never assemble a shell command.
+- **runner.rs:** lifecycle, process groups, timeouts, verifier sequencing, cleanup.
+- **verifier logic (in runner.rs):** verifier argv/timeout, protected baseline roots, replay classification, and independent canary status. Contract identity is kept in `contract.rs`; no separate verifier framework is justified yet.
+- **optimizer.rs:** manifest-delta seed generation, transparent cost model, bounded hierarchical/greedy/seeded-random search, replay accounting, and three-pass promotion.
+- **profile.rs:** experimental pre-execution proposals for explicitly declared pytest, compileall, and offline wheel commands. It emits rationale/evidence and unresolved behaviors, never grants authority, and validates separately against an explicit developer ceiling. Exact source/command identity is required. M3.6 found its compiled grants identical to competent static configurations; keep it experimental.
+- **contract.rs / digest.rs:** opt-in immutable replay contract with executable and argv digests (never raw argument values), staged-source identity, declared verifier-root manifests, timeout, ceiling, runtime/package/backend/environment facts, and contract digest.
+- **record.rs:** versioned JSON records, hashes, diagnostics, redaction.
+- **main.rs:** initialization, top-level errors, exit status.
+
+The current implementation uses serde and JSON for run records and optimizer evidence; hand-authored TOML policy/config is not implemented. The verifier interface is a program plus argv, a timeout shared with the command, and optional read-only workspace roots. Tune reuses only the immutable contract and run snapshot; a candidate's verifier result is always rerun. No SQLite, Tree-sitter, eBPF, seccomp profile, or plugin system is in the MVP. Operational errors distinguish CLI, preflight, stage, policy, spawn, and record failures; command timeout and agent/verifier exit outcomes are recorded separately. Enforcement errors are fatal and never fall back to host execution.
+
+## CLI and records
+
+    autocage check
+    autocage run --workspace . --verify-command /usr/bin/pytest --verify-arg -q --verify-readonly tests -- /usr/bin/python3 -m pytest -q
+
+The CLI has `check`, `run`, `tune`, `recover`, and `inspect`. `run` accepts repeatable `--ceiling-file` and `--ceiling-dir` grants or `--read-only`, verifier argv and repeatable read-only roots, then `-- PROGRAM [ARG ...]`. `--record-contract` is required for tuning and requires at least one `--verify-readonly` root. It persists hashes/identities and argument counts, not raw argv. `tune RUN_DIR --max-replays 12 --strategy hierarchical|greedy|random` requires the exact commands again, validates the source, verifier-root, executable, ceiling, and runtime identities, then runs bounded fresh-stage trials. `recover RUN_DIR` marks incomplete work non-reusable and removes only known regular temporary evidence files. `inspect RUN_DIR` validates seals before printing records. No command is passed through a shell. Remote model commands still cannot communicate because networking is disabled.
+
+The optional read-only verifier snapshot prevents the agent from changing that verifier source. It is not a guarantee about arbitrary code loaded indirectly by the verifier; evaluator harnesses remain outside the stage.
+
+Version 2 JSON run records and contracts live in a private run directory. They store policy, run ID/time, before/after stage-manifest hashes, kernel/Bubblewrap/AppArmor facts, hashed agent/verifier argv, exit statuses, changed paths, omissions, and timings; they do not store raw argv values, environment values, transcripts, or raw command output. Atomic private writes, a single-writer lock, lifecycle markers, and evidence seals detect incomplete/corrupt records and invalidate tuning evidence. Run/replay directories hold fresh baseline and stage copies plus review patches; nothing is copied back automatically. The final real-repository benchmark package retains raw per-task JSON and hashes but omits repeated staged-file trees.
+
+## Deferred capabilities
+
+- Remote Codex/Claude/OpenCode inference in the sandbox.
+- Network proxying, domain allowlists, DNS/TLS inspection, credential injection, agent-versus-tool network separation.
+- Automatic escalation, including from denials or agent proposals.
+- Per-process executable policy, syscall policy, eBPF/ptrace/audit collection, full file-read minimization.
+- Landlock backend, OverlayFS, Git-worktree isolation, cross-platform enforcement, Windows.
+- Package installation, internet-dependent builds, arbitrary service fixtures, hard resource limits/cgroups.
+- Automatic apply-back to the original checkout.
+- Claims of resistance to all kernel exploits or that a task verifier proves security.

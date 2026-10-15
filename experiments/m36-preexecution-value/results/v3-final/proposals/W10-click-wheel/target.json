@@ -1,0 +1,49 @@
+{
+  "command": {
+    "argument_count": 10,
+    "argv_sha256": "47331bef0f7324e2d99bdc993f0dbeb841fabf97374b1796e4ff5b36ffa259db",
+    "executable_name": "env",
+    "executable_sha256": "d38fa7db8452a564868961fd5e9a0aa787095676b0fd6e497b766ac40ec65c8b"
+  },
+  "policy": {
+    "disable_nested_userns": true,
+    "network_access": false,
+    "schema_version": 1,
+    "write_grants": [
+      {
+        "kind": "directory_tree",
+        "path": "dist"
+      }
+    ]
+  },
+  "private_temporary_storage": [
+    "/tmp (private tmpfs per child)"
+  ],
+  "read_only_areas": [
+    "pyproject.toml",
+    "pyproject.toml or setup.py",
+    "src",
+    "tests"
+  ],
+  "recognized_behavior": [
+    "wheel artifacts are confined to the existing workspace directory dist"
+  ],
+  "rules": [
+    {
+      "decision": "allow recursive writes only in the explicitly declared output directory",
+      "evidence": [
+        "python-workflows-v1",
+        "explicit --wheel-dir output path: dist"
+      ],
+      "rationale": "the command names an existing workspace directory as --wheel-dir; the grant is limited to that directory and its descendants"
+    }
+  ],
+  "ruleset": "python-workflows-v1",
+  "schema_version": 1,
+  "source_manifest_sha256": "b6cff08007deeee53ca5ffee6c5176a4461e0f08681791e4d2114ec26adb9bd0",
+  "unresolved_requirements": [
+    "the selected PEP 517 or legacy build backend is not analyzed and may be denied if it writes inside the readonly workspace",
+    "dependencies and build isolation are disabled; all undeclared backend inputs must already exist in the guest runtime"
+  ],
+  "workflow": "python-wheel"
+}

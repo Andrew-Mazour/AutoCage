@@ -1,0 +1,1011 @@
+{
+  "contract_drift": {
+    "case_count": 8,
+    "cases": [
+      {
+        "change": "unrelated-source-comment",
+        "error_tail": "autocage tune: source workspace changed since the initial run\n",
+        "optimizer_record_created": false,
+        "rejected": true,
+        "rejected_before_replay": true,
+        "replay_count": 0,
+        "return_code": 2
+      },
+      {
+        "change": "added-source-file",
+        "error_tail": "autocage tune: source workspace changed since the initial run\n",
+        "optimizer_record_created": false,
+        "rejected": true,
+        "rejected_before_replay": true,
+        "replay_count": 0,
+        "return_code": 2
+      },
+      {
+        "change": "modified-verifier-test",
+        "error_tail": "autocage tune: source workspace changed since the initial run\n",
+        "optimizer_record_created": false,
+        "rejected": true,
+        "rejected_before_replay": true,
+        "replay_count": 0,
+        "return_code": 2
+      },
+      {
+        "change": "build-configuration-change",
+        "error_tail": "autocage tune: source workspace changed since the initial run\n",
+        "optimizer_record_created": false,
+        "rejected": true,
+        "rejected_before_replay": true,
+        "replay_count": 0,
+        "return_code": 2
+      },
+      {
+        "change": "dependency-declaration-addition",
+        "error_tail": "autocage tune: source workspace changed since the initial run\n",
+        "optimizer_record_created": false,
+        "rejected": true,
+        "rejected_before_replay": true,
+        "replay_count": 0,
+        "return_code": 2
+      },
+      {
+        "change": "changed-agent-argv",
+        "error_tail": "autocage tune: agent executable or arguments differ from the replay contract\n",
+        "optimizer_record_created": false,
+        "rejected": true,
+        "rejected_before_replay": true,
+        "replay_count": 0,
+        "return_code": 2
+      },
+      {
+        "change": "changed-verifier-argv",
+        "error_tail": "autocage tune: verifier executable or arguments differ from the replay contract\n",
+        "optimizer_record_created": false,
+        "rejected": true,
+        "rejected_before_replay": true,
+        "replay_count": 0,
+        "return_code": 2
+      },
+      {
+        "change": "runtime-binary-fingerprint-change",
+        "error_tail": "autocage tune: runtime identity changed since initial run\n",
+        "optimizer_record_created": false,
+        "rejected": true,
+        "rejected_before_replay": true,
+        "replay_count": 0,
+        "return_code": 2
+      }
+    ],
+    "rejected_before_replay": 8
+  },
+  "corrected_reuse_shadows": {
+    "case_count": 7,
+    "cases": [
+      {
+        "change": "unrelated-source-comment",
+        "cli_return_code": 0,
+        "contract_recorded": false,
+        "host_canary_marker_initialized_correctly": true,
+        "host_canary_unchanged": true,
+        "promoted": false,
+        "security": {
+          "agent_canary_exit": 0,
+          "agent_escape_probe": "PASS",
+          "host_canary_controller": "PASS",
+          "network_positive_control": "PASS",
+          "network_sandbox_connections": 0,
+          "original_source_controller": "PASS",
+          "readonly_mount_runtime_probe": "PASSED",
+          "status": "PASS",
+          "verifier_executed": true,
+          "verifier_fixture_controller": "PASS"
+        },
+        "utility_pass": true
+      },
+      {
+        "change": "added-source-file",
+        "cli_return_code": 0,
+        "contract_recorded": false,
+        "host_canary_marker_initialized_correctly": true,
+        "host_canary_unchanged": true,
+        "promoted": false,
+        "security": {
+          "agent_canary_exit": 0,
+          "agent_escape_probe": "PASS",
+          "host_canary_controller": "PASS",
+          "network_positive_control": "PASS",
+          "network_sandbox_connections": 0,
+          "original_source_controller": "PASS",
+          "readonly_mount_runtime_probe": "PASSED",
+          "status": "PASS",
+          "verifier_executed": true,
+          "verifier_fixture_controller": "PASS"
+        },
+        "utility_pass": true
+      },
+      {
+        "change": "modified-test-comment",
+        "cli_return_code": 0,
+        "contract_recorded": false,
+        "host_canary_marker_initialized_correctly": true,
+        "host_canary_unchanged": true,
+        "promoted": false,
+        "security": {
+          "agent_canary_exit": 0,
+          "agent_escape_probe": "PASS",
+          "host_canary_controller": "PASS",
+          "network_positive_control": "PASS",
+          "network_sandbox_connections": 0,
+          "original_source_controller": "PASS",
+          "readonly_mount_runtime_probe": "PASSED",
+          "status": "PASS",
+          "verifier_executed": true,
+          "verifier_fixture_controller": "PASS"
+        },
+        "utility_pass": true
+      },
+      {
+        "change": "build-config-comment",
+        "cli_return_code": 0,
+        "contract_recorded": false,
+        "host_canary_marker_initialized_correctly": true,
+        "host_canary_unchanged": true,
+        "promoted": false,
+        "security": {
+          "agent_canary_exit": 0,
+          "agent_escape_probe": "PASS",
+          "host_canary_controller": "PASS",
+          "network_positive_control": "PASS",
+          "network_sandbox_connections": 0,
+          "original_source_controller": "PASS",
+          "readonly_mount_runtime_probe": "PASSED",
+          "status": "PASS",
+          "verifier_executed": true,
+          "verifier_fixture_controller": "PASS"
+        },
+        "utility_pass": true
+      },
+      {
+        "change": "dependency-declaration-addition",
+        "cli_return_code": 0,
+        "contract_recorded": false,
+        "host_canary_marker_initialized_correctly": true,
+        "host_canary_unchanged": true,
+        "promoted": false,
+        "security": {
+          "agent_canary_exit": 0,
+          "agent_escape_probe": "PASS",
+          "host_canary_controller": "PASS",
+          "network_positive_control": "PASS",
+          "network_sandbox_connections": 0,
+          "original_source_controller": "PASS",
+          "readonly_mount_runtime_probe": "PASSED",
+          "status": "PASS",
+          "verifier_executed": true,
+          "verifier_fixture_controller": "PASS"
+        },
+        "utility_pass": true
+      },
+      {
+        "change": "changed-agent-argv",
+        "cli_return_code": 0,
+        "contract_recorded": false,
+        "host_canary_marker_initialized_correctly": true,
+        "host_canary_unchanged": true,
+        "promoted": false,
+        "security": {
+          "agent_canary_exit": 0,
+          "agent_escape_probe": "PASS",
+          "host_canary_controller": "PASS",
+          "network_positive_control": "PASS",
+          "network_sandbox_connections": 0,
+          "original_source_controller": "PASS",
+          "readonly_mount_runtime_probe": "PASSED",
+          "status": "PASS",
+          "verifier_executed": true,
+          "verifier_fixture_controller": "PASS"
+        },
+        "utility_pass": true
+      },
+      {
+        "change": "changed-verifier-argv",
+        "cli_return_code": 0,
+        "contract_recorded": false,
+        "host_canary_marker_initialized_correctly": true,
+        "host_canary_unchanged": true,
+        "promoted": false,
+        "security": {
+          "agent_canary_exit": 0,
+          "agent_escape_probe": "PASS",
+          "host_canary_controller": "PASS",
+          "network_positive_control": "PASS",
+          "network_sandbox_connections": 0,
+          "original_source_controller": "PASS",
+          "readonly_mount_runtime_probe": "PASSED",
+          "status": "PASS",
+          "verifier_executed": true,
+          "verifier_fixture_controller": "PASS"
+        },
+        "utility_pass": true
+      }
+    ],
+    "limitation": "One scripted RR01 workflow; these research-only shadows do not authorize reuse.",
+    "security_passes": 7,
+    "utility_passes": 7
+  },
+  "experiment_total_wall_seconds": 350.4386479500099,
+  "f_policy_structure_per_task": [
+    {
+      "exact_file_grants": 1,
+      "existing_directory_entries_covered": 0,
+      "existing_files_covered": 1,
+      "future_child_creation_allowed": false,
+      "high_impact_files_covered": [],
+      "recursive_directory_grants": [],
+      "task_id": "RR01-click-short-help",
+      "unauthorized_canary_blocked": true,
+      "validated": true,
+      "weighted_surface_reduction_percent": 99.80430528375733
+    },
+    {
+      "exact_file_grants": 0,
+      "existing_directory_entries_covered": 27,
+      "existing_files_covered": 178,
+      "future_child_creation_allowed": true,
+      "high_impact_files_covered": [
+        ".github/workflows/lock.yaml",
+        ".github/workflows/nightly.yaml",
+        ".github/workflows/pre-commit.yaml",
+        ".github/workflows/publish.yaml",
+        ".github/workflows/tests.yaml",
+        ".github/workflows/zizmor.yaml",
+        "pyproject.toml"
+      ],
+      "recursive_directory_grants": [
+        "."
+      ],
+      "task_id": "RR02-click-parameter-spec",
+      "unauthorized_canary_blocked": false,
+      "validated": false,
+      "weighted_surface_reduction_percent": null
+    },
+    {
+      "exact_file_grants": 0,
+      "existing_directory_entries_covered": 16,
+      "existing_files_covered": 139,
+      "future_child_creation_allowed": true,
+      "high_impact_files_covered": [
+        ".github/workflows/codeql.yml",
+        ".github/workflows/docs.yml",
+        ".github/workflows/lint.yml",
+        ".github/workflows/perf.yml",
+        ".github/workflows/publish.yml",
+        ".github/workflows/test.yml",
+        "pyproject.toml"
+      ],
+      "recursive_directory_grants": [
+        "."
+      ],
+      "task_id": "RR03-packaging-pylock-separators",
+      "unauthorized_canary_blocked": false,
+      "validated": false,
+      "weighted_surface_reduction_percent": null
+    },
+    {
+      "exact_file_grants": 0,
+      "existing_directory_entries_covered": 2,
+      "existing_files_covered": 23,
+      "future_child_creation_allowed": true,
+      "high_impact_files_covered": [],
+      "recursive_directory_grants": [
+        "src/packaging"
+      ],
+      "task_id": "RR04-packaging-empty-versions",
+      "unauthorized_canary_blocked": true,
+      "validated": true,
+      "weighted_surface_reduction_percent": 88.12154696132598
+    },
+    {
+      "exact_file_grants": 1,
+      "existing_directory_entries_covered": 0,
+      "existing_files_covered": 1,
+      "future_child_creation_allowed": false,
+      "high_impact_files_covered": [],
+      "recursive_directory_grants": [],
+      "task_id": "RR05-dotenv-expand-home",
+      "unauthorized_canary_blocked": true,
+      "validated": true,
+      "weighted_surface_reduction_percent": 99.28571428571429
+    },
+    {
+      "exact_file_grants": 17,
+      "existing_directory_entries_covered": 2,
+      "existing_files_covered": 26,
+      "future_child_creation_allowed": true,
+      "high_impact_files_covered": [
+        "pyproject.toml"
+      ],
+      "recursive_directory_grants": [
+        "src"
+      ],
+      "task_id": "RR06-dotenv-write-error-paths",
+      "unauthorized_canary_blocked": true,
+      "validated": true,
+      "weighted_surface_reduction_percent": 65.83850931677019
+    },
+    {
+      "exact_file_grants": 3,
+      "existing_directory_entries_covered": 1,
+      "existing_files_covered": 9,
+      "future_child_creation_allowed": true,
+      "high_impact_files_covered": [],
+      "recursive_directory_grants": [
+        "changelog.d"
+      ],
+      "task_id": "RR07-attrs-ne-validator",
+      "unauthorized_canary_blocked": true,
+      "validated": true,
+      "weighted_surface_reduction_percent": 94.20731707317073
+    },
+    {
+      "exact_file_grants": 19,
+      "existing_directory_entries_covered": 3,
+      "existing_files_covered": 43,
+      "future_child_creation_allowed": true,
+      "high_impact_files_covered": [
+        "pyproject.toml"
+      ],
+      "recursive_directory_grants": [
+        "src"
+      ],
+      "task_id": "RR08-filelock-hostile-pid",
+      "unauthorized_canary_blocked": true,
+      "validated": true,
+      "weighted_surface_reduction_percent": 72.75747508305648
+    },
+    {
+      "exact_file_grants": 1,
+      "existing_directory_entries_covered": 0,
+      "existing_files_covered": 1,
+      "future_child_creation_allowed": false,
+      "high_impact_files_covered": [],
+      "recursive_directory_grants": [],
+      "task_id": "RR09-iniconfig-strip-bom",
+      "unauthorized_canary_blocked": true,
+      "validated": true,
+      "weighted_surface_reduction_percent": 98.93617021276596
+    },
+    {
+      "exact_file_grants": 24,
+      "existing_directory_entries_covered": 13,
+      "existing_files_covered": 94,
+      "future_child_creation_allowed": true,
+      "high_impact_files_covered": [
+        "pyproject.toml",
+        "scripts/release.py",
+        "scripts/towncrier-draft-to-file.py"
+      ],
+      "recursive_directory_grants": [
+        "changelog",
+        "docs/_static",
+        "docs/examples",
+        "downstream",
+        "scripts",
+        "src",
+        "testing"
+      ],
+      "task_id": "RR10-pluggy-falsy-plugin",
+      "unauthorized_canary_blocked": false,
+      "validated": true,
+      "weighted_surface_reduction_percent": 24.850299401197603
+    },
+    {
+      "exact_file_grants": 3,
+      "existing_directory_entries_covered": 1,
+      "existing_files_covered": 6,
+      "future_child_creation_allowed": true,
+      "high_impact_files_covered": [
+        "pyproject.toml"
+      ],
+      "recursive_directory_grants": [
+        "src/iniconfig"
+      ],
+      "task_id": "RR11-iniconfig-inline-types-delete-stub",
+      "unauthorized_canary_blocked": true,
+      "validated": true,
+      "weighted_surface_reduction_percent": 76.19047619047619
+    }
+  ],
+  "methods": {
+    "A": {
+      "agent_executions_including_shared_broad": 11,
+      "all_agent_executions_including_repeats": 11,
+      "all_independent_canary_controls_completed": true,
+      "all_verifier_executions_including_repeats": 11,
+      "canary_attempts": 11,
+      "canary_block_rate": 0.0,
+      "canary_blocked": 0,
+      "canary_creations_permitted_by_policy": 11,
+      "conditional_median_reduction_percent": 0.0,
+      "exact_repeat_agent_executions": 0,
+      "exact_repeat_count": 0,
+      "exact_repeat_non_ceiling_execution_identity_matches": 0,
+      "exact_repeat_security_passes": 0,
+      "exact_repeat_utility_passes": 0,
+      "exact_repeat_verifier_executions": 0,
+      "fresh_validation_replays": 0,
+      "full_corpus_mean_reduction_percent_failures_zero": 0,
+      "full_corpus_median_reduction_percent_failures_zero": 0,
+      "median_exact_file_grants": 0,
+      "median_existing_directory_entries_covered": 14,
+      "median_existing_regular_files_covered": 116,
+      "median_high_impact_files_covered": 6,
+      "median_recursive_directory_grants": 1,
+      "optimizer_replays": 0,
+      "policies_allowing_future_child_creation": 11,
+      "policies_with_recursive_grants": 11,
+      "search_replays": 0,
+      "task_and_shared_cli_seconds": 13.94162990701443,
+      "task_count": 11,
+      "timeouts": 0,
+      "utility_passes": 11,
+      "validated_narrow_promotions": null,
+      "verifier_executions_including_shared_broad": 11
+    },
+    "B": {
+      "agent_executions_including_shared_broad": 11,
+      "all_agent_executions_including_repeats": 44,
+      "all_independent_canary_controls_completed": true,
+      "all_verifier_executions_including_repeats": 40,
+      "canary_attempts": 11,
+      "canary_block_rate": 0.0,
+      "canary_blocked": 0,
+      "canary_creations_permitted_by_policy": 11,
+      "conditional_median_reduction_percent": 45.714285714285715,
+      "exact_repeat_agent_executions": 33,
+      "exact_repeat_count": 33,
+      "exact_repeat_non_ceiling_execution_identity_matches": 33,
+      "exact_repeat_security_passes": 30,
+      "exact_repeat_utility_passes": 27,
+      "exact_repeat_verifier_executions": 30,
+      "fresh_validation_replays": 0,
+      "full_corpus_mean_reduction_percent_failures_zero": 38.19213114878923,
+      "full_corpus_median_reduction_percent_failures_zero": 44.61077844311377,
+      "median_exact_file_grants": 3,
+      "median_existing_directory_entries_covered": 8,
+      "median_existing_regular_files_covered": 93,
+      "median_high_impact_files_covered": 1,
+      "median_recursive_directory_grants": 3,
+      "optimizer_replays": 0,
+      "policies_allowing_future_child_creation": 11,
+      "policies_with_recursive_grants": 11,
+      "search_replays": 0,
+      "task_and_shared_cli_seconds": 12.275731429996085,
+      "task_count": 11,
+      "timeouts": 0,
+      "utility_passes": 9,
+      "validated_narrow_promotions": null,
+      "verifier_executions_including_shared_broad": 10
+    },
+    "C": {
+      "agent_executions_including_shared_broad": 22,
+      "all_agent_executions_including_repeats": 22,
+      "all_independent_canary_controls_completed": true,
+      "all_verifier_executions_including_repeats": 19,
+      "canary_attempts": 11,
+      "canary_block_rate": 0.8181818181818182,
+      "canary_blocked": 9,
+      "canary_creations_permitted_by_policy": 2,
+      "conditional_median_reduction_percent": 91.16443201724834,
+      "exact_repeat_agent_executions": 0,
+      "exact_repeat_count": 0,
+      "exact_repeat_non_ceiling_execution_identity_matches": 0,
+      "exact_repeat_security_passes": 0,
+      "exact_repeat_utility_passes": 0,
+      "exact_repeat_verifier_executions": 0,
+      "fresh_validation_replays": 0,
+      "full_corpus_mean_reduction_percent_failures_zero": 50.59504818247368,
+      "full_corpus_median_reduction_percent_failures_zero": 76.19047619047619,
+      "median_exact_file_grants": 1,
+      "median_existing_directory_entries_covered": 0,
+      "median_existing_regular_files_covered": 2,
+      "median_high_impact_files_covered": 0,
+      "median_recursive_directory_grants": 0,
+      "optimizer_replays": 0,
+      "policies_allowing_future_child_creation": 5,
+      "policies_with_recursive_grants": 5,
+      "search_replays": 0,
+      "task_and_shared_cli_seconds": 23.278416227025446,
+      "task_count": 11,
+      "timeouts": 0,
+      "utility_passes": 8,
+      "validated_narrow_promotions": null,
+      "verifier_executions_including_shared_broad": 19
+    },
+    "D": {
+      "agent_executions_including_shared_broad": 87,
+      "all_agent_executions_including_repeats": 87,
+      "all_independent_canary_controls_completed": true,
+      "all_verifier_executions_including_repeats": 69,
+      "canary_attempts": 11,
+      "canary_block_rate": 0.5454545454545454,
+      "canary_blocked": 6,
+      "canary_creations_permitted_by_policy": 5,
+      "conditional_median_reduction_percent": 88.12154696132598,
+      "exact_repeat_agent_executions": 0,
+      "exact_repeat_count": 0,
+      "exact_repeat_non_ceiling_execution_identity_matches": 0,
+      "exact_repeat_security_passes": 0,
+      "exact_repeat_utility_passes": 0,
+      "exact_repeat_verifier_executions": 0,
+      "fresh_validation_replays": 27,
+      "full_corpus_mean_reduction_percent_failures_zero": 52.53110882811214,
+      "full_corpus_median_reduction_percent_failures_zero": 76.19047619047619,
+      "median_exact_file_grants": 1,
+      "median_existing_directory_entries_covered": 2,
+      "median_existing_regular_files_covered": 23,
+      "median_high_impact_files_covered": 1,
+      "median_recursive_directory_grants": 1,
+      "optimizer_replays": 76,
+      "policies_allowing_future_child_creation": 8,
+      "policies_with_recursive_grants": 8,
+      "search_replays": 49,
+      "task_and_shared_cli_seconds": 93.71555564602022,
+      "task_count": 11,
+      "timeouts": 0,
+      "utility_passes": 9,
+      "validated_narrow_promotions": 9,
+      "verifier_executions_including_shared_broad": 69
+    },
+    "E": {
+      "agent_executions_including_shared_broad": 87,
+      "all_agent_executions_including_repeats": 87,
+      "all_independent_canary_controls_completed": true,
+      "all_verifier_executions_including_repeats": 68,
+      "canary_attempts": 11,
+      "canary_block_rate": 0.7272727272727273,
+      "canary_blocked": 8,
+      "canary_creations_permitted_by_policy": 3,
+      "conditional_median_reduction_percent": 88.12154696132598,
+      "exact_repeat_agent_executions": 0,
+      "exact_repeat_count": 0,
+      "exact_repeat_non_ceiling_execution_identity_matches": 0,
+      "exact_repeat_security_passes": 0,
+      "exact_repeat_utility_passes": 0,
+      "exact_repeat_verifier_executions": 0,
+      "fresh_validation_replays": 27,
+      "full_corpus_mean_reduction_percent_failures_zero": 57.72653128012353,
+      "full_corpus_median_reduction_percent_failures_zero": 76.19047619047619,
+      "median_exact_file_grants": 1,
+      "median_existing_directory_entries_covered": 2,
+      "median_existing_regular_files_covered": 23,
+      "median_high_impact_files_covered": 1,
+      "median_recursive_directory_grants": 1,
+      "optimizer_replays": 76,
+      "policies_allowing_future_child_creation": 8,
+      "policies_with_recursive_grants": 8,
+      "search_replays": 49,
+      "task_and_shared_cli_seconds": 86.44332070999371,
+      "task_count": 11,
+      "timeouts": 0,
+      "utility_passes": 9,
+      "validated_narrow_promotions": 9,
+      "verifier_executions_including_shared_broad": 68
+    },
+    "F": {
+      "agent_executions_including_shared_broad": 93,
+      "all_agent_executions_including_repeats": 120,
+      "all_independent_canary_controls_completed": true,
+      "all_verifier_executions_including_repeats": 86,
+      "canary_attempts": 11,
+      "canary_block_rate": 0.7272727272727273,
+      "canary_blocked": 8,
+      "canary_creations_permitted_by_policy": 3,
+      "conditional_median_reduction_percent": 88.12154696132598,
+      "exact_repeat_agent_executions": 27,
+      "exact_repeat_count": 27,
+      "exact_repeat_non_ceiling_execution_identity_matches": 27,
+      "exact_repeat_security_passes": 27,
+      "exact_repeat_utility_passes": 27,
+      "exact_repeat_verifier_executions": 27,
+      "fresh_validation_replays": 27,
+      "full_corpus_mean_reduction_percent_failures_zero": 65.45380125529407,
+      "full_corpus_median_reduction_percent_failures_zero": 76.19047619047619,
+      "median_exact_file_grants": 1,
+      "median_existing_directory_entries_covered": 2,
+      "median_existing_regular_files_covered": 23,
+      "median_high_impact_files_covered": 1,
+      "median_recursive_directory_grants": 1,
+      "optimizer_replays": 82,
+      "policies_allowing_future_child_creation": 8,
+      "policies_with_recursive_grants": 8,
+      "search_replays": 55,
+      "task_and_shared_cli_seconds": 77.10429453401593,
+      "task_count": 11,
+      "timeouts": 0,
+      "utility_passes": 9,
+      "validated_narrow_promotions": 9,
+      "verifier_executions_including_shared_broad": 59
+    },
+    "M": {
+      "agent_executions_including_shared_broad": 11,
+      "all_agent_executions_including_repeats": 11,
+      "all_independent_canary_controls_completed": null,
+      "all_verifier_executions_including_repeats": 8,
+      "canary_attempts": 0,
+      "canary_block_rate": null,
+      "canary_blocked": 0,
+      "canary_creations_permitted_by_policy": 0,
+      "conditional_median_reduction_percent": 94.20731707317073,
+      "exact_repeat_agent_executions": 0,
+      "exact_repeat_count": 0,
+      "exact_repeat_non_ceiling_execution_identity_matches": 0,
+      "exact_repeat_security_passes": 0,
+      "exact_repeat_utility_passes": 0,
+      "exact_repeat_verifier_executions": 0,
+      "fresh_validation_replays": 0,
+      "full_corpus_mean_reduction_percent_failures_zero": 58.36407278277492,
+      "full_corpus_median_reduction_percent_failures_zero": 85.38205980066445,
+      "median_exact_file_grants": null,
+      "median_existing_directory_entries_covered": null,
+      "median_existing_regular_files_covered": null,
+      "median_high_impact_files_covered": null,
+      "median_recursive_directory_grants": null,
+      "optimizer_replays": 0,
+      "policies_allowing_future_child_creation": 0,
+      "policies_with_recursive_grants": 0,
+      "search_replays": 0,
+      "task_and_shared_cli_seconds": 6.499386440002127,
+      "task_count": 11,
+      "timeouts": 0,
+      "utility_passes": 7,
+      "validated_narrow_promotions": null,
+      "verifier_executions_including_shared_broad": 8
+    }
+  },
+  "promotion_metrics": {
+    "F_promotions": 9,
+    "F_promotions_at_least_20pp_better_than_B": 7,
+    "amortized_tuning_seconds_per_future_run": {
+      "1": 4.573494750991813,
+      "10": 0.4573494750991813,
+      "3": 1.5244982503306044,
+      "50": 0.09146989501983625
+    },
+    "future_identical_repetitions_to_match_B_one_run_cost": 16,
+    "median_B_single_run_wall_seconds": 0.29933293399517424,
+    "median_F_minus_B_reduction_percentage_points": 42.85714285714285,
+    "median_incremental_tuning_wall_seconds": 4.573494750991813
+  },
+  "protocol_sha256": "903e3682216b46246febe39c94c2ac92c533893e0a5759cb66ea15f390ddf86d",
+  "repeat_identity_scope": "execution_identity_matches deliberately excludes authorized_ceiling. Each exact-repeat run resupplied the promoted grant as a new narrower ceiling. This did not reuse an unchanged full M3 contract or exercise a production policy-profile loader.",
+  "repeat_run_medians": {
+    "B": {
+      "median_agent": 0.041,
+      "median_cli": 0.5531277709960705,
+      "median_verifier": 0.252
+    },
+    "F": {
+      "median_agent": 0.02,
+      "median_cli": 0.49305828000069596,
+      "median_verifier": 0.268
+    }
+  },
+  "repository_groups": 7,
+  "search_scaling": {
+    "16": {
+      "clustered": {
+        "greedy": {
+          "reduction_percent": 76.34408602150538,
+          "total_replays_including_validation": 20,
+          "validated_utility": true
+        },
+        "hierarchical": {
+          "reduction_percent": 81.72043010752688,
+          "total_replays_including_validation": 15,
+          "validated_utility": true
+        },
+        "random": {
+          "reduction_percent": 76.34408602150538,
+          "total_replays_including_validation": 20,
+          "validated_utility": true
+        }
+      },
+      "dispersed": {
+        "greedy": {
+          "reduction_percent": 76.34408602150538,
+          "total_replays_including_validation": 20,
+          "validated_utility": true
+        },
+        "hierarchical": {
+          "reduction_percent": 81.72043010752688,
+          "total_replays_including_validation": 25,
+          "validated_utility": true
+        },
+        "random": {
+          "reduction_percent": 76.34408602150538,
+          "total_replays_including_validation": 20,
+          "validated_utility": true
+        }
+      }
+    },
+    "32": {
+      "clustered": {
+        "greedy": {
+          "reduction_percent": 75.69060773480663,
+          "total_replays_including_validation": 36,
+          "validated_utility": true
+        },
+        "hierarchical": {
+          "reduction_percent": 78.45303867403315,
+          "total_replays_including_validation": 23,
+          "validated_utility": true
+        },
+        "random": {
+          "reduction_percent": 75.69060773480663,
+          "total_replays_including_validation": 36,
+          "validated_utility": true
+        }
+      },
+      "dispersed": {
+        "greedy": {
+          "reduction_percent": 75.69060773480663,
+          "total_replays_including_validation": 36,
+          "validated_utility": true
+        },
+        "hierarchical": {
+          "reduction_percent": 78.45303867403315,
+          "total_replays_including_validation": 49,
+          "validated_utility": true
+        },
+        "random": {
+          "reduction_percent": 75.69060773480663,
+          "total_replays_including_validation": 36,
+          "validated_utility": true
+        }
+      }
+    },
+    "4": {
+      "clustered": {
+        "greedy": {
+          "reduction_percent": 79.62962962962963,
+          "total_replays_including_validation": 8,
+          "validated_utility": true
+        },
+        "hierarchical": {
+          "reduction_percent": 98.14814814814815,
+          "total_replays_including_validation": 7,
+          "validated_utility": true
+        },
+        "random": {
+          "reduction_percent": 79.62962962962963,
+          "total_replays_including_validation": 8,
+          "validated_utility": true
+        }
+      },
+      "dispersed": {
+        "greedy": {
+          "reduction_percent": 79.62962962962963,
+          "total_replays_including_validation": 8,
+          "validated_utility": true
+        },
+        "hierarchical": {
+          "reduction_percent": 98.14814814814815,
+          "total_replays_including_validation": 7,
+          "validated_utility": true
+        },
+        "random": {
+          "reduction_percent": 79.62962962962963,
+          "total_replays_including_validation": 8,
+          "validated_utility": true
+        }
+      }
+    },
+    "64": {
+      "clustered": {
+        "greedy": {
+          "reduction_percent": 75.35014005602241,
+          "total_replays_including_validation": 68,
+          "validated_utility": true
+        },
+        "hierarchical": {
+          "reduction_percent": 76.75070028011204,
+          "total_replays_including_validation": 39,
+          "validated_utility": true
+        },
+        "random": {
+          "reduction_percent": 75.35014005602241,
+          "total_replays_including_validation": 68,
+          "validated_utility": true
+        }
+      },
+      "dispersed": {
+        "greedy": {
+          "reduction_percent": 75.35014005602241,
+          "total_replays_including_validation": 68,
+          "validated_utility": true
+        },
+        "hierarchical": {
+          "reduction_percent": 76.75070028011204,
+          "total_replays_including_validation": 97,
+          "validated_utility": true
+        },
+        "random": {
+          "reduction_percent": 75.35014005602241,
+          "total_replays_including_validation": 68,
+          "validated_utility": true
+        }
+      }
+    },
+    "8": {
+      "clustered": {
+        "greedy": {
+          "reduction_percent": 77.55102040816327,
+          "total_replays_including_validation": 12,
+          "validated_utility": true
+        },
+        "hierarchical": {
+          "reduction_percent": 87.75510204081633,
+          "total_replays_including_validation": 11,
+          "validated_utility": true
+        },
+        "random": {
+          "reduction_percent": 77.55102040816327,
+          "total_replays_including_validation": 12,
+          "validated_utility": true
+        }
+      },
+      "dispersed": {
+        "greedy": {
+          "reduction_percent": 77.55102040816327,
+          "total_replays_including_validation": 12,
+          "validated_utility": true
+        },
+        "hierarchical": {
+          "reduction_percent": 87.75510204081633,
+          "total_replays_including_validation": 13,
+          "validated_utility": true
+        },
+        "random": {
+          "reduction_percent": 77.55102040816327,
+          "total_replays_including_validation": 12,
+          "validated_utility": true
+        }
+      }
+    }
+  },
+  "suite_id": "autocage-m35-repeatable-workflow-v1",
+  "supplemental_semantic_shadows": {
+    "case_count": 2,
+    "cases": [
+      "verified-test-addition",
+      "dependency-group-and-lock-addition"
+    ],
+    "limitation": "Post-freeze exploratory only; no dependency installation or resolution was run, and no policy was promoted.",
+    "path": "reuse-shadows-extended.json",
+    "security_passes": 2,
+    "utility_passes": 2
+  },
+  "timing_phase_totals": {
+    "exact_repeats": {
+      "agent_backend_compile_elapsed_millis": {
+        "records": 60,
+        "total_millis": 0
+      },
+      "policy_validation_elapsed_millis": {
+        "records": 60,
+        "total_millis": 0
+      },
+      "preflight_elapsed_millis": {
+        "records": 60,
+        "total_millis": 159
+      },
+      "readonly_canary_backend_compile_elapsed_millis": {
+        "records": 60,
+        "total_millis": 0
+      },
+      "supervisor_elapsed_before_record_millis": {
+        "records": 60,
+        "total_millis": 47688
+      },
+      "verifier_backend_compile_elapsed_millis": {
+        "records": 60,
+        "total_millis": 0
+      },
+      "workspace_stage_elapsed_millis": {
+        "records": 60,
+        "total_millis": 4908
+      }
+    },
+    "initial_broad": {
+      "agent_backend_compile_elapsed_millis": {
+        "records": 11,
+        "total_millis": 0
+      },
+      "policy_validation_elapsed_millis": {
+        "records": 11,
+        "total_millis": 0
+      },
+      "preflight_elapsed_millis": {
+        "records": 11,
+        "total_millis": 25
+      },
+      "readonly_canary_backend_compile_elapsed_millis": {
+        "records": 11,
+        "total_millis": 0
+      },
+      "supervisor_elapsed_before_record_millis": {
+        "records": 11,
+        "total_millis": 13814
+      },
+      "verifier_backend_compile_elapsed_millis": {
+        "records": 11,
+        "total_millis": 0
+      },
+      "workspace_stage_elapsed_millis": {
+        "records": 11,
+        "total_millis": 1203
+      }
+    },
+    "optimizer_replays": {
+      "agent_backend_compile_elapsed_millis": {
+        "records": 234,
+        "total_millis": 0
+      },
+      "policy_validation_elapsed_millis": {
+        "records": 234,
+        "total_millis": 0
+      },
+      "preflight_elapsed_millis": {
+        "records": 234,
+        "total_millis": 590
+      },
+      "readonly_canary_backend_compile_elapsed_millis": {
+        "records": 234,
+        "total_millis": 0
+      },
+      "supervisor_elapsed_before_record_millis": {
+        "records": 234,
+        "total_millis": 203398
+      },
+      "verifier_backend_compile_elapsed_millis": {
+        "records": 234,
+        "total_millis": 0
+      },
+      "workspace_stage_elapsed_millis": {
+        "records": 234,
+        "total_millis": 19150
+      }
+    },
+    "other_baselines_and_canaries": {
+      "agent_backend_compile_elapsed_millis": {
+        "records": 132,
+        "total_millis": 0
+      },
+      "policy_validation_elapsed_millis": {
+        "records": 132,
+        "total_millis": 0
+      },
+      "preflight_elapsed_millis": {
+        "records": 132,
+        "total_millis": 303
+      },
+      "readonly_canary_backend_compile_elapsed_millis": {
+        "records": 132,
+        "total_millis": 0
+      },
+      "supervisor_elapsed_before_record_millis": {
+        "records": 132,
+        "total_millis": 78780
+      },
+      "verifier_backend_compile_elapsed_millis": {
+        "records": 132,
+        "total_millis": 0
+      },
+      "workspace_stage_elapsed_millis": {
+        "records": 132,
+        "total_millis": 11830
+      }
+    }
+  },
+  "workflow_count": 11
+}

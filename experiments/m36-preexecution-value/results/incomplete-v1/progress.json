@@ -1,0 +1,11 @@
+{
+  "canary_runs_completed": 18,
+  "drift_checks_completed": 2,
+  "last_completed_phase": "W05-filelock-error-tests/parent/D",
+  "repeat_runs_completed": 12,
+  "status": "INCOMPLETE",
+  "suite_id": "autocage-m36-preexecution-value-v1",
+  "task_runs_completed": 20,
+  "tuning_workflows_completed": 2,
+  "warning": "Partial records are exploratory only. Missing checks are NOT TESTED, never PASS."
+}

@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "suite_id": "real-repository-write-policy-v1",
+  "status": "frozen-before-final-comparison",
+  "freeze_note": "Security-hardened final rerun. Compared with the first frozen comparison, the binary now requires declared readonly verifier roots and normalizes explicit verifier path arguments to require root coverage; task IDs, task split, costs, baselines, seed, replay budget, validations, timeout, weights, and thresholds are unchanged. The prior comparisons and their protocol copies are retained as superseded evidence and are not the reported final result.",
+  "tasks_sha256": "4c4e846d0f89517a3a10e3fe4f64b53c00e489a10bf5c29a47f85c77b4ea690b",
+  "prepare_sha256": "db5631b8b58867f69ea237fd3500e589db922403aeb70d4d41ae8e2585a839eb",
+  "runner_sha256": "679e0e8821ac55e76f238451b2e7e717bc31b0610f9973f78e43e94695756336",
+  "python_lock_sha256": "845581b07e7b93b4b2e7c82af787be4b8046a28bd5182dcf2f6c3640f9d24450",
+  "runtime_setup_sha256": "fea4ca6628b63552cba80685db3ca476fcbe2582a9257de2581a4df489506efb",
+  "prepared_manifest_sha256": "5c2761853d276385a9c1b77e60bdc89b61020bd981bfc8f9dd283be645af62ca",
+  "autocage_binary_sha256": "331def046e49f2c3720bdbc40afd8841917350686b5513c37b8661c6ae470808",
+  "parameters": {
+    "strategy_budget_including_validations": 12,
+    "random_seed": "0x4155544f43414745",
+    "validation_replays": 3,
+    "task_timeout_seconds": 120,
+    "startup_control_runs": 5,
+    "directory_weight": 10,
+    "high_impact_prefixes": [
+      ".github/workflows/",
+      "deploy/",
+      "deployment/",
+      "scripts/",
+      "package.json",
+      "pyproject.toml",
+      "cargo.toml"
+    ],
+    "cost_schema": "weighted-write-surface-v1"
+  },
+  "python_packages": {
+    "iniconfig": "2.3.1",
+    "packaging": "26.3",
+    "pluggy": "1.6.0",
+    "Pygments": "2.21.0",
+    "pytest": "9.1.1",
+    "pytest-asyncio": "1.3.0",
+    "pytest-mock": "3.15.1",
+    "pytest-timeout": "2.4.0",
+    "typing-extensions": "4.16.0"
+  },
+  "apt_packages": {
+    "bubblewrap": "0.9.0-1ubuntu0.3",
+    "python3-hypothesis": "6.98.15-1",
+    "python3-minimal": "3.12.3-0ubuntu2.1",
+    "python3-pip": "24.0+dfsg-1ubuntu1.3",
+    "python3-pretend": "1.0.9-2.1",
+    "python3-sortedcontainers": "2.4.0-2",
+    "python3-tomli-w": "1.0.0-2"
+  },
+  "tasks": [
+    {"id": "RR01-click-short-help", "split": "development", "repository": "click"},
+    {"id": "RR02-click-parameter-spec", "split": "development", "repository": "click"},
+    {"id": "RR03-packaging-pylock-separators", "split": "development", "repository": "packaging"},
+    {"id": "RR04-packaging-empty-versions", "split": "development", "repository": "packaging"},
+    {"id": "RR05-dotenv-expand-home", "split": "held-out", "repository": "python-dotenv"},
+    {"id": "RR06-dotenv-write-error-paths", "split": "held-out", "repository": "python-dotenv"},
+    {"id": "RR07-attrs-ne-validator", "split": "held-out", "repository": "attrs"},
+    {"id": "RR08-filelock-hostile-pid", "split": "held-out", "repository": "filelock"},
+    {"id": "RR09-iniconfig-strip-bom", "split": "held-out", "repository": "iniconfig"},
+    {"id": "RR10-pluggy-falsy-plugin", "split": "held-out", "repository": "pluggy"},
+    {"id": "RR11-iniconfig-inline-types-delete-stub", "split": "held-out", "repository": "iniconfig"}
+  ],
+  "sample": {
+    "task_count": 11,
+    "repository_count": 7,
+    "development_tasks": 4,
+    "development_repositories": 2,
+    "held_out_tasks": 7,
+    "held_out_repositories": 5,
+    "grouping_note": "Tasks RR01/RR02 share click; RR03/RR04 share packaging; RR05/RR06 share python-dotenv; RR09/RR11 share iniconfig. Tasks from a repository are not independent repositories."
+  },
+  "baselines": {
+    "A": "Recursive writable staged-workspace ceiling.",
+    "B": "Fixed conventional src/lib/docs/testing/tests/changelog directories and common root config/readme files, selected from repository structure only.",
+    "C": "Final changed-path policy inferred from the broad A run; no access to optimizer trials.",
+    "D": "Fixed-order greedy removal, at most 12 total trials including three final validations.",
+    "E": "Seeded random removal with the same 12-trial cap and identical seed per task.",
+    "F": "Hierarchical narrowing, at most 12 total trials including three final validations.",
+    "M": "Task-authored narrow policy for reference only; not an automatically achievable baseline."
+  },
+  "comparison_controls": {
+    "same_inputs": "All methods use the same pinned parent source, target test snapshot, scripted executable/action fixture, verifier source and argv, runtime, timeout, workspace stage mechanism, policy vocabulary, and cost function.",
+    "shared_broad_run": "A single byte-identical successful broad run is copied as immutable tuning evidence for D/E/F; physical execution accounting charges it once globally and once per strategy for amortized per-method comparisons.",
+    "fresh_trials": "Each optimizer trial restages the original parent snapshot. A promoted candidate must pass three fresh verifier and mandatory security-check replays; these count inside the 12-replay cap.",
+    "skip_policy": "The verifier rejects any skipped test. RR08 deselects four upstream macOS-only test cases with the fixed filter `not macos`; the selected Linux tests must all execute and pass.",
+    "generated_test_prerequisites": "RR08 receives a deterministic version module normally generated by the project's VCS build hook. RR06 receives a deterministic executable matching its declared console-script entry point. No repository build backend is executed during fixture preparation.",
+    "network": "Repository Git objects and pinned test wheels are prepared before sandbox tasks; all agent/verifier runs have AutoCage's private network namespace and no egress.",
+    "security_controller": "Independent host-side canary/listener and source/verifier tree hashes are checked outside the sandbox. Missing run records, skipped tests, or untested mandatory security checks never count as a pass."
+  },
+  "cost_definition": {
+    "ordinary_existing_writable_file": 1,
+    "high_impact_existing_writable_file": 10,
+    "directory_entry_under_recursive_grant": 10,
+    "root_directory_entry": 10,
+    "high_impact_prefixes": [
+      ".github/workflows/",
+      "deploy/",
+      "deployment/",
+      "scripts/",
+      "package.json",
+      "pyproject.toml",
+      "cargo.toml"
+    ],
+    "interpretation": "Transparent heuristic over existing writable files and directory entries, not a calibrated exploit probability or global minimum. Raw file/directory/rule counts are also reported."
+  },
+  "acceptance": {
+    "utility": "Every task whose broad A baseline verifies must preserve verifier utility under the promoted F policy and three fresh validations.",
+    "security": "Zero independent host-canary, source-integrity, verifier-integrity, network, readonly-mount, or required-check escapes; all mandatory checks must be executed and pass.",
+    "held_out_full_corpus_median_reduction_percent": 25,
+    "held_out_median_replays_max_including_validations": 12,
+    "reduction_denominator": "All held-out tasks; failed, blocked, or inconclusive policies receive zero reduction. Conditional successful-task reductions are reported separately.",
+    "pivot_signal": "Below 15% held-out full-corpus median reduction, or material held-out false denials, triggers a pivot. Results from 15% through 25% are inconclusive."
+  },
+  "runtime_environment": {
+    "distribution": "Ubuntu 24.04.5 LTS ARM64",
+    "kernel": "6.8.0-142-generic",
+    "bubblewrap": "0.9.0",
+    "mode": "Disposable Lima guest; no host home or credential mounts"
+  }
+}

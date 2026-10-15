@@ -1,0 +1,320 @@
+{
+  "schema_version": 1,
+  "suite_id": "real-repository-write-policy-v1",
+  "tasks_sha256": "4c4e846d0f89517a3a10e3fe4f64b53c00e489a10bf5c29a47f85c77b4ea690b",
+  "repositories": {
+    "click": {
+      "url": "https://github.com/pallets/click.git",
+      "license": "BSD-3-Clause",
+      "license_evidence": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "9a8ad106a394e853bfe21f42f4e72d592819a22805d991b5f3275029292b658d"
+        }
+      ]
+    },
+    "packaging": {
+      "url": "https://github.com/pypa/packaging.git",
+      "license": "Apache-2.0 OR BSD-2-Clause",
+      "license_evidence": [
+        {
+          "path": "LICENSE.APACHE",
+          "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594"
+        },
+        {
+          "path": "LICENSE.BSD",
+          "sha256": "b70e7e9b742f1cc6f948b34c16aa39ffece94196364bc88ff0d2180f0028fac5"
+        }
+      ]
+    },
+    "python-dotenv": {
+      "url": "https://github.com/theskumar/python-dotenv.git",
+      "license": "BSD-3-Clause",
+      "license_evidence": [
+        {
+          "path": "LICENSE",
+          "sha256": "80619b7049f08c81683ad0e01f08f257a840652dd71ee83146d36658c7d2c2b9"
+        }
+      ]
+    },
+    "attrs": {
+      "url": "https://github.com/python-attrs/attrs.git",
+      "license": "MIT",
+      "license_evidence": [
+        {
+          "path": "LICENSE",
+          "sha256": "882115c95dfc2af1eeb6714f8ec6d5cbcabf667caff8729f42420da63f714e9f"
+        }
+      ]
+    },
+    "filelock": {
+      "url": "https://github.com/tox-dev/filelock.git",
+      "license": "MIT",
+      "license_evidence": [
+        {
+          "path": "LICENSE",
+          "sha256": "608c89d5060ae9921adccf3236695bc654a9946e12323ef6c021dfa04e294d48"
+        }
+      ]
+    },
+    "iniconfig": {
+      "url": "https://github.com/pytest-dev/iniconfig.git",
+      "license": "MIT",
+      "license_evidence": [
+        {
+          "path": "LICENSE",
+          "sha256": "3409fa91f7ace557894632676656e32264fe5ef7581535725dc9a23774551bd4"
+        }
+      ]
+    },
+    "pluggy": {
+      "url": "https://github.com/pytest-dev/pluggy.git",
+      "license": "MIT",
+      "license_evidence": [
+        {
+          "path": "LICENSE",
+          "sha256": "d6b65e6c213a5d0b577911d34d6e5949b9f59d76c238c5071a2f3fc16cfb2606"
+        }
+      ]
+    }
+  },
+  "tasks": [
+    {
+      "task": "RR01-click-short-help",
+      "repository": "click",
+      "parent": "6d5bac5c712195cbfa9666ba0ecbf0573cdea356",
+      "target": "f67c2bb6c2f055c1c7a57cd46c3697fc26a7742e",
+      "license": "BSD-3-Clause",
+      "license_evidence": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "9a8ad106a394e853bfe21f42f4e72d592819a22805d991b5f3275029292b658d"
+        }
+      ],
+      "patch_sha256": "e094b7282fce589a82ca94f1cc44d2b19002867ce64d48f2e23280b911190b9f",
+      "agent_actions_sha256": "ca6cdfd01712de2a91cf3bb135b2d738283ca7679ba776af77bdb7cd210aa18a",
+      "input_tree_sha256": "658ebee6efa2fd965cb7a89269075d6b9b6a7503f49843e86d4b01c9db6579d5",
+      "source_tree_stats": {
+        "regular_files": 178,
+        "directories": 26,
+        "bytes": 1640194
+      },
+      "verifier_content_sha256": "07e8f98a42957dd2602f1f32f48e5ca95e93f5bc4fae602e95b777db6d4b6fc6",
+      "patch_bytes": 2542
+    },
+    {
+      "task": "RR02-click-parameter-spec",
+      "repository": "click",
+      "parent": "06b2a678741131fd577ce170e23e5ca0aeba0309",
+      "target": "9f0bcdf0d868edfc71435cd0aac2dcc08cf94828",
+      "license": "BSD-3-Clause",
+      "license_evidence": [],
+      "patch_sha256": "f92033ac2c03be8af9840512d30e2953161d66768a42789176b8071becf6b0fa",
+      "agent_actions_sha256": "f2f9a3e14be87cc2fd138d9761ea693e4272bef674650c071629af27dad3b540",
+      "input_tree_sha256": "7f22caa56362ff570b2c20f5d1854ccd0cb74c77da8160faa371ef3414244099",
+      "source_tree_stats": {
+        "regular_files": 178,
+        "directories": 26,
+        "bytes": 1678826
+      },
+      "verifier_content_sha256": "76af1a46c5335a258d273b66a88de40aca83b2ab2c0a436c4f6c997247d6b134",
+      "patch_bytes": 16731
+    },
+    {
+      "task": "RR03-packaging-pylock-separators",
+      "repository": "packaging",
+      "parent": "2aada00b158feb36109d77dc91d62baa91f7d400",
+      "target": "fa52d7237a74effdadd4ad2627d4ca413234cac2",
+      "license": "Apache-2.0 OR BSD-2-Clause",
+      "license_evidence": [
+        {
+          "path": "LICENSE.APACHE",
+          "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594"
+        },
+        {
+          "path": "LICENSE.BSD",
+          "sha256": "b70e7e9b742f1cc6f948b34c16aa39ffece94196364bc88ff0d2180f0028fac5"
+        }
+      ],
+      "patch_sha256": "9943d97463f0a911130b50eba63e7ce48477ce834a192b2d6032150f3b15439b",
+      "agent_actions_sha256": "cf594fda529063b3687195e74594ceb8a1d458b17edde79ec913d0abf7d6faf6",
+      "input_tree_sha256": "6ec83390c9baefa8a835b1efe5942acd76d2002ebb21e24e2f074c73f93d81cd",
+      "source_tree_stats": {
+        "regular_files": 139,
+        "directories": 15,
+        "bytes": 1593981
+      },
+      "verifier_content_sha256": "e5d1c44a8dd3e80c27b3d451ff4f443e0482a76babe691677b1540d022c7a02a",
+      "patch_bytes": 612
+    },
+    {
+      "task": "RR04-packaging-empty-versions",
+      "repository": "packaging",
+      "parent": "2c87a33f665828b7aa0f650b1b50243b3ab95695",
+      "target": "2aada00b158feb36109d77dc91d62baa91f7d400",
+      "license": "Apache-2.0 OR BSD-2-Clause",
+      "license_evidence": [],
+      "patch_sha256": "7bbd746ceaf0f53d7457778cfbc98c9397d1dfbefb5a87a4fa08beda0b18f50f",
+      "agent_actions_sha256": "2ada81a0cf21f31928d22dac71de880c0916581e8a6b2530e5e795a86299a9b7",
+      "input_tree_sha256": "a939db7fce1592abcea4d83e43da39351c9989fae315b3b766f3662128f148ea",
+      "source_tree_stats": {
+        "regular_files": 139,
+        "directories": 15,
+        "bytes": 1593058
+      },
+      "verifier_content_sha256": "dd51164296925cb94bbfa680e84a8a41ff0177ebd4bfea60476a2282f063feca",
+      "patch_bytes": 745
+    },
+    {
+      "task": "RR05-dotenv-expand-home",
+      "repository": "python-dotenv",
+      "parent": "791414804eff08a23f0b7970968e1717e3b28e66",
+      "target": "0b2880591780a426b0551436f47a17e7a76d954f",
+      "license": "BSD-3-Clause",
+      "license_evidence": [
+        {
+          "path": "LICENSE",
+          "sha256": "80619b7049f08c81683ad0e01f08f257a840652dd71ee83146d36658c7d2c2b9"
+        }
+      ],
+      "patch_sha256": "c552af18f3e44eb64eb0eb5960fda52351eaba3375d47591d762e40684594f0d",
+      "agent_actions_sha256": "c8bbdc80f1e242f5cfae5a29cddf1ff55d7ba3b37ed6b3e6681acb2d96e977a1",
+      "input_tree_sha256": "ae76197a2a2c536582313d4ebdd1163aab0e54ff01a247b629c780cf45061062",
+      "source_tree_stats": {
+        "regular_files": 43,
+        "directories": 6,
+        "bytes": 158545
+      },
+      "verifier_content_sha256": "dd19170f75f91719778d05c06fcedbe9ae55f8d7b44d89d0da9d708ae64b0d95",
+      "patch_bytes": 614
+    },
+    {
+      "task": "RR06-dotenv-write-error-paths",
+      "repository": "python-dotenv",
+      "parent": "828bdfe5ba91b736b545561ebb53326f1f88f6e5",
+      "target": "6a49d6d88fd9bd99bef8d63b9eb6f2e46ecc7072",
+      "license": "BSD-3-Clause",
+      "license_evidence": [],
+      "patch_sha256": "995a3e9f216bd8cc0c1e4a199e9c346ba9853cb69f08b0832b9a61e7ecdcadf1",
+      "agent_actions_sha256": "fea1457d481947f75c727493af06a9e567212295b0c153a91ebe1e983801fdbe",
+      "input_tree_sha256": "2cc831d63d8848fae41fce83d99a45663614e111dd89a99a5bcc944047921141",
+      "source_tree_stats": {
+        "regular_files": 44,
+        "directories": 8,
+        "bytes": 148908
+      },
+      "verifier_content_sha256": "5b87c92ad00a9ff78921752d901f9a0317d6268f079f3f151b5de0eadd4273e9",
+      "patch_bytes": 2031
+    },
+    {
+      "task": "RR07-attrs-ne-validator",
+      "repository": "attrs",
+      "parent": "f616f732c6c5f87a8f7a762176422baed250a6be",
+      "target": "5aa76a4450c311d87eda43946ec0ecd743572649",
+      "license": "MIT",
+      "license_evidence": [
+        {
+          "path": "LICENSE",
+          "sha256": "882115c95dfc2af1eeb6714f8ec6d5cbcabf667caff8729f42420da63f714e9f"
+        }
+      ],
+      "patch_sha256": "0ba287208e9177a50193445d2d3552bfacf8bc7403bf754bd8e5a29b3bd44af8",
+      "agent_actions_sha256": "71f69f925666bf62a6a7fefc7fb5aa204b714a5a67eb919dd8b15e97c2b8bf21",
+      "input_tree_sha256": "4b7fc21a8e64d25ad0d217e6882a90424f7d7c6ef739d7f9b3f9a2fec0a83b3f",
+      "source_tree_stats": {
+        "regular_files": 135,
+        "directories": 12,
+        "bytes": 2113953
+      },
+      "verifier_content_sha256": "feb997b91db2b088efcca2061ad3c63e3855960578a09f428247ebe426c6126f",
+      "patch_bytes": 4121
+    },
+    {
+      "task": "RR08-filelock-hostile-pid",
+      "repository": "filelock",
+      "parent": "4c6f32f2797b2883bbcb0cca1ee81211d3e09c12",
+      "target": "a5fb607a8655035bb6d5ae4326637e25cf1af849",
+      "license": "MIT",
+      "license_evidence": [
+        {
+          "path": "LICENSE",
+          "sha256": "608c89d5060ae9921adccf3236695bc654a9946e12323ef6c021dfa04e294d48"
+        }
+      ],
+      "patch_sha256": "4e97ff2c1e653573c151883a07a024b9a7a8d8b87ec71f5d494d5e2b41124412",
+      "agent_actions_sha256": "2e7ad683b8bbbc17ba537c4bb16b31bd494aef7b4738afb3226f355aacc19ad3",
+      "input_tree_sha256": "9a05e2750e28c3a514fd2159ff23e996ace91e8a7dd8fafcde84ef6063c5f7bf",
+      "source_tree_stats": {
+        "regular_files": 116,
+        "directories": 13,
+        "bytes": 1859680
+      },
+      "verifier_content_sha256": "705893f0b28c0f9ec9ff542a05bf5477e8c6dc26f795aaaff3f2eb47f7fbd32e",
+      "patch_bytes": 1282
+    },
+    {
+      "task": "RR09-iniconfig-strip-bom",
+      "repository": "iniconfig",
+      "parent": "40d8c03a1553953350d787e45f1cb768e2c14e6a",
+      "target": "d2dcb7289291e7e7019c183659814d42f7264b2d",
+      "license": "MIT",
+      "license_evidence": [
+        {
+          "path": "LICENSE",
+          "sha256": "3409fa91f7ace557894632676656e32264fe5ef7581535725dc9a23774551bd4"
+        }
+      ],
+      "patch_sha256": "fe333a2851b74b1e329659ae6d6f09085d804b0f893c9fd76a03c488d631e206",
+      "agent_actions_sha256": "7e8228bffa4a45d6fd6051e7b0f356751c951c0566d8917d90f4ecd6e8b5df8b",
+      "input_tree_sha256": "1954f7a6a5c389a7110dca3bb2b52e063a986dee08857fa71f422de999062b4d",
+      "source_tree_stats": {
+        "regular_files": 16,
+        "directories": 5,
+        "bytes": 58811
+      },
+      "verifier_content_sha256": "36d2a0d44fab21f78f4031abba1cdd2f90a0cc81b4a6512d6c7a2437ee04127d",
+      "patch_bytes": 690
+    },
+    {
+      "task": "RR10-pluggy-falsy-plugin",
+      "repository": "pluggy",
+      "parent": "0b7e46a29a5bc853b9b465f235175464fef740a0",
+      "target": "44474dd303ede8f22db180ca0a74e255b1fcfb2e",
+      "license": "MIT",
+      "license_evidence": [
+        {
+          "path": "LICENSE",
+          "sha256": "d6b65e6c213a5d0b577911d34d6e5949b9f59d76c238c5071a2f3fc16cfb2606"
+        }
+      ],
+      "patch_sha256": "8fa2582ecebbf686df3cc06c17db3f018f03e10c10b6c1135ad0fdc011958865",
+      "agent_actions_sha256": "824dfff19569cc83850d27d50006ec070e2fb20d79b461503cb83981b54be3ee",
+      "input_tree_sha256": "1ee5ac710bcd4eca8863797b247b9eb3fa262e543bfbdbf2b0e49ce7f3615304",
+      "source_tree_stats": {
+        "regular_files": 100,
+        "directories": 17,
+        "bytes": 375314
+      },
+      "verifier_content_sha256": "68ab7c26bb3469065758ca2a8a9ce0370516df5843b893536d3d0ad7b895fa1f",
+      "patch_bytes": 1484
+    },
+    {
+      "task": "RR11-iniconfig-inline-types-delete-stub",
+      "repository": "iniconfig",
+      "parent": "6bc5528789498c360577770cbb4bb779134ffce1",
+      "target": "f1d822822a10caa2999d3a9ec7ff13f849cae90d",
+      "license": "MIT",
+      "license_evidence": [],
+      "patch_sha256": "6a250ef27dd8570f9f9fb767cfa97e911ac41349305a27d8018dfaf19648d343",
+      "agent_actions_sha256": "57064e8b6daaa0d8c80e8ae3b82c641d8a7dd6f73227409e251164027304dda9",
+      "input_tree_sha256": "d7b49b9f94b9a0d601f963a35916898bfe10a588dbb758b41cab1a25ff0d53e9",
+      "source_tree_stats": {
+        "regular_files": 18,
+        "directories": 5,
+        "bytes": 22405
+      },
+      "verifier_content_sha256": "e3acfe8c63655e9db4d1feabfbaef885394cc55d774d34ff24856062b89d8c1c",
+      "patch_bytes": 11172
+    }
+  ]
+}

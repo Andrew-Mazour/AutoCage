@@ -1,0 +1,794 @@
+{
+  "baselines": {
+    "A": {
+      "agent_exit": 0,
+      "agent_timed_out": false,
+      "cost": {
+        "directory_entry_weight_total": 160,
+        "file_weight_total": 37,
+        "permission_rules": 1,
+        "recursive_directory_grants": 1,
+        "weighted_writable_exposure": 197,
+        "writable_directories": 16,
+        "writable_regular_files": 19
+      },
+      "elapsed_seconds": 0.08884965399920475,
+      "exit": 0,
+      "outcome": "verified",
+      "policy": [
+        [
+          "directory_tree",
+          "."
+        ]
+      ],
+      "replays": 1,
+      "run_dir": "/tmp/autocage-write-policy-v1-final-20261011-r2/runs/T22-root-atomic-package/A-broad",
+      "security": {
+        "host_access_probe": "PASS",
+        "host_access_probe_blocked": true,
+        "host_canary_unchanged": true,
+        "original_source_write_probe": "PASS",
+        "original_source_write_probe_blocked": true,
+        "pass": true,
+        "source_unchanged": true,
+        "status": "PASS",
+        "verifier_readonly_probe": "PASS",
+        "verifier_readonly_probe_blocked": true,
+        "verifier_snapshot_unchanged": true
+      },
+      "stderr": "",
+      "utility_pass": true,
+      "verifier_exit": 0,
+      "verifier_timed_out": false
+    },
+    "B": {
+      "agent_exit": 1,
+      "agent_timed_out": false,
+      "cost": {
+        "directory_entry_weight_total": 50,
+        "file_weight_total": 10,
+        "permission_rules": 2,
+        "recursive_directory_grants": 2,
+        "weighted_writable_exposure": 60,
+        "writable_directories": 5,
+        "writable_regular_files": 10
+      },
+      "elapsed_seconds": 0.04080457600139198,
+      "exit": 1,
+      "outcome": "agent_failed",
+      "policy": [
+        [
+          "directory_tree",
+          "src"
+        ],
+        [
+          "directory_tree",
+          "tests"
+        ]
+      ],
+      "replays": 1,
+      "run_dir": "/tmp/autocage-write-policy-v1-final-20261011-r2/runs/T22-root-atomic-package/B-static",
+      "security": {
+        "host_access_probe": "PASS",
+        "host_access_probe_blocked": true,
+        "host_canary_unchanged": true,
+        "original_source_write_probe": "PASS",
+        "original_source_write_probe_blocked": true,
+        "pass": false,
+        "source_unchanged": true,
+        "status": "NOT_TESTED",
+        "verifier_readonly_probe": "NOT_TESTED",
+        "verifier_readonly_probe_blocked": false,
+        "verifier_snapshot_unchanged": true
+      },
+      "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 20, in <module>\n  File \"/usr/lib/python3.12/pathlib.py\", line 1049, in write_text\n    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/pathlib.py\", line 1015, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nOSError: [Errno 30] Read-only file system: '/workspace/.package.tmp'\n",
+      "utility_pass": false,
+      "verifier_exit": null,
+      "verifier_timed_out": null
+    },
+    "C": {
+      "agent_exit": 1,
+      "agent_timed_out": false,
+      "cost": {
+        "directory_entry_weight_total": 0,
+        "file_weight_total": 11,
+        "permission_rules": 2,
+        "recursive_directory_grants": 0,
+        "weighted_writable_exposure": 11,
+        "writable_directories": 0,
+        "writable_regular_files": 2
+      },
+      "elapsed_seconds": 0.037663545001123566,
+      "exit": 1,
+      "outcome": "agent_failed",
+      "policy": [
+        [
+          "file_contents",
+          "oracle.txt"
+        ],
+        [
+          "file_contents",
+          "package.json"
+        ]
+      ],
+      "replays": 1,
+      "run_dir": "/tmp/autocage-write-policy-v1-final-20261011-r2/runs/T22-root-atomic-package/C-naive",
+      "security": {
+        "host_access_probe": "PASS",
+        "host_access_probe_blocked": true,
+        "host_canary_unchanged": true,
+        "original_source_write_probe": "PASS",
+        "original_source_write_probe_blocked": true,
+        "pass": false,
+        "source_unchanged": true,
+        "status": "NOT_TESTED",
+        "verifier_readonly_probe": "NOT_TESTED",
+        "verifier_readonly_probe_blocked": false,
+        "verifier_snapshot_unchanged": true
+      },
+      "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 20, in <module>\n  File \"/usr/lib/python3.12/pathlib.py\", line 1049, in write_text\n    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/pathlib.py\", line 1015, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nOSError: [Errno 30] Read-only file system: '/workspace/.package.tmp'\n",
+      "utility_pass": false,
+      "verifier_exit": null,
+      "verifier_timed_out": null
+    },
+    "M": {
+      "agent_exit": 0,
+      "agent_timed_out": false,
+      "cost": {
+        "directory_entry_weight_total": 160,
+        "file_weight_total": 37,
+        "permission_rules": 1,
+        "recursive_directory_grants": 1,
+        "weighted_writable_exposure": 197,
+        "writable_directories": 16,
+        "writable_regular_files": 19
+      },
+      "elapsed_seconds": 0.06254783300028066,
+      "exit": 0,
+      "outcome": "verified",
+      "policy": [
+        [
+          "directory_tree",
+          "."
+        ]
+      ],
+      "replays": 1,
+      "run_dir": "/tmp/autocage-write-policy-v1-final-20261011-r2/runs/T22-root-atomic-package/M-manual-oracle",
+      "security": {
+        "host_access_probe": "PASS",
+        "host_access_probe_blocked": true,
+        "host_canary_unchanged": true,
+        "original_source_write_probe": "PASS",
+        "original_source_write_probe_blocked": true,
+        "pass": true,
+        "source_unchanged": true,
+        "status": "PASS",
+        "verifier_readonly_probe": "PASS",
+        "verifier_readonly_probe_blocked": true,
+        "verifier_snapshot_unchanged": true
+      },
+      "stderr": "",
+      "utility_pass": true,
+      "verifier_exit": 0,
+      "verifier_timed_out": false
+    }
+  },
+  "optimizers": {
+    "D-greedy": {
+      "cost": {
+        "directory_entry_weight_total": 160,
+        "file_weight_total": 37,
+        "permission_rules": 1,
+        "recursive_directory_grants": 1,
+        "schema": "weighted-write-surface-v1",
+        "weighted_writable_exposure": 197,
+        "writable_directories": 16,
+        "writable_regular_files": 19
+      },
+      "elapsed_seconds": 0.16311909499927424,
+      "exit": 0,
+      "initial_broad_runs": 1,
+      "optimizer": {
+        "authorized_ceiling": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "directory_tree",
+              "path": "."
+            }
+          ]
+        },
+        "best_cost": {
+          "directory_entry_weight_total": 160,
+          "file_weight_total": 37,
+          "permission_rules": 1,
+          "recursive_directory_grants": 1,
+          "schema": "weighted-write-surface-v1",
+          "weighted_writable_exposure": 197,
+          "writable_directories": 16,
+          "writable_regular_files": 19
+        },
+        "best_policy": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "directory_tree",
+              "path": "."
+            }
+          ]
+        },
+        "ceiling_cost": {
+          "directory_entry_weight_total": 160,
+          "file_weight_total": 37,
+          "permission_rules": 1,
+          "recursive_directory_grants": 1,
+          "schema": "weighted-write-surface-v1",
+          "weighted_writable_exposure": 197,
+          "writable_directories": 16,
+          "writable_regular_files": 19
+        },
+        "optimization_elapsed_millis": 118,
+        "rejected_trials": 3,
+        "search_replays": 3,
+        "status": "inconclusive",
+        "strategy": "greedy",
+        "total_replays": 3,
+        "trials": [
+          {
+            "classification": "trial-000:agent_failed_exit_1:verifier_readonly_canary_not_tested",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 11,
+              "permission_rules": 2,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 11,
+              "writable_directories": 0,
+              "writable_regular_files": 2
+            },
+            "elapsed_millis": 38,
+            "passed": false,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "oracle.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "package.json"
+                }
+              ]
+            },
+            "security_canaries_passed": false
+          },
+          {
+            "classification": "trial-001:agent_failed_exit_1:verifier_readonly_canary_not_tested",
+            "cost": {
+              "directory_entry_weight_total": 150,
+              "file_weight_total": 37,
+              "permission_rules": 11,
+              "recursive_directory_grants": 8,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 187,
+              "writable_directories": 15,
+              "writable_regular_files": 19
+            },
+            "elapsed_millis": 40,
+            "passed": false,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "README.md"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "oracle.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "package.json"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": ".github"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "build"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "cache"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "config"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "docs"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "lib"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "src"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "tests"
+                }
+              ]
+            },
+            "security_canaries_passed": false
+          },
+          {
+            "classification": "trial-002:agent_failed_exit_1:verifier_readonly_canary_not_tested",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 0,
+              "permission_rules": 0,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 0,
+              "writable_directories": 0,
+              "writable_regular_files": 0
+            },
+            "elapsed_millis": 38,
+            "passed": false,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": []
+            },
+            "security_canaries_passed": false
+          }
+        ],
+        "validation_replays": 0
+      },
+      "policy": [
+        {
+          "kind": "directory_tree",
+          "path": "."
+        }
+      ],
+      "search_replays": 3,
+      "security_canaries_passed": true,
+      "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 20, in <module>\n  File \"/usr/lib/python3.12/pathlib.py\", line 1049, in write_text\n    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/pathlib.py\", line 1015, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nOSError: [Errno 30] Read-only file system: '/workspace/.package.tmp'\nTraceback (most recent call last):\n  File \"<string>\", line 20, in <module>\n  File \"/usr/lib/python3.12/pathlib.py\", line 1049, in write_text\n    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/pathlib.py\", line 1015, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nOSError: [Errno 30] Read-only file system: '/workspace/.package.tmp'\nTraceback (most recent call last):\n  File \"<string>\", line 20, in <module>\n  File \"/usr/lib/python3.12/pathlib.py\", line 1049, in write_text\n    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/pathlib.py\", line 1015, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nOSError: [Errno 30] Read-only file system: '/workspace/.package.tmp'\n",
+      "stdout": "optimizer: greedy (inconclusive)\nweighted writable exposure: 197 -> 197 (0.0% reduction)\nauthorized ceiling: directory-tree:.\nretained writes: directory-tree:.\nwritable files: 19, recursive directory grants: 1, policy rules: 1\nreplays: 3 search + 0 final validation = 3; elapsed: 118 ms\n",
+      "total_executions_including_initial_broad": 4,
+      "total_optimizer_replays": 3,
+      "utility_pass": true,
+      "validation_replays": 0
+    },
+    "E-random": {
+      "cost": {
+        "directory_entry_weight_total": 160,
+        "file_weight_total": 37,
+        "permission_rules": 1,
+        "recursive_directory_grants": 1,
+        "schema": "weighted-write-surface-v1",
+        "weighted_writable_exposure": 197,
+        "writable_directories": 16,
+        "writable_regular_files": 19
+      },
+      "elapsed_seconds": 0.16848942899741814,
+      "exit": 0,
+      "initial_broad_runs": 1,
+      "optimizer": {
+        "authorized_ceiling": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "directory_tree",
+              "path": "."
+            }
+          ]
+        },
+        "best_cost": {
+          "directory_entry_weight_total": 160,
+          "file_weight_total": 37,
+          "permission_rules": 1,
+          "recursive_directory_grants": 1,
+          "schema": "weighted-write-surface-v1",
+          "weighted_writable_exposure": 197,
+          "writable_directories": 16,
+          "writable_regular_files": 19
+        },
+        "best_policy": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "directory_tree",
+              "path": "."
+            }
+          ]
+        },
+        "ceiling_cost": {
+          "directory_entry_weight_total": 160,
+          "file_weight_total": 37,
+          "permission_rules": 1,
+          "recursive_directory_grants": 1,
+          "schema": "weighted-write-surface-v1",
+          "weighted_writable_exposure": 197,
+          "writable_directories": 16,
+          "writable_regular_files": 19
+        },
+        "optimization_elapsed_millis": 120,
+        "rejected_trials": 3,
+        "search_replays": 3,
+        "status": "inconclusive",
+        "strategy": "random",
+        "total_replays": 3,
+        "trials": [
+          {
+            "classification": "trial-000:agent_failed_exit_1:verifier_readonly_canary_not_tested",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 11,
+              "permission_rules": 2,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 11,
+              "writable_directories": 0,
+              "writable_regular_files": 2
+            },
+            "elapsed_millis": 43,
+            "passed": false,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "oracle.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "package.json"
+                }
+              ]
+            },
+            "security_canaries_passed": false
+          },
+          {
+            "classification": "trial-001:agent_failed_exit_1:verifier_readonly_canary_not_tested",
+            "cost": {
+              "directory_entry_weight_total": 150,
+              "file_weight_total": 37,
+              "permission_rules": 11,
+              "recursive_directory_grants": 8,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 187,
+              "writable_directories": 15,
+              "writable_regular_files": 19
+            },
+            "elapsed_millis": 39,
+            "passed": false,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "README.md"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "oracle.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "package.json"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": ".github"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "build"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "cache"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "config"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "docs"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "lib"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "src"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "tests"
+                }
+              ]
+            },
+            "security_canaries_passed": false
+          },
+          {
+            "classification": "trial-002:agent_failed_exit_1:verifier_readonly_canary_not_tested",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 0,
+              "permission_rules": 0,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 0,
+              "writable_directories": 0,
+              "writable_regular_files": 0
+            },
+            "elapsed_millis": 37,
+            "passed": false,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": []
+            },
+            "security_canaries_passed": false
+          }
+        ],
+        "validation_replays": 0
+      },
+      "policy": [
+        {
+          "kind": "directory_tree",
+          "path": "."
+        }
+      ],
+      "search_replays": 3,
+      "security_canaries_passed": true,
+      "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 20, in <module>\n  File \"/usr/lib/python3.12/pathlib.py\", line 1049, in write_text\n    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/pathlib.py\", line 1015, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nOSError: [Errno 30] Read-only file system: '/workspace/.package.tmp'\nTraceback (most recent call last):\n  File \"<string>\", line 20, in <module>\n  File \"/usr/lib/python3.12/pathlib.py\", line 1049, in write_text\n    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/pathlib.py\", line 1015, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nOSError: [Errno 30] Read-only file system: '/workspace/.package.tmp'\nTraceback (most recent call last):\n  File \"<string>\", line 20, in <module>\n  File \"/usr/lib/python3.12/pathlib.py\", line 1049, in write_text\n    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/pathlib.py\", line 1015, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nOSError: [Errno 30] Read-only file system: '/workspace/.package.tmp'\n",
+      "stdout": "optimizer: random (inconclusive)\nweighted writable exposure: 197 -> 197 (0.0% reduction)\nauthorized ceiling: directory-tree:.\nretained writes: directory-tree:.\nwritable files: 19, recursive directory grants: 1, policy rules: 1\nreplays: 3 search + 0 final validation = 3; elapsed: 120 ms\n",
+      "total_executions_including_initial_broad": 4,
+      "total_optimizer_replays": 3,
+      "utility_pass": true,
+      "validation_replays": 0
+    },
+    "F-hierarchical": {
+      "cost": {
+        "directory_entry_weight_total": 160,
+        "file_weight_total": 37,
+        "permission_rules": 1,
+        "recursive_directory_grants": 1,
+        "schema": "weighted-write-surface-v1",
+        "weighted_writable_exposure": 197,
+        "writable_directories": 16,
+        "writable_regular_files": 19
+      },
+      "elapsed_seconds": 0.16198369400080992,
+      "exit": 0,
+      "initial_broad_runs": 1,
+      "optimizer": {
+        "authorized_ceiling": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "directory_tree",
+              "path": "."
+            }
+          ]
+        },
+        "best_cost": {
+          "directory_entry_weight_total": 160,
+          "file_weight_total": 37,
+          "permission_rules": 1,
+          "recursive_directory_grants": 1,
+          "schema": "weighted-write-surface-v1",
+          "weighted_writable_exposure": 197,
+          "writable_directories": 16,
+          "writable_regular_files": 19
+        },
+        "best_policy": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "directory_tree",
+              "path": "."
+            }
+          ]
+        },
+        "ceiling_cost": {
+          "directory_entry_weight_total": 160,
+          "file_weight_total": 37,
+          "permission_rules": 1,
+          "recursive_directory_grants": 1,
+          "schema": "weighted-write-surface-v1",
+          "weighted_writable_exposure": 197,
+          "writable_directories": 16,
+          "writable_regular_files": 19
+        },
+        "optimization_elapsed_millis": 116,
+        "rejected_trials": 3,
+        "search_replays": 3,
+        "status": "inconclusive",
+        "strategy": "hierarchical",
+        "total_replays": 3,
+        "trials": [
+          {
+            "classification": "trial-000:agent_failed_exit_1:verifier_readonly_canary_not_tested",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 11,
+              "permission_rules": 2,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 11,
+              "writable_directories": 0,
+              "writable_regular_files": 2
+            },
+            "elapsed_millis": 38,
+            "passed": false,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "oracle.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "package.json"
+                }
+              ]
+            },
+            "security_canaries_passed": false
+          },
+          {
+            "classification": "trial-001:agent_failed_exit_1:verifier_readonly_canary_not_tested",
+            "cost": {
+              "directory_entry_weight_total": 150,
+              "file_weight_total": 37,
+              "permission_rules": 11,
+              "recursive_directory_grants": 8,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 187,
+              "writable_directories": 15,
+              "writable_regular_files": 19
+            },
+            "elapsed_millis": 39,
+            "passed": false,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "README.md"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "oracle.txt"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "package.json"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": ".github"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "build"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "cache"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "config"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "docs"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "lib"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "src"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "tests"
+                }
+              ]
+            },
+            "security_canaries_passed": false
+          },
+          {
+            "classification": "trial-002:agent_failed_exit_1:verifier_readonly_canary_not_tested",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 0,
+              "permission_rules": 0,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 0,
+              "writable_directories": 0,
+              "writable_regular_files": 0
+            },
+            "elapsed_millis": 38,
+            "passed": false,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": []
+            },
+            "security_canaries_passed": false
+          }
+        ],
+        "validation_replays": 0
+      },
+      "policy": [
+        {
+          "kind": "directory_tree",
+          "path": "."
+        }
+      ],
+      "search_replays": 3,
+      "security_canaries_passed": true,
+      "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 20, in <module>\n  File \"/usr/lib/python3.12/pathlib.py\", line 1049, in write_text\n    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/pathlib.py\", line 1015, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nOSError: [Errno 30] Read-only file system: '/workspace/.package.tmp'\nTraceback (most recent call last):\n  File \"<string>\", line 20, in <module>\n  File \"/usr/lib/python3.12/pathlib.py\", line 1049, in write_text\n    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/pathlib.py\", line 1015, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nOSError: [Errno 30] Read-only file system: '/workspace/.package.tmp'\nTraceback (most recent call last):\n  File \"<string>\", line 20, in <module>\n  File \"/usr/lib/python3.12/pathlib.py\", line 1049, in write_text\n    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/pathlib.py\", line 1015, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nOSError: [Errno 30] Read-only file system: '/workspace/.package.tmp'\n",
+      "stdout": "optimizer: hierarchical (inconclusive)\nweighted writable exposure: 197 -> 197 (0.0% reduction)\nauthorized ceiling: directory-tree:.\nretained writes: directory-tree:.\nwritable files: 19, recursive directory grants: 1, policy rules: 1\nreplays: 3 search + 0 final validation = 3; elapsed: 116 ms\n",
+      "total_executions_including_initial_broad": 4,
+      "total_optimizer_replays": 3,
+      "utility_pass": true,
+      "validation_replays": 0
+    }
+  },
+  "task": {
+    "expected_effects": [
+      "replace:package.json"
+    ],
+    "family": "high-impact-root",
+    "held_out": true,
+    "initial_source_sha256": "8196bec3523a9c0f8db243a385bc2712365f11b7544dadb6e44d84b682b7c18d",
+    "notes": "Atomic replacement at root forces namespace write at the root.",
+    "task_id": "T22-root-atomic-package"
+  }
+}

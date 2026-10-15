@@ -1,0 +1,98 @@
+{
+  "canary_runs": 72,
+  "canary_summary_by_method": {
+    "A": {
+      "all_controls_executed_and_classified": true,
+      "attempts": 96,
+      "blocked": 0,
+      "modified": 96
+    },
+    "B": {
+      "all_controls_executed_and_classified": true,
+      "attempts": 96,
+      "blocked": 96,
+      "modified": 0
+    },
+    "C": {
+      "all_controls_executed_and_classified": true,
+      "attempts": 96,
+      "blocked": 96,
+      "modified": 0
+    },
+    "D": {
+      "all_controls_executed_and_classified": true,
+      "attempts": 96,
+      "blocked": 96,
+      "modified": 0
+    },
+    "E": {
+      "all_controls_executed_and_classified": true,
+      "attempts": 48,
+      "blocked": 48,
+      "modified": 0
+    }
+  },
+  "exact_source_repeats": 48,
+  "postrun_tasks": 8,
+  "results_path": "/tmp/autocage-m36/results/v3-final/results.json",
+  "suite_id": "autocage-m36-preexecution-value-v3",
+  "summary_by_method": {
+    "A": {
+      "agent_child_elapsed_millis": 2898,
+      "bubblewrap_argument_compilation_millis": 0,
+      "conditional_median_reduction_percent": 0.0,
+      "conditional_median_weighted_exposure": 328.0,
+      "full_corpus_median_reduction_percent_zero_for_failures": 0.0,
+      "successful": 16,
+      "total": 16,
+      "total_cli_wall_millis": 7430,
+      "total_controller_wall_millis_including_source_fingerprints": 7595,
+      "utility_success_rate": 1.0,
+      "verifier_child_elapsed_millis": 2313,
+      "workspace_staging_millis": 1363
+    },
+    "B": {
+      "agent_child_elapsed_millis": 2811,
+      "bubblewrap_argument_compilation_millis": 0,
+      "conditional_median_reduction_percent": 100.0,
+      "conditional_median_weighted_exposure": 0.0,
+      "full_corpus_median_reduction_percent_zero_for_failures": 100.0,
+      "successful": 16,
+      "total": 16,
+      "total_cli_wall_millis": 7162,
+      "total_controller_wall_millis_including_source_fingerprints": 7327,
+      "utility_success_rate": 1.0,
+      "verifier_child_elapsed_millis": 2346,
+      "workspace_staging_millis": 1161
+    },
+    "C": {
+      "agent_child_elapsed_millis": 2824,
+      "bubblewrap_argument_compilation_millis": 0,
+      "conditional_median_reduction_percent": 100.0,
+      "conditional_median_weighted_exposure": 0.0,
+      "full_corpus_median_reduction_percent_zero_for_failures": 100.0,
+      "successful": 16,
+      "total": 16,
+      "total_cli_wall_millis": 7148,
+      "total_controller_wall_millis_including_source_fingerprints": 7307,
+      "utility_success_rate": 1.0,
+      "verifier_child_elapsed_millis": 2350,
+      "workspace_staging_millis": 1127
+    },
+    "D": {
+      "agent_child_elapsed_millis": 2833,
+      "bubblewrap_argument_compilation_millis": 0,
+      "conditional_median_reduction_percent": 100.0,
+      "conditional_median_weighted_exposure": 0.0,
+      "full_corpus_median_reduction_percent_zero_for_failures": 100.0,
+      "successful": 16,
+      "total": 16,
+      "total_cli_wall_millis": 7170,
+      "total_controller_wall_millis_including_source_fingerprints": 7334,
+      "utility_success_rate": 1.0,
+      "verifier_child_elapsed_millis": 2373,
+      "workspace_staging_millis": 1094
+    }
+  },
+  "task_runs": 64
+}

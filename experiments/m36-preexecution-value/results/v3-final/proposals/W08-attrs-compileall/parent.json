@@ -1,0 +1,42 @@
+{
+  "command": {
+    "argument_count": 7,
+    "argv_sha256": "a0a2957cdd25c7e6eca648055ed7f16f6457321057d1d56917a1ead8f23d0f71",
+    "executable_name": "env",
+    "executable_sha256": "d38fa7db8452a564868961fd5e9a0aa787095676b0fd6e497b766ac40ec65c8b"
+  },
+  "policy": {
+    "disable_nested_userns": true,
+    "network_access": false,
+    "schema_version": 1,
+    "write_grants": []
+  },
+  "private_temporary_storage": [
+    "/tmp (private tmpfs per child)"
+  ],
+  "read_only_areas": [
+    "pyproject.toml",
+    "src",
+    "tests",
+    "tox.ini"
+  ],
+  "recognized_behavior": [
+    "compileall bytecode cache is redirected under private /tmp"
+  ],
+  "rules": [
+    {
+      "decision": "leave the staged workspace readonly",
+      "evidence": [
+        "python-workflows-v1"
+      ],
+      "rationale": "recognized output is redirected to private /tmp; no workspace write grant is required by this profile"
+    }
+  ],
+  "ruleset": "python-workflows-v1",
+  "schema_version": 1,
+  "source_manifest_sha256": "fbf714577acd94023ad87c8c5dda1bee858a85159212abf54fcacc92782a49f1",
+  "unresolved_requirements": [
+    "only the declared compileall targets are analyzed; arbitrary build hooks are not inferred"
+  ],
+  "workflow": "python-compileall"
+}

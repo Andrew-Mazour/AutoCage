@@ -1,0 +1,1830 @@
+{
+  "authorized_ceiling": [
+    {
+      "kind": "directory_tree",
+      "path": "."
+    }
+  ],
+  "baseline_A": {
+    "agent_executions_including_shared_setup": 1,
+    "agent_exit_code": 0,
+    "agent_timed_out": false,
+    "cli_return_code": 0,
+    "controller_overhead_seconds_estimate": 0.2512641770046903,
+    "cost": {
+      "directory_entry_weight_total": 160,
+      "file_weight_total": 202,
+      "permission_rules": 1,
+      "recursive_directory_grants": 1,
+      "schema": "weighted-write-surface-v1",
+      "weighted_writable_exposure": 362,
+      "writable_directories": 16,
+      "writable_regular_files": 139
+    },
+    "fresh_validation_replays": 0,
+    "full_corpus_reduction_percent": 0.0,
+    "optimizer_total_replays": 0,
+    "optimizer_trials": [],
+    "outcome": "verified",
+    "policy": [
+      {
+        "kind": "directory_tree",
+        "path": "."
+      }
+    ],
+    "promotable": true,
+    "rejected_trials": 0,
+    "replay_security_not_tested": 0,
+    "replay_security_passes": 0,
+    "search_replays": 0,
+    "security": {
+      "agent_canary_exit": 0,
+      "agent_escape_probe": "PASS",
+      "host_canary_controller": "PASS",
+      "network_positive_control": "PASS",
+      "network_sandbox_connections": 0,
+      "original_source_controller": "PASS",
+      "readonly_mount_runtime_probe": "PASSED",
+      "status": "PASS",
+      "verifier_executed": true,
+      "verifier_fixture_controller": "PASS"
+    },
+    "status": "verified",
+    "stderr_sha256": "509f405d5cb21881c89d089bdfefb5ca2134786724ec055ce4b049523c8b5042",
+    "strategy": "A",
+    "successful_task_reduction_percent": 0.0,
+    "task_process_seconds": 0.044,
+    "timeouts": 0,
+    "trial_failures": 0,
+    "utility_pass": true,
+    "verifier_executions_including_shared_setup": 1,
+    "verifier_exit_code": 0,
+    "verifier_process_seconds": 0.207,
+    "verifier_timed_out": false,
+    "wall_seconds_attributed": 0.5022641770046903
+  },
+  "baseline_cost": {
+    "directory_entry_weight_total": 160,
+    "file_weight_total": 202,
+    "permission_rules": 1,
+    "recursive_directory_grants": 1,
+    "schema": "weighted-write-surface-v1",
+    "weighted_writable_exposure": 362,
+    "writable_directories": 16,
+    "writable_regular_files": 139
+  },
+  "baselines": {
+    "A": {
+      "agent_executions_including_shared_setup": 1,
+      "agent_exit_code": 0,
+      "agent_timed_out": false,
+      "cli_return_code": 0,
+      "controller_overhead_seconds_estimate": 0.2512641770046903,
+      "cost": {
+        "directory_entry_weight_total": 160,
+        "file_weight_total": 202,
+        "permission_rules": 1,
+        "recursive_directory_grants": 1,
+        "schema": "weighted-write-surface-v1",
+        "weighted_writable_exposure": 362,
+        "writable_directories": 16,
+        "writable_regular_files": 139
+      },
+      "fresh_validation_replays": 0,
+      "full_corpus_reduction_percent": 0.0,
+      "optimizer_total_replays": 0,
+      "optimizer_trials": [],
+      "outcome": "verified",
+      "policy": [
+        {
+          "kind": "directory_tree",
+          "path": "."
+        }
+      ],
+      "promotable": true,
+      "rejected_trials": 0,
+      "replay_security_not_tested": 0,
+      "replay_security_passes": 0,
+      "search_replays": 0,
+      "security": {
+        "agent_canary_exit": 0,
+        "agent_escape_probe": "PASS",
+        "host_canary_controller": "PASS",
+        "network_positive_control": "PASS",
+        "network_sandbox_connections": 0,
+        "original_source_controller": "PASS",
+        "readonly_mount_runtime_probe": "PASSED",
+        "status": "PASS",
+        "verifier_executed": true,
+        "verifier_fixture_controller": "PASS"
+      },
+      "status": "verified",
+      "stderr_sha256": "509f405d5cb21881c89d089bdfefb5ca2134786724ec055ce4b049523c8b5042",
+      "strategy": "A",
+      "successful_task_reduction_percent": 0.0,
+      "task_process_seconds": 0.044,
+      "timeouts": 0,
+      "trial_failures": 0,
+      "utility_pass": true,
+      "verifier_executions_including_shared_setup": 1,
+      "verifier_exit_code": 0,
+      "verifier_process_seconds": 0.207,
+      "verifier_timed_out": false,
+      "wall_seconds_attributed": 0.5022641770046903
+    },
+    "B": {
+      "agent_executions_including_shared_setup": 1,
+      "agent_exit_code": 0,
+      "agent_timed_out": false,
+      "cli_return_code": 3,
+      "controller_overhead_seconds_estimate": 0.18110501800442583,
+      "cost": {
+        "directory_entry_weight_total": 110,
+        "file_weight_total": 111,
+        "permission_rules": 5,
+        "recursive_directory_grants": 3,
+        "schema": "weighted-write-surface-v1",
+        "weighted_writable_exposure": 221,
+        "writable_directories": 11,
+        "writable_regular_files": 102
+      },
+      "fresh_validation_replays": 0,
+      "full_corpus_reduction_percent": 0.0,
+      "optimizer_total_replays": 0,
+      "optimizer_trials": [],
+      "outcome": "verifier_failed",
+      "policy": [
+        {
+          "kind": "file_contents",
+          "path": "README.rst"
+        },
+        {
+          "kind": "file_contents",
+          "path": "pyproject.toml"
+        },
+        {
+          "kind": "directory_tree",
+          "path": "docs"
+        },
+        {
+          "kind": "directory_tree",
+          "path": "src"
+        },
+        {
+          "kind": "directory_tree",
+          "path": "tests"
+        }
+      ],
+      "promotable": false,
+      "rejected_trials": 0,
+      "replay_security_not_tested": 0,
+      "replay_security_passes": 0,
+      "search_replays": 0,
+      "security": {
+        "agent_canary_exit": 0,
+        "agent_escape_probe": "PASS",
+        "host_canary_controller": "PASS",
+        "network_positive_control": "PASS",
+        "network_sandbox_connections": 0,
+        "original_source_controller": "PASS",
+        "readonly_mount_runtime_probe": "PASSED",
+        "status": "PASS",
+        "verifier_executed": true,
+        "verifier_fixture_controller": "PASS"
+      },
+      "status": "verifier_failed",
+      "stderr_sha256": "470429dc5d79dadb46f29ec4023d3a0a20c200c142d68d7685df6b209a2fc371",
+      "strategy": "B",
+      "successful_task_reduction_percent": null,
+      "task_process_seconds": 0.046,
+      "timeouts": 0,
+      "trial_failures": 0,
+      "utility_pass": false,
+      "verifier_executions_including_shared_setup": 1,
+      "verifier_exit_code": 1,
+      "verifier_process_seconds": 0.206,
+      "verifier_timed_out": false,
+      "wall_seconds_attributed": 0.4331050180044258
+    },
+    "C": {
+      "agent_executions_including_shared_setup": 2,
+      "agent_exit_code": 0,
+      "agent_timed_out": false,
+      "cli_return_code": 0,
+      "controller_overhead_seconds_estimate": 0.6852493190065725,
+      "cost": {
+        "directory_entry_weight_total": 160,
+        "file_weight_total": 202,
+        "permission_rules": 1,
+        "recursive_directory_grants": 1,
+        "schema": "weighted-write-surface-v1",
+        "weighted_writable_exposure": 362,
+        "writable_directories": 16,
+        "writable_regular_files": 139
+      },
+      "fresh_validation_replays": 0,
+      "full_corpus_reduction_percent": 0.0,
+      "optimizer_total_replays": 0,
+      "optimizer_trials": [],
+      "outcome": "verified",
+      "policy": [
+        {
+          "kind": "directory_tree",
+          "path": "."
+        }
+      ],
+      "promotable": true,
+      "rejected_trials": 0,
+      "replay_security_not_tested": 0,
+      "replay_security_passes": 0,
+      "search_replays": 0,
+      "security": {
+        "agent_canary_exit": 0,
+        "agent_escape_probe": "PASS",
+        "host_canary_controller": "PASS",
+        "network_positive_control": "PASS",
+        "network_sandbox_connections": 0,
+        "original_source_controller": "PASS",
+        "readonly_mount_runtime_probe": "PASSED",
+        "status": "PASS",
+        "verifier_executed": true,
+        "verifier_fixture_controller": "PASS"
+      },
+      "status": "verified",
+      "stderr_sha256": "509f405d5cb21881c89d089bdfefb5ca2134786724ec055ce4b049523c8b5042",
+      "strategy": "C",
+      "successful_task_reduction_percent": 0.0,
+      "task_process_seconds": 0.042,
+      "timeouts": 0,
+      "trial_failures": 0,
+      "utility_pass": true,
+      "verifier_executions_including_shared_setup": 2,
+      "verifier_exit_code": 0,
+      "verifier_process_seconds": 0.196,
+      "verifier_timed_out": false,
+      "wall_seconds_attributed": 0.9232493190065725
+    },
+    "M": {
+      "agent_executions_including_shared_setup": 1,
+      "agent_exit_code": 0,
+      "agent_timed_out": false,
+      "cli_return_code": 3,
+      "controller_overhead_seconds_estimate": 0.18078679501032457,
+      "cost": {
+        "directory_entry_weight_total": 0,
+        "file_weight_total": 1,
+        "permission_rules": 1,
+        "recursive_directory_grants": 0,
+        "schema": "weighted-write-surface-v1",
+        "weighted_writable_exposure": 1,
+        "writable_directories": 0,
+        "writable_regular_files": 1
+      },
+      "fresh_validation_replays": 0,
+      "full_corpus_reduction_percent": 0.0,
+      "optimizer_total_replays": 0,
+      "optimizer_trials": [],
+      "outcome": "verifier_failed",
+      "policy": [
+        {
+          "kind": "file_contents",
+          "path": "src/packaging/pylock.py"
+        }
+      ],
+      "promotable": false,
+      "rejected_trials": 0,
+      "replay_security_not_tested": 0,
+      "replay_security_passes": 0,
+      "search_replays": 0,
+      "security": {
+        "agent_canary_exit": 0,
+        "agent_escape_probe": "PASS",
+        "host_canary_controller": "PASS",
+        "network_positive_control": "PASS",
+        "network_sandbox_connections": 0,
+        "original_source_controller": "PASS",
+        "readonly_mount_runtime_probe": "PASSED",
+        "status": "PASS",
+        "verifier_executed": true,
+        "verifier_fixture_controller": "PASS"
+      },
+      "status": "verifier_failed",
+      "stderr_sha256": "4ade7575d519efaeab32dbc4ec0195b8b0fd7f0aa80355bfb289938f69d02736",
+      "strategy": "M",
+      "successful_task_reduction_percent": null,
+      "task_process_seconds": 0.042,
+      "timeouts": 0,
+      "trial_failures": 0,
+      "utility_pass": false,
+      "verifier_executions_including_shared_setup": 1,
+      "verifier_exit_code": 1,
+      "verifier_process_seconds": 0.2,
+      "verifier_timed_out": false,
+      "wall_seconds_attributed": 0.42278679501032457
+    }
+  },
+  "exact_contract_repeats": {
+    "B": [
+      {
+        "agent_seconds": 0.047,
+        "cli_wall_seconds": 0.5768530420027673,
+        "execution_identity_matches": true,
+        "policy": [
+          {
+            "kind": "file_contents",
+            "path": "README.rst"
+          },
+          {
+            "kind": "file_contents",
+            "path": "pyproject.toml"
+          },
+          {
+            "kind": "directory_tree",
+            "path": "docs"
+          },
+          {
+            "kind": "directory_tree",
+            "path": "src"
+          },
+          {
+            "kind": "directory_tree",
+            "path": "tests"
+          }
+        ],
+        "repeat": 1,
+        "security": {
+          "agent_canary_exit": 0,
+          "agent_escape_probe": "PASS",
+          "host_canary_controller": "PASS",
+          "network_positive_control": "PASS",
+          "network_sandbox_connections": 0,
+          "original_source_controller": "PASS",
+          "readonly_mount_runtime_probe": "PASSED",
+          "status": "PASS",
+          "verifier_executed": true,
+          "verifier_fixture_controller": "PASS"
+        },
+        "utility_pass": false,
+        "verifier_seconds": 0.253
+      },
+      {
+        "agent_seconds": 0.041,
+        "cli_wall_seconds": 0.5652454009978101,
+        "execution_identity_matches": true,
+        "policy": [
+          {
+            "kind": "file_contents",
+            "path": "README.rst"
+          },
+          {
+            "kind": "file_contents",
+            "path": "pyproject.toml"
+          },
+          {
+            "kind": "directory_tree",
+            "path": "docs"
+          },
+          {
+            "kind": "directory_tree",
+            "path": "src"
+          },
+          {
+            "kind": "directory_tree",
+            "path": "tests"
+          }
+        ],
+        "repeat": 2,
+        "security": {
+          "agent_canary_exit": 0,
+          "agent_escape_probe": "PASS",
+          "host_canary_controller": "PASS",
+          "network_positive_control": "PASS",
+          "network_sandbox_connections": 0,
+          "original_source_controller": "PASS",
+          "readonly_mount_runtime_probe": "PASSED",
+          "status": "PASS",
+          "verifier_executed": true,
+          "verifier_fixture_controller": "PASS"
+        },
+        "utility_pass": false,
+        "verifier_seconds": 0.252
+      },
+      {
+        "agent_seconds": 0.044,
+        "cli_wall_seconds": 0.559391800998128,
+        "execution_identity_matches": true,
+        "policy": [
+          {
+            "kind": "file_contents",
+            "path": "README.rst"
+          },
+          {
+            "kind": "file_contents",
+            "path": "pyproject.toml"
+          },
+          {
+            "kind": "directory_tree",
+            "path": "docs"
+          },
+          {
+            "kind": "directory_tree",
+            "path": "src"
+          },
+          {
+            "kind": "directory_tree",
+            "path": "tests"
+          }
+        ],
+        "repeat": 3,
+        "security": {
+          "agent_canary_exit": 0,
+          "agent_escape_probe": "PASS",
+          "host_canary_controller": "PASS",
+          "network_positive_control": "PASS",
+          "network_sandbox_connections": 0,
+          "original_source_controller": "PASS",
+          "readonly_mount_runtime_probe": "PASSED",
+          "status": "PASS",
+          "verifier_executed": true,
+          "verifier_fixture_controller": "PASS"
+        },
+        "utility_pass": false,
+        "verifier_seconds": 0.245
+      }
+    ],
+    "F": []
+  },
+  "execution_status": "COMPLETED",
+  "host_loopback_positive_control": "PASS",
+  "independent_controller_checks": {
+    "host_canary_unchanged": "PASS",
+    "source_unchanged": "PASS",
+    "verifier_fixture_unchanged": "PASS"
+  },
+  "input_tree_sha256": "6ec83390c9baefa8a835b1efe5942acd76d2002ebb21e24e2f074c73f93d81cd",
+  "license": "Apache-2.0 OR BSD-2-Clause",
+  "m35_workflow_operations": [],
+  "manual_policy": [
+    {
+      "kind": "file_contents",
+      "path": "src/packaging/pylock.py"
+    }
+  ],
+  "naive_changed_policy": [
+    {
+      "kind": "directory_tree",
+      "path": "."
+    }
+  ],
+  "optimizer_seal_inspection": {
+    "accepted_for_repeat": false,
+    "return_code": 0,
+    "reusable_policy": false,
+    "stderr": "",
+    "validation": "SEALED"
+  },
+  "optimizers": {
+    "D": {
+      "agent_executions_including_shared_setup": 3,
+      "agent_exit_code": null,
+      "agent_timed_out": null,
+      "cli_return_code": 0,
+      "controller_overhead_seconds_estimate": 0.8565207860005319,
+      "cost": {
+        "directory_entry_weight_total": 160,
+        "file_weight_total": 202,
+        "permission_rules": 1,
+        "recursive_directory_grants": 1,
+        "schema": "weighted-write-surface-v1",
+        "weighted_writable_exposure": 362,
+        "writable_directories": 16,
+        "writable_regular_files": 139
+      },
+      "fresh_validation_replays": 0,
+      "full_corpus_reduction_percent": 0.0,
+      "optimizer_total_replays": 2,
+      "optimizer_trials": [
+        {
+          "classification": "trial-000:verifier_failed_exit_1:required_security_checks_passed",
+          "cost": {
+            "directory_entry_weight_total": 150,
+            "file_weight_total": 202,
+            "permission_rules": 19,
+            "recursive_directory_grants": 6,
+            "schema": "weighted-write-surface-v1",
+            "weighted_writable_exposure": 352,
+            "writable_directories": 15,
+            "writable_regular_files": 139
+          },
+          "elapsed_millis": 457,
+          "passed": false,
+          "policy": {
+            "disable_nested_userns": true,
+            "network_access": false,
+            "schema_version": 1,
+            "write_grants": [
+              {
+                "kind": "file_contents",
+                "path": ".gitignore"
+              },
+              {
+                "kind": "file_contents",
+                "path": ".pre-commit-config.yaml"
+              },
+              {
+                "kind": "file_contents",
+                "path": ".readthedocs.yml"
+              },
+              {
+                "kind": "file_contents",
+                "path": "CHANGELOG.rst"
+              },
+              {
+                "kind": "file_contents",
+                "path": "CONTRIBUTING.rst"
+              },
+              {
+                "kind": "file_contents",
+                "path": "LICENSE"
+              },
+              {
+                "kind": "file_contents",
+                "path": "LICENSE.APACHE"
+              },
+              {
+                "kind": "file_contents",
+                "path": "LICENSE.BSD"
+              },
+              {
+                "kind": "file_contents",
+                "path": "README.rst"
+              },
+              {
+                "kind": "file_contents",
+                "path": "SECURITY.md"
+              },
+              {
+                "kind": "file_contents",
+                "path": "asv.conf.json"
+              },
+              {
+                "kind": "file_contents",
+                "path": "noxfile.py"
+              },
+              {
+                "kind": "file_contents",
+                "path": "pyproject.toml"
+              },
+              {
+                "kind": "directory_tree",
+                "path": ".github"
+              },
+              {
+                "kind": "directory_tree",
+                "path": "benchmarks"
+              },
+              {
+                "kind": "directory_tree",
+                "path": "docs"
+              },
+              {
+                "kind": "directory_tree",
+                "path": "src"
+              },
+              {
+                "kind": "directory_tree",
+                "path": "tasks"
+              },
+              {
+                "kind": "directory_tree",
+                "path": "tests"
+              }
+            ]
+          },
+          "security_canaries_passed": true,
+          "security_checks": [
+            {
+              "evidence": "preflight succeeded before the task process was launched",
+              "name": "required_namespace_preflight",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "candidate policy was checked against the recorded ceiling",
+              "name": "authorized_ceiling_subset",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "before/after source manifest digests matched",
+              "name": "source_checkout_unchanged",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "probe exit 0; canary unchanged=true",
+              "name": "readonly_mount_write_denial",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "host-side canary is supplied by the independent integration/benchmark controller",
+              "name": "external_host_canary",
+              "required_for_policy_promotion": false,
+              "status": "not_tested"
+            }
+          ]
+        },
+        {
+          "classification": "trial-001:agent_failed_exit_1:required_security_checks_passed",
+          "cost": {
+            "directory_entry_weight_total": 0,
+            "file_weight_total": 0,
+            "permission_rules": 0,
+            "recursive_directory_grants": 0,
+            "schema": "weighted-write-surface-v1",
+            "weighted_writable_exposure": 0,
+            "writable_directories": 0,
+            "writable_regular_files": 0
+          },
+          "elapsed_millis": 231,
+          "passed": false,
+          "policy": {
+            "disable_nested_userns": true,
+            "network_access": false,
+            "schema_version": 1,
+            "write_grants": []
+          },
+          "security_canaries_passed": true,
+          "security_checks": [
+            {
+              "evidence": "preflight succeeded before the task process was launched",
+              "name": "required_namespace_preflight",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "candidate policy was checked against the recorded ceiling",
+              "name": "authorized_ceiling_subset",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "before/after source manifest digests matched",
+              "name": "source_checkout_unchanged",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "probe exit 0; canary unchanged=true",
+              "name": "readonly_mount_write_denial",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "host-side canary is supplied by the independent integration/benchmark controller",
+              "name": "external_host_canary",
+              "required_for_policy_promotion": false,
+              "status": "not_tested"
+            }
+          ]
+        }
+      ],
+      "outcome": "optimizer_trials",
+      "policy": [
+        {
+          "kind": "directory_tree",
+          "path": "."
+        }
+      ],
+      "promotable": false,
+      "rejected_trials": 2,
+      "replay_security": [
+        {
+          "agent_canary_exit": 0,
+          "agent_escape_probe": "PASS",
+          "agent_exit_code": 0,
+          "host_canary_controller": "PASS",
+          "network_positive_control": "PASS",
+          "network_sandbox_connections": 0,
+          "original_source_controller": "PASS",
+          "readonly_mount_runtime_probe": "PASSED",
+          "run_outcome": "verifier_failed",
+          "status": "PASS",
+          "trial": "trial-000",
+          "verifier_executed": true,
+          "verifier_exit_code": 1,
+          "verifier_fixture_controller": "PASS"
+        },
+        {
+          "agent_canary_exit": 1,
+          "agent_escape_probe": "PASS",
+          "agent_exit_code": 1,
+          "host_canary_controller": "PASS",
+          "network_positive_control": "PASS",
+          "network_sandbox_connections": 0,
+          "original_source_controller": "PASS",
+          "readonly_mount_runtime_probe": "PASSED",
+          "run_outcome": "agent_failed",
+          "status": "NOT_TESTED",
+          "trial": "trial-001",
+          "verifier_executed": false,
+          "verifier_exit_code": null,
+          "verifier_fixture_controller": "PASS"
+        }
+      ],
+      "replay_security_not_tested": 1,
+      "replay_security_passes": 1,
+      "search_replays": 2,
+      "security": {
+        "evidence": [],
+        "fresh_validation_canaries": 0,
+        "status": "NOT_TESTED"
+      },
+      "status": "inconclusive",
+      "stderr_sha256": "b87fe19c06e5303bb8f8aeefb4b7cfb219bd6e75739f4c11f9351bc66adac77a",
+      "strategy": "D",
+      "successful_task_reduction_percent": null,
+      "task_process_seconds": 0.132,
+      "timeouts": 0,
+      "trial_failures": 2,
+      "utility_pass": false,
+      "verifier_executions_including_shared_setup": 2,
+      "verifier_exit_code": null,
+      "verifier_process_seconds": 0.419,
+      "verifier_timed_out": null,
+      "wall_seconds_attributed": 1.407520786000532
+    },
+    "E": {
+      "agent_executions_including_shared_setup": 3,
+      "agent_exit_code": null,
+      "agent_timed_out": null,
+      "cli_return_code": 0,
+      "controller_overhead_seconds_estimate": 0.8575567299947142,
+      "cost": {
+        "directory_entry_weight_total": 160,
+        "file_weight_total": 202,
+        "permission_rules": 1,
+        "recursive_directory_grants": 1,
+        "schema": "weighted-write-surface-v1",
+        "weighted_writable_exposure": 362,
+        "writable_directories": 16,
+        "writable_regular_files": 139
+      },
+      "fresh_validation_replays": 0,
+      "full_corpus_reduction_percent": 0.0,
+      "optimizer_total_replays": 2,
+      "optimizer_trials": [
+        {
+          "classification": "trial-000:verifier_failed_exit_1:required_security_checks_passed",
+          "cost": {
+            "directory_entry_weight_total": 150,
+            "file_weight_total": 202,
+            "permission_rules": 19,
+            "recursive_directory_grants": 6,
+            "schema": "weighted-write-surface-v1",
+            "weighted_writable_exposure": 352,
+            "writable_directories": 15,
+            "writable_regular_files": 139
+          },
+          "elapsed_millis": 446,
+          "passed": false,
+          "policy": {
+            "disable_nested_userns": true,
+            "network_access": false,
+            "schema_version": 1,
+            "write_grants": [
+              {
+                "kind": "file_contents",
+                "path": ".gitignore"
+              },
+              {
+                "kind": "file_contents",
+                "path": ".pre-commit-config.yaml"
+              },
+              {
+                "kind": "file_contents",
+                "path": ".readthedocs.yml"
+              },
+              {
+                "kind": "file_contents",
+                "path": "CHANGELOG.rst"
+              },
+              {
+                "kind": "file_contents",
+                "path": "CONTRIBUTING.rst"
+              },
+              {
+                "kind": "file_contents",
+                "path": "LICENSE"
+              },
+              {
+                "kind": "file_contents",
+                "path": "LICENSE.APACHE"
+              },
+              {
+                "kind": "file_contents",
+                "path": "LICENSE.BSD"
+              },
+              {
+                "kind": "file_contents",
+                "path": "README.rst"
+              },
+              {
+                "kind": "file_contents",
+                "path": "SECURITY.md"
+              },
+              {
+                "kind": "file_contents",
+                "path": "asv.conf.json"
+              },
+              {
+                "kind": "file_contents",
+                "path": "noxfile.py"
+              },
+              {
+                "kind": "file_contents",
+                "path": "pyproject.toml"
+              },
+              {
+                "kind": "directory_tree",
+                "path": ".github"
+              },
+              {
+                "kind": "directory_tree",
+                "path": "benchmarks"
+              },
+              {
+                "kind": "directory_tree",
+                "path": "docs"
+              },
+              {
+                "kind": "directory_tree",
+                "path": "src"
+              },
+              {
+                "kind": "directory_tree",
+                "path": "tasks"
+              },
+              {
+                "kind": "directory_tree",
+                "path": "tests"
+              }
+            ]
+          },
+          "security_canaries_passed": true,
+          "security_checks": [
+            {
+              "evidence": "preflight succeeded before the task process was launched",
+              "name": "required_namespace_preflight",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "candidate policy was checked against the recorded ceiling",
+              "name": "authorized_ceiling_subset",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "before/after source manifest digests matched",
+              "name": "source_checkout_unchanged",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "probe exit 0; canary unchanged=true",
+              "name": "readonly_mount_write_denial",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "host-side canary is supplied by the independent integration/benchmark controller",
+              "name": "external_host_canary",
+              "required_for_policy_promotion": false,
+              "status": "not_tested"
+            }
+          ]
+        },
+        {
+          "classification": "trial-001:agent_failed_exit_1:required_security_checks_passed",
+          "cost": {
+            "directory_entry_weight_total": 0,
+            "file_weight_total": 0,
+            "permission_rules": 0,
+            "recursive_directory_grants": 0,
+            "schema": "weighted-write-surface-v1",
+            "weighted_writable_exposure": 0,
+            "writable_directories": 0,
+            "writable_regular_files": 0
+          },
+          "elapsed_millis": 239,
+          "passed": false,
+          "policy": {
+            "disable_nested_userns": true,
+            "network_access": false,
+            "schema_version": 1,
+            "write_grants": []
+          },
+          "security_canaries_passed": true,
+          "security_checks": [
+            {
+              "evidence": "preflight succeeded before the task process was launched",
+              "name": "required_namespace_preflight",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "candidate policy was checked against the recorded ceiling",
+              "name": "authorized_ceiling_subset",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "before/after source manifest digests matched",
+              "name": "source_checkout_unchanged",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "probe exit 0; canary unchanged=true",
+              "name": "readonly_mount_write_denial",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "host-side canary is supplied by the independent integration/benchmark controller",
+              "name": "external_host_canary",
+              "required_for_policy_promotion": false,
+              "status": "not_tested"
+            }
+          ]
+        }
+      ],
+      "outcome": "optimizer_trials",
+      "policy": [
+        {
+          "kind": "directory_tree",
+          "path": "."
+        }
+      ],
+      "promotable": false,
+      "rejected_trials": 2,
+      "replay_security": [
+        {
+          "agent_canary_exit": 0,
+          "agent_escape_probe": "PASS",
+          "agent_exit_code": 0,
+          "host_canary_controller": "PASS",
+          "network_positive_control": "PASS",
+          "network_sandbox_connections": 0,
+          "original_source_controller": "PASS",
+          "readonly_mount_runtime_probe": "PASSED",
+          "run_outcome": "verifier_failed",
+          "status": "PASS",
+          "trial": "trial-000",
+          "verifier_executed": true,
+          "verifier_exit_code": 1,
+          "verifier_fixture_controller": "PASS"
+        },
+        {
+          "agent_canary_exit": 1,
+          "agent_escape_probe": "PASS",
+          "agent_exit_code": 1,
+          "host_canary_controller": "PASS",
+          "network_positive_control": "PASS",
+          "network_sandbox_connections": 0,
+          "original_source_controller": "PASS",
+          "readonly_mount_runtime_probe": "PASSED",
+          "run_outcome": "agent_failed",
+          "status": "NOT_TESTED",
+          "trial": "trial-001",
+          "verifier_executed": false,
+          "verifier_exit_code": null,
+          "verifier_fixture_controller": "PASS"
+        }
+      ],
+      "replay_security_not_tested": 1,
+      "replay_security_passes": 1,
+      "search_replays": 2,
+      "security": {
+        "evidence": [],
+        "fresh_validation_canaries": 0,
+        "status": "NOT_TESTED"
+      },
+      "status": "inconclusive",
+      "stderr_sha256": "8339627507d298e6812b4056aaa677ec6390ea854bb487d75a1a4d9087c68dd0",
+      "strategy": "E",
+      "successful_task_reduction_percent": null,
+      "task_process_seconds": 0.133,
+      "timeouts": 0,
+      "trial_failures": 2,
+      "utility_pass": false,
+      "verifier_executions_including_shared_setup": 2,
+      "verifier_exit_code": null,
+      "verifier_process_seconds": 0.415,
+      "verifier_timed_out": null,
+      "wall_seconds_attributed": 1.4055567299947143
+    },
+    "F": {
+      "agent_executions_including_shared_setup": 3,
+      "agent_exit_code": null,
+      "agent_timed_out": null,
+      "cli_return_code": 0,
+      "controller_overhead_seconds_estimate": 0.8927800269968575,
+      "cost": {
+        "directory_entry_weight_total": 160,
+        "file_weight_total": 202,
+        "permission_rules": 1,
+        "recursive_directory_grants": 1,
+        "schema": "weighted-write-surface-v1",
+        "weighted_writable_exposure": 362,
+        "writable_directories": 16,
+        "writable_regular_files": 139
+      },
+      "fresh_validation_replays": 0,
+      "full_corpus_reduction_percent": 0.0,
+      "optimizer_total_replays": 2,
+      "optimizer_trials": [
+        {
+          "classification": "trial-000:verifier_failed_exit_1:required_security_checks_passed",
+          "cost": {
+            "directory_entry_weight_total": 150,
+            "file_weight_total": 202,
+            "permission_rules": 19,
+            "recursive_directory_grants": 6,
+            "schema": "weighted-write-surface-v1",
+            "weighted_writable_exposure": 352,
+            "writable_directories": 15,
+            "writable_regular_files": 139
+          },
+          "elapsed_millis": 494,
+          "passed": false,
+          "policy": {
+            "disable_nested_userns": true,
+            "network_access": false,
+            "schema_version": 1,
+            "write_grants": [
+              {
+                "kind": "file_contents",
+                "path": ".gitignore"
+              },
+              {
+                "kind": "file_contents",
+                "path": ".pre-commit-config.yaml"
+              },
+              {
+                "kind": "file_contents",
+                "path": ".readthedocs.yml"
+              },
+              {
+                "kind": "file_contents",
+                "path": "CHANGELOG.rst"
+              },
+              {
+                "kind": "file_contents",
+                "path": "CONTRIBUTING.rst"
+              },
+              {
+                "kind": "file_contents",
+                "path": "LICENSE"
+              },
+              {
+                "kind": "file_contents",
+                "path": "LICENSE.APACHE"
+              },
+              {
+                "kind": "file_contents",
+                "path": "LICENSE.BSD"
+              },
+              {
+                "kind": "file_contents",
+                "path": "README.rst"
+              },
+              {
+                "kind": "file_contents",
+                "path": "SECURITY.md"
+              },
+              {
+                "kind": "file_contents",
+                "path": "asv.conf.json"
+              },
+              {
+                "kind": "file_contents",
+                "path": "noxfile.py"
+              },
+              {
+                "kind": "file_contents",
+                "path": "pyproject.toml"
+              },
+              {
+                "kind": "directory_tree",
+                "path": ".github"
+              },
+              {
+                "kind": "directory_tree",
+                "path": "benchmarks"
+              },
+              {
+                "kind": "directory_tree",
+                "path": "docs"
+              },
+              {
+                "kind": "directory_tree",
+                "path": "src"
+              },
+              {
+                "kind": "directory_tree",
+                "path": "tasks"
+              },
+              {
+                "kind": "directory_tree",
+                "path": "tests"
+              }
+            ]
+          },
+          "security_canaries_passed": true,
+          "security_checks": [
+            {
+              "evidence": "preflight succeeded before the task process was launched",
+              "name": "required_namespace_preflight",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "candidate policy was checked against the recorded ceiling",
+              "name": "authorized_ceiling_subset",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "before/after source manifest digests matched",
+              "name": "source_checkout_unchanged",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "probe exit 0; canary unchanged=true",
+              "name": "readonly_mount_write_denial",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "host-side canary is supplied by the independent integration/benchmark controller",
+              "name": "external_host_canary",
+              "required_for_policy_promotion": false,
+              "status": "not_tested"
+            }
+          ]
+        },
+        {
+          "classification": "trial-001:agent_failed_exit_1:required_security_checks_passed",
+          "cost": {
+            "directory_entry_weight_total": 0,
+            "file_weight_total": 0,
+            "permission_rules": 0,
+            "recursive_directory_grants": 0,
+            "schema": "weighted-write-surface-v1",
+            "weighted_writable_exposure": 0,
+            "writable_directories": 0,
+            "writable_regular_files": 0
+          },
+          "elapsed_millis": 233,
+          "passed": false,
+          "policy": {
+            "disable_nested_userns": true,
+            "network_access": false,
+            "schema_version": 1,
+            "write_grants": []
+          },
+          "security_canaries_passed": true,
+          "security_checks": [
+            {
+              "evidence": "preflight succeeded before the task process was launched",
+              "name": "required_namespace_preflight",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "candidate policy was checked against the recorded ceiling",
+              "name": "authorized_ceiling_subset",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "before/after source manifest digests matched",
+              "name": "source_checkout_unchanged",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "probe exit 0; canary unchanged=true",
+              "name": "readonly_mount_write_denial",
+              "required_for_policy_promotion": true,
+              "status": "passed"
+            },
+            {
+              "evidence": "host-side canary is supplied by the independent integration/benchmark controller",
+              "name": "external_host_canary",
+              "required_for_policy_promotion": false,
+              "status": "not_tested"
+            }
+          ]
+        }
+      ],
+      "outcome": "optimizer_trials",
+      "policy": [
+        {
+          "kind": "directory_tree",
+          "path": "."
+        }
+      ],
+      "promotable": false,
+      "rejected_trials": 2,
+      "replay_security": [
+        {
+          "agent_canary_exit": 0,
+          "agent_escape_probe": "PASS",
+          "agent_exit_code": 0,
+          "host_canary_controller": "PASS",
+          "network_positive_control": "PASS",
+          "network_sandbox_connections": 0,
+          "original_source_controller": "PASS",
+          "readonly_mount_runtime_probe": "PASSED",
+          "run_outcome": "verifier_failed",
+          "status": "PASS",
+          "trial": "trial-000",
+          "verifier_executed": true,
+          "verifier_exit_code": 1,
+          "verifier_fixture_controller": "PASS"
+        },
+        {
+          "agent_canary_exit": 1,
+          "agent_escape_probe": "PASS",
+          "agent_exit_code": 1,
+          "host_canary_controller": "PASS",
+          "network_positive_control": "PASS",
+          "network_sandbox_connections": 0,
+          "original_source_controller": "PASS",
+          "readonly_mount_runtime_probe": "PASSED",
+          "run_outcome": "agent_failed",
+          "status": "NOT_TESTED",
+          "trial": "trial-001",
+          "verifier_executed": false,
+          "verifier_exit_code": null,
+          "verifier_fixture_controller": "PASS"
+        }
+      ],
+      "replay_security_not_tested": 1,
+      "replay_security_passes": 1,
+      "search_replays": 2,
+      "security": {
+        "evidence": [],
+        "fresh_validation_canaries": 0,
+        "status": "NOT_TESTED"
+      },
+      "status": "inconclusive",
+      "stderr_sha256": "a5d0bea0de10c8d113e0ac4718bd16058888714efbb316614bdcecd57a9fc1e4",
+      "strategy": "F",
+      "successful_task_reduction_percent": null,
+      "task_process_seconds": 0.126,
+      "timeouts": 0,
+      "trial_failures": 2,
+      "utility_pass": false,
+      "verifier_executions_including_shared_setup": 2,
+      "verifier_exit_code": null,
+      "verifier_process_seconds": 0.433,
+      "verifier_timed_out": null,
+      "wall_seconds_attributed": 1.4517800269968575
+    }
+  },
+  "outcome_distinction": {
+    "F_narrow_policy_validated": false,
+    "F_result": "known successful broad ceiling retained; optimization inconclusive",
+    "broad_task_utility_pass": true
+  },
+  "parent_commit": "2aada00b158feb36109d77dc91d62baa91f7d400",
+  "patch_sha256": "9943d97463f0a911130b50eba63e7ce48477ce834a192b2d6032150f3b15439b",
+  "policy_shape": {
+    "A": {
+      "exact_file_grants": [],
+      "existing_directory_entries_covered": 16,
+      "existing_files_covered": 139,
+      "future_child_creation_allowed": true,
+      "future_child_scope": "unbounded under each recursive grant",
+      "grant_breadth": [
+        {
+          "immediate_children": 19,
+          "path": "."
+        }
+      ],
+      "grant_depths": [
+        0
+      ],
+      "high_impact_files_covered": [
+        ".github/workflows/codeql.yml",
+        ".github/workflows/docs.yml",
+        ".github/workflows/lint.yml",
+        ".github/workflows/perf.yml",
+        ".github/workflows/publish.yml",
+        ".github/workflows/test.yml",
+        "pyproject.toml"
+      ],
+      "recursive_directory_grants": [
+        "."
+      ],
+      "weighted_write_surface_v1": {
+        "directory_entry_weight_total": 160,
+        "file_weight_total": 202,
+        "permission_rules": 1,
+        "recursive_directory_grants": 1,
+        "schema": "weighted-write-surface-v1",
+        "weighted_writable_exposure": 362,
+        "writable_directories": 16,
+        "writable_regular_files": 139
+      }
+    },
+    "B": {
+      "exact_file_grants": [
+        "README.rst",
+        "pyproject.toml"
+      ],
+      "existing_directory_entries_covered": 11,
+      "existing_files_covered": 102,
+      "future_child_creation_allowed": true,
+      "future_child_scope": "unbounded under each recursive grant",
+      "grant_breadth": [
+        {
+          "immediate_children": 19,
+          "path": "docs"
+        },
+        {
+          "immediate_children": 1,
+          "path": "src"
+        },
+        {
+          "immediate_children": 25,
+          "path": "tests"
+        }
+      ],
+      "grant_depths": [
+        1,
+        1,
+        1
+      ],
+      "high_impact_files_covered": [
+        "pyproject.toml"
+      ],
+      "recursive_directory_grants": [
+        "docs",
+        "src",
+        "tests"
+      ],
+      "weighted_write_surface_v1": {
+        "directory_entry_weight_total": 110,
+        "file_weight_total": 111,
+        "permission_rules": 5,
+        "recursive_directory_grants": 3,
+        "schema": "weighted-write-surface-v1",
+        "weighted_writable_exposure": 221,
+        "writable_directories": 11,
+        "writable_regular_files": 102
+      }
+    },
+    "C": {
+      "exact_file_grants": [],
+      "existing_directory_entries_covered": 16,
+      "existing_files_covered": 139,
+      "future_child_creation_allowed": true,
+      "future_child_scope": "unbounded under each recursive grant",
+      "grant_breadth": [
+        {
+          "immediate_children": 19,
+          "path": "."
+        }
+      ],
+      "grant_depths": [
+        0
+      ],
+      "high_impact_files_covered": [
+        ".github/workflows/codeql.yml",
+        ".github/workflows/docs.yml",
+        ".github/workflows/lint.yml",
+        ".github/workflows/perf.yml",
+        ".github/workflows/publish.yml",
+        ".github/workflows/test.yml",
+        "pyproject.toml"
+      ],
+      "recursive_directory_grants": [
+        "."
+      ],
+      "weighted_write_surface_v1": {
+        "directory_entry_weight_total": 160,
+        "file_weight_total": 202,
+        "permission_rules": 1,
+        "recursive_directory_grants": 1,
+        "schema": "weighted-write-surface-v1",
+        "weighted_writable_exposure": 362,
+        "writable_directories": 16,
+        "writable_regular_files": 139
+      }
+    },
+    "D": {
+      "exact_file_grants": [],
+      "existing_directory_entries_covered": 16,
+      "existing_files_covered": 139,
+      "future_child_creation_allowed": true,
+      "future_child_scope": "unbounded under each recursive grant",
+      "grant_breadth": [
+        {
+          "immediate_children": 19,
+          "path": "."
+        }
+      ],
+      "grant_depths": [
+        0
+      ],
+      "high_impact_files_covered": [
+        ".github/workflows/codeql.yml",
+        ".github/workflows/docs.yml",
+        ".github/workflows/lint.yml",
+        ".github/workflows/perf.yml",
+        ".github/workflows/publish.yml",
+        ".github/workflows/test.yml",
+        "pyproject.toml"
+      ],
+      "recursive_directory_grants": [
+        "."
+      ],
+      "weighted_write_surface_v1": {
+        "directory_entry_weight_total": 160,
+        "file_weight_total": 202,
+        "permission_rules": 1,
+        "recursive_directory_grants": 1,
+        "schema": "weighted-write-surface-v1",
+        "weighted_writable_exposure": 362,
+        "writable_directories": 16,
+        "writable_regular_files": 139
+      }
+    },
+    "E": {
+      "exact_file_grants": [],
+      "existing_directory_entries_covered": 16,
+      "existing_files_covered": 139,
+      "future_child_creation_allowed": true,
+      "future_child_scope": "unbounded under each recursive grant",
+      "grant_breadth": [
+        {
+          "immediate_children": 19,
+          "path": "."
+        }
+      ],
+      "grant_depths": [
+        0
+      ],
+      "high_impact_files_covered": [
+        ".github/workflows/codeql.yml",
+        ".github/workflows/docs.yml",
+        ".github/workflows/lint.yml",
+        ".github/workflows/perf.yml",
+        ".github/workflows/publish.yml",
+        ".github/workflows/test.yml",
+        "pyproject.toml"
+      ],
+      "recursive_directory_grants": [
+        "."
+      ],
+      "weighted_write_surface_v1": {
+        "directory_entry_weight_total": 160,
+        "file_weight_total": 202,
+        "permission_rules": 1,
+        "recursive_directory_grants": 1,
+        "schema": "weighted-write-surface-v1",
+        "weighted_writable_exposure": 362,
+        "writable_directories": 16,
+        "writable_regular_files": 139
+      }
+    },
+    "F": {
+      "exact_file_grants": [],
+      "existing_directory_entries_covered": 16,
+      "existing_files_covered": 139,
+      "future_child_creation_allowed": true,
+      "future_child_scope": "unbounded under each recursive grant",
+      "grant_breadth": [
+        {
+          "immediate_children": 19,
+          "path": "."
+        }
+      ],
+      "grant_depths": [
+        0
+      ],
+      "high_impact_files_covered": [
+        ".github/workflows/codeql.yml",
+        ".github/workflows/docs.yml",
+        ".github/workflows/lint.yml",
+        ".github/workflows/perf.yml",
+        ".github/workflows/publish.yml",
+        ".github/workflows/test.yml",
+        "pyproject.toml"
+      ],
+      "recursive_directory_grants": [
+        "."
+      ],
+      "weighted_write_surface_v1": {
+        "directory_entry_weight_total": 160,
+        "file_weight_total": 202,
+        "permission_rules": 1,
+        "recursive_directory_grants": 1,
+        "schema": "weighted-write-surface-v1",
+        "weighted_writable_exposure": 362,
+        "writable_directories": 16,
+        "writable_regular_files": 139
+      }
+    }
+  },
+  "pytest_cache": "workspace",
+  "repository": "packaging",
+  "source_tree_stats": {
+    "bytes": 1593981,
+    "directories": 15,
+    "regular_files": 139
+  },
+  "split": "development",
+  "static_policy": [
+    {
+      "kind": "directory_tree",
+      "path": "docs"
+    },
+    {
+      "kind": "directory_tree",
+      "path": "src"
+    },
+    {
+      "kind": "directory_tree",
+      "path": "tests"
+    },
+    {
+      "kind": "file_contents",
+      "path": "README.rst"
+    },
+    {
+      "kind": "file_contents",
+      "path": "pyproject.toml"
+    }
+  ],
+  "target_commit": "fa52d7237a74effdadd4ad2627d4ca413234cac2",
+  "task_id": "RR03-packaging-pylock-separators",
+  "task_operations": [],
+  "timings": {
+    "phase_totals_by_execution_class": {
+      "exact_repeats": {
+        "agent_backend_compile_elapsed_millis": {
+          "records": 3,
+          "total_millis": 0
+        },
+        "policy_validation_elapsed_millis": {
+          "records": 3,
+          "total_millis": 0
+        },
+        "preflight_elapsed_millis": {
+          "records": 3,
+          "total_millis": 9
+        },
+        "readonly_canary_backend_compile_elapsed_millis": {
+          "records": 3,
+          "total_millis": 0
+        },
+        "supervisor_elapsed_before_record_millis": {
+          "records": 3,
+          "total_millis": 1648
+        },
+        "verifier_backend_compile_elapsed_millis": {
+          "records": 3,
+          "total_millis": 0
+        },
+        "workspace_stage_elapsed_millis": {
+          "records": 3,
+          "total_millis": 406
+        }
+      },
+      "initial_broad": {
+        "agent_backend_compile_elapsed_millis": {
+          "records": 1,
+          "total_millis": 0
+        },
+        "policy_validation_elapsed_millis": {
+          "records": 1,
+          "total_millis": 0
+        },
+        "preflight_elapsed_millis": {
+          "records": 1,
+          "total_millis": 2
+        },
+        "readonly_canary_backend_compile_elapsed_millis": {
+          "records": 1,
+          "total_millis": 0
+        },
+        "supervisor_elapsed_before_record_millis": {
+          "records": 1,
+          "total_millis": 488
+        },
+        "verifier_backend_compile_elapsed_millis": {
+          "records": 1,
+          "total_millis": 0
+        },
+        "workspace_stage_elapsed_millis": {
+          "records": 1,
+          "total_millis": 132
+        }
+      },
+      "optimizer_replays": {
+        "agent_backend_compile_elapsed_millis": {
+          "records": 6,
+          "total_millis": 0
+        },
+        "policy_validation_elapsed_millis": {
+          "records": 6,
+          "total_millis": 0
+        },
+        "preflight_elapsed_millis": {
+          "records": 6,
+          "total_millis": 16
+        },
+        "readonly_canary_backend_compile_elapsed_millis": {
+          "records": 6,
+          "total_millis": 0
+        },
+        "supervisor_elapsed_before_record_millis": {
+          "records": 6,
+          "total_millis": 1893
+        },
+        "verifier_backend_compile_elapsed_millis": {
+          "records": 6,
+          "total_millis": 0
+        },
+        "workspace_stage_elapsed_millis": {
+          "records": 6,
+          "total_millis": 704
+        }
+      },
+      "other_baselines_and_canaries": {
+        "agent_backend_compile_elapsed_millis": {
+          "records": 12,
+          "total_millis": 0
+        },
+        "policy_validation_elapsed_millis": {
+          "records": 12,
+          "total_millis": 0
+        },
+        "preflight_elapsed_millis": {
+          "records": 12,
+          "total_millis": 30
+        },
+        "readonly_canary_backend_compile_elapsed_millis": {
+          "records": 12,
+          "total_millis": 0
+        },
+        "supervisor_elapsed_before_record_millis": {
+          "records": 12,
+          "total_millis": 4046
+        },
+        "verifier_backend_compile_elapsed_millis": {
+          "records": 12,
+          "total_millis": 0
+        },
+        "workspace_stage_elapsed_millis": {
+          "records": 12,
+          "total_millis": 1552
+        }
+      }
+    },
+    "run_record_count": 22,
+    "timing_note": "Bubblewrap argv construction excludes process start, kernel mount setup, and syscall overhead."
+  },
+  "unauthorized_write_attempts": {
+    "A": {
+      "agent_exit_code": 0,
+      "canary_blocked": false,
+      "canary_created": true,
+      "cli_return_code": 0,
+      "expected_allow": true,
+      "mandatory_checks_executed_passed": true,
+      "original_workspace_unchanged": true,
+      "policy": [
+        {
+          "kind": "directory_tree",
+          "path": "."
+        }
+      ],
+      "run_record_present": true,
+      "status": "PASS"
+    },
+    "B": {
+      "agent_exit_code": 0,
+      "canary_blocked": false,
+      "canary_created": true,
+      "cli_return_code": 0,
+      "expected_allow": true,
+      "mandatory_checks_executed_passed": true,
+      "original_workspace_unchanged": true,
+      "policy": [
+        {
+          "kind": "file_contents",
+          "path": "README.rst"
+        },
+        {
+          "kind": "file_contents",
+          "path": "pyproject.toml"
+        },
+        {
+          "kind": "directory_tree",
+          "path": "docs"
+        },
+        {
+          "kind": "directory_tree",
+          "path": "src"
+        },
+        {
+          "kind": "directory_tree",
+          "path": "tests"
+        }
+      ],
+      "run_record_present": true,
+      "status": "PASS"
+    },
+    "C": {
+      "agent_exit_code": 0,
+      "canary_blocked": false,
+      "canary_created": true,
+      "cli_return_code": 0,
+      "expected_allow": true,
+      "mandatory_checks_executed_passed": true,
+      "original_workspace_unchanged": true,
+      "policy": [
+        {
+          "kind": "directory_tree",
+          "path": "."
+        }
+      ],
+      "run_record_present": true,
+      "status": "PASS"
+    },
+    "D": {
+      "agent_exit_code": 0,
+      "canary_blocked": false,
+      "canary_created": true,
+      "cli_return_code": 0,
+      "expected_allow": true,
+      "mandatory_checks_executed_passed": true,
+      "original_workspace_unchanged": true,
+      "policy": [
+        {
+          "kind": "directory_tree",
+          "path": "."
+        }
+      ],
+      "run_record_present": true,
+      "status": "PASS"
+    },
+    "E": {
+      "agent_exit_code": 0,
+      "canary_blocked": false,
+      "canary_created": true,
+      "cli_return_code": 0,
+      "expected_allow": true,
+      "mandatory_checks_executed_passed": true,
+      "original_workspace_unchanged": true,
+      "policy": [
+        {
+          "kind": "directory_tree",
+          "path": "."
+        }
+      ],
+      "run_record_present": true,
+      "status": "PASS"
+    },
+    "F": {
+      "agent_exit_code": 0,
+      "canary_blocked": false,
+      "canary_created": true,
+      "cli_return_code": 0,
+      "expected_allow": true,
+      "mandatory_checks_executed_passed": true,
+      "original_workspace_unchanged": true,
+      "policy": [
+        {
+          "kind": "directory_tree",
+          "path": "."
+        }
+      ],
+      "run_record_present": true,
+      "status": "PASS"
+    }
+  },
+  "verifier_tests": [
+    "tests/test_pylock.py"
+  ],
+  "verifier_tree_sha256": "e5d1c44a8dd3e80c27b3d451ff4f443e0482a76babe691677b1540d022c7a02a"
+}

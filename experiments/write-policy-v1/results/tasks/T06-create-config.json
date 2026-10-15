@@ -1,0 +1,953 @@
+{
+  "baselines": {
+    "A": {
+      "agent_exit": 0,
+      "agent_timed_out": false,
+      "cost": {
+        "directory_entry_weight_total": 160,
+        "file_weight_total": 37,
+        "permission_rules": 1,
+        "recursive_directory_grants": 1,
+        "weighted_writable_exposure": 197,
+        "writable_directories": 16,
+        "writable_regular_files": 19
+      },
+      "elapsed_seconds": 0.08759989000100177,
+      "exit": 0,
+      "outcome": "verified",
+      "policy": [
+        [
+          "directory_tree",
+          "."
+        ]
+      ],
+      "replays": 1,
+      "run_dir": "/tmp/autocage-write-policy-v1-final-20261011-r2/runs/T06-create-config/A-broad",
+      "security": {
+        "host_access_probe": "PASS",
+        "host_access_probe_blocked": true,
+        "host_canary_unchanged": true,
+        "original_source_write_probe": "PASS",
+        "original_source_write_probe_blocked": true,
+        "pass": true,
+        "source_unchanged": true,
+        "status": "PASS",
+        "verifier_readonly_probe": "PASS",
+        "verifier_readonly_probe_blocked": true,
+        "verifier_snapshot_unchanged": true
+      },
+      "stderr": "",
+      "utility_pass": true,
+      "verifier_exit": 0,
+      "verifier_timed_out": false
+    },
+    "B": {
+      "agent_exit": 1,
+      "agent_timed_out": false,
+      "cost": {
+        "directory_entry_weight_total": 50,
+        "file_weight_total": 10,
+        "permission_rules": 2,
+        "recursive_directory_grants": 2,
+        "weighted_writable_exposure": 60,
+        "writable_directories": 5,
+        "writable_regular_files": 10
+      },
+      "elapsed_seconds": 0.03733477599962498,
+      "exit": 1,
+      "outcome": "agent_failed",
+      "policy": [
+        [
+          "directory_tree",
+          "src"
+        ],
+        [
+          "directory_tree",
+          "tests"
+        ]
+      ],
+      "replays": 1,
+      "run_dir": "/tmp/autocage-write-policy-v1-final-20261011-r2/runs/T06-create-config/B-static",
+      "security": {
+        "host_access_probe": "PASS",
+        "host_access_probe_blocked": true,
+        "host_canary_unchanged": true,
+        "original_source_write_probe": "PASS",
+        "original_source_write_probe_blocked": true,
+        "pass": false,
+        "source_unchanged": true,
+        "status": "NOT_TESTED",
+        "verifier_readonly_probe": "NOT_TESTED",
+        "verifier_readonly_probe_blocked": false,
+        "verifier_snapshot_unchanged": true
+      },
+      "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 20, in <module>\nOSError: [Errno 30] Read-only file system: '/workspace/config/new.toml'\n",
+      "utility_pass": false,
+      "verifier_exit": null,
+      "verifier_timed_out": null
+    },
+    "C": {
+      "agent_exit": 0,
+      "agent_timed_out": false,
+      "cost": {
+        "directory_entry_weight_total": 10,
+        "file_weight_total": 2,
+        "permission_rules": 2,
+        "recursive_directory_grants": 1,
+        "weighted_writable_exposure": 12,
+        "writable_directories": 1,
+        "writable_regular_files": 2
+      },
+      "elapsed_seconds": 0.05963737199999741,
+      "exit": 0,
+      "outcome": "verified",
+      "policy": [
+        [
+          "file_contents",
+          "oracle.txt"
+        ],
+        [
+          "directory_tree",
+          "config"
+        ]
+      ],
+      "replays": 1,
+      "run_dir": "/tmp/autocage-write-policy-v1-final-20261011-r2/runs/T06-create-config/C-naive",
+      "security": {
+        "host_access_probe": "PASS",
+        "host_access_probe_blocked": true,
+        "host_canary_unchanged": true,
+        "original_source_write_probe": "PASS",
+        "original_source_write_probe_blocked": true,
+        "pass": true,
+        "source_unchanged": true,
+        "status": "PASS",
+        "verifier_readonly_probe": "PASS",
+        "verifier_readonly_probe_blocked": true,
+        "verifier_snapshot_unchanged": true
+      },
+      "stderr": "",
+      "utility_pass": true,
+      "verifier_exit": 0,
+      "verifier_timed_out": false
+    },
+    "M": {
+      "agent_exit": 0,
+      "agent_timed_out": false,
+      "cost": {
+        "directory_entry_weight_total": 10,
+        "file_weight_total": 1,
+        "permission_rules": 1,
+        "recursive_directory_grants": 1,
+        "weighted_writable_exposure": 11,
+        "writable_directories": 1,
+        "writable_regular_files": 1
+      },
+      "elapsed_seconds": 0.0626872339998954,
+      "exit": 0,
+      "outcome": "verified",
+      "policy": [
+        [
+          "directory_tree",
+          "config"
+        ]
+      ],
+      "replays": 1,
+      "run_dir": "/tmp/autocage-write-policy-v1-final-20261011-r2/runs/T06-create-config/M-manual-oracle",
+      "security": {
+        "host_access_probe": "PASS",
+        "host_access_probe_blocked": true,
+        "host_canary_unchanged": true,
+        "original_source_write_probe": "PASS",
+        "original_source_write_probe_blocked": true,
+        "pass": true,
+        "source_unchanged": true,
+        "status": "PASS",
+        "verifier_readonly_probe": "PASS",
+        "verifier_readonly_probe_blocked": true,
+        "verifier_snapshot_unchanged": true
+      },
+      "stderr": "",
+      "utility_pass": true,
+      "verifier_exit": 0,
+      "verifier_timed_out": false
+    }
+  },
+  "optimizers": {
+    "D-greedy": {
+      "cost": {
+        "directory_entry_weight_total": 10,
+        "file_weight_total": 1,
+        "permission_rules": 1,
+        "recursive_directory_grants": 1,
+        "schema": "weighted-write-surface-v1",
+        "weighted_writable_exposure": 11,
+        "writable_directories": 1,
+        "writable_regular_files": 1
+      },
+      "elapsed_seconds": 0.379860902998189,
+      "exit": 0,
+      "initial_broad_runs": 1,
+      "optimizer": {
+        "authorized_ceiling": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "directory_tree",
+              "path": "."
+            }
+          ]
+        },
+        "best_cost": {
+          "directory_entry_weight_total": 10,
+          "file_weight_total": 1,
+          "permission_rules": 1,
+          "recursive_directory_grants": 1,
+          "schema": "weighted-write-surface-v1",
+          "weighted_writable_exposure": 11,
+          "writable_directories": 1,
+          "writable_regular_files": 1
+        },
+        "best_policy": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "directory_tree",
+              "path": "config"
+            }
+          ]
+        },
+        "ceiling_cost": {
+          "directory_entry_weight_total": 160,
+          "file_weight_total": 37,
+          "permission_rules": 1,
+          "recursive_directory_grants": 1,
+          "schema": "weighted-write-surface-v1",
+          "weighted_writable_exposure": 197,
+          "writable_directories": 16,
+          "writable_regular_files": 19
+        },
+        "optimization_elapsed_millis": 332,
+        "rejected_trials": 1,
+        "search_replays": 3,
+        "status": "validated",
+        "strategy": "greedy",
+        "total_replays": 6,
+        "trials": [
+          {
+            "classification": "trial-000:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 10,
+              "file_weight_total": 2,
+              "permission_rules": 2,
+              "recursive_directory_grants": 1,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 12,
+              "writable_directories": 1,
+              "writable_regular_files": 2
+            },
+            "elapsed_millis": 57,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "oracle.txt"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "config"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-001:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 10,
+              "file_weight_total": 1,
+              "permission_rules": 1,
+              "recursive_directory_grants": 1,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 11,
+              "writable_directories": 1,
+              "writable_regular_files": 1
+            },
+            "elapsed_millis": 58,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "directory_tree",
+                  "path": "config"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-002:agent_failed_exit_1:verifier_readonly_canary_not_tested",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 0,
+              "permission_rules": 0,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 0,
+              "writable_directories": 0,
+              "writable_regular_files": 0
+            },
+            "elapsed_millis": 39,
+            "passed": false,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": []
+            },
+            "security_canaries_passed": false
+          },
+          {
+            "classification": "trial-003:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 10,
+              "file_weight_total": 1,
+              "permission_rules": 1,
+              "recursive_directory_grants": 1,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 11,
+              "writable_directories": 1,
+              "writable_regular_files": 1
+            },
+            "elapsed_millis": 59,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "directory_tree",
+                  "path": "config"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-004:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 10,
+              "file_weight_total": 1,
+              "permission_rules": 1,
+              "recursive_directory_grants": 1,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 11,
+              "writable_directories": 1,
+              "writable_regular_files": 1
+            },
+            "elapsed_millis": 58,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "directory_tree",
+                  "path": "config"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-005:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 10,
+              "file_weight_total": 1,
+              "permission_rules": 1,
+              "recursive_directory_grants": 1,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 11,
+              "writable_directories": 1,
+              "writable_regular_files": 1
+            },
+            "elapsed_millis": 58,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "directory_tree",
+                  "path": "config"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          }
+        ],
+        "validation_replays": 3
+      },
+      "policy": [
+        {
+          "kind": "directory_tree",
+          "path": "config"
+        }
+      ],
+      "search_replays": 3,
+      "security_canaries_passed": true,
+      "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 20, in <module>\nOSError: [Errno 30] Read-only file system: '/workspace/config/new.toml'\n",
+      "stdout": "optimizer: greedy (validated)\nweighted writable exposure: 197 -> 11 (94.4% reduction)\nauthorized ceiling: directory-tree:.\nretained writes: directory-tree:config\nwritable files: 1, recursive directory grants: 1, policy rules: 1\nreplays: 3 search + 3 final validation = 6; elapsed: 332 ms\n",
+      "total_executions_including_initial_broad": 7,
+      "total_optimizer_replays": 6,
+      "utility_pass": true,
+      "validation_replays": 3
+    },
+    "E-random": {
+      "cost": {
+        "directory_entry_weight_total": 10,
+        "file_weight_total": 1,
+        "permission_rules": 1,
+        "recursive_directory_grants": 1,
+        "schema": "weighted-write-surface-v1",
+        "weighted_writable_exposure": 11,
+        "writable_directories": 1,
+        "writable_regular_files": 1
+      },
+      "elapsed_seconds": 0.38550290999774006,
+      "exit": 0,
+      "initial_broad_runs": 1,
+      "optimizer": {
+        "authorized_ceiling": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "directory_tree",
+              "path": "."
+            }
+          ]
+        },
+        "best_cost": {
+          "directory_entry_weight_total": 10,
+          "file_weight_total": 1,
+          "permission_rules": 1,
+          "recursive_directory_grants": 1,
+          "schema": "weighted-write-surface-v1",
+          "weighted_writable_exposure": 11,
+          "writable_directories": 1,
+          "writable_regular_files": 1
+        },
+        "best_policy": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "directory_tree",
+              "path": "config"
+            }
+          ]
+        },
+        "ceiling_cost": {
+          "directory_entry_weight_total": 160,
+          "file_weight_total": 37,
+          "permission_rules": 1,
+          "recursive_directory_grants": 1,
+          "schema": "weighted-write-surface-v1",
+          "weighted_writable_exposure": 197,
+          "writable_directories": 16,
+          "writable_regular_files": 19
+        },
+        "optimization_elapsed_millis": 340,
+        "rejected_trials": 1,
+        "search_replays": 3,
+        "status": "validated",
+        "strategy": "random",
+        "total_replays": 6,
+        "trials": [
+          {
+            "classification": "trial-000:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 10,
+              "file_weight_total": 2,
+              "permission_rules": 2,
+              "recursive_directory_grants": 1,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 12,
+              "writable_directories": 1,
+              "writable_regular_files": 2
+            },
+            "elapsed_millis": 61,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "oracle.txt"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "config"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-001:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 10,
+              "file_weight_total": 1,
+              "permission_rules": 1,
+              "recursive_directory_grants": 1,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 11,
+              "writable_directories": 1,
+              "writable_regular_files": 1
+            },
+            "elapsed_millis": 60,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "directory_tree",
+                  "path": "config"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-002:agent_failed_exit_1:verifier_readonly_canary_not_tested",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 0,
+              "permission_rules": 0,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 0,
+              "writable_directories": 0,
+              "writable_regular_files": 0
+            },
+            "elapsed_millis": 38,
+            "passed": false,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": []
+            },
+            "security_canaries_passed": false
+          },
+          {
+            "classification": "trial-003:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 10,
+              "file_weight_total": 1,
+              "permission_rules": 1,
+              "recursive_directory_grants": 1,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 11,
+              "writable_directories": 1,
+              "writable_regular_files": 1
+            },
+            "elapsed_millis": 59,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "directory_tree",
+                  "path": "config"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-004:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 10,
+              "file_weight_total": 1,
+              "permission_rules": 1,
+              "recursive_directory_grants": 1,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 11,
+              "writable_directories": 1,
+              "writable_regular_files": 1
+            },
+            "elapsed_millis": 58,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "directory_tree",
+                  "path": "config"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-005:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 10,
+              "file_weight_total": 1,
+              "permission_rules": 1,
+              "recursive_directory_grants": 1,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 11,
+              "writable_directories": 1,
+              "writable_regular_files": 1
+            },
+            "elapsed_millis": 60,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "directory_tree",
+                  "path": "config"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          }
+        ],
+        "validation_replays": 3
+      },
+      "policy": [
+        {
+          "kind": "directory_tree",
+          "path": "config"
+        }
+      ],
+      "search_replays": 3,
+      "security_canaries_passed": true,
+      "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 20, in <module>\nOSError: [Errno 30] Read-only file system: '/workspace/config/new.toml'\n",
+      "stdout": "optimizer: random (validated)\nweighted writable exposure: 197 -> 11 (94.4% reduction)\nauthorized ceiling: directory-tree:.\nretained writes: directory-tree:config\nwritable files: 1, recursive directory grants: 1, policy rules: 1\nreplays: 3 search + 3 final validation = 6; elapsed: 340 ms\n",
+      "total_executions_including_initial_broad": 7,
+      "total_optimizer_replays": 6,
+      "utility_pass": true,
+      "validation_replays": 3
+    },
+    "F-hierarchical": {
+      "cost": {
+        "directory_entry_weight_total": 10,
+        "file_weight_total": 1,
+        "permission_rules": 1,
+        "recursive_directory_grants": 1,
+        "schema": "weighted-write-surface-v1",
+        "weighted_writable_exposure": 11,
+        "writable_directories": 1,
+        "writable_regular_files": 1
+      },
+      "elapsed_seconds": 0.4277031329984311,
+      "exit": 0,
+      "initial_broad_runs": 1,
+      "optimizer": {
+        "authorized_ceiling": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "directory_tree",
+              "path": "."
+            }
+          ]
+        },
+        "best_cost": {
+          "directory_entry_weight_total": 10,
+          "file_weight_total": 1,
+          "permission_rules": 1,
+          "recursive_directory_grants": 1,
+          "schema": "weighted-write-surface-v1",
+          "weighted_writable_exposure": 11,
+          "writable_directories": 1,
+          "writable_regular_files": 1
+        },
+        "best_policy": {
+          "disable_nested_userns": true,
+          "network_access": false,
+          "schema_version": 1,
+          "write_grants": [
+            {
+              "kind": "directory_tree",
+              "path": "config"
+            }
+          ]
+        },
+        "ceiling_cost": {
+          "directory_entry_weight_total": 160,
+          "file_weight_total": 37,
+          "permission_rules": 1,
+          "recursive_directory_grants": 1,
+          "schema": "weighted-write-surface-v1",
+          "weighted_writable_exposure": 197,
+          "writable_directories": 16,
+          "writable_regular_files": 19
+        },
+        "optimization_elapsed_millis": 381,
+        "rejected_trials": 2,
+        "search_replays": 4,
+        "status": "validated",
+        "strategy": "hierarchical",
+        "total_replays": 7,
+        "trials": [
+          {
+            "classification": "trial-000:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 10,
+              "file_weight_total": 2,
+              "permission_rules": 2,
+              "recursive_directory_grants": 1,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 12,
+              "writable_directories": 1,
+              "writable_regular_files": 2
+            },
+            "elapsed_millis": 60,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "oracle.txt"
+                },
+                {
+                  "kind": "directory_tree",
+                  "path": "config"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-001:agent_failed_exit_1:verifier_readonly_canary_not_tested",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 2,
+              "permission_rules": 2,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 2,
+              "writable_directories": 0,
+              "writable_regular_files": 2
+            },
+            "elapsed_millis": 40,
+            "passed": false,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "config/app.toml"
+                },
+                {
+                  "kind": "file_contents",
+                  "path": "oracle.txt"
+                }
+              ]
+            },
+            "security_canaries_passed": false
+          },
+          {
+            "classification": "trial-002:agent_failed_exit_1:verifier_readonly_canary_not_tested",
+            "cost": {
+              "directory_entry_weight_total": 0,
+              "file_weight_total": 1,
+              "permission_rules": 1,
+              "recursive_directory_grants": 0,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 1,
+              "writable_directories": 0,
+              "writable_regular_files": 1
+            },
+            "elapsed_millis": 39,
+            "passed": false,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "file_contents",
+                  "path": "oracle.txt"
+                }
+              ]
+            },
+            "security_canaries_passed": false
+          },
+          {
+            "classification": "trial-003:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 10,
+              "file_weight_total": 1,
+              "permission_rules": 1,
+              "recursive_directory_grants": 1,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 11,
+              "writable_directories": 1,
+              "writable_regular_files": 1
+            },
+            "elapsed_millis": 62,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "directory_tree",
+                  "path": "config"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-004:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 10,
+              "file_weight_total": 1,
+              "permission_rules": 1,
+              "recursive_directory_grants": 1,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 11,
+              "writable_directories": 1,
+              "writable_regular_files": 1
+            },
+            "elapsed_millis": 58,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "directory_tree",
+                  "path": "config"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-005:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 10,
+              "file_weight_total": 1,
+              "permission_rules": 1,
+              "recursive_directory_grants": 1,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 11,
+              "writable_directories": 1,
+              "writable_regular_files": 1
+            },
+            "elapsed_millis": 59,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "directory_tree",
+                  "path": "config"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          },
+          {
+            "classification": "trial-006:verified:security_canaries_checked",
+            "cost": {
+              "directory_entry_weight_total": 10,
+              "file_weight_total": 1,
+              "permission_rules": 1,
+              "recursive_directory_grants": 1,
+              "schema": "weighted-write-surface-v1",
+              "weighted_writable_exposure": 11,
+              "writable_directories": 1,
+              "writable_regular_files": 1
+            },
+            "elapsed_millis": 59,
+            "passed": true,
+            "policy": {
+              "disable_nested_userns": true,
+              "network_access": false,
+              "schema_version": 1,
+              "write_grants": [
+                {
+                  "kind": "directory_tree",
+                  "path": "config"
+                }
+              ]
+            },
+            "security_canaries_passed": true
+          }
+        ],
+        "validation_replays": 3
+      },
+      "policy": [
+        {
+          "kind": "directory_tree",
+          "path": "config"
+        }
+      ],
+      "search_replays": 4,
+      "security_canaries_passed": true,
+      "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 20, in <module>\nOSError: [Errno 30] Read-only file system: '/workspace/config/new.toml'\nTraceback (most recent call last):\n  File \"<string>\", line 20, in <module>\nOSError: [Errno 30] Read-only file system: '/workspace/config/new.toml'\n",
+      "stdout": "optimizer: hierarchical (validated)\nweighted writable exposure: 197 -> 11 (94.4% reduction)\nauthorized ceiling: directory-tree:.\nretained writes: directory-tree:config\nwritable files: 1, recursive directory grants: 1, policy rules: 1\nreplays: 4 search + 3 final validation = 7; elapsed: 381 ms\n",
+      "total_executions_including_initial_broad": 8,
+      "total_optimizer_replays": 7,
+      "utility_pass": true,
+      "validation_replays": 3
+    }
+  },
+  "task": {
+    "expected_effects": [
+      "create:config/new.toml"
+    ],
+    "family": "create",
+    "held_out": false,
+    "initial_source_sha256": "8196bec3523a9c0f8db243a385bc2712365f11b7544dadb6e44d84b682b7c18d",
+    "notes": "",
+    "task_id": "T06-create-config"
+  }
+}
