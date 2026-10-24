@@ -224,6 +224,7 @@ mod tests {
     }
 
     #[test]
+    #[ignore = "requires Bubblewrap namespaces; executed by the Linux enforcement workflow"]
     fn launcher_marks_unapproved_inherited_descriptor_close_on_exec() {
         let root = temp_dir();
         let stage = root.join("stage");

@@ -576,7 +576,9 @@ mod tests {
             kernel: "6.8".into(),
             euid: 1000,
             egid: 1000,
-            bubblewrap_path: PathBuf::from("/usr/bin/bwrap"),
+            // Contract unit tests use the test binary as a synthetic runtime
+            // file so portable CI does not need Bubblewrap installed.
+            bubblewrap_path: std::env::current_exe().unwrap(),
             bubblewrap_version: "0.9".into(),
             apparmor_enabled: "Y".into(),
             apparmor_userns_restricted: "1".into(),
