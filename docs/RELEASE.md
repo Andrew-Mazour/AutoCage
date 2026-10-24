@@ -1,6 +1,6 @@
 # 0.1.0-rc.1 release checklist and validation record
 
-**Release candidate status:** local engineering and supported-Lima validation passed in a clean source copy. AutoCage-owned code and documentation are licensed Apache-2.0. No public release or tag has been created. GitHub-hosted enforcement is configured but has not yet been executed.
+**Release gate:** PASS for the supported Lima guest and GitHub-hosted workflows at `bde4272`. AutoCage-owned code and documentation are licensed Apache-2.0. The public prerelease state is available from the repository's GitHub Releases page.
 
 ## Prioritized checklist
 
@@ -15,7 +15,7 @@
 
 ## Current evidence
 
-This section distinguishes executed checks from configured-but-unrun GitHub Actions jobs. See [installation and CI instructions](INSTALL.md) for exact commands and [M5's frozen results](../experiments/inspect-autocage-v1/results/2026-10-18/REPORT.md) for the original evaluation.
+The M6.1 section below is a frozen historical snapshot. The M6.2 addendum records the later hosted workflow results without changing M6.1 evidence. See [installation and CI instructions](INSTALL.md) for exact commands and [M5's frozen results](../experiments/inspect-autocage-v1/results/2026-10-18/REPORT.md) for the original evaluation.
 
 ### Linux and Rust
 
@@ -47,7 +47,7 @@ This section distinguishes executed checks from configured-but-unrun GitHub Acti
 - No `NOTICE` file is added: AutoCage does not include upstream source or an existing third-party NOTICE-bearing work. This project is not an Apache Software Foundation project.
 - No substantive licensing conflict was found for the source-only project distribution. This is a repository-level review, not a legal opinion; dependencies must retain their own licenses when separately installed or redistributed.
 
-## M6.1 final validation (2026-10-23 UTC)
+## M6.1 final validation (2026-10-23 UTC; historical snapshot)
 
 The final rerun used a clean source copy in the existing isolated Lima guest, with no host directory mounts: Ubuntu 24.04.5 ARM64, Linux 6.8.0-142-generic, Bubblewrap 0.9.0, Rust/Cargo 1.75.0, Python 3.12.3, Inspect AI 0.3.281, and enforced `bwrap//&unpriv_bwrap` AppArmor profile.
 
@@ -72,4 +72,15 @@ Historical M0–M5 protocols and results are retained. Per-sample Inspect worksp
 
 ## Release gate
 
-The local technical release gate is **PASS** for the named Lima guest and documented scripted workload. Apache-2.0 is selected and included for AutoCage-owned material. The release remains **unpublished** pending a clean Git commit, valid author identity, remote review, and an actual hosted CI run. The GitHub Actions enforcement gate remains unverified and must be reported separately; Lima success and portable CI cannot validate it. Current local Git HEAD is `3f43827`; the M4–M6.1 work remains uncommitted because no trusted email or valid GitHub credential was available. The historical root-commit author email is machine-local and was not reused.
+The local technical release gate was **PASS** for the named Lima guest and documented scripted workload. At this historical point, the release remained unpublished, commits had not been pushed, and GitHub Actions had not run. The M6.2 addendum below records resolution of those blockers. The historical root commit retains its original machine-local author email; future release commits use the verified account email configured locally for this repository.
+
+## M6.2 final publication validation (2026-10-24 UTC)
+
+The release source is on `main` at commit `bde4272902c34b5c46b37715d55de8adf3b867a4`. The verified author identity for new commits is configured repository-locally as Andrew Mazour with the owner-provided, GitHub-verified primary address. The remote was fetched and confirmed to be an ancestor before pushing; no remote history was overwritten.
+
+- GitHub Actions [portable validation](https://github.com/Andrew-Mazour/AutoCage/actions/runs/40137546025): **PASS** on Ubuntu x86_64 and ARM64.
+- GitHub Actions [Linux enforcement and Inspect regression](https://github.com/Andrew-Mazour/AutoCage/actions/runs/40137546016): **PASS** on Ubuntu 24.04 ARM64. The job installed and loaded the official Ubuntu Bubblewrap AppArmor profile without disabling global restrictions, passed the namespace smoke test, ran all 47 unit tests and 22 live Linux integration tests, passed `autocage check`, completed all 41 M0 checks, and ran the M4 containment regression and 13-sample no-cost Inspect quickstart.
+- Quickstart evidence: 13 samples, three intentionally detected broad-write regressions, and three clean comparisons. These are deterministic synthetic scenarios, not a model-resistance result.
+- A previous run exposed a timing race in `interrupted_optimization_is_not_resumed_or_promoted`: recovery correctly refused to operate while an inherited sandbox lock remained held. The test now waits up to five seconds for lock release and still fails on any other recovery error. Production locking and sandbox policy were unchanged. The fixed test passed repeatedly in Lima and in the final hosted enforcement run.
+- Final local verification in the supported Lima guest: formatting, strict Clippy, 47 unit tests, 22 Linux integration tests, and locked release build all passed.
+- Release version: `0.1.0-rc.1`. The release remains pre-1.0 and does not claim production-grade sandbox security.

@@ -6,7 +6,7 @@ AutoCage connects [Inspect AI](https://inspect.aisi.org.uk/) evaluations to a di
 
 This is a pre-1.0 research and developer tool. Its validated runtime target is **Ubuntu 24.04 ARM64, Linux 6.8+, Bubblewrap 0.9+, with Ubuntu's enforced `bwrap-userns-restrict` AppArmor profile**. AutoCage does not enforce Linux isolation on macOS or Windows.
 
-**M6.1 status (2026-10-23 UTC):** Apache-2.0 is selected for AutoCage-owned code and documentation. The local release gate passed in a clean source copy and fresh Python environment in the supported Lima guest. The 13-sample no-cost quickstart validated three intentional broad-policy regressions. GitHub-hosted workflows have not run, and no release has been published. See the [release record](docs/RELEASE.md) and [M6.1 quickstart evidence](experiments/inspect-autocage-v1/results/2026-10-23-m6-1-final-validation/README.md).
+**M6.2 validation (2026-10-24 UTC):** The release candidate passed both GitHub Actions workflows at commit `bde4272`: portable x86_64/ARM64 checks and Ubuntu 24.04 ARM64 enforcement. Hosted evidence includes the required AppArmor profile, 41/41 M0 checks, 47 Rust unit tests, 22 live Linux integration tests, the M4 containment regression, and the 13-sample no-cost Inspect quickstart. See the [release record](docs/RELEASE.md) and historical [M6.1 local evidence](experiments/inspect-autocage-v1/results/2026-10-23-m6-1-final-validation/README.md).
 
 ## What a result tells you
 
@@ -77,4 +77,4 @@ See the [threat model](docs/THREAT_MODEL.md), [decision log](docs/DECISIONS.md),
 
 ## Release status and licensing
 
-**Release candidate:** `0.1.0-rc.1`, not published. AutoCage-owned code and documentation are licensed under Apache-2.0; separately installed dependencies, benchmark repositories, and model weights retain their own licenses. See [LICENSE](LICENSE), [release notes](CHANGELOG.md), and [security reporting guidance](SECURITY.md).
+**Release candidate:** `0.1.0-rc.1`. AutoCage-owned code and documentation are licensed under Apache-2.0; separately installed dependencies, benchmark repositories, and model weights retain their own licenses. See [LICENSE](LICENSE), [release notes](CHANGELOG.md), and [security reporting guidance](SECURITY.md).
