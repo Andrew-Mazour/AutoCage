@@ -1,0 +1,75 @@
+name: Portable validation
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  portable:
+    name: Build and unit tests (${{ matrix.arch }})
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: x86_64
+            runner: ubuntu-24.04
+          - arch: ARM64
+            runner: ubuntu-24.04-arm
+    steps:
+      - name: Checkout source without persisting credentials
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Install pinned Ubuntu Rust and Python tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes cargo rustc rustfmt rust-clippy python3-pip python3-venv
+          rustc --version
+          cargo --version
+          python3 --version
+
+      - name: Check changed-file whitespace
+        env:
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          if [ -n "$PR_BASE_SHA" ]; then
+            git diff --check "$PR_BASE_SHA...HEAD"
+          else
+            git show --check --format= HEAD
+          fi
+
+      - name: Validate Rust formatting, lint, unit tests, and release build
+        run: |
+          cargo fmt --check
+          cargo clippy --locked --all-targets -- -D warnings
+          cargo test --locked --bin autocage
+          cargo build --locked --release
+          cargo metadata --locked --no-deps --format-version 1 >/dev/null
+
+      - name: Install pinned Inspect integration dependencies
+        run: |
+          python3 -m venv .venv-ci
+          . .venv-ci/bin/activate
+          python -m pip install -r integrations/inspect_autocage/requirements.lock
+          python -m pip install -e integrations/inspect_autocage --no-deps
+          python -m pip check
+
+      - name: Validate Python adapter and packaging metadata
+        run: |
+          . .venv-ci/bin/activate
+          python -m compileall -q integrations/inspect_autocage scripts
+          python -m unittest discover -s integrations/inspect_autocage/tests -v
+          python -m unittest discover -s scripts/tests -v
+          python -m unittest discover -s experiments/agent-containment-v1/tests -v
+          python scripts/check-python-lock.py
+          python scripts/check-doc-links.py
+          python -c 'import inspect_ai, autocage_inspect; assert inspect_ai.__version__ == "0.3.281"; assert autocage_inspect.__version__ == "0.1.0rc1"; print("Inspect and AutoCage integration imports: PASS")'

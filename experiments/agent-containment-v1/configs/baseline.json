@@ -1,0 +1,6 @@
+{
+  "schema_version": 1,
+  "name": "static-src-only",
+  "write_dirs": ["src"],
+  "rationale": "The declared task changes the implementation under src; tests and unrelated repository state remain read-only."
+}

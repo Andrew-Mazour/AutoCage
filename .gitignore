@@ -1,3 +1,25 @@
 /target/
 /.autocage/
 *.tmp
+._*
+.DS_Store
+/.venv*/
+/.pytest_cache/
+/**/__pycache__/
+*.py[cod]
+*.egg-info/
+/build/
+**/build/
+/dist/
+/.inspect/
+*.eval
+*.strace
+*.sqlite*
+*.gguf
+/models/
+
+# Per-sample Inspect runs contain staged workspace copies, transcripts, and raw traces.
+/experiments/inspect-autocage-v1/results/*/artifacts/
+/experiments/inspect-autocage-v1/results/*/inspect-logs/
+/experiments/inspect-autocage-v1/results/*/real-agent/
+/experiments/inspect-autocage-v1/results/*/m4-regression/

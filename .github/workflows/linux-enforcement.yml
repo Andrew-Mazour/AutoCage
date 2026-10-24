@@ -1,0 +1,98 @@
+name: Linux enforcement and Inspect regression
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  enforcement:
+    name: Ubuntu 24.04 ARM64 sandbox validation
+    runs-on: ubuntu-24.04-arm
+    timeout-minutes: 60
+    steps:
+      - name: Checkout source without persisting credentials
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - name: Report hosted runner and inspect AppArmor state
+        run: |
+          uname -a
+          cat /etc/os-release
+          id
+          if [ -r /proc/sys/kernel/apparmor_restrict_unprivileged_userns ]; then
+            cat /proc/sys/kernel/apparmor_restrict_unprivileged_userns
+          else
+            echo "AppArmor unprivileged-userns setting: unavailable"
+          fi
+          if [ -r /sys/kernel/security/apparmor/profiles ]; then
+            grep -E '(^|[ /])(bwrap|unpriv_bwrap)(//|[[:space:](])' \
+              /sys/kernel/security/apparmor/profiles || true
+          else
+            echo "Loaded AppArmor profile list: unavailable"
+          fi
+
+      - name: Install official guest prerequisites and run namespace smoke test
+        run: bash experiments/m0-linux-feasibility/setup/install-guest-deps.sh
+
+      - name: Run Rust, M0, and Linux integration gates
+        run: |
+          cargo fmt --check
+          cargo clippy --locked --all-targets -- -D warnings
+          cargo test --locked
+          cargo build --locked --release
+          target/release/autocage check
+          python3 experiments/m0-linux-feasibility/scripts/run_m0.py \
+            --output /tmp/autocage-m0-ci.json
+
+      - name: Run deterministic M4 containment regression
+        run: |
+          python3 experiments/agent-containment-v1/run_suite.py \
+            --autocage "$PWD/target/release/autocage" \
+            --work-root /tmp/autocage-m4-ci \
+            --output /tmp/autocage-m4-ci.json \
+            --replicates 1
+
+      - name: Run no-cost Inspect quickstart
+        run: |
+          python3 -m venv .venv-inspect
+          . .venv-inspect/bin/activate
+          python -m pip install -r integrations/inspect_autocage/requirements.lock
+          python -m pip install -e integrations/inspect_autocage --no-deps
+          missing_root=/tmp/autocage-missing-binary-smoke
+          if AUTOCAGE_BINARY=/tmp/autocage-binary-does-not-exist \
+              AUTOCAGE_RESULTS_ROOT="$missing_root" \
+              scripts/run-inspect-quickstart.sh; then
+            echo "Quickstart unexpectedly accepted a missing runtime."
+            exit 1
+          fi
+          test ! -e "$missing_root"
+          AUTOCAGE_BINARY="$PWD/target/release/autocage" \
+            AUTOCAGE_RESULTS_ROOT=/tmp/autocage-inspect-ci \
+            scripts/run-inspect-quickstart.sh
+
+      - name: Summarize enforcement evidence without uploading raw artifacts
+        if: always()
+        run: |
+          {
+            echo "## Linux enforcement job"
+            if [ -f /tmp/autocage-m0-ci.json ]; then
+              python3 -c 'import json; d=json.load(open("/tmp/autocage-m0-ci.json")); print("M0:", d.get("verdict"), "checks:", len(d.get("tests", [])))'
+            else
+              echo "M0: BLOCKED or failed before evidence was written."
+            fi
+            if [ -f /tmp/autocage-m4-ci.json ]; then
+              python3 -c 'import json; d=json.load(open("/tmp/autocage-m4-ci.json")); print("M4:", d.get("status"), "runs:", d.get("counts", {}).get("total_runs"), "checks:", d.get("validation", {}).get("checks"))'
+            else
+              echo "M4: NOT TESTED."
+            fi
+            if [ -f /tmp/autocage-inspect-ci/summary.json ]; then
+              python3 -c 'import json; d=json.load(open("/tmp/autocage-inspect-ci/summary.json")); print("Inspect samples:", d.get("sample_count"), "arms:", sorted(d.get("arms", {})))'
+            else
+              echo "Inspect end-to-end: NOT TESTED."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"

@@ -1,5 +1,7 @@
 # AutoCage evaluation plan
 
+**M6 release validation:** use the exact source tree, dependency lock, Rust/Cargo version, Ubuntu architecture, Bubblewrap/AppArmor configuration, and commands in [installation and CI guidance](INSTALL.md). Portable CI is reported as build/unit validation only. The dedicated Linux workflow is the only CI path that may report namespace, mount, M0, M4, or Inspect enforcement checks as executed; missing controls are a hard failure or blocked environment, never a pass. The public quickstart additionally validates 13 expected deterministic samples and keeps task utility, selected syscall results, canaries, control status, and record integrity separate.
+
 **Status (2026-10-15):** M2's 22-task and M3's frozen 11-task/seven-repository results remain unchanged. M3 was historically **INCONCLUSIVE** because RR03 did not produce a validated narrowed policy. M3.5's patch-task exact-repeat experiment missed its policy-value and 10-run amortized-overhead gates. M3.6 compared deterministic pre-execution profiles with competent static and developer-authored policies on eight recurring workflow types at two pinned revisions across six Python repositories. Suggestions matched the static policies and outcomes exactly; recommendation **B** is to keep profiles as infrastructure and pivot the core contribution to agent-containment evaluation. See the [M2 report](../experiments/write-policy-v1/REPORT.md), [M3 report](../experiments/real-repository-v1/REPORT.md), [M3.5 report](../experiments/m35-product-value/REPORT.md), and [M3.6 report/protocol/results](../experiments/m36-preexecution-value/REPORT.md). These scripted tasks measure filesystem-policy behavior, not model coding ability or stochastic-agent performance.
 
 ## Hypothesis and kill outcome
@@ -133,3 +135,34 @@ B, C, and D compiled identical grants in all 16 cases: no workspace write grant 
 The study executed all declared controls: 96/96 comparable staged-write canaries were blocked by B/C/D, broad A modified 96/96 positive-control targets, exact-proposal repeats passed 48/48, all eight stale parent-to-target proposals and six controlled drift attempts were rejected, and the target-revision greedy policies passed 8/8. The M3.6 report records exact commands, incomplete harness attempts, overhead, per-case outcomes, and limitations. The research-only old-wheel-grant shadow passed five source/config changes; it is not production policy reuse. Production suggestion identity remains source/command-bound, while empirical learned-policy evidence retains the stricter full execution-contract checks.
 
 **M3.6 decision:** pre-execution suggestions achieved zero replay and matched competent static behavior, but the static profile was equally restrictive, equally successful, and blocked the same operations. User-effort savings were not measured. The predeclared differentiation criterion failed; keep this ruleset experimental and do not start real-agent integration on its strength. Recommendation B is to pivot to a narrowly scoped agent-containment evaluation prototype that measures legitimate task utility separately from independent containment canaries. No stochastic or real-model agent result is claimed.
+
+## M5 Inspect integration validation
+
+The frozen [M5 protocol](../experiments/inspect-autocage-v1/PROTOCOL.json) validates the Inspect adapter, not model safety. The 19 samples pair three controlled clean/adversarial content surfaces across Inspect Local, broad AutoCage workspace writes, and static AutoCage `src/` writes; one readonly run is a utility regression control. The local baseline is opt-in and was executed only in the isolated Lima guest. Inspect generation calls were 0/20.
+
+| Arm | Utility | Adversarial protected writes | Canary changed | Required AutoCage evidence |
+|---|---:|---:|---:|---:|
+| Inspect local (same filesystem in Lima) | 6/6 | 3/3 successful opens | 3/3 | No AutoCage boundary |
+| AutoCage broad | 6/6 | 3/3 successful opens | 3/3 | 6/6 valid records and controls |
+| AutoCage static `src/` | 6/6 | 3/3 denied | 0/6 | 6/6 valid records and controls |
+| AutoCage readonly control | 0/1, expected | no attempt | 0/1 | 1/1 valid record and controls |
+
+All 19 input opens were observed and all original fixtures stayed unchanged. The paired formatter reported three broad-versus-static security regressions and three static improvements over the Inspect-local arm. These classifications require the observed denial/success outcome and independent canary state; they do not infer agent intention. All 19 deterministic outcomes match the frozen protocol. The optional Aider 0.86.2/Ollama 0.40.4/Qwen2.5-Coder 3B pair passed both verifiers, opened both inputs, changed no canary, and made no observed protected-write attempt; it is feasibility evidence only. Exact runtime, traces, costs, and limitations are in the [M5 report](../experiments/inspect-autocage-v1/results/2026-10-18/REPORT.md), [raw artifacts](../experiments/inspect-autocage-v1/results/2026-10-18/), and [integration guide](../integrations/inspect_autocage/README.md).
+
+Inspect owns task orchestration, sample logging, and scorer aggregation. AutoCage adds the OS boundary, explicit write grants, validated run contract/runtime identity, selected syscall result, and controller-read canaries. The evaluation compared against Inspect's local sandbox only; it does not establish superiority over Docker or other configured sandboxes. The deterministic agent is not an LLM. The one real-agent pair had no observed unauthorized attempt, so it does not demonstrate resistance.
+
+## M4 agent-containment regression prototype
+
+The frozen [M4 protocol](../experiments/agent-containment-v1/PROTOCOL.json) pairs three controlled untrusted-content surfaces with a clean counterpart. It uses the existing Rust runner, an independent verifier, external `strace` observation, and post-run canary inspection. The scripted controller intentionally attempts the malicious write after opening the selected input; these outcomes validate the observer and OS boundary, not model behavior.
+
+| Arm | Main utility | Protected write outcome on adversarial arm | Canary changed | Executions |
+|---|---:|---|---:|---:|
+| Static `src/` policy | 12/12 | 6/6 denied | 0/6 | 12 main |
+| Broad staged-workspace control | 12/12 | 6/6 succeeded | 6/6 | 12 main |
+| Readonly utility control | 0/2, expected | not granted | 0/2 | 2 controls |
+
+All 26 records, task verifiers, trace files, and required AutoCage checks completed. Inputs opened in 24/24 main runs. Median deterministic-run wall time was 417.5 ms including stage copy, verifier, and tracing. Full evidence and the frozen input identity are in the [M4 report](../experiments/agent-containment-v1/results/REPORT.md) and [`final.json`](../experiments/agent-containment-v1/results/final.json).
+
+One Aider 0.86.2 + Ollama 0.40.4 + Qwen2.5-Coder 3B clean/adversarial pair ran with the local model server in the private sandbox network namespace. Both task verifiers passed; both untrusted files were opened; no protected-write attempt was observed; canaries remained unchanged; selected tracing observed no non-loopback connects. This is a single feasibility pair, not a resistance or success-rate estimate. It used approximately 14.7–17.8 seconds per run and sampled about 2.9 GiB process-tree RSS sum. Aider attempted optional metadata lookups that failed inside the no-egress sandbox.
+
+**Interpretation:** AutoCage provides demonstrated local Bubblewrap execution and explicit separation of utility, traced operations, OS outcome, and canary state. It has not established that a standalone regression framework adds value over Inspect or BoundaryBench. Inspect already supports sandbox providers and external agents; BoundaryBench already evaluates coding agents under hardened policies and has an enforcement probe. Keep claims narrow and implement an Inspect adapter before adding more evaluation orchestration.

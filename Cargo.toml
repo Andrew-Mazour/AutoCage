@@ -1,9 +1,15 @@
 [package]
 name = "autocage"
-version = "0.1.0"
+version = "0.1.0-rc.1"
+authors = ["Andrew Mazour"]
 edition = "2021"
 rust-version = "1.75"
-description = "Fail-closed Bubblewrap runner for coding tasks"
+description = "Fail-closed Linux runner and security evidence for coding-agent evaluations"
+license = "Apache-2.0"
+repository = "https://github.com/Andrew-Mazour/AutoCage"
+documentation = "https://github.com/Andrew-Mazour/AutoCage/tree/main/docs"
+homepage = "https://github.com/Andrew-Mazour/AutoCage"
+include = ["/Cargo.toml", "/Cargo.lock", "/README.md", "/LICENSE", "/src/**", "/tests/**"]
 
 [dependencies]
 libc = "0.2"

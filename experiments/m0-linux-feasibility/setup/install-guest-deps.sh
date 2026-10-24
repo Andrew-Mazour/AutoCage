@@ -27,7 +27,7 @@ if grep -Eq '(^|[ /])(bwrap|unpriv_bwrap)(//|[[:space:](])' <<<"$loaded_profiles
 fi
 
 sudo apt-get update
-sudo apt-get install --yes bubblewrap diffutils python3 python3-pytest util-linux procps iproute2 apparmor-profiles apparmor-utils rustc cargo rustfmt rust-clippy
+sudo apt-get install --yes bubblewrap diffutils git python3 python3-pip python3-venv python3-pytest util-linux procps iproute2 apparmor-profiles apparmor-utils rustc cargo rustfmt rust-clippy
 
 profile=/usr/share/apparmor/extra-profiles/bwrap-userns-restrict
 if [[ ! -r "$profile" ]]; then

@@ -1,68 +1,80 @@
 # AutoCage
 
-AutoCage is a research-stage Linux sandbox runner with an experimental pre-execution filesystem-policy suggestion prototype for a few deterministic Python workflows.
+**Local Linux enforcement and evidence for coding-agent security evaluations.**
 
-It uses Bubblewrap to run commands in a copied workspace with no outbound network and developer-authorized filesystem write limits. Suggestions never grant authority: they must be reviewed, explicitly accepted, and remain within a separately supplied ceiling. A verifier pass shows utility on that run; it does not prove general correctness, security, or a global permission minimum.
+AutoCage connects [Inspect AI](https://inspect.aisi.org.uk/) evaluations to a disposable, Bubblewrap-isolated Linux runner. Inspect provides tasks, samples, logs, and score aggregation. AutoCage adds a developer-authorized filesystem boundary, network-denied execution, sealed run identity, selected OS-operation observations, and independently checked canaries.
 
-## Status
+This is a pre-1.0 research and developer tool. Its validated runtime target is **Ubuntu 24.04 ARM64, Linux 6.8+, Bubblewrap 0.9+, with Ubuntu's enforced `bwrap-userns-restrict` AppArmor profile**. AutoCage does not enforce Linux isolation on macOS or Windows.
 
-M0 passed 41 Linux feasibility checks; M1 established the fail-closed runner; M2 implemented bounded verifier-guided write-policy search; M3 hardened exact replay contracts; and M3.5 showed selected staged-write blocking but did not establish practical value for recurring workflows. M3.6 tested eight repeatable workflows at two pinned revisions across six Python repositories. Static, developer-authored, and AutoCage-suggested policies all preserved utility 16/16 and blocked the same 96/96 canary writes. The suggestions matched competent static policies exactly; human authoring effort was not measured. The project direction is **B: keep profiles as experimental infrastructure and pivot the primary contribution toward agent-containment evaluation**. No real-agent performance evidence has been collected. See the [M3.6 report](experiments/m36-preexecution-value/REPORT.md), [protocol](experiments/m36-preexecution-value/PROTOCOL.json), and [raw results](experiments/m36-preexecution-value/results/v3-final/results.json).
+**M6.1 status (2026-10-23 UTC):** Apache-2.0 is selected for AutoCage-owned code and documentation. The local release gate passed in a clean source copy and fresh Python environment in the supported Lima guest. The 13-sample no-cost quickstart validated three intentional broad-policy regressions. GitHub-hosted workflows have not run, and no release has been published. See the [release record](docs/RELEASE.md) and [M6.1 quickstart evidence](experiments/inspect-autocage-v1/results/2026-10-23-m6-1-final-validation/README.md).
 
-## Intended workflow
+## What a result tells you
 
-    autocage run --workspace . --record-contract \
-      --verify-command /usr/bin/pytest --verify-arg -q \
-      --verify-readonly tests \
-      -- /usr/bin/python3 -m pytest -q
+AutoCage reports separate evidence for:
 
-    autocage tune RUN_DIR --max-replays 12 --strategy greedy
-    autocage inspect RUN_DIR
+- whether the coding task passed its trusted verifier;
+- whether a selected protected-file operation was observed, denied, or succeeded;
+- whether an independent protected canary changed;
+- whether required sandbox controls and the sealed run record validated.
 
-The experimental profile workflow is limited to declared `python-test`, `python-compileall`, and offline `python-wheel` commands:
+No observed attempt is not a denial or evidence of model resistance. `strace` covers selected system calls and is not a complete access audit. A verifier pass applies only to that run. AutoCage is not a sandbox-escape proof, does not provide aggregate CPU or memory isolation, and does not claim complete credential secrecy.
 
-    autocage propose --workspace . --workflow python-test -- \
-      /usr/bin/env PYTHONPATH=/workspace/src \
-      /usr/bin/python3 -m pytest tests -q -o cache_dir=/tmp/autocage-pytest-cache \
-      > proposal.json
+## How it fits with Inspect
 
-Review the emitted JSON, then accept it only with an explicit maximum ceiling, for example `--accept-proposal proposal.json --ceiling-dir .`. Proposals bind to the exact source snapshot and command; source or command drift requires a new proposal. M3.6 found no measured protection or effort advantage over writing the equivalent static policy directly.
+```mermaid
+flowchart LR
+    D[Inspect task and sample] --> C[AutoCage controller]
+    C --> S[Fresh staged workspace]
+    S --> B[Bubblewrap namespaces<br/>AppArmor + write policy<br/>no network]
+    B --> V[Declared task verifier]
+    C --> E[Sealed record, selected syscall trace,<br/>independent canary checks]
+    V --> I[Inspect scores and logs]
+    E --> I
+```
 
-The command after `--` is passed as argv without shell interpolation. AutoCage copies the repository into a private run directory, runs the command and its descendants with a cleared environment, no outbound network, and the authorized write ceiling over that copy plus private temporary storage, then runs the verifier with selected paths overmounted read-only. After an initially verified run, `tune` tests narrower candidate policies against fresh copies and only promotes one after three fresh verifier/canary passes. It leaves a patch and JSON record for review and never changes the original checkout. `--record-contract` stores command identities and argument digests, not raw argument values. It requires at least one `--verify-readonly` root; declare every workspace-resident verifier code, test, and configuration root there. `tune` requires the exact commands and arguments to be supplied again.
+The integration uses Inspect's task/solver/scorer lifecycle and launches one complete AutoCage execution per sample. It does not implement Inspect's persistent `SandboxEnvironment` interface because AutoCage currently stages a workspace for one complete run. See the [architecture](docs/ARCHITECTURE.md) and [Inspect integration guide](integrations/inspect_autocage/README.md).
 
-The required experiments use deterministic commands and scripted fixtures, not paid inference. Remote inference, credential brokering, and network policy remain deferred; real-agent support has not been validated. Learned tuning evidence remains bound to exact source, verifier, commands, and runtime. There is no cross-snapshot learned-policy reuse. M3.6 profile proposals also bind to the exact source and command and must be regenerated after changes.
+## Quickstart
 
-## Scope
+Run on the supported Linux guest after installing the prerequisites described in [Installation](docs/INSTALL.md):
 
-- Linux first; Bubblewrap is the initial namespace and mount backend.
-- Stage a private copy of the project; do not expose the original Git metadata, home directory, credentials, host sockets, inherited environment, or unapproved file descriptors. The supervisor must close unapproved descriptors before Bubblewrap; Bubblewrap preserves any explicitly inherited FD.
-- Keep the policy ceiling limited to the staged workspace, private temporary storage, and read-only runtime files. Network is denied.
-- Optimize exact existing-file inode writes and recursive filesystem directory writes within the staged workspace. File grants do not permit create, unlink, rename, or atomic replacement. Read access to the staged project is broad; executable, credential, and network policy synthesis are deferred.
-- Keep the core free to build and run: no hosted services or paid inference. Scripted agents provide deterministic tests; local inference is optional.
+```sh
+cargo build --locked --release
+python3 -m venv .venv-inspect
+source .venv-inspect/bin/activate
+python -m pip install -r integrations/inspect_autocage/requirements.lock
+python -m pip install -e integrations/inspect_autocage --no-deps
+scripts/run-inspect-quickstart.sh
+```
 
-## Development environment
+The quickstart runs 13 synthetic samples without an LLM or paid service. It writes Inspect logs, JSON evidence, syscall traces, sealed AutoCage records, review patches, and a compact comparison to `/tmp/autocage-inspect-quickstart-*` by default. Set `AUTOCAGE_RESULTS_ROOT` to choose a new, not-yet-existing output directory. The report distinguishes the broad-write control from the restrictive `src/` policy and checks that the expected adversarial writes are denied while task utility remains intact.
 
-The development host is an ARM64 Mac running macOS 26.6.2. Homebrew 6.0.14 and Lima 2.2.1 are installed. A dedicated Lima VM uses Apple Virtualization, Ubuntu 24.04.5 ARM64, and Linux 6.8.0-142; its generated configuration has `mounts: null`. The VM has no shared host home or checkout. M0 required Ubuntu's `apparmor-profiles` and `apparmor-utils`, then loaded the packaged `/usr/share/apparmor/extra-profiles/bwrap-userns-restrict` profile. `kernel.apparmor_restrict_unprivileged_userns` remains `1`; `/usr/bin/bwrap` is not setuid. See the reproduction instructions in the [M0 harness README](experiments/m0-linux-feasibility/README.md).
+For the exact evaluation protocol and measured results, see the [M5 report](experiments/inspect-autocage-v1/results/2026-10-18/REPORT.md) and [reproduction guide](experiments/inspect-autocage-v1/README.md). A genuine local Aider/Ollama example is optional; it requires a separately installed local model and is not part of CI.
 
-## Documentation
+## Measured example
 
-- [Architecture](docs/ARCHITECTURE.md)
-- [Threat model](docs/THREAT_MODEL.md)
-- [Roadmap](docs/ROADMAP.md)
-- [Decision log](docs/DECISIONS.md)
-- [Evaluation plan](docs/EVALUATION.md)
-- [M3 real-repository report](experiments/real-repository-v1/REPORT.md)
-- [M3.5 product-value report](experiments/m35-product-value/REPORT.md)
-- [M3.6 pre-execution profile report](experiments/m36-preexecution-value/REPORT.md)
+In the frozen M5 evaluation, all 18 main scripted task runs passed their trusted verifier. In three matched adversarial cases, broad workspace write allowed the protected write and changed its canary; the `src/` policy denied all three observed attempts and left all three canaries unchanged. All 13 AutoCage records and required controls validated. This shows the integration can report a deliberately constructed policy regression; it does not establish a general model-security result or superiority over a properly configured Docker sandbox.
 
-AutoCage does not enforce Linux namespaces on macOS. Run Linux development and enforcement experiments in the disposable Lima guest; the Mac host does not need Bubblewrap, QEMU, Docker, or Podman.
+## Build and test
 
-## Linux development and tests
+On the supported Ubuntu guest:
 
-The supported implementation target is the isolated Ubuntu ARM64 guest described above. Run M0 setup there to install the distro Rust toolchain, Bubblewrap, diffutils, pytest, and the official AppArmor profile. Transfer only source and tests into the guest, then run:
+```sh
+cargo fmt --check
+cargo clippy --locked --all-targets -- -D warnings
+cargo test --locked
+cargo build --locked --release
+autocage check
+```
 
-    cargo fmt --check
-    cargo clippy --locked --all-targets -- -D warnings
-    cargo test --locked
-    cargo build --locked --release
+The CI workflows separate portable build/unit checks from the privileged Linux enforcement job. The latter is a manual or trusted-branch workflow and never substitutes mock checks for actual enforcement. See [CI and release setup](docs/INSTALL.md#ci-and-release-checks).
 
-The runner supports non-interactive commands: stdin is `/dev/null`; no pseudo-terminal or arbitrary environment passthrough is provided. The runner requires Ubuntu 24.04 ARM64, Linux 6.8+, enforced AppArmor profiles, and Bubblewrap 0.9+. It fails closed outside that tested configuration. M2 benchmark reproduction steps and the exact environment are in [`experiments/write-policy-v1/README.md`](experiments/write-policy-v1/README.md).
+## Research record and limitations
+
+The optimizer and profile-suggestion work remain documented research components, not the product's central claim. Earlier inconclusive and negative results are retained in the [M2–M3.6 reports](docs/ROADMAP.md). The current system has been validated on one Ubuntu ARM64 configuration. Other distributions, architectures, container environments, and hosted Inspect model bridges are unsupported or unvalidated.
+
+See the [threat model](docs/THREAT_MODEL.md), [decision log](docs/DECISIONS.md), [evaluation plan](docs/EVALUATION.md), and [roadmap](docs/ROADMAP.md).
+
+## Release status and licensing
+
+**Release candidate:** `0.1.0-rc.1`, not published. AutoCage-owned code and documentation are licensed under Apache-2.0; separately installed dependencies, benchmark repositories, and model weights retain their own licenses. See [LICENSE](LICENSE), [release notes](CHANGELOG.md), and [security reporting guidance](SECURITY.md).

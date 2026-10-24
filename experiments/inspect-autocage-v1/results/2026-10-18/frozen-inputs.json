@@ -1,0 +1,41 @@
+{
+  "created_utc": "2026-10-18T22:27:15Z",
+  "environment": {
+    "architecture": "aarch64",
+    "autocage_sha256": "26699de49e90737a63403273b5c9310b50977cfe32546a77e349007e7a2b6bf9",
+    "bubblewrap": "bubblewrap 0.9.0",
+    "distribution": "Ubuntu 24.04.5 LTS",
+    "inspect_ai": "0.3.281",
+    "kernel": "6.8.0-142-generic",
+    "python": "3.12.3",
+    "strace": "strace -- version 6.8"
+  },
+  "files": {
+    "experiments/agent-containment-v1/PROTOCOL.json": "1cc3c619ad365f6a960973bda4cbaa8d1c7d12927395fd773fb62eb52ab53e30",
+    "experiments/agent-containment-v1/configs/baseline.json": "ea9cfadf6c28af92d40b4952053f1afa623a46573659114673c3aba7cf49954a",
+    "experiments/agent-containment-v1/configs/candidate.json": "3b3d4f53203f611a37ae072798e31554f5ab007fd14f96e99271ec5e908f2bab",
+    "experiments/agent-containment-v1/configs/read-only.json": "907f4e451cbe43c5b8895e600c2cd956b8fa0dcd1d12758658c219727b6dfe80",
+    "experiments/agent-containment-v1/real_agent/launch_local_aider.py": "f170b2d31d938db32cf9439998fd04b734389077316472b7aede9d445d90fb30",
+    "experiments/agent-containment-v1/suite.json": "de9d4a77d1124a48aea6c78780ee424ef9ff4b3990e31f9a1afb7f5db97abb08",
+    "experiments/inspect-autocage-v1/PROTOCOL.json": "846784aa149747c7a6c6e7cf1bb1533e7bd0107a3c87ee1dc6090c394d84c6bb",
+    "experiments/inspect-autocage-v1/freeze_inputs.py": "8c5b200aef7c85ef10caea9ab43535bedf1f89c829a1b442c299f1ebe679b62f",
+    "experiments/inspect-autocage-v1/summarize.py": "3a42e87a8d76be0c81f8d6065a7123d9a1d21e74dfb542e16fef4765902eba3c",
+    "integrations/inspect_autocage/README.md": "94dd0aa40e97abe81eb1d62e84daea1d4ee6d168cd6af696682b253e5d4a3bae",
+    "integrations/inspect_autocage/autocage_inspect/__init__.py": "f5c3407617a057d7b8f78820fa449ff24efdd221aa8f1177c507c7b2ea5ab895",
+    "integrations/inspect_autocage/autocage_inspect/evidence.py": "f661ffd301edc1418ab974edebfea1ac5cc99576427332b718f41fb8b8e60f85",
+    "integrations/inspect_autocage/autocage_inspect/execution.py": "a9a66c5e3833ff059173a5bb04d63e70c2d92cb605594157597d7fa143cf9d89",
+    "integrations/inspect_autocage/autocage_inspect/task.py": "c1498ec021be051cefc7a51044abf206c8133bf9486bf9c526724c51d0530522",
+    "integrations/inspect_autocage/eval.py": "a35134e8436ede447291930b86f850423154adc6a391f9a7a2610e6694470e9a",
+    "integrations/inspect_autocage/pyproject.toml": "ee46e21c87a988b694cc49f37a191bf7dba4ca3867ca41313cdce0ee626b4b6c",
+    "integrations/inspect_autocage/requirements.lock": "e57f900df8238013ec2c98a367aa1b68af2b2c3c8c16818dc4fb51fba7429991",
+    "integrations/inspect_autocage/scenarios/local-aider-injection.txt": "097a9bf89b617b6c724d2c51641f003ed4b8816ff50c361acbb1a23377c85cbe",
+    "integrations/inspect_autocage/scenarios/local-aider.json": "e5db6e8f0ae8877fa1a8c190508d7cc0555e326efc2a18e1baabd8fe763b8f61",
+    "integrations/inspect_autocage/tests/test_evidence.py": "c1102334ef0697a9d51230272208220886dd452383543f6e199cad044f7b4420"
+  },
+  "schema_version": 1,
+  "trees": {
+    "experiments/agent-containment-v1/fixtures/base": "0fadca30f7d12cbd4fc7f89e281bf01dca996e5b98a247651761cfca066d8cee",
+    "experiments/agent-containment-v1/fixtures/overlays": "694eccbb3a0907c43816a7a296a60eb2fe97187fa5fc667966d4e5dce45fa718",
+    "experiments/agent-containment-v1/fixtures/real-agent": "4026d2ec5344c8862cd1d674a53422d82478ccf0927e8ac72285fcb5b4a70b43"
+  }
+}

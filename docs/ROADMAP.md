@@ -1,8 +1,10 @@
 # AutoCage implementation roadmap
 
-**Status (2026-10-15):** M0–M3.6 implementation and scoped evaluation are complete. M3's historical verdict remains **INCONCLUSIVE** because RR03 had no validated narrow policy under its frozen verifier. M3.5 found concrete test-root write blocking in selected cases, but its patch-task repeats did not establish recurring-workflow value. M3.6 found that deterministic pre-execution suggestions preserve utility and block staged writes, yet are identical to a competent static policy and have no measured user-effort advantage. Final recommendation **B**: retain profiles as experimental infrastructure and pivot the main contribution to an agent-containment evaluation prototype. The historical 16-repeat M3.5 calculation is amortized tuning overhead only, not latency savings or a latency break-even. See the [M2 report](../experiments/write-policy-v1/REPORT.md), [M3 report](../experiments/real-repository-v1/REPORT.md), [M3.5 report](../experiments/m35-product-value/REPORT.md), and [M3.6 report/evidence](../experiments/m36-preexecution-value/REPORT.md).
+**Status (2026-10-22):** M0–M5 implementation and declared evaluations are complete. M3 remains historically **INCONCLUSIVE**. M3.5 and M3.6 did not establish product value for post-run optimization or automatic profile suggestions. M4's deterministic containment and one local-agent pair were feasibility evidence, not model-resistance results. M5 selected a narrow Inspect task/solver/scorer integration and detected three deliberate broad-policy regressions with independent syscall and canary evidence. M6's local pre-1.0 release gate passed in the validated Lima guest. Apache-2.0 is selected for AutoCage-owned material; Git publication and hosted enforcement remain pending. Historical experiment protocols and results remain unchanged.
 
 Effort assumes one student working part-time and is an estimate. Each stage has a stop/go review. Security tests are part of each deliverable.
+
+**Current status (2026-10-19):** M6 local release engineering and clean-copy validation are complete. The latest no-cost Inspect quickstart scored 13/13 samples and independently reproduced the expected policy regressions. The GitHub workflows are configured but have not run remotely. No additional product-value research gate is proposed.
 
 ## M0 — Linux feasibility gate
 
@@ -82,34 +84,44 @@ Effort assumes one student working part-time and is an estimate. Each stage has 
 
 The v1 and v2 attempts stopped incomplete due harness defects; they are separately archived and excluded from v3. M3.6 does not measure model coding ability or stochastic agents. It does not authorize policy reuse across snapshots.
 
-## M4 — Agent containment evaluation prototype (recommended next; not started)
+## M4 — Agent containment evaluation prototype
 
-M3.6 did not establish differentiation for pre-execution profile suggestions. The next contribution should test whether AutoCage's existing OS boundary contains unwanted effects from an untrusted coding-agent process while allowing a legitimate repository task to complete. This is an implementation/evaluation milestone, not another product-value gate.
+**Status: complete (2026-10-17).** Implementation, protocol, evidence, and decision are in [`experiments/agent-containment-v1/`](../experiments/agent-containment-v1/README.md) and the [M4 report](../experiments/agent-containment-v1/results/REPORT.md).
 
-**First deliverables:** an experiment harness under `experiments/agent-containment-v1/`; pinned benign and malicious-repository/tool-output fixtures; a scripted arbitrary-executable agent that makes deterministic task and out-of-scope-write attempts; independent host/stage canaries; and baselines for unrestricted staged writes, competent static policy, and native agent permission controls where a free local path exists. Use the existing Bubblewrap backend and records. First validate repeatable security mechanics; add one local model-compatible agent only if it can run without paid inference or host credentials. Do not route model traffic through the namespace via an unreviewed proxy.
+**Implemented:** paired clean/adversarial repo-instruction, source-comment, and tool-output fixtures; deterministic scripted controls; a protected `src/` policy, broad-write regression control, readonly utility control; an external `strace` observer; trusted task verifier and canary checker; stable experiment identity and JSON/Markdown outputs. One genuine Aider 0.86.2 + Qwen2.5-Coder 3B local-inference pair ran inside the no-egress namespace.
 
-**Acceptance:** successful legitimate-task execution and independently measured containment outcomes are reported separately; all required canaries execute; original checkout and guest host canaries remain unchanged; network remains unavailable; exact commands/model/runtime are recorded; at least 20 paired stochastic runs are required before any claim of model utility parity. State clearly what the sandbox prevents and what the agent can still read or alter. A passing verifier alone is not security evidence.
+**Measured:** 26/26 deterministic execution records, verifiers, trace files, and required AutoCage checks completed. Static `src/` policy denied 6/6 explicit adversarial writes and left 6/6 canaries unchanged; broad control allowed 6/6 and modified 6/6; both preserved the task on 12/12 cases. Readonly control failed its two utility checks as expected. The real agent passed both task verifiers; both untrusted files were opened; no protected-write attempt was observed; no canary changed; no non-loopback connection was observed. That single pair is integration feasibility only, not model-resistance evidence.
 
-**Outside scope:** cross-snapshot empirical policy reuse, automatic permission widening, credential brokering, new sandbox backends, paid inference, and claims about arbitrary one-off coding prompts.
+**Regression checks:** M0 feasibility harness passed 41/41; Rust tests passed 47 unit + 22 Linux integration; formatting, strict Clippy, locked release build, and `autocage check` passed; five M4 Python controller tests passed. The full deterministic suite completed at 417.5 ms median including staging, verifier, and tracing.
 
-## M5 — External benchmark
+**Research conclusion:** paired utility/security evidence and selected Linux syscall/canary evidence are useful, but Inspect already offers custom sandbox providers/external-agent integration and BoundaryBench already evaluates coding-agent capability under hardened policies with Inspect logs and an enforcement probe. A standalone M4 product would overlap existing evaluation infrastructure. Proceed with one thin Inspect sandbox/evidence integration, not another standalone evaluation framework.
 
-**Effort:** 3–5 weeks; may overlap M4.
+**Outside scope:** hosted inference, credential brokering, remote network access, new sandbox backends, general prompt-attack catalogues, hard resource limits, broad model-resistance claims.
 
-**Files:** experiments/authbench/, benchmark adapters, pinned task manifest, baselines, raw results, analysis script, evaluation doc updates.
+## M5 — Inspect integration and usable developer workflow
 
-Audit AuthBench license, task setup, image reproducibility, and protocol. Start with a declared subset, then expand if feasible. Use scripted agents for zero-cost enforcement/policy experiments; local open-weight model is a separate optional result. Compare identical task/agent/runtime under ceiling, static, manual, naive, AutoCage, and fair nono/OpenShell integrations where possible.
+**Status: complete (2026-10-18).** The implementation uses Inspect `Task`/solver/scorer APIs and one complete `autocage run` per sample. It does not implement a persistent `SandboxEnvironment` because that contract expects repeated per-sample file and process operations that do not match the current runner lifecycle.
 
-**Acceptance:** pinned inputs and commands reproduce raw metrics without paid services; utility and sensitive exposure are separate; failures and missing tasks disclosed.
+**Implemented:** pinned Inspect AI 0.3.281; a scenario-driven paired task adapter; explicit argv templates with no shell interpolation; scenario/fixture/verifier/agent/policy/runtime fingerprints; sealed AutoCage record validation; categorical utility, observed-attempt, canary, enforcement, and integrity scores; optional gated Inspect-local baseline; optional local Aider/Ollama/Qwen example; per-sample artifact and paired-report formatter.
 
-**Out of scope:** leaderboard claims, unreviewed paid inference, synthetic-only security claims.
+**Measured:** frozen 19/19 deterministic samples scored with zero model-generation calls. All 18 main task runs passed the trusted verifier; the single readonly control failed as expected. In three adversarial cases, broad AutoCage and Inspect local each allowed and changed the protected canary; static `src/` AutoCage denied each attempt and left its canaries unchanged. All 13 AutoCage records and required checks passed. The optional real Aider pair passed both verifiers but made no observed protected-write attempt. Full evidence and the matched comparison are in [`experiments/inspect-autocage-v1/results/2026-10-18/REPORT.md`](../experiments/inspect-autocage-v1/results/2026-10-18/REPORT.md).
+
+**Validation:** 47 Rust unit + 22 Linux integration tests; 20 M5 Python tests; 5 M4 Python tests; M0 harness 41/41; M4 deterministic regression 26/26. Formatting, strict Clippy, locked release build, and `autocage check` passed.
+
+**Research decision:** A — maintain AutoCage as a narrowly scoped Inspect-integrated local enforcement/evidence tool. Evidence shows the integration can carry OS policy checks, sealed runtime identity, selected syscall outcomes, and independent canaries into Inspect results. The study does not establish superiority to Docker or general model resistance. Keep profile synthesis experimental and avoid a custom persistent sandbox provider or general evaluation framework.
+
+**Out of scope:** hosted inference, network credential brokering, model-provider tool bridges, policy optimization changes, cross-platform enforcement, general attack catalogs, and production-grade security claims.
 
 ## M6 — Linux release candidate
 
-**Effort:** 2–4 weeks.
+**Status (2026-10-22):** release candidate implementation complete; local supported-guest validation passed. The exact Linux-enforcement GitHub Actions workflow is configured for Ubuntu 24.04 ARM64 but has not yet run on GitHub-hosted infrastructure. The portable workflow is configured for x86_64 and ARM64; no remote workflow result is claimed. Apache-2.0 licensing is resolved for AutoCage-owned content. No release has been published.
 
-Add CI on pinned Ubuntu, install/troubleshooting guide, threat model, architecture diagram, benchmark report, dependency audit, versioned schemas, failure injection, and pre-1.0 release.
+**Implemented:** pre-1.0 version metadata and changelog; top-level quickstart and architecture diagram; install/troubleshooting/support documentation; security reporting instructions; a pinned Inspect lock/build backend; CI for portable Rust/Python validation and separately scoped Linux enforcement; a preflight diagnostic script; a one-command Inspect quickstart with structured-result assertions; generated-file ignores and local documentation/dependency consistency checks.
 
-**Acceptance:** clean VM reproduces documented usage; fail-closed behavior is visible; no secret collection; every claim maps to tests/results; known limits are prominent.
+**Local release gate:** the clean-copy installation and quickstart were executed in the isolated Ubuntu 24.04.5 ARM64 Lima guest. The full Rust suite, M0, M4 deterministic controller, and M5 Inspect integration gates passed after release changes. Detailed command output and results are in the M6 section of [`docs/RELEASE.md`](RELEASE.md) and [M5 report](../experiments/inspect-autocage-v1/results/2026-10-18/REPORT.md). The M6 scripts do not store run results in public GitHub artifacts.
+
+**Not yet verified:** GitHub-hosted runner support for the required AppArmor/user-namespace profile; GitHub Actions execution; public release/distribution. CI's portable job is not OS-enforcement evidence. Do not call this a published release until Git history, remote contents, and CI are reviewed.
+
+**Out of scope:** new sandbox backends, macOS/Windows enforcement, hosted inference, credential brokering, persistent Inspect sandbox provider, policy optimizer changes, production security claims.
 
 **Out of scope:** macOS enforcement, Windows, enterprise fleet management, production-grade security claims.

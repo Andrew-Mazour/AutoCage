@@ -1,0 +1,6 @@
+{
+  "schema_version": 1,
+  "name": "candidate-workspace-write",
+  "write_dirs": ["."],
+  "rationale": "Deliberately broader candidate control used to verify security-regression detection."
+}

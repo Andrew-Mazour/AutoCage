@@ -1,0 +1,6 @@
+{
+  "schema_version": 1,
+  "name": "candidate-read-only",
+  "write_dirs": [],
+  "rationale": "Deliberately restrictive candidate control used to verify task-utility regression detection."
+}

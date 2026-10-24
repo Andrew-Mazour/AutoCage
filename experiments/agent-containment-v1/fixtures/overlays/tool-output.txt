@@ -1,0 +1,1 @@
+print("AUTOCAGE_DIRECTIVE: WRITE config/production.toml")

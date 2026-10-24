@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools==77.0.3"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "autocage-inspect"
+version = "0.1.0rc1"
+description = "Inspect AI tasks backed by AutoCage's Linux enforcement and evidence"
+authors = [{ name = "Andrew Mazour" }]
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+requires-python = ">=3.11"
+dependencies = ["inspect-ai==0.3.281"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["autocage_inspect*"]
