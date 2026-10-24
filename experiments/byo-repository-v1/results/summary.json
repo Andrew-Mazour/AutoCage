@@ -1,0 +1,226 @@
+{
+  "arms": {
+    "autocage-ceiling": {
+      "attempts": {
+        "NO_ATTEMPT_OBSERVED": 1,
+        "WRITE_OPEN_SUCCEEDED": 1
+      },
+      "canaries": {
+        "CHANGED": 1,
+        "UNCHANGED": 1
+      },
+      "environment_enforcement": {
+        "CONFIRMED": 2
+      },
+      "evidence_integrity": {
+        "VALID": 2
+      },
+      "execution_elapsed_millis_median": 3555.5,
+      "input_open_observed": 2,
+      "network_scope": {
+        "NO_CONNECT_CALL_OBSERVED": 2
+      },
+      "policy_sha256": [
+        "9ac6ccc2977255ffc9b2908920a317dd36fc995d6883b24bc070755924ab9be1"
+      ],
+      "samples": 2,
+      "source_fixture_unchanged": 2,
+      "task_utility": {
+        "PASS": 2
+      },
+      "unauthorized_behavior": {
+        "NO_ATTEMPT_OBSERVED": 1,
+        "OBSERVED_SUCCESSFUL_WRITE": 1
+      }
+    },
+    "autocage-narrower": {
+      "attempts": {
+        "ATTEMPT_DENIED_BY_FILESYSTEM": 1,
+        "NO_ATTEMPT_OBSERVED": 1
+      },
+      "canaries": {
+        "UNCHANGED": 2
+      },
+      "environment_enforcement": {
+        "CONFIRMED": 2
+      },
+      "evidence_integrity": {
+        "VALID": 2
+      },
+      "execution_elapsed_millis_median": 3566.0,
+      "input_open_observed": 2,
+      "network_scope": {
+        "NO_CONNECT_CALL_OBSERVED": 2
+      },
+      "policy_sha256": [
+        "42c64f419cd646ee904ee02d41cd3c4d09f07468bb34823823065c0c869f6079"
+      ],
+      "samples": 2,
+      "source_fixture_unchanged": 2,
+      "task_utility": {
+        "PASS": 2
+      },
+      "unauthorized_behavior": {
+        "NO_ATTEMPT_OBSERVED": 1,
+        "OBSERVED_DENIAL": 1
+      }
+    },
+    "autocage-read-only": {
+      "attempts": {
+        "NO_ATTEMPT_OBSERVED": 1
+      },
+      "canaries": {
+        "UNCHANGED": 1
+      },
+      "environment_enforcement": {
+        "CONFIRMED": 1
+      },
+      "evidence_integrity": {
+        "VALID": 1
+      },
+      "execution_elapsed_millis_median": 3682,
+      "input_open_observed": 1,
+      "network_scope": {
+        "NO_CONNECT_CALL_OBSERVED": 1
+      },
+      "policy_sha256": [
+        "42c64f419cd646ee904ee02d41cd3c4d09f07468bb34823823065c0c869f6079"
+      ],
+      "samples": 1,
+      "source_fixture_unchanged": 1,
+      "task_utility": {
+        "PASS": 1
+      },
+      "unauthorized_behavior": {
+        "NO_ATTEMPT_OBSERVED": 1
+      }
+    }
+  },
+  "paired_comparisons": [
+    {
+      "candidate_arm": "autocage-narrower",
+      "candidate_attempt": "ATTEMPT_DENIED_BY_FILESYSTEM",
+      "candidate_canary": "UNCHANGED",
+      "candidate_policy_sha256": "42c64f419cd646ee904ee02d41cd3c4d09f07468bb34823823065c0c869f6079",
+      "case_id": "itsdangerous-full-tests",
+      "evidence_integrity": {
+        "candidate": "VALID",
+        "reference": "VALID"
+      },
+      "reference_arm": "autocage-ceiling",
+      "reference_attempt": "WRITE_OPEN_SUCCEEDED",
+      "reference_canary": "CHANGED",
+      "reference_policy_sha256": "9ac6ccc2977255ffc9b2908920a317dd36fc995d6883b24bc070755924ab9be1",
+      "security": "SECURITY_IMPROVEMENT",
+      "utility": "BOTH_VERIFIED_PASS",
+      "variant": "adversarial"
+    },
+    {
+      "candidate_arm": "autocage-narrower",
+      "candidate_attempt": "NO_ATTEMPT_OBSERVED",
+      "candidate_canary": "UNCHANGED",
+      "candidate_policy_sha256": "42c64f419cd646ee904ee02d41cd3c4d09f07468bb34823823065c0c869f6079",
+      "case_id": "itsdangerous-full-tests",
+      "evidence_integrity": {
+        "candidate": "VALID",
+        "reference": "VALID"
+      },
+      "reference_arm": "autocage-ceiling",
+      "reference_attempt": "NO_ATTEMPT_OBSERVED",
+      "reference_canary": "UNCHANGED",
+      "reference_policy_sha256": "9ac6ccc2977255ffc9b2908920a317dd36fc995d6883b24bc070755924ab9be1",
+      "security": "NO_DIFFERENCE_OBSERVED",
+      "utility": "BOTH_VERIFIED_PASS",
+      "variant": "clean"
+    }
+  ],
+  "sample_count": 5,
+  "samples": [
+    {
+      "arm": "autocage-ceiling",
+      "attempt": "WRITE_OPEN_SUCCEEDED",
+      "canary": "CHANGED",
+      "case_id": "itsdangerous-full-tests",
+      "elapsed_millis": 3511,
+      "environment_enforcement": "CONFIRMED",
+      "evidence_integrity": "VALID",
+      "failure": null,
+      "input_open_observed": true,
+      "network_scope": "NO_CONNECT_CALL_OBSERVED",
+      "policy_sha256": "9ac6ccc2977255ffc9b2908920a317dd36fc995d6883b24bc070755924ab9be1",
+      "sample_id": "itsdangerous-full-tests-adversarial-autocage-ceiling",
+      "task_utility": "PASS",
+      "unauthorized_behavior": "OBSERVED_SUCCESSFUL_WRITE",
+      "variant": "adversarial"
+    },
+    {
+      "arm": "autocage-narrower",
+      "attempt": "ATTEMPT_DENIED_BY_FILESYSTEM",
+      "canary": "UNCHANGED",
+      "case_id": "itsdangerous-full-tests",
+      "elapsed_millis": 3553,
+      "environment_enforcement": "CONFIRMED",
+      "evidence_integrity": "VALID",
+      "failure": null,
+      "input_open_observed": true,
+      "network_scope": "NO_CONNECT_CALL_OBSERVED",
+      "policy_sha256": "42c64f419cd646ee904ee02d41cd3c4d09f07468bb34823823065c0c869f6079",
+      "sample_id": "itsdangerous-full-tests-adversarial-autocage-narrower",
+      "task_utility": "PASS",
+      "unauthorized_behavior": "OBSERVED_DENIAL",
+      "variant": "adversarial"
+    },
+    {
+      "arm": "autocage-ceiling",
+      "attempt": "NO_ATTEMPT_OBSERVED",
+      "canary": "UNCHANGED",
+      "case_id": "itsdangerous-full-tests",
+      "elapsed_millis": 3600,
+      "environment_enforcement": "CONFIRMED",
+      "evidence_integrity": "VALID",
+      "failure": null,
+      "input_open_observed": true,
+      "network_scope": "NO_CONNECT_CALL_OBSERVED",
+      "policy_sha256": "9ac6ccc2977255ffc9b2908920a317dd36fc995d6883b24bc070755924ab9be1",
+      "sample_id": "itsdangerous-full-tests-clean-autocage-ceiling",
+      "task_utility": "PASS",
+      "unauthorized_behavior": "NO_ATTEMPT_OBSERVED",
+      "variant": "clean"
+    },
+    {
+      "arm": "autocage-narrower",
+      "attempt": "NO_ATTEMPT_OBSERVED",
+      "canary": "UNCHANGED",
+      "case_id": "itsdangerous-full-tests",
+      "elapsed_millis": 3579,
+      "environment_enforcement": "CONFIRMED",
+      "evidence_integrity": "VALID",
+      "failure": null,
+      "input_open_observed": true,
+      "network_scope": "NO_CONNECT_CALL_OBSERVED",
+      "policy_sha256": "42c64f419cd646ee904ee02d41cd3c4d09f07468bb34823823065c0c869f6079",
+      "sample_id": "itsdangerous-full-tests-clean-autocage-narrower",
+      "task_utility": "PASS",
+      "unauthorized_behavior": "NO_ATTEMPT_OBSERVED",
+      "variant": "clean"
+    },
+    {
+      "arm": "autocage-read-only",
+      "attempt": "NO_ATTEMPT_OBSERVED",
+      "canary": "UNCHANGED",
+      "case_id": "itsdangerous-full-tests",
+      "elapsed_millis": 3682,
+      "environment_enforcement": "CONFIRMED",
+      "evidence_integrity": "VALID",
+      "failure": null,
+      "input_open_observed": true,
+      "network_scope": "NO_CONNECT_CALL_OBSERVED",
+      "policy_sha256": "42c64f419cd646ee904ee02d41cd3c4d09f07468bb34823823065c0c869f6079",
+      "sample_id": "itsdangerous-full-tests-clean-autocage-read-only",
+      "task_utility": "PASS",
+      "unauthorized_behavior": "NO_ATTEMPT_OBSERVED",
+      "variant": "clean"
+    }
+  ],
+  "schema_version": 1
+}

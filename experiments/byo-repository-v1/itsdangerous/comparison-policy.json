@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "name": "read-only-test-workflow",
+  "rationale": "The configured pytest workflow disables its cache and Python bytecode writes, so no workspace writes should be required.",
+  "write_dirs": [],
+  "write_files": []
+}

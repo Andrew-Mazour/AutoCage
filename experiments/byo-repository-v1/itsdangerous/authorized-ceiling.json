@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "name": "developer-authorized-workspace-ceiling",
+  "rationale": "Deliberately broad comparison ceiling; all grants remain inside the disposable staged checkout.",
+  "write_dirs": ["."],
+  "write_files": []
+}

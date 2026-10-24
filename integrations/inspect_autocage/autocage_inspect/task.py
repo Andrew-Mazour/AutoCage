@@ -6,6 +6,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+from pathlib import PurePosixPath
 import shutil
 import sys
 from typing import Any
@@ -20,18 +21,125 @@ from .execution import M4_ROOT, REPOSITORY_ROOT, run_sample
 from .evidence import sha256_file, tree_digest
 
 
+def _policy_path_parts(value: str, *, label: str, file_grant: bool = False) -> tuple[str, ...]:
+    if not isinstance(value, str) or not value or "\x00" in value or value.startswith("/"):
+        raise ValueError(f"{label} must be a normalized relative path")
+    if value == ".":
+        if file_grant:
+            raise ValueError(f"{label} file grant cannot target the workspace root")
+        return ()
+    parts = tuple(value.split("/"))
+    if any(part in ("", ".", "..") for part in parts):
+        raise ValueError(f"{label} must be a normalized relative path")
+    if PurePosixPath(value).as_posix() != value:
+        raise ValueError(f"{label} must be a normalized relative path")
+    return parts
+
+
+def _load_policy_bytes(raw: bytes, label: str) -> dict[str, list[str]]:
+    policy = json.loads(raw)
+    if not isinstance(policy, dict) or type(policy.get("schema_version")) is not int or policy["schema_version"] != 1:
+        raise ValueError(f"{label} must be a schema_version 1 policy object")
+    if set(policy) - {"schema_version", "write_dirs", "write_files", "name", "rationale"}:
+        raise ValueError(f"{label} contains unsupported permission fields")
+    directories = policy.get("write_dirs", [])
+    files = policy.get("write_files", [])
+    if not isinstance(directories, list) or not all(isinstance(item, str) for item in directories):
+        raise ValueError(f"{label} write_dirs must be strings")
+    if not isinstance(files, list) or not all(isinstance(item, str) for item in files):
+        raise ValueError(f"{label} write_files must be strings")
+    for item in directories:
+        _policy_path_parts(item, label=f"{label} directory")
+    for item in files:
+        _policy_path_parts(item, label=f"{label} file", file_grant=True)
+    grants = [
+        ("directory", _policy_path_parts(item, label=f"{label} directory"))
+        for item in directories
+    ] + [
+        ("file", _policy_path_parts(item, label=f"{label} file", file_grant=True))
+        for item in files
+    ]
+    if len(set(grants)) != len(grants):
+        raise ValueError(f"{label} contains duplicate write grants")
+    for kind, path in grants:
+        for ancestor_kind, ancestor_path in grants:
+            if ancestor_kind == "directory" and len(ancestor_path) <= len(path) \
+                    and path[: len(ancestor_path)] == ancestor_path \
+                    and (ancestor_path, ancestor_kind) != (path, kind):
+                raise ValueError(f"{label} contains grants subsumed by a recursive directory grant")
+    return {"write_dirs": directories, "write_files": files}
+
+
+def _policy_subset(candidate: dict[str, list[str]], ceiling: dict[str, list[str]]) -> bool:
+    ceiling_dirs = [_policy_path_parts(path, label="authorized ceiling directory") for path in ceiling["write_dirs"]]
+    ceiling_files = {_policy_path_parts(path, label="authorized ceiling file", file_grant=True) for path in ceiling["write_files"]}
+
+    def covered(path: tuple[str, ...], directory: tuple[str, ...]) -> bool:
+        return len(directory) <= len(path) and path[: len(directory)] == directory
+
+    for path in candidate["write_dirs"]:
+        parts = _policy_path_parts(path, label="comparison directory")
+        if not any(covered(parts, allowed) for allowed in ceiling_dirs):
+            return False
+    for path in candidate["write_files"]:
+        parts = _policy_path_parts(path, label="comparison file", file_grant=True)
+        if parts not in ceiling_files and not any(covered(parts, allowed) for allowed in ceiling_dirs):
+            return False
+    return True
+
+
+def _policy_targets_exist(policy: dict[str, list[str]], fixture_root: Path, label: str) -> None:
+    for kind, paths in (("directory", policy["write_dirs"]), ("file", policy["write_files"])):
+        for value in paths:
+            parts = _policy_path_parts(value, label=f"{label} {kind}", file_grant=kind == "file")
+            target = fixture_root.joinpath(*parts)
+            if kind == "directory" and not target.is_dir():
+                raise ValueError(f"{label} directory grant does not name a directory in the fixture: {value}")
+            if kind == "file" and not target.is_file():
+                raise ValueError(f"{label} file grant does not name a regular file in the fixture: {value}")
+
+
+def _policy_file(path: Path, value: Any, label: str) -> tuple[Path, bytes]:
+    if not isinstance(value, str) or not value:
+        raise ValueError(f"{label} must name a policy file relative to the scenario")
+    relative = Path(value)
+    if relative.is_absolute() or ".." in relative.parts:
+        raise ValueError(f"{label} path must remain within the scenario directory")
+    candidate = path.parent / relative
+    if candidate.is_symlink():
+        raise ValueError(f"{label} must not be a symlink")
+    resolved = candidate.resolve()
+    if not resolved.is_relative_to(path.parent.resolve()) or not resolved.is_file():
+        raise ValueError(f"{label} must be a regular file within the scenario directory")
+    return resolved, resolved.read_bytes()
+
+
 def _suite(scenario_file: str | None = None) -> tuple[dict[str, Any], Path, Path, dict[str, Any]]:
     path = Path(scenario_file).resolve() if scenario_file else (M4_ROOT / "suite.json").resolve()
     raw = path.read_bytes()
     suite = json.loads(raw)
-    if not isinstance(suite, dict) or suite.get("schema_version") != 1:
-        raise ValueError("scenario file must be a schema_version 1 JSON object")
-    for field in ("task", "fixture_root", "agent", "verifier", "timeout_seconds", "cases", "policy_comparisons"):
+    if (
+        not isinstance(suite, dict)
+        or type(suite.get("schema_version")) is not int
+        or suite["schema_version"] not in (1, 2)
+    ):
+        raise ValueError("scenario file must use supported schema_version 1 or 2")
+    schema_version = suite["schema_version"]
+    required_fields = ("task", "fixture_root", "agent", "verifier", "timeout_seconds", "cases")
+    if schema_version == 1:
+        required_fields += ("policy_comparisons",)
+    else:
+        required_fields += ("authorized_ceiling", "comparison_policy")
+    for field in required_fields:
         if field not in suite:
             raise ValueError(f"scenario file is missing required field {field!r}")
+    if not isinstance(suite.get("task"), str) or not suite["task"].strip():
+        raise ValueError("scenario task must be a non-empty string")
     fixture_root = (path.parent / suite["fixture_root"]).resolve()
     if not fixture_root.is_dir():
         raise ValueError("scenario fixture_root must resolve to a directory")
+    if schema_version == 2 and (fixture_root / ".git").exists():
+        raise ValueError("schema_version 2 fixture must be a sanitized source snapshot without .git")
     fixture_sha256 = tree_digest(fixture_root)
     agent = suite["agent"]
     verifier = suite["verifier"]
@@ -44,6 +152,9 @@ def _suite(scenario_file: str | None = None) -> tuple[dict[str, Any], Path, Path
 
     if not isinstance(agent, dict) or not isinstance(agent.get("program"), str):
         raise ValueError("scenario agent requires a program")
+    agent_kind = agent.get("kind", "configured-executable")
+    if not isinstance(agent_kind, str) or not agent_kind.strip() or len(agent_kind) > 80:
+        raise ValueError("scenario agent kind must be a non-empty label of at most 80 characters")
     if "argv" in agent:
         if not isinstance(agent["argv"], list) or not all(isinstance(arg, str) for arg in agent["argv"]):
             raise ValueError("scenario agent argv must be a string array")
@@ -97,16 +208,27 @@ def _suite(scenario_file: str | None = None) -> tuple[dict[str, Any], Path, Path
     verifier_executable_identity = executable_identity(verifier["program"])
     if not isinstance(suite["cases"], list) or not suite["cases"]:
         raise ValueError("scenario cases must be a non-empty array")
+    case_ids: set[str] = set()
     for case in suite["cases"]:
-        if not isinstance(case, dict) or not all(
-            isinstance(case.get(field), str)
-            for field in ("case_id", "surface", "input_path", "protected_path", "canary_initial")
-        ):
+        required_case_fields = ("case_id", "surface", "input_path", "protected_path")
+        if schema_version == 1:
+            required_case_fields += ("canary_initial",)
+        if not isinstance(case, dict) or not all(isinstance(case.get(field), str) for field in required_case_fields):
             raise ValueError("each scenario case requires id, surface, input, protected path, and canary")
+        if case["case_id"] in case_ids:
+            raise ValueError(f"scenario case_id must be unique: {case['case_id']!r}")
+        case_ids.add(case["case_id"])
         for field in ("input_path", "protected_path"):
             candidate = Path(case[field])
             if candidate.is_absolute() or ".." in candidate.parts:
                 raise ValueError(f"scenario {field} must remain within the staged fixture")
+        if schema_version == 2:
+            input_file = fixture_root / case["input_path"]
+            protected_file = fixture_root / case["protected_path"]
+            if not input_file.is_file() or not protected_file.is_file():
+                raise ValueError("schema_version 2 input_path and protected_path must name regular fixture files")
+            if not isinstance(case.get("overlay"), str) or case.get("overlay_mode") not in ("append", "comment", "replace"):
+                raise ValueError("schema_version 2 cases require an overlay file and supported overlay_mode")
         if case.get("overlay") is not None:
             overlay = Path(case["overlay"])
             if overlay.is_absolute() or ".." in overlay.parts:
@@ -114,37 +236,71 @@ def _suite(scenario_file: str | None = None) -> tuple[dict[str, Any], Path, Path
             overlay_file = path.parent / overlay
             if overlay_file.is_symlink() or not overlay_file.is_file():
                 raise ValueError("scenario overlay must be a regular file")
-    if not isinstance(suite["timeout_seconds"], int) or not 1 <= suite["timeout_seconds"] <= 3600:
+        if schema_version == 2:
+            if case.get("canary_initial") is not None:
+                raise ValueError("schema_version 2 canary_initial must be null so protected contents are not persisted")
+            protected = fixture_root / case["protected_path"]
+            case["canary_initial"] = {"sha256": sha256_file(protected)}
+    if type(suite["timeout_seconds"]) is not int or not 1 <= suite["timeout_seconds"] <= 3600:
         raise ValueError("scenario timeout_seconds must be between 1 and 3600")
 
-    comparisons = suite["policy_comparisons"]
-    if not isinstance(comparisons, dict) or not {"baseline", "candidate"}.issubset(comparisons):
-        raise ValueError("policy_comparisons must declare baseline and candidate policies")
     policies: dict[str, Any] = {}
     policy_digests: dict[str, str] = {}
-    # M4's candidate file is the deliberately broad regression control;
-    # baseline is the competent static src-only grant.
-    for arm, comparison in (("autocage-broad", "candidate"), ("autocage-src-only", "baseline")):
-        policy_path = (path.parent / comparisons[comparison]).resolve()
-        policy_bytes = policy_path.read_bytes()
-        policy = json.loads(policy_bytes)
-        if not isinstance(policy, dict) or policy.get("schema_version") != 1:
-            raise ValueError(f"policy file {comparison!r} must have schema_version 1")
-        directories = policy.get("write_dirs", [])
-        files = policy.get("write_files", [])
-        if not isinstance(directories, list) or not all(isinstance(item, str) for item in directories):
-            raise ValueError(f"policy {comparison!r} write_dirs must be strings")
-        if not isinstance(files, list) or not all(isinstance(item, str) for item in files):
-            raise ValueError(f"policy {comparison!r} write_files must be strings")
-        policies[arm] = {"write_dirs": directories, "write_files": files}
-        policy_digests[arm] = hashlib.sha256(policy_bytes).hexdigest()
+    if schema_version == 1:
+        comparisons = suite["policy_comparisons"]
+        if not isinstance(comparisons, dict) or not {"baseline", "candidate"}.issubset(comparisons):
+            raise ValueError("policy_comparisons must declare baseline and candidate policies")
+        # Legacy M4 scenarios use candidate as the broad control and baseline
+        # as the narrower static policy. Keep their sample IDs unchanged.
+        for arm, comparison in (("autocage-broad", "candidate"), ("autocage-src-only", "baseline")):
+            policy_path = (path.parent / comparisons[comparison]).resolve()
+            policy_bytes = policy_path.read_bytes()
+            policies[arm] = _load_policy_bytes(policy_bytes, f"policy {comparison!r}")
+            policy_digests[arm] = hashlib.sha256(policy_bytes).hexdigest()
+        policy_arms = ["autocage-broad", "autocage-src-only"]
+        narrow_policy_arm = "autocage-src-only"
+        policy_comparison = {
+            "reference_arm": "autocage-src-only",
+            "candidate_arm": "autocage-broad",
+        }
+        authorized_ceiling_sha256 = policy_digests["autocage-broad"]
+    else:
+        ceiling_path, ceiling_bytes = _policy_file(path, suite["authorized_ceiling"], "authorized_ceiling")
+        comparison_path, comparison_bytes = _policy_file(path, suite["comparison_policy"], "comparison_policy")
+        ceiling = _load_policy_bytes(ceiling_bytes, "authorized_ceiling")
+        comparison = _load_policy_bytes(comparison_bytes, "comparison_policy")
+        _policy_targets_exist(ceiling, fixture_root, "authorized_ceiling")
+        _policy_targets_exist(comparison, fixture_root, "comparison_policy")
+        if not _policy_subset(comparison, ceiling):
+            raise ValueError("comparison_policy exceeds the developer-authorized write ceiling")
+        if _policy_subset(ceiling, comparison):
+            raise ValueError("comparison_policy must be strictly narrower than authorized_ceiling")
+        policies = {
+            "autocage-ceiling": ceiling,
+            "autocage-narrower": comparison,
+        }
+        policy_digests = {
+            "autocage-ceiling": hashlib.sha256(ceiling_bytes).hexdigest(),
+            "autocage-narrower": hashlib.sha256(comparison_bytes).hexdigest(),
+        }
+        policy_arms = ["autocage-ceiling", "autocage-narrower"]
+        narrow_policy_arm = "autocage-narrower"
+        authorized_ceiling_sha256 = hashlib.sha256(ceiling_bytes).hexdigest()
+        policy_comparison = {
+            "reference_arm": "autocage-ceiling",
+            "candidate_arm": "autocage-narrower",
+        }
     scenario = {
         "scenario_file": str(path),
         "scenario_root": str(path.parent),
         "fixture_root": str(fixture_root),
         "agent_config": {**agent, "argv": command_argv},
+        "agent_kind": agent_kind if schema_version == 2 else "scripted",
         "verifier": verifier,
         "write_policies": policies,
+        "policy_arms": policy_arms,
+        "narrow_policy_arm": narrow_policy_arm,
+        "policy_comparison": policy_comparison,
         "scenario_identity": {
             "scenario_sha256": hashlib.sha256(raw).hexdigest(),
             "agent_config_sha256": hashlib.sha256(
@@ -166,6 +322,7 @@ def _suite(scenario_file: str | None = None) -> tuple[dict[str, Any], Path, Path
                 ).encode()
             ).hexdigest(),
             "policy_config_sha256": policy_digests,
+            "authorized_ceiling_sha256": authorized_ceiling_sha256,
             "agent_executable": agent_executable_identity,
             "verifier_executable": verifier_executable_identity,
             "fixture_sha256": fixture_sha256,
@@ -319,7 +476,7 @@ def containment_regression(
             "Inspect local baseline runs outside AutoCage; only enable it in a disposable Linux VM "
             "with AUTOCAGE_INSPECT_UNCONFINED_LOCAL_BASELINE=1"
         )
-    arms = ["autocage-broad", "autocage-src-only"]
+    arms = scenario["policy_arms"]
     if include_inspect_local:
         arms.insert(0, "inspect-local")
     samples = _samples(
@@ -328,7 +485,7 @@ def containment_regression(
         cases=suite["cases"],
         task_text=suite["task"],
         timeout_seconds=int(suite["timeout_seconds"]),
-        agent_kind="scripted",
+        agent_kind=scenario["agent_kind"],
         autocage_binary=autocage_binary,
         scenario_file=str(scenario_path),
         configuration_identity=configuration_identity,
@@ -342,12 +499,14 @@ def containment_regression(
             cases=[suite["cases"][0]],
             task_text=suite["task"],
             timeout_seconds=int(suite["timeout_seconds"]),
-            agent_kind="scripted",
+            agent_kind=scenario["agent_kind"],
             autocage_binary=autocage_binary,
             scenario_file=str(scenario_path),
             configuration_identity=configuration_identity,
         )
     )
+    task_version = int(suite["schema_version"])
+    task_name = "autocage-containment-regression-v1" if task_version == 1 else "autocage-byo-repository-v2"
     return Task(
         dataset=samples,
         solver=execute_autocage_sample(work_root),
@@ -362,12 +521,16 @@ def containment_regression(
         model="mockllm/model",
         sandbox="local",
         fail_on_error=False,
-        name="autocage-containment-regression-v1",
-        version=1,
+        name=task_name,
+        version=task_version,
         metadata={
-            "agent": "deterministic scripted control; no model inference is called",
-            "comparison": ["Inspect LocalSandboxEnvironment in isolated Lima", "AutoCage broad", "AutoCage src-only"],
-            "model_sentinel": "mockllm/model is required by the Inspect TaskState API; the solver does not invoke generate()",
+            "agent": (
+                "Deterministic scripted control; no model inference is called"
+                if task_version == 1
+                else f"Configured executable; declared kind label: {scenario['agent_kind']} (not independently verified)"
+            ),
+            "comparison": [*arms],
+            "model_sentinel": "mockllm/model is an Inspect TaskState placeholder; the solver does not invoke model generation",
             "scenario_file": str(scenario_path),
             "fixture_root": str(fixture_root),
         },
@@ -384,16 +547,22 @@ def local_aider_regression(
     default_scenario = Path(__file__).resolve().parents[1] / "scenarios" / "local-aider.json"
     suite, scenario_path, fixture_root, scenario = _suite(scenario_file or str(default_scenario))
     case = suite["cases"][0]
+    task_version = int(suite["schema_version"])
     samples = _samples(
-        arms=["autocage-src-only"],
+        arms=[scenario["narrow_policy_arm"]],
         variants=["clean", "adversarial"],
         cases=[case],
         task_text=suite["task"],
         timeout_seconds=int(suite["timeout_seconds"]),
-        agent_kind="aider",
+        agent_kind=scenario["agent_kind"] if task_version == 2 else "aider",
         autocage_binary=autocage_binary,
         scenario_file=str(scenario_path),
         configuration_identity=scenario["scenario_identity"],
+    )
+    task_name = (
+        "autocage-local-aider-qwen25-coder-3b-v1"
+        if task_version == 1
+        else "autocage-local-agent-scenario-v2"
     )
     return Task(
         dataset=samples,
@@ -409,12 +578,22 @@ def local_aider_regression(
         model="mockllm/model",
         sandbox="local",
         fail_on_error=False,
-        name="autocage-local-aider-qwen25-coder-3b-v1",
-        version=1,
+        name=task_name,
+        version=task_version,
         metadata={
-            "agent": "Aider with local Ollama inference, if guest assets are installed",
-            "inference": "Ollama is launched by the agent wrapper inside AutoCage's no-egress namespace",
-            "model_sentinel": "Inspect mock model provider is not called; inference is local Ollama",
+            "agent": (
+                "Aider with local Ollama inference, if guest assets are installed"
+                if task_version == 1 else "Configured local executable; no Inspect-hosted model bridge"
+            ),
+            "inference": (
+                "Ollama is launched by the agent wrapper inside AutoCage's no-egress namespace"
+                if task_version == 1 else "The configured executable runs inside AutoCage; no hosted inference bridge"
+            ),
+            "model_sentinel": (
+                "Inspect mock model provider is not called; inference is local Ollama"
+                if task_version == 1
+                else "mockllm/model is a TaskState placeholder; the configured executable runs directly without an Inspect model bridge"
+            ),
             "scenario_file": str(scenario_path),
             "scenario_identity": scenario["scenario_identity"],
         },

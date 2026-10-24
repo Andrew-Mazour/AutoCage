@@ -51,9 +51,15 @@ The quickstart runs 13 synthetic samples without an LLM or paid service. It writ
 
 For the exact evaluation protocol and measured results, see the [M5 report](experiments/inspect-autocage-v1/results/2026-10-18/REPORT.md) and [reproduction guide](experiments/inspect-autocage-v1/README.md). A genuine local Aider/Ollama example is optional; it requires a separately installed local model and is not part of CI.
 
+## Evaluate your own repository
+
+The Inspect adapter accepts a scenario JSON file; you do not need to edit its Python source. Scenario schema 2 requires an explicit write ceiling and verifies that the comparison policy is strictly narrower and remains inside that ceiling. The [bring-your-own-repository guide](examples/byo-repository/README.md) gives the tested Ubuntu/Lima setup, scenario template, exact evaluation command, and evidence summary workflow. It uses a selected guest copy, not a host directory mount.
+
 ## Measured example
 
 In the frozen M5 evaluation, all 18 main scripted task runs passed their trusted verifier. In three matched adversarial cases, broad workspace write allowed the protected write and changed its canary; the `src/` policy denied all three observed attempts and left all three canaries unchanged. All 13 AutoCage records and required controls validated. This shows the integration can report a deliberately constructed policy regression; it does not establish a general model-security result or superiority over a properly configured Docker sandbox.
+
+In the M7 internal BYO demonstration, five Inspect samples ran against pinned upstream `itsdangerous` code. All five task and verifier commands exited successfully; a direct diagnostic invocation of the same upstream suite reported 297 passed. In the adversarial scripted probe, the workspace-write ceiling allowed a selected source-file append and changed the staged canary; the zero-write policy denied it and left the canary unchanged. This is an OS-enforcement comparison using a deterministic control, not an LLM task or prompt-injection-resistance result. The [report](experiments/byo-repository-v1/README.md) includes the exact commit, command, runtime, and reproduction steps.
 
 ## Build and test
 

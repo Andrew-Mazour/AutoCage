@@ -175,6 +175,9 @@ def validate_autocage_record(
     try:
         record = inspect_report["run"]
         lifecycle = inspect_report["lifecycle"]
+        if not isinstance(lifecycle, dict):
+            failures.append("run lifecycle is not an object")
+            lifecycle = {}
         if inspect_report.get("validation") != "SEALED":
             failures.append("AutoCage did not report a sealed run")
         if lifecycle.get("phase") != "complete":
@@ -191,6 +194,9 @@ def validate_autocage_record(
         record_digest = sha256_file(record_path)
         contract_digest = sha256_file(contract_path)
         contract = json.loads(contract_path.read_text(encoding="utf-8"))
+        if not isinstance(contract, dict):
+            failures.append("run contract is not an object")
+            return False, failures
         if inspect_report.get("run_record_sha256") != record_digest:
             failures.append("run record digest does not match AutoCage inspect output")
         if inspect_report.get("contract_sha256") != contract_digest:
@@ -199,9 +205,11 @@ def validate_autocage_record(
             failures.append("run record contract digest mismatch")
         if record.get("run_id") != inspect_report.get("run", {}).get("run_id"):
             failures.append("run id mismatch")
-        if contract.get("source_manifest_sha256") != record.get("workspace", {}).get(
-            "before_manifest_sha256"
-        ):
+        workspace = record.get("workspace")
+        if not isinstance(workspace, dict):
+            failures.append("recorded workspace identity is missing")
+            workspace = {}
+        if contract.get("source_manifest_sha256") != workspace.get("before_manifest_sha256"):
             failures.append("source snapshot fingerprint mismatch")
         if contract.get("host") != record.get("runtime"):
             failures.append("recorded host/runtime facts differ from the contract")
@@ -209,7 +217,13 @@ def validate_autocage_record(
             failures.append("authorized ceiling differs from the contract")
         for identity_name in ("agent", "verifier"):
             identity = contract.get(identity_name, {})
-            command = record.get(identity_name, {})
+            command = record.get(identity_name)
+            if not isinstance(identity, dict):
+                failures.append(f"{identity_name} contract identity is missing")
+                continue
+            if not isinstance(command, dict):
+                failures.append(f"{identity_name} command result is missing")
+                continue
             if identity.get("executable_name") != command.get("executable_name"):
                 failures.append(f"{identity_name} executable identity mismatch")
             if identity.get("argv_sha256") != command.get("argv_sha256"):
@@ -218,6 +232,9 @@ def validate_autocage_record(
                 failures.append(f"{identity_name} executable fingerprint is invalid")
 
         runtime = contract.get("runtime", {})
+        if not isinstance(runtime, dict):
+            failures.append("runtime identity is missing from the contract")
+            runtime = {}
         bwrap = Path(shutil.which("bwrap") or "/missing/bwrap")
         if not autocage_binary.is_file() or runtime.get("autocage_sha256") != sha256_file(
             autocage_binary

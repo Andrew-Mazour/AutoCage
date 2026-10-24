@@ -28,6 +28,8 @@ scripts/run-inspect-quickstart.sh
 
 The pinned Python environment installs Inspect AI `0.3.281`. The adapter is built from the checkout and is not published as a separate package. No model, API key, cloud account, or paid service is needed for the quickstart.
 
+To run the Inspect adapter against a sanitized local repository snapshot, follow the [bring-your-own-repository guide](../examples/byo-repository/README.md). Scenario schema 2 records an explicit developer-authorized write ceiling and rejects a comparison policy that exceeds it.
+
 `cargo install` installs only into the Linux guest user's Cargo bin directory; it does not install a system service. The quickstart script deliberately uses the freshly built `target/release/autocage` unless `AUTOCAGE_BINARY` is set.
 
 ## macOS with isolated Lima
@@ -72,7 +74,7 @@ The Lima guest is disposable and has no host directory mounts. To remove the ent
 
 `.github/workflows/ci.yml` runs formatting, strict Clippy, Rust unit tests and release builds on Ubuntu x86_64 and ARM64, plus Python tests, pinned dependency checks, and local documentation-link checks. This validates compilation and portable components; it does not claim sandbox enforcement on those workers.
 
-`.github/workflows/linux-enforcement.yml` runs only on a trusted push to `main` or a manual dispatch. It targets the GitHub-hosted Ubuntu 24.04 ARM64 runner, installs and inspects Ubuntu's official AppArmor profile in its disposable VM, then runs the full M0, Rust/Linux, M4, and M5 gates. It fails visibly when a prerequisite is unsupported; it never reports a blocked enforcement run as passed. The workflow has not yet been observed on GitHub-hosted infrastructure. The currently measured enforcement evidence comes from the isolated Lima guest described in the M0 and M5 reports.
+`.github/workflows/linux-enforcement.yml` runs only on a trusted push to `main` or a manual dispatch. It targets the GitHub-hosted Ubuntu 24.04 ARM64 runner, installs and inspects Ubuntu's official AppArmor profile in its disposable VM, then runs the full M0, Rust/Linux, M4, and M5 gates. It fails visibly when a prerequisite is unsupported; it never reports a blocked enforcement run as passed. The workflow passed on the published release commit; the latest successful run is [here](https://github.com/Andrew-Mazour/AutoCage/actions/runs/40138780277). The separately scoped portable build/test matrix also passed [here](https://github.com/Andrew-Mazour/AutoCage/actions/runs/40138780285). Hosted CI does not extend the documented supported runtime matrix beyond Ubuntu 24.04 ARM64.
 
 Run the complete supported-guest gate locally with the same commands shown in the workflow. Do not treat portable CI success as a substitute for M0 or Linux integration tests.
 
@@ -84,4 +86,4 @@ Historical experiment protocols and results are retained under `experiments/`. T
 
 ## Release and license
 
-The code is versioned `0.1.0-rc.1`; no binary or Python package has been published. AutoCage-owned code and documentation use Apache-2.0. The Rust and Python package metadata declare `Apache-2.0`, and the Python adapter distribution includes its own copy of the license text. Runtime dependencies, upstream benchmark projects, and optional model weights are separate works governed by their own terms; none are bundled.
+The public GitHub prerelease is [`v0.1.0-rc.1`](https://github.com/Andrew-Mazour/AutoCage/releases/tag/v0.1.0-rc.1); no binary or separate Python package has been published. AutoCage-owned code and documentation use Apache-2.0. The Rust and Python package metadata declare `Apache-2.0`, and the Python adapter distribution includes its own copy of the license text. Runtime dependencies, upstream benchmark projects, and optional model weights are separate works governed by their own terms; none are bundled.
