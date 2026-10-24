@@ -7,7 +7,7 @@ use std::process::{Command, Stdio};
 use std::sync::atomic::{AtomicU64, Ordering};
 use std::thread;
 use std::time::Duration;
-use std::time::{SystemTime, UNIX_EPOCH};
+use std::time::{Instant, SystemTime, UNIX_EPOCH};
 
 static TEMP_COUNTER: AtomicU64 = AtomicU64::new(0);
 
@@ -1388,15 +1388,27 @@ fn interrupted_optimization_is_not_resumed_or_promoted() {
     );
     tuner.kill().unwrap();
     let _ = tuner.wait();
-    let recovered = Command::new(binary())
-        .args(["recover", run_dir.to_str().unwrap()])
-        .output()
-        .unwrap();
-    assert!(
-        recovered.status.success(),
-        "{}",
-        String::from_utf8_lossy(&recovered.stderr)
-    );
+    // A sandbox child can briefly retain the inherited flock descriptor while
+    // Bubblewrap finishes its exec transition after the optimizer is killed.
+    // Recovery must remain fail-closed during that interval, so wait for the
+    // lock to be released instead of weakening the production lock check.
+    let recovery_deadline = Instant::now() + Duration::from_secs(5);
+    loop {
+        let attempt = Command::new(binary())
+            .args(["recover", run_dir.to_str().unwrap()])
+            .output()
+            .unwrap();
+        if attempt.status.success() {
+            break;
+        }
+        let stderr = String::from_utf8_lossy(&attempt.stderr);
+        if !stderr.contains("run directory is already being modified")
+            || Instant::now() >= recovery_deadline
+        {
+            panic!("{}", stderr);
+        }
+        thread::sleep(Duration::from_millis(10));
+    }
     assert!(!run_dir.join("optimizer.json").exists());
     let inspected = Command::new(binary())
         .args(["inspect", run_dir.to_str().unwrap()])
