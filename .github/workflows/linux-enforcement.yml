@@ -39,6 +39,14 @@ jobs:
       - name: Install official guest prerequisites and run namespace smoke test
         run: bash experiments/m0-linux-feasibility/setup/install-guest-deps.sh
 
+      - name: Select the repository-pinned Rust toolchain
+        run: |
+          rustup toolchain install 1.75.0 --profile minimal --component clippy --component rustfmt
+          rustup default 1.75.0
+          rustc --version
+          cargo --version
+          test "$(rustc -V | cut -d' ' -f2)" = "1.75.0"
+
       - name: Run Rust, M0, and Linux integration gates
         run: |
           cargo fmt --check
