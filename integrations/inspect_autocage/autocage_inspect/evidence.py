@@ -216,20 +216,37 @@ def validate_autocage_record(
         if contract.get("authorized_ceiling") != record.get("authorized_ceiling"):
             failures.append("authorized ceiling differs from the contract")
         for identity_name in ("agent", "verifier"):
-            identity = contract.get(identity_name, {})
+            identity = contract.get(identity_name)
             command = record.get(identity_name)
             if not isinstance(identity, dict):
                 failures.append(f"{identity_name} contract identity is missing")
                 continue
+            executable_name = identity.get("executable_name")
+            argv_sha256 = identity.get("argv_sha256")
+            executable_sha256 = identity.get("executable_sha256")
+            if not isinstance(executable_name, str) or not executable_name:
+                failures.append(f"{identity_name} contract executable identity is missing")
+            if not SHA256.fullmatch(str(argv_sha256 or "")):
+                failures.append(f"{identity_name} contract argument fingerprint is invalid")
+            if not SHA256.fullmatch(str(executable_sha256 or "")):
+                failures.append(f"{identity_name} executable fingerprint is invalid")
             if not isinstance(command, dict):
+                if (
+                    identity_name == "verifier"
+                    and command is None
+                    and _verifier_skip_matches_agent_outcome(record)
+                ):
+                    # The runner records a complete agent failure and deliberately skips
+                    # verification unless the agent exits successfully. The verifier's
+                    # immutable command identity remains in the contract; no verifier
+                    # result is represented as a pass.
+                    continue
                 failures.append(f"{identity_name} command result is missing")
                 continue
-            if identity.get("executable_name") != command.get("executable_name"):
+            if executable_name != command.get("executable_name"):
                 failures.append(f"{identity_name} executable identity mismatch")
-            if identity.get("argv_sha256") != command.get("argv_sha256"):
+            if argv_sha256 != command.get("argv_sha256"):
                 failures.append(f"{identity_name} argument identity mismatch")
-            if not SHA256.fullmatch(str(identity.get("executable_sha256", ""))):
-                failures.append(f"{identity_name} executable fingerprint is invalid")
 
         runtime = contract.get("runtime", {})
         if not isinstance(runtime, dict):
@@ -273,3 +290,32 @@ def required_checks(record: dict[str, Any]) -> tuple[str, list[dict[str, Any]]]:
     if any(item.get("status") != "passed" for item in mandatory):
         return "NOT_TESTED", mandatory
     return "CONFIRMED", mandatory
+
+
+def verifier_execution_status(record: dict[str, Any]) -> str:
+    """Report whether the verifier ran, without treating a skipped verifier as a pass."""
+    verifier = record.get("verifier")
+    if isinstance(verifier, dict):
+        return "EXECUTED_TIMED_OUT" if verifier.get("timed_out") is True else "EXECUTED"
+    if _verifier_skip_matches_agent_outcome(record):
+        return (
+            "NOT_RUN_AGENT_TIMEOUT"
+            if record.get("outcome") == "agent_timed_out"
+            else "NOT_RUN_AGENT_FAILED"
+        )
+    return "UNAVAILABLE"
+
+
+def _verifier_skip_matches_agent_outcome(record: dict[str, Any]) -> bool:
+    """Accept a missing verifier result only when the sealed runner skipped it as designed."""
+    agent = record.get("agent")
+    if not isinstance(agent, dict) or type(agent.get("exit_code")) is not int:
+        return False
+    timed_out = agent.get("timed_out")
+    if type(timed_out) is not bool:
+        return False
+    if record.get("outcome") == "agent_failed":
+        return agent["exit_code"] != 0 and not timed_out
+    if record.get("outcome") == "agent_timed_out":
+        return timed_out
+    return False

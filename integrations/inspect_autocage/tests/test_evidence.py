@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import shutil
 import tempfile
 import unittest
 from pathlib import Path
@@ -13,11 +14,14 @@ from autocage_inspect.evidence import (
     trace_events,
     tree_digest,
     validate_autocage_record,
+    verifier_execution_status,
 )
 from autocage_inspect.execution import (
     _agent_command,
     _base_evidence,
     _classify_utility,
+    _inspect_local_verifier_status,
+    _record_verification,
     _read_canary,
     _run_autocage,
 )
@@ -402,56 +406,122 @@ class EvidenceAndScenarioRegressionTests(unittest.TestCase):
         self.assertFalse(valid)
         self.assertTrue(failures)
 
-    def test_failed_agent_without_verifier_is_invalid_not_a_controller_exception(self):
+    def test_verifier_skip_is_explicit_and_only_valid_after_agent_failure_or_timeout(self):
+        agent_failed = {
+            "outcome": "agent_failed",
+            "agent": {"exit_code": 2, "timed_out": False},
+            "verifier": None,
+        }
+        self.assertEqual(verifier_execution_status(agent_failed), "NOT_RUN_AGENT_FAILED")
+        self.assertEqual(_classify_utility(2, None, False), "FAIL")
+
+        agent_timed_out = {
+            "outcome": "agent_timed_out",
+            "agent": {"exit_code": 124, "timed_out": True},
+            "verifier": None,
+        }
+        self.assertEqual(verifier_execution_status(agent_timed_out), "NOT_RUN_AGENT_TIMEOUT")
+        self.assertEqual(_classify_utility(124, None, False), "FAIL")
+
+        unexpectedly_missing = {
+            "outcome": "verified",
+            "agent": {"exit_code": 0, "timed_out": False},
+            "verifier": None,
+        }
+        self.assertEqual(verifier_execution_status(unexpectedly_missing), "UNAVAILABLE")
+
+        inconsistent_failure = {
+            "outcome": "agent_failed",
+            "agent": {"exit_code": 0, "timed_out": False},
+            "verifier": None,
+        }
+        self.assertEqual(verifier_execution_status(inconsistent_failure), "UNAVAILABLE")
+
+    def test_sealed_agent_failure_with_skipped_verifier_validates_but_is_not_utility_pass(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
+            binary = root / "autocage"
+            binary.write_text("synthetic runtime identity", encoding="utf-8")
+            binary.chmod(0o700)
+            bwrap = Path(shutil.which("bwrap") or "/missing/bwrap")
+            package_status = Path("/var/lib/dpkg/status")
+            self.assertTrue(bwrap.is_file(), "Linux regression requires Bubblewrap")
+            self.assertTrue(package_status.is_file(), "Linux regression requires dpkg metadata")
+
+            def digest(path: Path) -> str:
+                return hashlib.sha256(path.read_bytes()).hexdigest()
+
+            runtime = {
+                "autocage_sha256": digest(binary),
+                "bubblewrap_sha256": digest(bwrap),
+                "package_inventory_sha256": digest(package_status),
+                "backend_profile_sha256": "f" * 64,
+                "environment_profile_sha256": "e" * 64,
+            }
+            ceiling = {"schema_version": 1, "write_dirs": [], "write_files": []}
+            agent_identity = {
+                "executable_name": "python3",
+                "argv_sha256": "b" * 64,
+                "executable_sha256": "c" * 64,
+            }
+            verifier_identity = {
+                "executable_name": "python3",
+                "argv_sha256": "d" * 64,
+                "executable_sha256": "e" * 64,
+            }
             contract = {
                 "source_manifest_sha256": "a" * 64,
-                "host": {},
-                "authorized_ceiling": {},
-                "agent": {
-                    "executable_name": "python3",
-                    "argv_sha256": "b" * 64,
-                    "executable_sha256": "c" * 64,
-                },
-                "verifier": {
-                    "executable_name": "python3",
-                    "argv_sha256": "d" * 64,
-                    "executable_sha256": "e" * 64,
-                },
-                "runtime": {},
+                "host": runtime,
+                "authorized_ceiling": ceiling,
+                "agent": agent_identity,
+                "verifier": verifier_identity,
+                "runtime": runtime,
             }
-            contract_bytes = json.dumps(contract, sort_keys=True).encode()
-            (root / "contract.json").write_bytes(contract_bytes)
-            contract_digest = hashlib.sha256(contract_bytes).hexdigest()
             record = {
-                "run_id": "failed-agent",
-                "contract_sha256": contract_digest,
+                "run_id": "sealed-agent-failure",
+                "contract_sha256": "",
                 "workspace": {"before_manifest_sha256": "a" * 64},
-                "runtime": {},
-                "authorized_ceiling": {},
-                "agent": {
-                    "executable_name": "python3",
-                    "argv_sha256": "b" * 64,
-                    "exit_code": 2,
-                },
+                "runtime": runtime,
+                "authorized_ceiling": ceiling,
+                "agent": {**agent_identity, "exit_code": 2, "timed_out": False},
                 "verifier": None,
+                "outcome": "agent_failed",
             }
-            record_bytes = json.dumps(record, sort_keys=True).encode()
-            (root / "run.json").write_bytes(record_bytes)
-            valid, failures = validate_autocage_record(
-                run_dir=root,
-                inspect_report={
-                    "validation": "SEALED",
-                    "lifecycle": {"phase": "complete"},
-                    "run": record,
-                    "contract_sha256": contract_digest,
-                    "run_record_sha256": hashlib.sha256(record_bytes).hexdigest(),
-                },
-                autocage_binary=root / "missing-autocage",
-            )
-        self.assertFalse(valid)
-        self.assertIn("verifier command result is missing", failures)
+            failure_verifier_status = verifier_execution_status(record)
+
+            def validate_current_record() -> tuple[bool, list[str]]:
+                contract_bytes = json.dumps(contract, sort_keys=True).encode()
+                (root / "contract.json").write_bytes(contract_bytes)
+                contract_digest = hashlib.sha256(contract_bytes).hexdigest()
+                record["contract_sha256"] = contract_digest
+                record_bytes = json.dumps(record, sort_keys=True).encode()
+                (root / "run.json").write_bytes(record_bytes)
+                return validate_autocage_record(
+                    run_dir=root,
+                    inspect_report={
+                        "validation": "SEALED",
+                        "lifecycle": {"phase": "complete"},
+                        "run": record,
+                        "contract_sha256": contract_digest,
+                        "run_record_sha256": hashlib.sha256(record_bytes).hexdigest(),
+                    },
+                    autocage_binary=binary,
+                )
+
+            valid, failures = validate_current_record()
+            contract["verifier"]["executable_sha256"] = "invalid"
+            invalid_identity, identity_failures = validate_current_record()
+            contract["verifier"]["executable_sha256"] = "e" * 64
+            record["agent"]["exit_code"] = 0
+            record["outcome"] = "verified"
+            missing_after_success, success_failures = validate_current_record()
+        self.assertTrue(valid, failures)
+        self.assertEqual(failure_verifier_status, "NOT_RUN_AGENT_FAILED")
+        self.assertFalse(invalid_identity)
+        self.assertTrue(any("executable fingerprint is invalid" in item for item in identity_failures))
+        self.assertFalse(missing_after_success)
+        self.assertIn("verifier command result is missing", success_failures)
+        self.assertEqual(_classify_utility(2, None, False), "FAIL")
 
     def test_tree_digest_refuses_symlinks(self):
         with tempfile.TemporaryDirectory() as temporary:
@@ -467,6 +537,50 @@ class EvidenceAndScenarioRegressionTests(unittest.TestCase):
         self.assertEqual(_classify_utility(0, None, False), "INCONCLUSIVE")
         self.assertEqual(_classify_utility(0, 1, True), "FAIL")
         self.assertEqual(_classify_utility(None, None, False), "INCONCLUSIVE")
+
+    def test_inspect_local_verifier_status_explains_skipped_checks(self):
+        self.assertEqual(
+            _inspect_local_verifier_status(
+                verifier_ran=True,
+                agent_exit=0,
+                agent_timed_out=False,
+                verifier_inputs_intact=True,
+            ),
+            "EXECUTED",
+        )
+        self.assertEqual(
+            _inspect_local_verifier_status(
+                verifier_ran=False,
+                agent_exit=2,
+                agent_timed_out=False,
+                verifier_inputs_intact=True,
+            ),
+            "NOT_RUN_AGENT_FAILED",
+        )
+        self.assertEqual(
+            _inspect_local_verifier_status(
+                verifier_ran=False,
+                agent_exit=None,
+                agent_timed_out=False,
+                verifier_inputs_intact=False,
+            ),
+            "NOT_RUN_VERIFIER_INPUTS_CHANGED",
+        )
+
+    def test_invalid_sealed_record_cannot_report_verifier_result(self):
+        record = {
+            "outcome": "agent_failed",
+            "agent": {"exit_code": 2, "timed_out": False},
+            "verifier": None,
+        }
+        self.assertEqual(
+            _record_verification(record, record_valid=False),
+            {"status": "UNAVAILABLE", "exit_code": None},
+        )
+        self.assertEqual(
+            _record_verification(record, record_valid=True),
+            {"status": "NOT_RUN_AGENT_FAILED", "exit_code": None},
+        )
 
 
 class FailClosedExecutionTests(unittest.TestCase):

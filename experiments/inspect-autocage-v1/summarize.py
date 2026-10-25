@@ -15,6 +15,14 @@ def _counts(values: list[str]) -> dict[str, int]:
     return dict(sorted(Counter(values).items()))
 
 
+def _verification_status(row: dict[str, Any]) -> str:
+    verification = row.get("verification")
+    if not isinstance(verification, dict):
+        return "UNAVAILABLE"
+    status = verification.get("status")
+    return status if isinstance(status, str) else "UNAVAILABLE"
+
+
 def _security_outcome(reference: dict[str, Any], candidate: dict[str, Any]) -> str:
     for row in (reference, candidate):
         if row.get("trace", {}).get("state") != "OBSERVED":
@@ -95,6 +103,7 @@ def summarize(root: Path) -> dict[str, Any]:
                 if row.get("configuration_identity", {}).get("effective_policy_sha256") is not None
             }),
             "task_utility": _counts([row.get("task_utility", "INCONCLUSIVE") for row in rows]),
+            "verifier_execution": _counts([_verification_status(row) for row in rows]),
             "unauthorized_behavior": _counts([
                 row.get("unauthorized_behavior", {}).get("outcome", "OBSERVATION_UNAVAILABLE")
                 for row in rows
@@ -191,6 +200,7 @@ def summarize(root: Path) -> dict[str, Any]:
                 "arm": row.get("arm"),
                 "policy_sha256": row.get("configuration_identity", {}).get("effective_policy_sha256"),
                 "task_utility": row.get("task_utility"),
+                "verifier_execution": _verification_status(row),
                 "attempt": row.get("unauthorized_behavior", {}).get("attempt"),
                 "unauthorized_behavior": row.get("unauthorized_behavior", {}).get("outcome"),
                 "canary": row.get("protected_assets", {}).get("stage_canary", {}).get("status"),
@@ -214,18 +224,19 @@ def render_markdown(summary: dict[str, Any]) -> str:
         "",
         "## Per-arm evidence",
         "",
-        "| Arm | Samples | Policy SHA-256 prefix | Utility | Unauthorized outcomes | Canary state | Enforcement | Integrity | Median execution ms |",
-        "|---|---:|---|---|---|---|---|---|---:|",
+        "| Arm | Samples | Policy SHA-256 prefix | Utility | Verifier execution | Unauthorized outcomes | Canary state | Enforcement | Integrity | Median execution ms |",
+        "|---|---:|---|---|---|---|---|---|---|---:|",
     ]
     for arm, data in summary["arms"].items():
         utility = ", ".join(f"{key}={value}" for key, value in data["task_utility"].items())
+        verifier = ", ".join(f"{key}={value}" for key, value in data["verifier_execution"].items())
         security = ", ".join(f"{key}={value}" for key, value in data["unauthorized_behavior"].items())
         canary = ", ".join(f"{key}={value}" for key, value in data["canaries"].items())
         enforcement = ", ".join(f"{key}={value}" for key, value in data["environment_enforcement"].items())
         integrity = ", ".join(f"{key}={value}" for key, value in data["evidence_integrity"].items())
         policy_ids = ", ".join(value[:12] for value in data["policy_sha256"])
         lines.append(
-            f"| {arm} | {data['samples']} | {policy_ids} | {utility} | {security} | {canary} | "
+            f"| {arm} | {data['samples']} | {policy_ids} | {utility} | {verifier} | {security} | {canary} | "
             f"{enforcement} | {integrity} | {data['execution_elapsed_millis_median']} |"
         )
     lines.extend([
