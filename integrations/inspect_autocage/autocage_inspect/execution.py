@@ -28,6 +28,7 @@ from .evidence import (
     validate_autocage_record,
     verifier_execution_status,
 )
+from .diagnostics import DiagnosticFrameError, parse_diagnostic_frame, persist_diagnostic_frame
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
@@ -208,6 +209,21 @@ def _record_verification(record: dict[str, Any], *, record_valid: bool) -> dict[
     }
 
 
+def _trial_model_seed(metadata: dict[str, Any]) -> int:
+    trial = metadata.get("trial")
+    if not isinstance(trial, dict):
+        raise ValueError("{model_seed} requires trusted trial metadata")
+    if "model_seed" not in trial or type(trial["model_seed"]) is not int:
+        raise ValueError("trial model_seed must be an integer")
+    seed = trial["model_seed"]
+    if not 0 <= seed <= 0x7FFFFFFF:
+        raise ValueError("trial model_seed must be between 0 and 2147483647")
+    sample_id = metadata.get("sample_id")
+    if not isinstance(sample_id, str) or not sample_id or trial.get("sample_id") != sample_id:
+        raise ValueError("trial sample_id must match the current Inspect sample")
+    return seed
+
+
 def _agent_command(metadata: dict[str, Any], case: dict[str, Any]) -> list[str]:
     config = metadata.get("agent_config", {})
     program = config.get("program")
@@ -216,11 +232,15 @@ def _agent_command(metadata: dict[str, Any], case: dict[str, Any]) -> list[str]:
         isinstance(item, str) for item in argv
     ):
         raise ValueError("scenario agent command is malformed")
+    names_in_argv = {name for item in argv for name in re.findall(r"\{([a-z_]+)\}", item)}
+    model_seed = _trial_model_seed(metadata) if "model_seed" in names_in_argv else ""
     substitutions = {
         "task": metadata.get("task_text", ""),
         "surface": case["surface"],
         "input_path": case["input_path"],
         "protected_path": case["protected_path"],
+        "sample_id": metadata.get("sample_id", ""),
+        "model_seed": model_seed,
     }
     command = [program]
     for item in argv:
@@ -233,6 +253,13 @@ def _agent_command(metadata: dict[str, Any], case: dict[str, Any]) -> list[str]:
             item,
         )
         command.append(item)
+    if metadata.get("retain_agent_diagnostics"):
+        diagnostic_argv = config.get("diagnostics_argv")
+        if not isinstance(diagnostic_argv, list) or not diagnostic_argv or not all(
+            isinstance(item, str) and item for item in diagnostic_argv
+        ):
+            raise ValueError("diagnostic retention requested but scenario has no explicit diagnostics_argv")
+        command.extend(diagnostic_argv)
     return command
 
 
@@ -289,6 +316,12 @@ def _base_evidence(sample_id: str, metadata: dict[str, Any], root: Path) -> dict
         "evidence_integrity": "MISSING",
         "runtime_identity": "NOT_TESTED",
         "trace": {"state": "OBSERVATION_UNAVAILABLE"},
+        "trial": metadata.get("trial", {}),
+        "agent_diagnostics": {
+            "status": "MISSING" if metadata.get("retain_agent_diagnostics") else "DISABLED",
+            "opt_in": bool(metadata.get("retain_agent_diagnostics")),
+            "artifacts": {},
+        },
         "failure": None,
         "verification": {"status": "UNAVAILABLE", "exit_code": None},
     }
@@ -423,6 +456,30 @@ def _run_autocage(sample_id: str, metadata: dict[str, Any], work_root: str | Non
             "agent_signal": _parse_agent_signal(stdout, "AUTOCAGE_AGENT_SIGNAL="),
             "agent_metrics": _parse_agent_signal(stdout, "AUTOCAGE_LOCAL_AGENT_METRICS="),
         }
+        if metadata.get("retain_agent_diagnostics"):
+            try:
+                frame = parse_diagnostic_frame(stdout, str(metadata.get("sample_id", sample_id)))
+                if frame is None:
+                    evidence["agent_diagnostics"] = {
+                        "status": "MISSING", "opt_in": True, "artifacts": {},
+                        "reason": "launcher emitted no diagnostic frame",
+                    }
+                else:
+                    trial_identity = metadata.get("trial")
+                    expected_seed = (
+                        trial_identity.get("model_seed")
+                        if isinstance(trial_identity, dict) else None
+                    )
+                    if expected_seed is None or frame["metadata"].get("model_seed") != expected_seed:
+                        raise DiagnosticFrameError("diagnostic model seed does not match the trial plan")
+                    evidence["agent_diagnostics"] = {
+                        "opt_in": True, **persist_diagnostic_frame(root, frame),
+                    }
+            except (DiagnosticFrameError, OSError, ValueError) as error:
+                evidence["agent_diagnostics"] = {
+                    "status": "INVALID", "opt_in": True, "artifacts": {},
+                    "reason": f"{type(error).__name__}: {error}",
+                }
         evidence["trace"] = trace_events(trace_path, case["input_path"], case["protected_path"]) if traced else {
             "state": "OBSERVATION_UNAVAILABLE",
             "input_open_observed": None,
@@ -480,6 +537,7 @@ def _run_autocage(sample_id: str, metadata: dict[str, Any], work_root: str | Non
                 "workspace": record.get("workspace"),
                 "phase_timings": record.get("phase_timings"),
             }
+            evidence["trial"] = metadata.get("trial", {})
             evidence["runtime_identity"] = "MATCHED" if valid else "MISMATCHED"
             environment, required = required_checks(record)
             evidence["environment_enforcement"] = environment
