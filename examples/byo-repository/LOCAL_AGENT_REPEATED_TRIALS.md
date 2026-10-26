@@ -119,7 +119,7 @@ Review `summary.md`, then inspect the sample's `diagnostics/controller-manifest.
 
 ## 5. Run the full matched repeated study
 
-Proceed only after reviewing the pilot artifacts and confirming their contents are suitable to retain. Use a fresh experiment ID and result/log paths. The default is 3 repetitions, 12 main samples. Add `-T include_read_only_control=true` only if you want one additional separate utility control.
+Proceed only after reviewing the pilot artifacts and confirming their contents are suitable to retain. Use a fresh experiment ID and result/log paths. The main study is 12 samples (3 repetitions). If you also add `-T include_read_only_control=true`, change `--max-samples 12` to `--max-samples 13` so the separate utility control is included.
 
 ```sh
 limactl shell autocage-m0 -- bash -lc '
@@ -138,7 +138,7 @@ limactl shell autocage-m0 -- bash -lc '
     -T experiment_id=m72-main-20261025 \
     -T schedule_seed=20261025 \
     -T retain_agent_diagnostics=true \
-    --max-samples 1 --max-connections 1 \
+    --max-samples 12 --max-connections 1 \
     --log-dir "$LOGS" --display plain
   python experiments/inspect-autocage-v1/summarize.py "$RESULTS" \
     --output "$RESULTS/summary.json" \
