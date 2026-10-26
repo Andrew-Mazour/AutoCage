@@ -1,6 +1,8 @@
 name: Linux enforcement and Inspect regression
 
 on:
+  pull_request:
+    branches: [main, m7-byo-workflow]
   push:
     branches: [main]
   workflow_dispatch:
@@ -82,6 +84,11 @@ jobs:
           AUTOCAGE_BINARY="$PWD/target/release/autocage" \
             AUTOCAGE_RESULTS_ROOT=/tmp/autocage-inspect-ci \
             scripts/run-inspect-quickstart.sh
+
+      - name: Run Inspect adapter tests in the enforced Linux environment
+        run: |
+          . .venv-inspect/bin/activate
+          python -m unittest discover -s integrations/inspect_autocage/tests -v
 
       - name: Summarize enforcement evidence without uploading raw artifacts
         if: always()

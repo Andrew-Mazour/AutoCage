@@ -15,6 +15,14 @@ def _counts(values: list[str]) -> dict[str, int]:
     return dict(sorted(Counter(values).items()))
 
 
+def _verification_status(row: dict[str, Any]) -> str:
+    verification = row.get("verification")
+    if not isinstance(verification, dict):
+        return "UNAVAILABLE"
+    status = verification.get("status")
+    return status if isinstance(status, str) else "UNAVAILABLE"
+
+
 def _security_outcome(reference: dict[str, Any], candidate: dict[str, Any]) -> str:
     for row in (reference, candidate):
         if row.get("trace", {}).get("state") != "OBSERVED":
@@ -89,7 +97,13 @@ def summarize(root: Path) -> dict[str, Any]:
         ]
         arms[arm] = {
             "samples": len(rows),
+            "policy_sha256": sorted({
+                row.get("configuration_identity", {}).get("effective_policy_sha256")
+                for row in rows
+                if row.get("configuration_identity", {}).get("effective_policy_sha256") is not None
+            }),
             "task_utility": _counts([row.get("task_utility", "INCONCLUSIVE") for row in rows]),
+            "verifier_execution": _counts([_verification_status(row) for row in rows]),
             "unauthorized_behavior": _counts([
                 row.get("unauthorized_behavior", {}).get("outcome", "OBSERVATION_UNAVAILABLE")
                 for row in rows
@@ -120,19 +134,28 @@ def summarize(root: Path) -> dict[str, Any]:
             ]),
         }
 
+    pair_specs = {
+        (
+            row.get("scenario_id", ""),
+            row.get("variant", ""),
+            row.get("policy_comparison", {}).get("reference_arm"),
+            row.get("policy_comparison", {}).get("candidate_arm"),
+        )
+        for row in results
+        if isinstance(row.get("policy_comparison"), dict)
+        and isinstance(row["policy_comparison"].get("reference_arm"), str)
+        and isinstance(row["policy_comparison"].get("candidate_arm"), str)
+    }
+    # Preserve the separately opted-in M5 Inspect-local comparison for legacy
+    # scenarios while allowing user scenarios to name their two policy arms.
+    pair_specs.update(
+        (row.get("scenario_id", ""), row.get("variant", ""), "inspect-local", "autocage-src-only")
+        for row in results
+        if row.get("arm") == "inspect-local"
+    )
+
     paired_comparisons = []
-    for case_id, variant, reference_arm, candidate_arm in sorted(
-        {
-            (row.get("scenario_id", ""), row.get("variant", ""), "autocage-src-only", "autocage-broad")
-            for row in results
-            if row.get("arm") == "autocage-broad"
-        }
-        | {
-            (row.get("scenario_id", ""), row.get("variant", ""), "inspect-local", "autocage-src-only")
-            for row in results
-            if row.get("arm") == "inspect-local"
-        }
-    ):
+    for case_id, variant, reference_arm, candidate_arm in sorted(pair_specs):
         reference = by_case.get((case_id, variant, reference_arm))
         candidate = by_case.get((case_id, variant, candidate_arm))
         if reference is None or candidate is None:
@@ -154,6 +177,8 @@ def summarize(root: Path) -> dict[str, Any]:
             "security": _security_outcome(reference, candidate),
             "reference_attempt": reference.get("unauthorized_behavior", {}).get("attempt"),
             "candidate_attempt": candidate.get("unauthorized_behavior", {}).get("attempt"),
+            "reference_policy_sha256": reference.get("configuration_identity", {}).get("effective_policy_sha256"),
+            "candidate_policy_sha256": candidate.get("configuration_identity", {}).get("effective_policy_sha256"),
             "reference_canary": reference.get("protected_assets", {}).get("stage_canary", {}).get("status"),
             "candidate_canary": candidate.get("protected_assets", {}).get("stage_canary", {}).get("status"),
             "evidence_integrity": {
@@ -173,7 +198,9 @@ def summarize(root: Path) -> dict[str, Any]:
                 "case_id": row.get("scenario_id"),
                 "variant": row.get("variant"),
                 "arm": row.get("arm"),
+                "policy_sha256": row.get("configuration_identity", {}).get("effective_policy_sha256"),
                 "task_utility": row.get("task_utility"),
+                "verifier_execution": _verification_status(row),
                 "attempt": row.get("unauthorized_behavior", {}).get("attempt"),
                 "unauthorized_behavior": row.get("unauthorized_behavior", {}).get("outcome"),
                 "canary": row.get("protected_assets", {}).get("stage_canary", {}).get("status"),
@@ -197,17 +224,19 @@ def render_markdown(summary: dict[str, Any]) -> str:
         "",
         "## Per-arm evidence",
         "",
-        "| Arm | Samples | Utility | Unauthorized outcomes | Canary state | Enforcement | Integrity | Median execution ms |",
-        "|---|---:|---|---|---|---|---|---:|",
+        "| Arm | Samples | Policy SHA-256 prefix | Utility | Verifier execution | Unauthorized outcomes | Canary state | Enforcement | Integrity | Median execution ms |",
+        "|---|---:|---|---|---|---|---|---|---|---:|",
     ]
     for arm, data in summary["arms"].items():
         utility = ", ".join(f"{key}={value}" for key, value in data["task_utility"].items())
+        verifier = ", ".join(f"{key}={value}" for key, value in data["verifier_execution"].items())
         security = ", ".join(f"{key}={value}" for key, value in data["unauthorized_behavior"].items())
         canary = ", ".join(f"{key}={value}" for key, value in data["canaries"].items())
         enforcement = ", ".join(f"{key}={value}" for key, value in data["environment_enforcement"].items())
         integrity = ", ".join(f"{key}={value}" for key, value in data["evidence_integrity"].items())
+        policy_ids = ", ".join(value[:12] for value in data["policy_sha256"])
         lines.append(
-            f"| {arm} | {data['samples']} | {utility} | {security} | {canary} | "
+            f"| {arm} | {data['samples']} | {policy_ids} | {utility} | {verifier} | {security} | {canary} | "
             f"{enforcement} | {integrity} | {data['execution_elapsed_millis_median']} |"
         )
     lines.extend([

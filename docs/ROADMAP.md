@@ -1,10 +1,10 @@
 # AutoCage implementation roadmap
 
-**Status (2026-10-22):** M0–M5 implementation and declared evaluations are complete. M3 remains historically **INCONCLUSIVE**. M3.5 and M3.6 did not establish product value for post-run optimization or automatic profile suggestions. M4's deterministic containment and one local-agent pair were feasibility evidence, not model-resistance results. M5 selected a narrow Inspect task/solver/scorer integration and detected three deliberate broad-policy regressions with independent syscall and canary evidence. M6's local pre-1.0 release gate passed in the validated Lima guest. Apache-2.0 is selected for AutoCage-owned material; Git publication and hosted enforcement remain pending. Historical experiment protocols and results remain unchanged.
+**Current status (2026-10-24):** `v0.1.0-rc.1` is published. Both portable GitHub Actions validation and the Ubuntu 24.04 ARM64 enforcement workflow passed on the release commit; see the [M6.2 release record](RELEASE.md#m62-final-publication-validation-2026-10-24-utc). M0–M6 remain completed historical milestones. M7 adds a bring-your-own-repository scenario format to the existing Inspect adapter and has passed an internal pinned real-repository demonstration. The project owner's first personal repository evaluation is pending. No external-user feedback has been collected.
 
 Effort assumes one student working part-time and is an estimate. Each stage has a stop/go review. Security tests are part of each deliverable.
 
-**Current status (2026-10-19):** M6 local release engineering and clean-copy validation are complete. The latest no-cost Inspect quickstart scored 13/13 samples and independently reproduced the expected policy regressions. The GitHub workflows are configured but have not run remotely. No additional product-value research gate is proposed.
+**Historical M6 status (2026-10-19):** local release engineering and clean-copy validation were complete. The 13/13 Inspect quickstart passed locally at that point; GitHub workflows had not yet run. M6.2 later resolved publication and CI status without changing that historical evidence.
 
 ## M0 — Linux feasibility gate
 
@@ -114,14 +114,26 @@ The v1 and v2 attempts stopped incomplete due harness defects; they are separate
 
 ## M6 — Linux release candidate
 
-**Status (2026-10-22):** release candidate implementation complete; local supported-guest validation passed. The exact Linux-enforcement GitHub Actions workflow is configured for Ubuntu 24.04 ARM64 but has not yet run on GitHub-hosted infrastructure. The portable workflow is configured for x86_64 and ARM64; no remote workflow result is claimed. Apache-2.0 licensing is resolved for AutoCage-owned content. No release has been published.
+**Status as of 2026-10-22 (historical):** release candidate implementation complete; local supported-guest validation passed. At that point, hosted workflows and publication had not run. M6.2 below records the later result; this snapshot is retained unchanged as historical evidence.
 
 **Implemented:** pre-1.0 version metadata and changelog; top-level quickstart and architecture diagram; install/troubleshooting/support documentation; security reporting instructions; a pinned Inspect lock/build backend; CI for portable Rust/Python validation and separately scoped Linux enforcement; a preflight diagnostic script; a one-command Inspect quickstart with structured-result assertions; generated-file ignores and local documentation/dependency consistency checks.
 
 **Local release gate:** the clean-copy installation and quickstart were executed in the isolated Ubuntu 24.04.5 ARM64 Lima guest. The full Rust suite, M0, M4 deterministic controller, and M5 Inspect integration gates passed after release changes. Detailed command output and results are in the M6 section of [`docs/RELEASE.md`](RELEASE.md) and [M5 report](../experiments/inspect-autocage-v1/results/2026-10-18/REPORT.md). The M6 scripts do not store run results in public GitHub artifacts.
 
-**Not yet verified:** GitHub-hosted runner support for the required AppArmor/user-namespace profile; GitHub Actions execution; public release/distribution. CI's portable job is not OS-enforcement evidence. Do not call this a published release until Git history, remote contents, and CI are reviewed.
+**Historical open items:** GitHub-hosted runner support, Actions execution, and publication were pending at this snapshot. They were verified in M6.2. The portable CI job alone remains distinct from OS-enforcement evidence.
 
 **Out of scope:** new sandbox backends, macOS/Windows enforcement, hosted inference, credential brokering, persistent Inspect sandbox provider, policy optimizer changes, production security claims.
 
 **Out of scope:** macOS enforcement, Windows, enterprise fleet management, production-grade security claims.
+
+## M7 — Bring-your-own-repository workflow
+
+**Status:** internal vertical slice and automated validation complete; owner evaluation pending. Implementation is on the `m7-byo-workflow` branch. The published `v0.1.0-rc.1` tag is unchanged.
+
+**Implemented:** schema-versioned BYO scenarios for the existing Inspect task/solver/scorer adapter; separate developer-authorized write ceiling and strictly narrower comparison policy; relative-path, grant-normalization, fixture-symlink, `.git`, policy-target, and canary-content validation; SHA-256-derived protected-file identity; dynamic paired summaries with policy hashes. The Rust runner and Bubblewrap backend were not changed. A failed task with no verifier result is now reported as invalid evidence instead of escaping as an adapter exception.
+
+**Measured internal demonstration:** pinned upstream `pallets/itsdangerous` at `672971d66a2ef9f85151e53283113f33d642dabd` (BSD-3-Clause), with no `.git` metadata in the source fixture. Inspect 0.3.281 ran five AutoCage samples in 19 seconds: clean and adversarial variants under the workspace-write ceiling and zero-write comparison policy, plus a read-only utility control. All five agent and verifier commands exited successfully; a direct diagnostic invocation of the same upstream suite reported 297 passed. All five records and mandatory controls validated. In the adversarial scripted probe, the broad ceiling allowed a selected source-file append and the staged canary changed; the zero-write policy denied it and left the canary unchanged. Clean trials had no observed probe attempt. The source fixture remained unchanged in every run. This is deterministic enforcement testing, not real-agent behavior or prompt-injection resistance. Details and sanitized results are in [`experiments/byo-repository-v1/`](../experiments/byo-repository-v1/README.md).
+
+**User workflow:** the [Mac-to-Lima guide](../examples/byo-repository/README.md) covers snapshot transfer, guest installation, scenario review, policy-ceiling validation, Inspect execution, and result summaries. A fresh pinned Python environment completed the same five-sample evaluation. Human setup effort was not measured; no external-user or owner feedback has yet been collected. No Aider executable or model weights were available in the guest, so M7 did not include a real-model run. The M4 local-agent experiment remains historical feasibility evidence only.
+
+**Acceptance:** a non-bundled repository can be evaluated through the existing Inspect adapter without editing its source. Task success, observed operations, canary outcome, enforcement, and evidence integrity remain separate. The owner's first personal repository evaluation is the next step; do not add more M7 features before it.

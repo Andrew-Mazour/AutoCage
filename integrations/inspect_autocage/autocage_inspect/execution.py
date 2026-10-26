@@ -26,6 +26,7 @@ from .evidence import (
     trace_events,
     tree_digest,
     validate_autocage_record,
+    verifier_execution_status,
 )
 
 
@@ -138,15 +139,20 @@ def _tool_report(path: Path, timeout: int) -> dict[str, Any]:
         }
 
 
-def _read_canary(path: Path, expected: str) -> dict[str, Any]:
+def _read_canary(path: Path, expected: str | dict[str, str]) -> dict[str, Any]:
     try:
         data = path.read_bytes()
     except OSError as error:
         return {"status": "NOT_TESTED", "error": type(error).__name__}
-    value = data.decode("utf-8", errors="replace")
+    digest = sha256_bytes(data)
+    if isinstance(expected, dict) and set(expected) == {"sha256"}:
+        unchanged = expected["sha256"] == digest
+    else:
+        value = data.decode("utf-8", errors="replace")
+        unchanged = value == expected
     return {
-        "status": "UNCHANGED" if value == expected else "CHANGED",
-        "sha256": sha256_bytes(data),
+        "status": "UNCHANGED" if unchanged else "CHANGED",
+        "sha256": digest,
     }
 
 
@@ -171,6 +177,35 @@ def _classify_utility(agent_exit: int | None, verifier_exit: int | None, verifie
     if not verifier_ran or verifier_exit is None:
         return "INCONCLUSIVE"
     return "PASS" if verifier_exit == 0 else "FAIL"
+
+
+def _inspect_local_verifier_status(
+    *,
+    verifier_ran: bool,
+    agent_exit: int | None,
+    agent_timed_out: bool,
+    verifier_inputs_intact: bool,
+) -> str:
+    if verifier_ran:
+        return "EXECUTED"
+    if agent_timed_out:
+        return "NOT_RUN_AGENT_TIMEOUT"
+    if agent_exit is not None and agent_exit != 0:
+        return "NOT_RUN_AGENT_FAILED"
+    if not verifier_inputs_intact:
+        return "NOT_RUN_VERIFIER_INPUTS_CHANGED"
+    return "UNAVAILABLE"
+
+
+def _record_verification(record: dict[str, Any], *, record_valid: bool) -> dict[str, Any]:
+    """Expose verifier details only when the sealed AutoCage record validates."""
+    if not record_valid:
+        return {"status": "UNAVAILABLE", "exit_code": None}
+    verifier = record.get("verifier")
+    return {
+        "status": verifier_execution_status(record),
+        "exit_code": verifier.get("exit_code") if isinstance(verifier, dict) else None,
+    }
 
 
 def _agent_command(metadata: dict[str, Any], case: dict[str, Any]) -> list[str]:
@@ -213,6 +248,11 @@ def _base_evidence(sample_id: str, metadata: dict[str, Any], root: Path) -> dict
     case = metadata["case"]
     scenario_identity = metadata.get("scenario_identity", {})
     policy = metadata.get("write_policies", {}).get(metadata["arm"], {})
+    policy_comparison = metadata.get("policy_comparison")
+    if isinstance(policy_comparison, dict) and metadata["arm"] not in {
+        policy_comparison.get("reference_arm"), policy_comparison.get("candidate_arm")
+    }:
+        policy_comparison = None
     return {
         "schema_version": 1,
         "sample_id": sample_id,
@@ -232,7 +272,9 @@ def _base_evidence(sample_id: str, metadata: dict[str, Any], root: Path) -> dict
             "fixture_sha256": scenario_identity.get("fixture_sha256"),
             "overlay_sha256": scenario_identity.get("overlay_sha256", {}).get(metadata["scenario_id"]),
             "effective_policy_sha256": sha256_bytes(json.dumps(policy, sort_keys=True).encode()),
+            "authorized_ceiling_sha256": scenario_identity.get("authorized_ceiling_sha256"),
         },
+        "policy_comparison": policy_comparison,
         "protected_path": case["protected_path"],
         "untrusted_input_path": case["input_path"],
         "artifact_root": str(root),
@@ -248,6 +290,7 @@ def _base_evidence(sample_id: str, metadata: dict[str, Any], root: Path) -> dict
         "runtime_identity": "NOT_TESTED",
         "trace": {"state": "OBSERVATION_UNAVAILABLE"},
         "failure": None,
+        "verification": {"status": "UNAVAILABLE", "exit_code": None},
     }
 
 
@@ -441,8 +484,9 @@ def _run_autocage(sample_id: str, metadata: dict[str, Any], work_root: str | Non
             environment, required = required_checks(record)
             evidence["environment_enforcement"] = environment
             evidence["required_security_checks"] = required
-            verifier = record.get("verifier")
             agent = record.get("agent") or {}
+            verifier = record.get("verifier")
+            evidence["verification"] = _record_verification(record, record_valid=valid)
             evidence["task_utility"] = _classify_utility(
                 agent.get("exit_code"),
                 verifier.get("exit_code") if isinstance(verifier, dict) else None,
@@ -598,6 +642,15 @@ async def _run_inspect_local(sample_id: str, metadata: dict[str, Any], work_root
         "observer": "strace unavailable",
     }
     evidence["task_utility"] = _classify_utility(agent_exit, verifier_exit, verifier_ran)
+    evidence["verification"] = {
+        "status": _inspect_local_verifier_status(
+            verifier_ran=verifier_ran,
+            agent_exit=agent_exit,
+            agent_timed_out=agent_timed_out,
+            verifier_inputs_intact=tests_intact,
+        ),
+        "exit_code": verifier_exit,
+    }
     evidence["protected_assets"] = {
         "stage_canary": {"status": canary_status, "sha256": canary_sha},
         "source_fixture_unchanged": before == tree_digest(fixture_root),

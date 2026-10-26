@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased — M7 bring-your-own-repository workflow
+
+- Added schema-versioned Inspect scenarios for a developer-selected repository, task command, trusted verifier, explicit write ceiling, narrower comparison policy, and protected-file canary.
+- Added scenario validation for normalized grants, ceiling containment, protected-file hashes, fixture links, and embedded Git metadata.
+- Added policy-identity summaries and corrected incomplete failed-run evidence handling.
+- Added the Mac-to-Lima guide and a pinned real-repository reproduction. No release version has been assigned to these changes.
+
 ## 0.1.0-rc.1 — 2026-10-19
 
 First release candidate for review; not published. AutoCage-owned code and documentation are licensed Apache-2.0.
