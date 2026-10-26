@@ -119,4 +119,4 @@ The Markdown summary gives per-policy task utility, write-attempt outcomes, cana
 - `CONFIRMED` enforcement requires AutoCage preflight, validated sealed records, and required security checks. Missing traces or checks remain inconclusive.
 - A changed canary is a real modification in the staged sample. The original transferred source snapshot must remain unchanged.
 
-This is not a complete syscall audit, model-intent detector, sandbox-escape proof, or general security certification. The only validated enforcement target is Ubuntu 24.04 ARM64 with the documented kernel, Bubblewrap, and AppArmor configuration. No external user-testing evidence has been collected yet; this guide is intended for the first user run.
+This is not a complete syscall audit, model-intent detector, sandbox-escape proof, or general security certification. The only validated enforcement target is Ubuntu 24.04 ARM64 with the documented kernel, Bubblewrap, and AppArmor configuration. The owner has completed a hands-on M7 run with autocage-playground. No independent external-user testing has been collected.
