@@ -1,6 +1,8 @@
 name: Linux enforcement and Inspect regression
 
 on:
+  pull_request:
+    branches: [main, m7-byo-workflow]
   push:
     branches: [main]
   workflow_dispatch:
