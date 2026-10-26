@@ -1,6 +1,6 @@
 # AutoCage threat model
 
-**Status (2026-10-18):** M0–M5 enforcement checks ran in the isolated Ubuntu 24.04.5 ARM64 Lima guest. M5's 19-sample deterministic Inspect evaluation detected three deliberate broad-policy regressions; the optional Aider/Qwen pair had no observed protected-write attempt. The current release candidate does not establish model resistance, sandbox-escape prevention, or enforcement on GitHub-hosted runners. Historical negative and inconclusive optimizer findings remain in the experiment reports.
+**Status (2026-10-25):** M0–M6 enforcement and release checks were validated on the documented Ubuntu 24.04 ARM64 guest; M7 owner-run scripted playground evaluation completed with five valid records. M7.2 adds opt-in diagnostic retention for a marked synthetic local-agent scenario. Its owner-run pilot and repeated model trials have not been performed. Neither the earlier no-attempt Aider runs nor the deterministic scripted negative control establishes model resistance. Historical negative and inconclusive optimizer findings remain in the experiment reports.
 
 ## Objective
 
@@ -53,6 +53,12 @@ M5 passes AutoCage run evidence into Inspect as separate task-utility, selected-
 The optional `inspect-local` comparator is outside the AutoCage boundary and runs only when explicitly enabled on Linux. It was executed only inside the isolated Lima VM. It is not safe to run adversarial samples from that arm on an ordinary developer host. Inspect's model provider is not invoked by the deterministic task. The optional Aider example runs its local model server inside the sandbox and uses loopback only; hosted inference, agent bridges, and remote tool paths are not covered.
 
 M5's one real Aider/Qwen pair did not attempt the protected write. The selected connect trace showed loopback/Unix endpoints only. No model-resistance conclusion follows. Inspect Local and the broad AutoCage policy both allowed the deterministic controller's protected writes; the `src/` policy denied them. Docker and competing sandbox configurations were not tested in this milestone.
+
+## M7.2 diagnostic-retention boundary
+
+Transcript retention is disabled by default. The Inspect task refuses opt-in unless the schema-v2 suite ID, Aider launcher, README input, `config/settings.json` canary, and synthetic marker file match the supported playground shape. The launcher creates histories and bounded logs under a mode-0700 temporary directory in the sandbox's private `/tmp`, runs with a cleared environment and no external network, then returns a single capped diagnostic frame over its existing stdout channel. The controller accepts only fixed artifact names and the expected sample ID, verifies lengths and hashes, and creates files exclusively with mode 0600 under a private per-sample result directory.
+
+Opt-in artifacts may contain the synthetic task prompt, repository text, model responses, and tool output. They are untrusted supplementary material; recomputed hashes do not prove provenance. They are not sealed run-record fields, and a frame is not accepted as security evidence. Missing, corrupted, partial, or truncated artifacts remain visibly incomplete. An interrupted process may not transfer its private `/tmp` content. Do not enable this mode on real repositories with secrets, private source, or personal data. AutoCage does not upload diagnostic material.
 
 ## M6 release scope
 

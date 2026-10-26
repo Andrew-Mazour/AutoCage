@@ -114,6 +114,38 @@ class EvidenceClassificationTests(unittest.TestCase):
                 {"surface": "x", "input_path": "x", "protected_path": "x"},
             )
 
+    def test_trial_seed_and_sample_identity_are_substituted_without_shell_parsing(self):
+        result = _agent_command(
+            {
+                "agent_config": {
+                    "program": "/usr/bin/python3",
+                    "argv": ["--sample", "{sample_id}", "--seed", "{model_seed}"],
+                },
+                "sample_id": "rep-02-adversarial-narrow",
+                "model_seed": 8123,
+            },
+            {"surface": "README", "input_path": "README.md", "protected_path": "config/settings.json"},
+        )
+        self.assertEqual(
+            result,
+            ["/usr/bin/python3", "--sample", "rep-02-adversarial-narrow", "--seed", "8123"],
+        )
+
+    def test_diagnostic_argv_is_added_only_after_explicit_opt_in(self):
+        metadata = {
+            "agent_config": {
+                "program": "/usr/bin/python3", "argv": ["runner.py"],
+                "diagnostics_argv": ["--retain-diagnostics"],
+            },
+            "task_text": "task", "sample_id": "sample", "model_seed": 3,
+        }
+        case = {"surface": "README", "input_path": "README.md", "protected_path": "config/settings.json"}
+        self.assertEqual(_agent_command(metadata, case), ["/usr/bin/python3", "runner.py"])
+        self.assertEqual(
+            _agent_command({**metadata, "retain_agent_diagnostics": True}, case),
+            ["/usr/bin/python3", "runner.py", "--retain-diagnostics"],
+        )
+
     def test_unconfined_inspect_baseline_requires_explicit_linux_opt_in(self):
         with patch.dict("os.environ", {"AUTOCAGE_INSPECT_UNCONFINED_LOCAL_BASELINE": "0"}):
             with self.assertRaisesRegex(ValueError, "disposable Linux VM"):
@@ -251,6 +283,39 @@ class EvidenceAndScenarioRegressionTests(unittest.TestCase):
             task = local_aider_regression(scenario_file=str(scenario_path))
         self.assertEqual(task.version, 2)
         self.assertEqual(task.name, "autocage-local-agent-scenario-v2")
+
+    def test_diagnostic_retention_requires_the_marked_synthetic_playground(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            scenario_path = self._scenario(root, self._policy(["."]), self._policy(["src"]))
+            fixture = root / "project"
+            (fixture / "config").mkdir()
+            (fixture / "config/settings.json").write_text('{"format":"plain"}\n', encoding="utf-8")
+            config = json.loads(scenario_path.read_text(encoding="utf-8"))
+            config["suite_id"] = "autocage-playground-local-aider-qwen25-coder-3b-v2"
+            config["agent"] = {
+                "program": "/usr/bin/python3",
+                "argv": ["-B", "scripts/run_local_aider.py"],
+                "diagnostics_argv": ["--retain-diagnostics"],
+                "kind": "aider-ollama-qwen2.5-coder-3b-local",
+            }
+            config["cases"][0]["protected_path"] = "config/settings.json"
+            (fixture / ".autocage-synthetic-playground").write_text(
+                "autocage-playground-local-agent-v1\n", encoding="utf-8"
+            )
+            scenario_path.write_text(json.dumps(config), encoding="utf-8")
+            task = local_aider_regression(
+                scenario_file=str(scenario_path), work_root=str(root / "results"),
+                pilot=True, experiment_id="synthetic-opt-in", retain_agent_diagnostics=True,
+            )
+            self.assertTrue(task.metadata["retain_agent_diagnostics"])
+
+            (fixture / ".autocage-synthetic-playground").unlink()
+            with self.assertRaisesRegex(ValueError, "restricted to the declared synthetic local-Aider playground"):
+                local_aider_regression(
+                    scenario_file=str(scenario_path), work_root=str(root / "other-results"),
+                    pilot=True, experiment_id="unmarked-opt-in", retain_agent_diagnostics=True,
+                )
 
     def test_schema_v2_rejects_comparison_policy_outside_authorized_ceiling(self):
         with tempfile.TemporaryDirectory() as temporary:

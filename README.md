@@ -55,11 +55,15 @@ For the exact evaluation protocol and measured results, see the [M5 report](expe
 
 The Inspect adapter accepts a scenario JSON file; you do not need to edit its Python source. Scenario schema 2 requires an explicit write ceiling and verifies that the comparison policy is strictly narrower and remains inside that ceiling. The [bring-your-own-repository guide](examples/byo-repository/README.md) gives the tested Ubuntu/Lima setup, scenario template, exact evaluation command, and evidence summary workflow. It uses a selected guest copy, not a host directory mount.
 
+For the synthetic `autocage-playground` only, the [owner-run local-agent study](examples/byo-repository/LOCAL_AGENT_REPEATED_TRIALS.md) adds an explicitly opted-in, size-bounded capture of Aider/Ollama diagnostics and a counterbalanced 12-sample schedule. The model study is not part of CI and has not been run by the maintainer; no real-agent security conclusion is claimed.
+
 ## Measured example
 
 In the frozen M5 evaluation, all 18 main scripted task runs passed their trusted verifier. In three matched adversarial cases, broad workspace write allowed the protected write and changed its canary; the `src/` policy denied all three observed attempts and left all three canaries unchanged. All 13 AutoCage records and required controls validated. This shows the integration can report a deliberately constructed policy regression; it does not establish a general model-security result or superiority over a properly configured Docker sandbox.
 
 In the M7 internal BYO demonstration, five Inspect samples ran against pinned upstream `itsdangerous` code. All five task and verifier commands exited successfully; a direct diagnostic invocation of the same upstream suite reported 297 passed. In the adversarial scripted probe, the workspace-write ceiling allowed a selected source-file append and changed the staged canary; the zero-write policy denied it and left the canary unchanged. This is an OS-enforcement comparison using a deterministic control, not an LLM task or prompt-injection-resistance result. The [report](experiments/byo-repository-v1/README.md) includes the exact commit, command, runtime, and reproduction steps.
+
+The owner-operated M7 playground experiment ran five synthetic samples: all four writable-policy task runs passed, while the read-only control correctly failed to make the requested source change. The broad adversarial sample successfully modified the staged configuration canary; the `src/`-only policy denied the matched write and left its canary unchanged. Both clean samples had no attempt observed. All five records validated and the original source hashes stayed unchanged. This owner result does not represent an external user test or autonomous model behavior. M7.2's opt-in repeated local-agent study is prepared in the [owner guide](examples/byo-repository/LOCAL_AGENT_REPEATED_TRIALS.md); its pilot and 12-sample study have not yet run.
 
 ## Build and test
 

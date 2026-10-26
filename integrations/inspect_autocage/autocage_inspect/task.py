@@ -19,6 +19,7 @@ from inspect_ai.solver import Generate, Solver, TaskState, solver
 
 from .execution import M4_ROOT, REPOSITORY_ROOT, run_sample
 from .evidence import sha256_file, tree_digest
+from .trials import build_pilot, build_trial_schedule, persist_trial_plan
 
 
 def _policy_path_parts(value: str, *, label: str, file_grant: bool = False) -> tuple[str, ...]:
@@ -294,6 +295,7 @@ def _suite(scenario_file: str | None = None) -> tuple[dict[str, Any], Path, Path
         "scenario_file": str(path),
         "scenario_root": str(path.parent),
         "fixture_root": str(fixture_root),
+        "suite_id": suite.get("suite_id"),
         "agent_config": {**agent, "argv": command_argv},
         "agent_kind": agent_kind if schema_version == 2 else "scripted",
         "verifier": verifier,
@@ -350,6 +352,7 @@ def _metadata(
     autocage_binary: str | None = None,
     scenario_file: str,
     configuration_identity: dict[str, Any],
+    trial: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     return {
         "scenario_id": scenario_id,
@@ -360,6 +363,7 @@ def _metadata(
         "autocage_binary": autocage_binary,
         "scenario_file": scenario_file,
         "configuration_identity": configuration_identity,
+        "trial": trial or {},
     }
 
 
@@ -380,6 +384,8 @@ def _runtime_metadata(sample_metadata: dict[str, Any], task_text: str) -> dict[s
         "arm": sample_metadata["arm"],
         "agent_kind": sample_metadata["agent_kind"],
         "autocage_binary": sample_metadata.get("autocage_binary"),
+        "sample_id": sample_metadata.get("sample_id"),
+        "trial": sample_metadata.get("trial", {}),
     })
     if sample_metadata["arm"] == "autocage-read-only":
         scenario["write_policies"]["autocage-read-only"] = {"write_dirs": [], "write_files": []}
@@ -387,13 +393,17 @@ def _runtime_metadata(sample_metadata: dict[str, Any], task_text: str) -> dict[s
 
 
 @solver
-def execute_autocage_sample(work_root: str | None = None) -> Solver:
+def execute_autocage_sample(
+    work_root: str | None = None, retain_agent_diagnostics: bool = False
+) -> Solver:
     """Run one complete execution per Inspect sample, then expose evidence."""
 
     async def solve(state: TaskState, generate: Generate) -> TaskState:
         del generate  # The model is deliberately never called by this executor.
         try:
             metadata = _runtime_metadata(state.metadata, str(state.input))
+            metadata["sample_id"] = str(state.sample_id)
+            metadata["retain_agent_diagnostics"] = retain_agent_diagnostics
         except (OSError, ValueError, KeyError, json.JSONDecodeError) as error:
             result = {
                 "schema_version": 1,
@@ -405,6 +415,12 @@ def execute_autocage_sample(work_root: str | None = None) -> Solver:
                 "evidence_integrity": "INVALID",
                 "runtime_identity": "NOT_TESTED",
                 "trace": {"state": "OBSERVATION_UNAVAILABLE"},
+                "trial": state.metadata.get("trial", {}),
+                "agent_diagnostics": {
+                    "status": "INVALID" if retain_agent_diagnostics else "DISABLED",
+                    "opt_in": retain_agent_diagnostics,
+                    "artifacts": {},
+                },
                 "failure": f"scenario validation failed before launch: {type(error).__name__}",
             }
         else:
@@ -430,29 +446,35 @@ def _samples(
     autocage_binary: str | None,
     scenario_file: str,
     configuration_identity: dict[str, Any],
+    trial: dict[str, Any] | None = None,
 ) -> list[Sample]:
     samples = []
     for case in cases:
         for variant in variants:
             for arm in arms:
-                sample_id = f"{case['case_id']}-{variant}-{arm}"
+                sample_id = (trial or {}).get(
+                    "sample_id", f"{case['case_id']}-{variant}-{arm}"
+                )
+                metadata = _metadata(
+                    scenario_id=case["case_id"],
+                    case=case,
+                    variant=variant,
+                    arm=arm,
+                    task_text=task_text,
+                    timeout_seconds=timeout_seconds,
+                    agent_kind=agent_kind,
+                    autocage_binary=autocage_binary,
+                    scenario_file=scenario_file,
+                    configuration_identity=configuration_identity,
+                    trial=trial,
+                )
+                metadata["sample_id"] = sample_id
                 samples.append(
                     Sample(
                         id=sample_id,
                         input=task_text,
                         target="independently verified task and security evidence",
-                        metadata=_metadata(
-                            scenario_id=case["case_id"],
-                            case=case,
-                            variant=variant,
-                            arm=arm,
-                            task_text=task_text,
-                            timeout_seconds=timeout_seconds,
-                            agent_kind=agent_kind,
-                            autocage_binary=autocage_binary,
-                            scenario_file=scenario_file,
-                            configuration_identity=configuration_identity,
-                        ),
+                        metadata=metadata,
                     )
                 )
     return samples
@@ -542,23 +564,111 @@ def local_aider_regression(
     autocage_binary: str | None = None,
     work_root: str | None = None,
     scenario_file: str | None = None,
+    repetitions: int = 3,
+    schedule_seed: int = 20261025,
+    experiment_id: str | None = None,
+    pilot: bool = False,
+    include_read_only_control: bool = False,
+    retain_agent_diagnostics: bool = False,
 ) -> Task:
-    """Optional genuine local inference task using the previously validated wrapper."""
+    """Sequential, paired local-agent trials; retained transcripts require explicit opt-in."""
     default_scenario = Path(__file__).resolve().parents[1] / "scenarios" / "local-aider.json"
     suite, scenario_path, fixture_root, scenario = _suite(scenario_file or str(default_scenario))
+    experiment_id = experiment_id or f"aider-qwen25-{schedule_seed}"
+    if not isinstance(pilot, bool) or not isinstance(include_read_only_control, bool):
+        raise ValueError("pilot and include_read_only_control must be booleans")
+    if pilot and include_read_only_control:
+        raise ValueError("pilot and read-only control are separate runs")
     case = suite["cases"][0]
     task_version = int(suite["schema_version"])
-    samples = _samples(
-        arms=[scenario["narrow_policy_arm"]],
-        variants=["clean", "adversarial"],
-        cases=[case],
-        task_text=suite["task"],
-        timeout_seconds=int(suite["timeout_seconds"]),
-        agent_kind=scenario["agent_kind"] if task_version == 2 else "aider",
-        autocage_binary=autocage_binary,
-        scenario_file=str(scenario_path),
-        configuration_identity=scenario["scenario_identity"],
+    if task_version == 1:
+        if pilot or include_read_only_control or retain_agent_diagnostics or repetitions != 3:
+            raise ValueError("repeated local-agent trials require a schema_version 2 scenario")
+        samples = _samples(
+            arms=[scenario["narrow_policy_arm"]], variants=["clean", "adversarial"],
+            cases=[case], task_text=suite["task"],
+            timeout_seconds=int(suite["timeout_seconds"]), agent_kind="aider",
+            autocage_binary=autocage_binary, scenario_file=str(scenario_path),
+            configuration_identity=scenario["scenario_identity"],
+        )
+        return Task(
+            dataset=samples, solver=execute_autocage_sample(work_root),
+            scorer=[task_utility(), unauthorized_behavior(), protected_canary(),
+                    environment_controls(), evidence_integrity(), input_observation()],
+            model="mockllm/model", sandbox="local", fail_on_error=False,
+            name="autocage-local-aider-qwen25-coder-3b-v1", version=task_version,
+            metadata={
+                "agent": "Aider with local Ollama inference; legacy two-sample scenario",
+                "inference": "Configured executable runs inside AutoCage; no Inspect model bridge",
+                "model_sentinel": "mockllm/model is a TaskState placeholder; the solver does not invoke Inspect model generation",
+                "scenario_file": str(scenario_path),
+                "scenario_identity": scenario["scenario_identity"],
+            },
+        )
+    if retain_agent_diagnostics and not (
+        suite.get("suite_id") == "autocage-playground-local-aider-qwen25-coder-3b-v2"
+        and scenario.get("agent_kind") == "aider-ollama-qwen2.5-coder-3b-local"
+        and scenario["agent_config"].get("program") == "/usr/bin/python3"
+        and "scripts/run_local_aider.py" in scenario["agent_config"].get("argv", [])
+        and scenario["agent_config"].get("diagnostics_argv") == ["--retain-diagnostics"]
+        and len(suite.get("cases", [])) == 1
+        and suite["cases"][0].get("input_path") == "README.md"
+        and suite["cases"][0].get("protected_path") == "config/settings.json"
+        and (fixture_root / ".autocage-synthetic-playground").is_file()
+        and (fixture_root / ".autocage-synthetic-playground").read_text(encoding="utf-8")
+        == "autocage-playground-local-agent-v1\n"
+    ):
+        raise ValueError(
+            "diagnostic retention is restricted to the declared synthetic local-Aider playground scenario"
+        )
+    schedule = (
+        [build_pilot(schedule_seed=schedule_seed, experiment_id=experiment_id)]
+        if pilot
+        else build_trial_schedule(
+            repetitions=repetitions, schedule_seed=schedule_seed, experiment_id=experiment_id
+        )
     )
+    plan_identity = persist_trial_plan(
+        work_root=work_root,
+        experiment_id=experiment_id,
+        schedule=schedule,
+        scenario_identity=scenario["scenario_identity"],
+        retain_agent_diagnostics=retain_agent_diagnostics,
+    )
+    if plan_identity is not None:
+        schedule = [{**trial, "plan_sha256": plan_identity["sha256"]} for trial in schedule]
+    samples: list[Sample] = []
+    for trial in schedule:
+        trial = {**trial, "sample_id": f"{trial['experiment_id']}-{trial['repetition_id']}-{trial['variant']}-{trial['arm']}"}
+        samples.extend(_samples(
+            arms=[trial["arm"]],
+            variants=[trial["variant"]],
+            cases=[case],
+            task_text=suite["task"],
+            timeout_seconds=int(suite["timeout_seconds"]),
+            agent_kind=scenario["agent_kind"] if task_version == 2 else "aider",
+            autocage_binary=autocage_binary,
+            scenario_file=str(scenario_path),
+            configuration_identity=scenario["scenario_identity"],
+            trial=trial,
+        ))
+    if include_read_only_control and not pilot:
+        control_trial = {
+            **schedule[0],
+            "repetition_id": "read-only-control",
+            "trial_order": None,
+            "arm": "autocage-read-only",
+            "condition": "clean-autocage-read-only-control",
+            "sample_id": f"{experiment_id}-read-only-control",
+            "plan_kind": "separate-read-only-control",
+        }
+        samples.extend(_samples(
+            arms=["autocage-read-only"], variants=["clean"], cases=[case],
+            task_text=suite["task"], timeout_seconds=int(suite["timeout_seconds"]),
+            agent_kind=scenario["agent_kind"] if task_version == 2 else "aider",
+            autocage_binary=autocage_binary, scenario_file=str(scenario_path),
+            configuration_identity=scenario["scenario_identity"], trial=control_trial,
+        ))
     task_name = (
         "autocage-local-aider-qwen25-coder-3b-v1"
         if task_version == 1
@@ -566,7 +676,7 @@ def local_aider_regression(
     )
     return Task(
         dataset=samples,
-        solver=execute_autocage_sample(work_root),
+        solver=execute_autocage_sample(work_root, retain_agent_diagnostics),
         scorer=[
             task_utility(),
             unauthorized_behavior(),
@@ -596,6 +706,13 @@ def local_aider_regression(
             ),
             "scenario_file": str(scenario_path),
             "scenario_identity": scenario["scenario_identity"],
+            "experiment_id": experiment_id,
+            "repetitions": 1 if pilot else repetitions,
+            "schedule_seed": schedule_seed,
+            "pilot": pilot,
+            "retain_agent_diagnostics": retain_agent_diagnostics,
+            "trial_schedule": schedule,
+            "trial_plan": plan_identity,
         },
     )
 
