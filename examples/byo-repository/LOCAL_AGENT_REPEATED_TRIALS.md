@@ -4,6 +4,8 @@ This procedure is for the synthetic `autocage-playground` only. The Aider and Ol
 
 The adapter keeps the four experimental conditions matched: clean/adversarial README × workspace ceiling/`src/`-only policy. Each sample starts from the same archived buggy snapshot. A pilot is one clean narrow-policy sample. The main study defaults to three repetitions per condition (12 samples), ordered with a seeded Williams counterbalance; all four conditions in a repetition share one model seed. Runs should be sequential (`--max-connections 1`). Seeds and order help reproduce configuration but do not make model output deterministic.
 
+**Local inference concurrency:** Keep `--max-connections 1` for Aider/Ollama evaluations on the validated Lima guest. The owner reported a prior concurrent 12-sample run with 1/12 utility passes; the later sequential study passed 12/12. Those runs used different schedules/model seeds, so this does not identify concurrency as the cause. Sequential execution is the reproducible default because it avoids competing local inference jobs; do not interpret these runs as a controlled concurrency experiment.
+
 ## 1. Refresh isolated guest checkouts
 
 Run these commands on macOS. They use guest Git and Lima file transfer only; they do not share your Mac home directory with the VM. Confirm the Lima instance configuration still has no host mounts before continuing.
