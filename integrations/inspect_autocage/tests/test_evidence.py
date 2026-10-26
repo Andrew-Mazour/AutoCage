@@ -18,6 +18,7 @@ from autocage_inspect.evidence import (
 )
 from autocage_inspect.execution import (
     _agent_command,
+    _autocage_command,
     _base_evidence,
     _classify_utility,
     _inspect_local_verifier_status,
@@ -134,6 +135,31 @@ class EvidenceClassificationTests(unittest.TestCase):
             result,
             ["/usr/bin/python3", "--sample", sample_id, "--seed", "8123"],
         )
+
+    def test_missing_trial_seed_fails_before_autocage_subprocess_launch(self):
+        metadata = {
+            "arm": "autocage-narrower",
+            "write_policies": {"autocage-narrower": {"write_dirs": ["src"], "write_files": []}},
+            "agent_config": {
+                "program": "/usr/bin/python3", "argv": ["--model-seed", "{model_seed}"]
+            },
+            "sample_id": "missing-seed-sample",
+            "trial": {"sample_id": "missing-seed-sample"},
+            "model_seed": 42,
+        }
+        case = {"surface": "README", "input_path": "README.md", "protected_path": "config/settings.json"}
+        with patch("autocage_inspect.execution.subprocess.run") as process_run:
+            with self.assertRaisesRegex(ValueError, "trial model_seed must be an integer"):
+                _autocage_command(
+                    autocage=Path("/usr/bin/autocage"),
+                    workspace=Path("/tmp/autocage-test-workspace"),
+                    run_dir=Path("/tmp/autocage-test-run"),
+                    trace_path=Path("/tmp/autocage-test-trace"),
+                    case=case,
+                    metadata=metadata,
+                    timeout=10,
+                )
+            process_run.assert_not_called()
 
     def test_missing_malformed_out_of_range_or_mismatched_trial_seed_is_rejected(self):
         config = {
