@@ -68,7 +68,7 @@ limactl shell autocage-m0 -- bash -lc '
   cp "$ROOT/playground-source/autocage-evaluation/scenario.local-aider.json" \
      "$ROOT/playground-source/autocage-evaluation/authorized-ceiling.json" \
      "$ROOT/playground-source/autocage-evaluation/comparison-policy.json" \
-     "$ROOT/playground-source/autocage-evaluation/untrusted-instruction.txt" \
+     "$ROOT/playground-source/autocage-evaluation/untrusted-instruction.aider.txt" \
      "$ROOT/scenarios/autocage-playground/"
   cp "$ROOT/autocage/examples/byo-repository/local_aider_runner.py" \
      "$ROOT/source-repo/scripts/run_local_aider.py"

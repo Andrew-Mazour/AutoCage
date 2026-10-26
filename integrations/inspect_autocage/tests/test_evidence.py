@@ -25,6 +25,7 @@ from autocage_inspect.execution import (
     _read_canary,
     _run_autocage,
 )
+from autocage_inspect.trials import build_pilot, build_trial_schedule
 from autocage_inspect.task import (
     _metadata,
     _runtime_metadata,
@@ -115,20 +116,97 @@ class EvidenceClassificationTests(unittest.TestCase):
             )
 
     def test_trial_seed_and_sample_identity_are_substituted_without_shell_parsing(self):
+        sample_id = "rep-02-adversarial-narrow"
         result = _agent_command(
             {
                 "agent_config": {
                     "program": "/usr/bin/python3",
                     "argv": ["--sample", "{sample_id}", "--seed", "{model_seed}"],
                 },
-                "sample_id": "rep-02-adversarial-narrow",
-                "model_seed": 8123,
+                "sample_id": sample_id,
+                "trial": {"sample_id": sample_id, "model_seed": 8123},
+                # A top-level value must not override trusted trial metadata.
+                "model_seed": 999,
             },
             {"surface": "README", "input_path": "README.md", "protected_path": "config/settings.json"},
         )
         self.assertEqual(
             result,
-            ["/usr/bin/python3", "--sample", "rep-02-adversarial-narrow", "--seed", "8123"],
+            ["/usr/bin/python3", "--sample", sample_id, "--seed", "8123"],
+        )
+
+    def test_missing_malformed_out_of_range_or_mismatched_trial_seed_is_rejected(self):
+        config = {
+            "agent_config": {
+                "program": "/usr/bin/python3", "argv": ["--model-seed", "{model_seed}"]
+            },
+            "sample_id": "pilot-sample",
+            # A legacy top-level seed is intentionally insufficient.
+            "model_seed": 7,
+        }
+        case = {"surface": "README", "input_path": "README.md", "protected_path": "config/settings.json"}
+        invalid_trials = (
+            None,
+            {},
+            {"model_seed": "7", "sample_id": "pilot-sample"},
+            {"model_seed": True, "sample_id": "pilot-sample"},
+            {"model_seed": -1, "sample_id": "pilot-sample"},
+            {"model_seed": 0x80000000, "sample_id": "pilot-sample"},
+            {"model_seed": 7, "sample_id": "other-sample"},
+        )
+        for trial in invalid_trials:
+            metadata = {**config}
+            if trial is not None:
+                metadata["trial"] = trial
+            with self.subTest(trial=trial), self.assertRaises(ValueError):
+                _agent_command(metadata, case)
+
+    def test_m72_pilot_and_repeated_trials_emit_the_scheduled_seed_and_opt_in_arg(self):
+        repo = Path(__file__).resolve().parents[3]
+        scenario = json.loads(
+            (repo / "examples/byo-repository/local-aider-scenario-v2.template.json").read_text()
+        )
+        case = scenario["cases"][0]
+        pilot = build_pilot(schedule_seed=20261025, experiment_id="m72-pilot-20261025")
+        self.assertEqual(pilot["model_seed"], 1844109445)
+        repeated = build_trial_schedule(
+            repetitions=1, schedule_seed=20261025, experiment_id="seed-repeated"
+        )[0]
+        for trial in (pilot, repeated):
+            sample_id = "{}-{}-{}-{}".format(
+                trial["experiment_id"], trial["repetition_id"],
+                trial["variant"], trial["arm"],
+            )
+            trial = {**trial, "sample_id": sample_id}
+            metadata = {
+                "agent_config": scenario["agent"],
+                "task_text": scenario["task"],
+                "sample_id": sample_id,
+                "trial": trial,
+                "retain_agent_diagnostics": True,
+            }
+            command = _agent_command(metadata, case)
+            self.assertEqual(
+                command,
+                [
+                    "/usr/bin/python3", "-B", "scripts/run_local_aider.py",
+                    "--task", scenario["task"], "--input", "README.md",
+                    "--sample-id", sample_id, "--model-seed", str(trial["model_seed"]),
+                    "--retain-diagnostics",
+                ],
+            )
+            self.assertTrue(0 <= trial["model_seed"] <= 0x7FFFFFFF)
+
+    def test_owner_runbook_uses_the_playground_scenario_overlay_filename(self):
+        repo = Path(__file__).resolve().parents[3]
+        guide = (repo / "examples/byo-repository/LOCAL_AGENT_REPEATED_TRIALS.md").read_text()
+        self.assertIn(
+            '"$ROOT/playground-source/autocage-evaluation/untrusted-instruction.aider.txt"',
+            guide,
+        )
+        self.assertNotIn(
+            '"$ROOT/playground-source/autocage-evaluation/untrusted-instruction.txt"',
+            guide,
         )
 
     def test_diagnostic_argv_is_added_only_after_explicit_opt_in(self):

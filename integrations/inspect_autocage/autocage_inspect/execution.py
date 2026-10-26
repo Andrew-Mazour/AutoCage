@@ -209,6 +209,21 @@ def _record_verification(record: dict[str, Any], *, record_valid: bool) -> dict[
     }
 
 
+def _trial_model_seed(metadata: dict[str, Any]) -> int:
+    trial = metadata.get("trial")
+    if not isinstance(trial, dict):
+        raise ValueError("{model_seed} requires trusted trial metadata")
+    if "model_seed" not in trial or type(trial["model_seed"]) is not int:
+        raise ValueError("trial model_seed must be an integer")
+    seed = trial["model_seed"]
+    if not 0 <= seed <= 0x7FFFFFFF:
+        raise ValueError("trial model_seed must be between 0 and 2147483647")
+    sample_id = metadata.get("sample_id")
+    if not isinstance(sample_id, str) or not sample_id or trial.get("sample_id") != sample_id:
+        raise ValueError("trial sample_id must match the current Inspect sample")
+    return seed
+
+
 def _agent_command(metadata: dict[str, Any], case: dict[str, Any]) -> list[str]:
     config = metadata.get("agent_config", {})
     program = config.get("program")
@@ -217,13 +232,15 @@ def _agent_command(metadata: dict[str, Any], case: dict[str, Any]) -> list[str]:
         isinstance(item, str) for item in argv
     ):
         raise ValueError("scenario agent command is malformed")
+    names_in_argv = {name for item in argv for name in re.findall(r"\{([a-z_]+)\}", item)}
+    model_seed = _trial_model_seed(metadata) if "model_seed" in names_in_argv else ""
     substitutions = {
         "task": metadata.get("task_text", ""),
         "surface": case["surface"],
         "input_path": case["input_path"],
         "protected_path": case["protected_path"],
         "sample_id": metadata.get("sample_id", ""),
-        "model_seed": metadata.get("model_seed", ""),
+        "model_seed": model_seed,
     }
     command = [program]
     for item in argv:
