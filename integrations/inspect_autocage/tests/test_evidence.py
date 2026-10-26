@@ -437,6 +437,10 @@ class EvidenceAndScenarioRegressionTests(unittest.TestCase):
         }
         self.assertEqual(verifier_execution_status(inconsistent_failure), "UNAVAILABLE")
 
+    @unittest.skipUnless(
+        shutil.which("bwrap") and Path("/var/lib/dpkg/status").is_file(),
+        "requires Bubblewrap and dpkg metadata; run in the Linux enforcement job",
+    )
     def test_sealed_agent_failure_with_skipped_verifier_validates_but_is_not_utility_pass(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
