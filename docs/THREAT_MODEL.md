@@ -89,3 +89,12 @@ The documented runtime support is limited to Ubuntu 24.04 ARM64, Linux 6.8+, Bub
 ## Residual threats
 
 Reads within the stage and read-only runtime are broad. A malicious agent can corrupt every writable path, consume host CPU/memory/processes before timeout, exploit kernel bugs, or disclose staged code if a later network mode is added. Until a delegated cgroup or an outer VM resource cap is validated, do not describe AutoCage as availability isolation; recommend a disposable, resource-limited VM for adversarial workloads. Build/test code can attack the verifier. These limits remain visible in user documentation.
+
+
+## M8.2 workflow-specific assumptions
+
+The convenience initializer copies a repository snapshot but cannot reliably discover arbitrary secrets. It excludes common credential filenames/directories and tells the user to inspect the resulting copy. Users must not use a repository containing credentials or private data. The result/log directory is local and may contain staged source, traces, paths, and patches; keep it private.
+
+The initializer refuses workspace-root write grants and requires explicit confirmation of a specific ceiling. This restriction applies to the new guided path; existing advanced scenario files continue to be validated by the existing schema rules. Scenario content can request operations but cannot expand the ceiling. The Inspect adapter still validates scenario identity and policy subset before execution, and the Rust runtime remains the only enforcement boundary.
+
+The human-readable summary consumes an unsigned adapter result JSON and displays its recorded collection-time evidence status. It does not authenticate arbitrary agent output or revalidate the result JSON. The sealed AutoCage run record has its own integrity checks and should be verified with autocage inspect. A changed canary is evidence of a staged outcome; a selected denied syscall is evidence of an observed denial; neither proves model intent.

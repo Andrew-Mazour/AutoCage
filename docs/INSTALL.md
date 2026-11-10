@@ -28,7 +28,7 @@ scripts/run-inspect-quickstart.sh
 
 The pinned Python environment installs Inspect AI `0.3.281`. The adapter is built from the checkout and is not published as a separate package. No model, API key, cloud account, or paid service is needed for the quickstart.
 
-To run the Inspect adapter against a sanitized local repository snapshot, follow the [bring-your-own-repository guide](../examples/byo-repository/README.md). Scenario schema 2 records an explicit developer-authorized write ceiling and rejects a comparison policy that exceeds it.
+To run the Inspect adapter against a sanitized local repository snapshot, use the M8.2 [getting-started guide](GETTING_STARTED.md) for the guided autocage init, eval, and report commands, or the [manual BYO scenario guide](../examples/byo-repository/README.md). Both use scenario schema 2, an explicit developer-authorized write ceiling, a narrower comparison policy, and an independent verifier. The guided initializer refuses a workspace-root grant; review the copied snapshot because its exclusion rules are not a secret scanner.
 
 `cargo install` installs only into the Linux guest user's Cargo bin directory; it does not install a system service. The quickstart script deliberately uses the freshly built `target/release/autocage` unless `AUTOCAGE_BINARY` is set.
 
@@ -74,7 +74,7 @@ The Lima guest is disposable and has no host directory mounts. To remove the ent
 
 `.github/workflows/ci.yml` runs formatting, strict Clippy, Rust unit tests and release builds on Ubuntu x86_64 and ARM64, plus Python tests, pinned dependency checks, and local documentation-link checks. This validates compilation and portable components; it does not claim sandbox enforcement on those workers.
 
-`.github/workflows/linux-enforcement.yml` runs only on a trusted push to `main` or a manual dispatch. It targets the GitHub-hosted Ubuntu 24.04 ARM64 runner, installs and inspects Ubuntu's official AppArmor profile in its disposable VM, then runs the full M0, Rust/Linux, M4, and M5 gates. It fails visibly when a prerequisite is unsupported; it never reports a blocked enforcement run as passed. The workflow passed on the published release commit; the latest successful run is [here](https://github.com/Andrew-Mazour/AutoCage/actions/runs/40138780277). The separately scoped portable build/test matrix also passed [here](https://github.com/Andrew-Mazour/AutoCage/actions/runs/40138780285). Hosted CI does not extend the documented supported runtime matrix beyond Ubuntu 24.04 ARM64.
+`.github/workflows/linux-enforcement.yml` runs on pull requests to supported development bases, trusted pushes to `main`, or a manual dispatch. It targets the GitHub-hosted Ubuntu 24.04 ARM64 runner, installs and inspects Ubuntu's official AppArmor profile in its disposable VM, then runs the full M0, Rust/Linux, M4, and M5 gates. It fails visibly when a prerequisite is unsupported; it never reports a blocked enforcement run as passed. The workflow passed on the published release commit; the latest successful run is [here](https://github.com/Andrew-Mazour/AutoCage/actions/runs/40138780277). The separately scoped portable build/test matrix also passed [here](https://github.com/Andrew-Mazour/AutoCage/actions/runs/40138780285). Hosted CI does not extend the documented supported runtime matrix beyond Ubuntu 24.04 ARM64.
 
 Run the complete supported-guest gate locally with the same commands shown in the workflow. Do not treat portable CI success as a substitute for M0 or Linux integration tests.
 

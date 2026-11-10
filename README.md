@@ -53,9 +53,11 @@ For the exact evaluation protocol and measured results, see the [M5 report](expe
 
 ## Evaluate your own repository
 
-The Inspect adapter accepts a scenario JSON file; you do not need to edit its Python source. Scenario schema 2 requires an explicit write ceiling and verifies that the comparison policy is strictly narrower and remains inside that ceiling. The [bring-your-own-repository guide](examples/byo-repository/README.md) gives the tested Ubuntu/Lima setup, scenario template, exact evaluation command, and evidence summary workflow. It uses a selected guest copy, not a host directory mount.
+The M8.2 feature branch adds a developer workflow on top of the existing Rust runner and Inspect adapter. From a supported Ubuntu guest, autocage init copies a reviewed source snapshot and interactively builds a schema-v2 scenario; it requires an explicit, non-root write ceiling, an independent verifier, a protected canary, and a narrower comparison policy. autocage eval runs the existing Inspect adapter sequentially after AutoCage preflight. autocage report renders human-readable and JSON evidence with patch paths and investigation hints. Generated changes are never applied to the source checkout.
 
-For the synthetic `autocage-playground` only, the [owner-run local-agent study](examples/byo-repository/LOCAL_AGENT_REPEATED_TRIALS.md) adds an explicitly opted-in, size-bounded capture of Aider/Ollama diagnostics and a counterbalanced 12-sample schedule. The model study is not part of CI and has not been run by the maintainer; no real-agent security conclusion is claimed.
+M8.2 is under review on the m8.2-developer-experience branch and is not in the 0.1.0-rc.1 release. See the [M8.2 getting-started guide](docs/GETTING_STARTED.md) and [deterministic CLI acceptance report](experiments/byo-workflow-v1/README.md). The wizard excludes common VCS, environment, cache, and key-named files, but is not a secret scanner; users must inspect their snapshot. The existing [BYO scenario guide](examples/byo-repository/README.md) remains available for manual schema editing.
+
+Local Aider/Ollama can be configured through the existing guest helper when its pinned local profile is installed. This is optional and no hosted inference is supported. A command that needs inference must launch its local model service inside the no-egress sandbox; AutoCage does not pass host services or credentials through.
 
 ## Measured example
 

@@ -291,14 +291,66 @@ def _diagnostic_summary(row: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+
+
+def _operator_guidance(row: dict[str, Any], execution: dict[str, Any]) -> str:
+    classification = execution.get("classification")
+    if row.get("evidence_integrity") != "VALID":
+        return "Evidence is missing or invalid; do not rely on this run. Inspect the record-validation failure."
+    if row.get("environment_enforcement") != "CONFIRMED":
+        return "Required enforcement was not confirmed; treat the execution as inconclusive."
+    if classification == "NO_OBSERVABLE_EDITS":
+        return "Agent exited without final changes and verification failed; inspect agent setup/task delivery, then review the verifier result."
+    if classification == "EDITS_VERIFIER_FAILED":
+        return "Review the patch and trusted verifier failure; do not apply the patch as a passing result."
+    if classification == "AGENT_TIMED_OUT":
+        return "Agent timed out; inspect the timeout and incomplete-run evidence before changing limits."
+    if classification in {"AGENT_PROCESS_FAILED", "AGENT_LAUNCH_NOT_CONFIRMED", "AGENT_LAUNCH_NOT_STARTED"}:
+        return "Agent did not complete normally; inspect launch/termination evidence. The verifier may not have run."
+    if classification == "EDITS_VERIFIED":
+        return "Task verifier passed; review the patch before applying it."
+    if classification == "NO_EDITS_VERIFIER_PASSED":
+        return "Verifier passed without final changes; confirm the declared task required no edit."
+    attempt = row.get("unauthorized_behavior", {}).get("attempt")
+    if attempt == "ATTEMPT_DENIED_BY_FILESYSTEM":
+        return "A selected protected write was denied; this does not by itself prove model resistance."
+    if attempt == "WRITE_OPEN_SUCCEEDED":
+        return "A protected write was attempted and succeeded; inspect the canary and patch immediately."
+    if attempt == "NO_ATTEMPT_OBSERVED":
+        return "No protected write attempt was observed; this is not evidence of a denial."
+    return "Review the sample evidence and any unavailable observations."
+
+
+def _sample_artifacts(row: dict[str, Any], sample_root: Path | None) -> dict[str, str | None]:
+    artifacts = row.get("artifact_files")
+    if not isinstance(artifacts, dict) or sample_root is None:
+        return {"run_directory": None, "patch": None, "trace": None}
+    root = sample_root.resolve()
+    output: dict[str, str | None] = {}
+    for key in ("autocage_run", "patch", "trace"):
+        value = artifacts.get(key)
+        if not isinstance(value, str):
+            output[key if key != "autocage_run" else "run_directory"] = None
+            continue
+        candidate = Path(value)
+        try:
+            output[key if key != "autocage_run" else "run_directory"] = candidate.resolve().relative_to(root).as_posix()
+        except (OSError, ValueError):
+            output[key if key != "autocage_run" else "run_directory"] = None
+    return output
+
+
 def summarize(root: Path) -> dict[str, Any]:
     result_paths = sorted(root.glob("*/result.json"))
     results = []
     source_analysis: dict[str, dict[str, Any]] = {}
+    sample_roots: dict[str, Path] = {}
     for path in result_paths:
         row = json.loads(path.read_text(encoding="utf-8"))
         results.append(row)
-        source_analysis[row.get("sample_id", str(path))] = _source_analysis(path.parent, row)
+        sample_key = row.get("sample_id", str(path))
+        sample_roots[sample_key] = path.parent
+        source_analysis[sample_key] = _source_analysis(path.parent, row)
     by_arm: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for result in results:
         by_arm[result.get("arm", "UNKNOWN")].append(result)
@@ -484,6 +536,8 @@ def summarize(root: Path) -> dict[str, Any]:
                 "policy_sha256": row.get("configuration_identity", {}).get("effective_policy_sha256"),
                 "task_utility": row.get("task_utility"),
                 "agent_execution": _agent_execution(row),
+                "investigation_hint": _operator_guidance(row, _agent_execution(row)),
+                **_sample_artifacts(row, sample_roots.get(row.get("sample_id", ""))),
                 "verifier_execution": _verification_status(row),
                 "attempt": row.get("unauthorized_behavior", {}).get("attempt"),
                 "protected_write_trace_lines": row.get("trace", {}).get("protected_write_trace_lines", []),
@@ -557,6 +611,28 @@ def render_markdown(summary: dict[str, Any]) -> str:
             f"{canaries} | {enforcement} | {integrity} | {diagnostics} |"
         )
     lines.extend([
+        "",
+        "## Developer quick review",
+        "",
+        "| Sample | Utility | Agent | Changed files | Protected write | Canary | Enforcement / integrity at collection | Patch | Next step |",
+        "|---|---|---|---|---|---|---|---|---|",
+    ])
+    for sample in summary["samples"]:
+        execution = sample.get("agent_execution", {})
+        changed = ", ".join(sample.get("changed_files", [])) or "none observed"
+        patch = sample.get("patch") or "unavailable"
+        lines.append(
+            f"| {sample.get('sample_id')} | {sample.get('task_utility')} | {execution.get('classification')} | "
+            f"{changed} | {sample.get('attempt')} | {sample.get('canary')} | "
+            f"{sample.get('environment_enforcement')} / {sample.get('evidence_integrity')} | "
+            f"{patch} | {sample.get('investigation_hint')} |"
+        )
+    lines.extend([
+        "",
+        "A denied selected operation and a successful protected write are different outcomes. "
+        "NO_ATTEMPT_OBSERVED is not evidence of a denial or model resistance.",
+        "Integrity and enforcement values are the adapter's collection-time findings in an unsigned result JSON. "
+        "This formatter does not revalidate result JSON; run autocage inspect on a sample's sealed run directory.",
         "",
         "## Per-sample local-agent diagnosis",
         "",

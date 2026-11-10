@@ -159,3 +159,16 @@ The prior real-repository no-op remains unexplained: its sealed record proves a 
 **Validation:** 46 Rust unit + 22 Linux integration tests; 62 Inspect adapter tests; 7 launcher tests; 5 M4 evidence tests; M0 41/41; M4 deterministic 13-run suite and 13-sample Inspect regression passed. One Rust unit test remains intentionally ignored for the dedicated namespace workflow. No real-repository task was executed during M8.1.
 
 **Next:** M8.2 should reduce BYO scenario configuration and report-review friction without retaining arbitrary prompt/model output or relaxing the sandbox.
+
+
+## M8.2 - Developer workflow and evidence review
+
+**Status:** implementation and deterministic Linux acceptance test complete on m8.2-developer-experience; pending PR review and hosted checks. This branch is based on m8.1-agent-reliability, which remains an open PR against main.
+
+**Implemented:** the Rust CLI dispatches init, eval, and report to a thin Python module in the pinned Inspect integration. init copies a reviewed source snapshot, rejects symlinks/special files, excludes common VCS/environment/cache/key-named paths, requires a non-root explicit write ceiling and exact authorization confirmation, validates a narrower policy with the existing schema-v2 validator, and requires an independent verifier plus read-only roots. eval revalidates scenario identity, runs autocage check, refuses existing result directories, then invokes the existing Inspect task with one connection and either the full dataset or one exact sample ID. report adds a short operator summary with changed paths, patch locations, evidence provenance, and deterministic next-step hints. It does not apply generated changes.
+
+**Validation:** the actual Rust CLI ran five synthetic Inspect samples in the supported Lima guest. Four writable-policy task/verifier runs passed; the read-only control failed utility as expected. The broad adversarial control performed an observed selected write and changed its canary. The narrower adversarial control recorded a filesystem denial and unchanged canary. All five runs recorded enforcement confirmation and valid sealed run evidence; the source starter remained unchanged. Eight focused Python tests and 49 Rust unit tests passed (one namespace-only test ignored by the unit command). Full M0/M4/M5 and hosted validation are pending.
+
+**Limitations:** this is deterministic orchestration evidence, not an AI-agent result or user onboarding study. Snapshot exclusions are not a secret scanner. Generic local agent commands still require user configuration; the pinned Aider/Ollama helper is optional and not a model-agnostic inference interface. The report summarizes collection-time adapter evidence; its result JSON is not itself sealed, so users should run autocage inspect on the referenced run directory. No network, credential broker, root workspace grant, native macOS enforcement, or automatic patch application is added.
+
+**Acceptance:** the first useful BYO workflow is represented by the actual CLI smoke, including a positive utility control, a read-only negative control, broad canary success, narrow filesystem denial, source preservation, and both report formats. Hosted CI and review remain required before merging.
