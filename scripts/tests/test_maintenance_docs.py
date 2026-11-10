@@ -1,8 +1,9 @@
 from __future__ import annotations
 
-from contextlib import redirect_stdout
+from contextlib import redirect_stderr, redirect_stdout
 import io
 import json
+import subprocess
 from pathlib import Path
 import tempfile
 import unittest
@@ -66,6 +67,40 @@ class MaintenanceDocsTests(unittest.TestCase):
             for item in selected:
                 self.assertIn(item["new_target"], text)
             self.assertEqual(len(maintenance_docs._scan(root)), 12 - len(selected))
+
+    def test_case_mismatch_in_relative_image_link_is_repaired(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root / "docs").mkdir()
+            (root / "docs/Diagram.SVG").write_text("synthetic image\n")
+            document = root / "README.md"
+            document.write_text("![diagram](docs/diagram.svg)\n")
+            candidates = maintenance_docs._scan(root)
+            self.assertEqual(len(candidates), 1)
+            self.assertEqual(candidates[0]["new_target"], "docs/Diagram.SVG")
+
+    def test_check_diff_rejects_paths_outside_documentation_allowlist(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root / "docs").mkdir()
+            (root / "src").mkdir()
+            (root / "README.md").write_text("# Initial\n")
+            (root / "docs/guide.md").write_text("# Guide\n")
+            (root / "src/policy.rs").write_text("fn policy() {}\n")
+            subprocess.run(["git", "init", "-q", str(root)], check=True)
+            subprocess.run(["git", "-C", str(root), "add", "."], check=True)
+            subprocess.run([
+                "git", "-C", str(root), "-c", "user.name=Test", "-c",
+                "user.email=test@example.invalid", "commit", "-qm", "fixture",
+            ], check=True)
+            output = io.StringIO()
+            errors = io.StringIO()
+            with patch.object(maintenance_docs, "ROOT", root), redirect_stdout(output), redirect_stderr(errors):
+                self.assertEqual(maintenance_docs.main(["--check-diff"]), 0)
+                (root / "docs/guide.md").write_text("# Corrected guide\n")
+                (root / "src/policy.rs").write_text("fn policy() { panic!() }\n")
+                self.assertEqual(maintenance_docs.main(["--check-diff"]), 1)
+            self.assertIn("src/policy.rs", errors.getvalue())
 
     def test_ambiguous_casefold_match_is_not_repaired(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
