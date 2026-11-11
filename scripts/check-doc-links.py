@@ -14,6 +14,7 @@ DOCUMENTS = [
     ROOT / "CHANGELOG.md",
     ROOT / "SECURITY.md",
     ROOT / "docs" / "INSTALL.md",
+    ROOT / "docs" / "GETTING_STARTED.md",
     ROOT / "docs" / "RELEASE.md",
     ROOT / "docs" / "ARCHITECTURE.md",
     ROOT / "docs" / "THREAT_MODEL.md",
