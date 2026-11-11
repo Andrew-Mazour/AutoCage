@@ -9,11 +9,7 @@ In the isolated Linux guest, clone AutoCage and install the pinned Inspect integ
     git clone https://github.com/Andrew-Mazour/AutoCage.git
     cd AutoCage
 
-Before M8.2 merges, check out the reviewed feature branch after cloning:
-
-    git switch --track origin/m8.2-developer-experience
-
-After M8.2 merges, stay on main.
+The guided BYO workflow is available on `main` (it was added after the `0.1.0-rc.1` release tag).
 
     cargo build --locked --release
     python3 -m venv .venv-inspect
@@ -47,13 +43,30 @@ Review these generated files before running:
 
 The initial comparison runs each case clean and with the declared overlay under both policies, then runs one read-only utility control. With one case, that is five samples. The read-only control is expected to fail if the task requires writing. No model API is called by Inspect itself.
 
-### Existing local Aider/Ollama setup
+### Local Aider/Ollama with an installed model
 
-AutoCage accepts an executable argv and can stage a helper from the AutoCage checkout into the copied repository. The existing example helper is examples/byo-repository/local_aider_runner.py; it supports only its documented, locally installed model profiles and starts Ollama inside the sandbox. For example, enter this argv (adjust the editable file and task):
+For a reusable example that accepts any already-installed Ollama model tag, use
+examples/byo-repository/local_aider_ollama.py. It launches Ollama in the same
+sandbox, binds to 127.0.0.1 only, checks that the exact model is already
+installed, and never downloads a model. It passes Aider a shell-free task,
+read-only file list, and explicit editable-file list. Its default Aider
+configuration, env file, chat history, and input history are isolated or sent
+to /dev/null. Raw transcripts are not intentionally retained.
 
-    ["/usr/bin/python3", "-B", "scripts/run_local_aider.py", "--task", "{task}", "--input", "{input_path}", "--sample-id", "{sample_id}", "--model-profile", "qwen2.5-coder-3b", "--editable-file", "src/module.py"]
+In the init wizard, use an argv like this (adjust the task target, model tag,
+and allowed files):
 
-When prompted for the helper source, enter examples/byo-repository/local_aider_runner.py; set its workspace destination to scripts/run_local_aider.py. The model must already be installed in the guest. This historical helper's model profiles are examples, not AutoCage's general model interface. A direct Aider command that depends on a pre-existing host or guest Ollama service will not work through the no-egress boundary unless that service is launched inside the sandbox.
+    ["/usr/bin/python3", "-B", "scripts/run_local_aider_ollama.py", "--task", "{task}", "--model-tag", "qwen2.5-coder:3b", "--editable-file", "src/module.py", "--read-file", "AGENTS.md", "--context-length", "8192", "--temperature", "0", "--seed", "8303"]
+
+When prompted for the helper source, enter
+examples/byo-repository/local_aider_ollama.py and set its workspace destination
+to scripts/run_local_aider_ollama.py. The selected model must already be
+installed in the guest's configured Ollama model store. AutoCage does not
+download weights, use hosted inference, expose a host Ollama service, or grant
+network access. This is an Aider/Ollama adapter, not a universal agent plugin;
+other agents can be configured with the existing explicit program/argv
+interface when their dependencies and local service lifecycle work inside the
+same sandbox.
 
 ## Execute and read the result
 
