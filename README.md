@@ -8,6 +8,8 @@ This is a pre-1.0 research and developer tool. Its validated runtime target is *
 
 **M6.2 validation (2026-10-24 UTC):** The release candidate passed both GitHub Actions workflows at commit `bde4272`: portable x86_64/ARM64 checks and Ubuntu 24.04 ARM64 enforcement. Hosted evidence includes the required AppArmor profile, 41/41 M0 checks, 47 Rust unit tests, 22 live Linux integration tests, the M4 containment regression, and the 13-sample no-cost Inspect quickstart. See the [release record](docs/RELEASE.md) and historical [M6.1 local evidence](experiments/inspect-autocage-v1/results/2026-10-23-m6-1-final-validation/README.md).
 
+**Current status:** M8.3 is merged into main; its portable and Linux enforcement/Inspect workflows passed. The latest release remains the prerelease 0.1.0-rc.1. Owner acceptance of the local-agent workflow and an independent developer walkthrough are outstanding. See [Project status](docs/PROJECT_STATUS.md).
+
 ## What a result tells you
 
 AutoCage reports separate evidence for:
