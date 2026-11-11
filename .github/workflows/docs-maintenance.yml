@@ -1,0 +1,190 @@
+name: Low-risk documentation maintenance
+
+on:
+  schedule:
+    - cron: '17 2,8,14,20 * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: Scan and report only; never create a branch or PR
+        type: boolean
+        required: true
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: autocage-doc-maintenance
+  cancel-in-progress: false
+
+jobs:
+  choose-slot:
+    name: Select one daily UTC slot
+    runs-on: ubuntu-24.04
+    permissions: {}
+    outputs:
+      should_scan: ${{ steps.slot.outputs.should_scan }}
+      date: ${{ steps.slot.outputs.date }}
+    steps:
+      - id: slot
+        name: Select a date-derived slot without checking out source
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          python3 - <<'PY'
+          from datetime import datetime, timezone
+          import hashlib
+          import os
+
+          today = datetime.now(timezone.utc).date().isoformat()
+          should_scan = os.environ["EVENT_NAME"] == "workflow_dispatch"
+          if os.environ["EVENT_NAME"] == "schedule":
+              hours = (2, 8, 14, 20)
+              digest = hashlib.sha256(f"autocage-doc-maintenance-slot-v1:{today}".encode()).hexdigest()
+              selected_hour = hours[int(digest[:8], 16) % len(hours)]
+              should_scan = datetime.now(timezone.utc).hour == selected_hour
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
+              output.write(f"date={today}\nshould_scan={str(should_scan).lower()}\n")
+          print(f"UTC date: {today}; scan selected: {should_scan}")
+          PY
+
+  scan:
+    name: Read-only candidate scan
+    needs: choose-slot
+    if: needs.choose-slot.outputs.should_scan == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    outputs:
+      should_apply: ${{ steps.plan.outputs.should_apply }}
+      date: ${{ steps.plan.outputs.date }}
+      base_sha: ${{ steps.plan.outputs.base_sha }}
+      plan_digest: ${{ steps.plan.outputs.plan_digest }}
+    steps:
+      - name: Checkout the selected revision without persisting credentials
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+
+      - id: plan
+        name: Dry-run deterministic documentation candidate selection
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          DRY_RUN: ${{ inputs.dry_run }}
+          EVENT_DATE: ${{ needs.choose-slot.outputs.date }}
+          GITHUB_REF_NAME: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          base_sha="$(git rev-parse HEAD)"
+          python3 scripts/maintenance_docs.py --dry-run --date "$EVENT_DATE" --seed autocage-daily --json > "$RUNNER_TEMP/maintenance-plan.json"
+          python3 - "$RUNNER_TEMP/maintenance-plan.json" "$GITHUB_OUTPUT" "$base_sha" "$EVENT_NAME" "$DRY_RUN" "$GITHUB_REF_NAME" <<'PY'
+          import json
+          import sys
+
+          plan_path, output_path, base_sha, event_name, dry_run, ref_name = sys.argv[1:]
+          plan = json.load(open(plan_path, encoding="utf-8"))
+          selected = int(plan["selected_count"])
+          should_apply = selected >= 3 and not (event_name == "workflow_dispatch" and dry_run.lower() == "true")
+          if event_name == "workflow_dispatch" and dry_run.lower() != "true" and ref_name != "main":
+              should_apply = False
+          with open(output_path, "a", encoding="utf-8") as output:
+              output.write(f"date={plan['date']}\n")
+              output.write(f"base_sha={base_sha}\n")
+              output.write(f"plan_digest={plan['plan_digest']}\n")
+              output.write(f"should_apply={str(should_apply).lower()}\n")
+          print(json.dumps(plan, indent=2, sort_keys=True))
+          print("Manual dry-run: candidate scan had read-only permissions; no PR will be created." if event_name == "workflow_dispatch" and dry_run.lower() == "true" else "Eligible maintenance PR: " + str(should_apply))
+          PY
+          cat "$RUNNER_TEMP/maintenance-plan.json" >> "$GITHUB_STEP_SUMMARY"
+
+  propose:
+    name: Validate and propose documentation repairs
+    needs: [choose-slot, scan]
+    if: needs.scan.outputs.should_apply == 'true' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout main without untrusted PR code
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Check for an existing maintenance PR or branch
+        id: duplicate
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          open_prs="$(gh pr list --state open --json headRefName --jq '[.[] | select(.headRefName | startswith("automation/docs-maintenance-"))] | length')"
+          branch="automation/docs-maintenance-${{ needs.scan.outputs.date }}"
+          if [ "$open_prs" -gt 0 ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "An earlier documentation-maintenance PR is still open; no new PR will be created." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          if git ls-remote --exit-code --heads origin "$branch" >/dev/null 2>&1; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "The date-specific branch already exists; refusing to overwrite it." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          echo "skip=false" >> "$GITHUB_OUTPUT"
+
+      - name: Recompute, validate, and create a review branch
+        if: steps.duplicate.outputs.skip != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EXPECTED_BASE: ${{ needs.scan.outputs.base_sha }}
+          EXPECTED_DATE: ${{ needs.scan.outputs.date }}
+          EXPECTED_PLAN: ${{ needs.scan.outputs.plan_digest }}
+        run: |
+          set -euo pipefail
+          actual_base="$(git rev-parse HEAD)"
+          if [ "$actual_base" != "$EXPECTED_BASE" ]; then
+            echo "Main changed after the read-only scan; refusing to apply a stale plan." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          python3 scripts/maintenance_docs.py --apply --date "$EXPECTED_DATE" --seed autocage-daily --json > "$RUNNER_TEMP/maintenance-applied.json"
+          python3 - "$RUNNER_TEMP/maintenance-applied.json" "$EXPECTED_PLAN" <<'PY'
+          import json
+          import sys
+          applied = json.load(open(sys.argv[1], encoding="utf-8"))
+          if applied["plan_digest"] != sys.argv[2] or not applied["applied"] or int(applied["selected_count"]) < 3:
+              raise SystemExit("Recomputed maintenance plan differs from read-only scan; refusing publication")
+          PY
+          python3 scripts/maintenance_docs.py --check-diff
+          if ! { git diff --check && python3 scripts/check-doc-links.py && python3 -m unittest discover -s scripts/tests -v; }; then
+            git restore --worktree -- .
+            echo "Validation failed; candidate documentation repairs were discarded and no PR was created." >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
+          if git diff --quiet; then
+            echo "No actual maintenance changes remain; skipping commit and PR." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          branch="automation/docs-maintenance-${EXPECTED_DATE}"
+          git switch -c "$branch"
+          git diff --name-only -z | xargs -0 git add --
+          python3 scripts/maintenance_docs.py --check-diff
+          git diff --cached --check
+          if git diff --cached --quiet; then
+            echo "No staged maintenance changes; skipping commit and PR." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "docs: repair verified internal link casing"
+          git push origin "$branch"
+          gh pr create \
+            --base main \
+            --head "$branch" \
+            --title "docs: repair verified internal link casing" \
+            --body "Automated low-risk documentation maintenance. Only unambiguous case-mismatch corrections to allowlisted internal Markdown links are included. The workflow ran git diff --check, the repository documentation-link checker, and scripts unit tests before creating this review PR. Please review before merge."
+          echo "Created a review-only documentation maintenance PR from $branch." >> "$GITHUB_STEP_SUMMARY"
