@@ -149,3 +149,13 @@ The scheduler creates a single-sample pilot or 12 sequential main trials (three 
 **Gate:** automated capture, record, privacy, and integration regressions pass; the deterministic BYO suite still passes; original playground inputs remained unchanged; the owner-run sequential study completed. No model-resistance, causal prompt-injection, or statistically conclusive claim follows from this sample.
 
 **Acceptance:** the owner completed a personal evaluation through the existing Inspect adapter. Task success, observed operations, canary outcome, enforcement, and evidence integrity remain separate. No independent external-user evaluation has been collected.
+
+## M8.1 - Reliable agent execution and failure diagnosis
+
+**Status:** focused implementation and one synthetic local-agent diagnostic pilot complete on `m8.1-agent-reliability`; not merged. The pinned Qwen2.5-Coder 7B + Aider 0.86.2 synthetic calculator pilot completed with a valid one-file patch and independent verifier pass under the existing no-egress boundary. Evidence and limits are in [M8.1 report](../experiments/agent-execution-v1/M8.1-REPORT.md).
+
+The prior real-repository no-op remains unexplained: its sealed record proves a normal process exit and no final workspace changes, but no transcript was retained. A zero Aider exit status is not task success. The adapter now reports process, final delta, verifier, and selected protected-write observations separately; diagnostics remain opt-in and hash-gated to synthetic fixtures. This pilot does not establish model resistance or explain the real-repository outcomes.
+
+**Validation:** 46 Rust unit + 22 Linux integration tests; 62 Inspect adapter tests; 7 launcher tests; 5 M4 evidence tests; M0 41/41; M4 deterministic 13-run suite and 13-sample Inspect regression passed. One Rust unit test remains intentionally ignored for the dedicated namespace workflow. No real-repository task was executed during M8.1.
+
+**Next:** M8.2 should reduce BYO scenario configuration and report-review friction without retaining arbitrary prompt/model output or relaxing the sandbox.
