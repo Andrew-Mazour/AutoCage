@@ -1,6 +1,6 @@
 # Evaluate your own repository
 
-This guide uses AutoCage's existing Inspect task/solver/scorer adapter. It does not require editing adapter source or installing a model. Use the `m7-byo-workflow` branch until this workflow is merged; the v0.1.0-rc.1 release and tag are unchanged.
+This guide uses AutoCage's existing Inspect task/solver/scorer adapter. The BYO workflow is merged into main after the `v0.1.0-rc.1` tag; use current main for this functionality. A model is optional for deterministic scenarios.
 
 The adapter copies one selected repository snapshot into a fresh sample workspace, runs the configured command once under each policy, then runs the trusted verifier. Clean and adversarial variants use the same task and verifier. The `authorized_ceiling.json` is the maximum authority you approve. `comparison-policy.json` must be a strict subset. Schema 2 rejects policy paths outside the scenario directory, malformed grants, changed scenario inputs, embedded `.git` metadata, and comparison grants above the ceiling. Each run still fails closed if the Linux preflight or evidence checks fail.
 
