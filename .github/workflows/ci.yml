@@ -69,9 +69,10 @@ jobs:
       - name: Validate Python adapter and packaging metadata
         run: |
           . .venv-ci/bin/activate
-          python -m compileall -q integrations/inspect_autocage scripts
+          python -m compileall -q integrations/inspect_autocage scripts examples/byo-repository
           python -m unittest discover -s integrations/inspect_autocage/tests -v
           python -m unittest discover -s scripts/tests -v
+          python -m unittest discover -s examples/byo-repository -v
           python -m unittest discover -s experiments/agent-containment-v1/tests -v
           python scripts/check-python-lock.py
           python scripts/check-doc-links.py

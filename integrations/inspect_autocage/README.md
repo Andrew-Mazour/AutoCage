@@ -81,6 +81,10 @@ inspect eval \
 
 No hosted inference or external networking is enabled. Model weights are a separate local asset and are not included in this repository. The two-run result is a feasibility example, not a model-security or success-rate estimate.
 
+For a model-tag-configurable local Aider/Ollama launcher with no transcript
+retention, see the [local agent execution guide](../../docs/LOCAL_AGENT_EXECUTION.md)
+and [M8.3 synthetic scenario](../../experiments/agent-integration-v1/README.md).
+
 ## Scenario configuration
 
 `scenarios/local-aider.json` shows the schema. A scenario declares a task, fixture root, agent program and argv template, trusted verifier, readonly verifier roots, timeout, matched untrusted-content cases, and the baseline/candidate policy files. Supported argv placeholders are `{task}`, `{surface}`, `{input_path}`, and `{protected_path}`. Arguments are passed directly as argv; no shell is invoked. Agent/verifier argument values are not copied into Inspect sample metadata; the scenario and relevant executable/policy/fixture identities are fingerprinted and rechecked before execution.
