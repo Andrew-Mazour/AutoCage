@@ -8,6 +8,9 @@ use std::time::Duration;
 pub const HELP: &str = concat!(
     "AutoCage — fail-closed isolated command runner\n\n",
     "Usage:\n",
+    "  autocage init --source PATH --output NEW_SCENARIO_DIR\n",
+    "  autocage eval --scenario PATH [--sample-id ID] [--autocage PATH] [--output-dir NEW_DIR]\n",
+    "  autocage report RUN_DIRECTORY\n",
     "  autocage check\n",
     "  autocage propose --workspace PATH --workflow python-test|python-compileall|python-wheel -- PROGRAM [ARG ...]\n",
     "  autocage run --workspace PATH [--run-dir PATH] [--timeout-seconds N] \\\n",
@@ -20,6 +23,8 @@ pub const HELP: &str = concat!(
     "  autocage recover RUN_DIR\n",
     "  autocage inspect RUN_DIR\n\n",
     "The command after -- runs in a copied, writable workspace with no outbound network.\n",
+    "init/eval/report use the installed Inspect integration; eval runs samples sequentially.\n",
+    "An exact --sample-id is never combined with --limit. Generated changes are never applied automatically.\n",
     "Readonly verifier roots are snapshotted from the original workspace and overmounted for verifier runs.\n",
     "Only an explicitly provided verifier is run after a successful command.\n",
     "`propose` emits an experimental deterministic suggestion; it grants no authority. `run --accept-proposal` requires an explicit ceiling.\n",
@@ -53,6 +58,10 @@ pub struct RunOptions {
 pub enum Invocation {
     Help,
     Check,
+    DeveloperWorkflow {
+        command: String,
+        args: Vec<OsString>,
+    },
     Propose {
         workspace: PathBuf,
         workflow: WorkflowKind,
@@ -81,6 +90,10 @@ pub fn parse(args: Vec<OsString>) -> Result<Invocation> {
     }
     match args[0].to_str() {
         Some("check") if args.len() == 1 => Ok(Invocation::Check),
+        Some(command @ ("init" | "eval" | "report")) => Ok(Invocation::DeveloperWorkflow {
+            command: command.to_owned(),
+            args: args[1..].to_vec(),
+        }),
         Some("propose") => parse_propose(&args[1..]),
         Some("run") => parse_run(&args[1..]),
         Some("tune") => parse_tune(&args[1..]),
@@ -370,6 +383,40 @@ mod tests {
 
     fn strings(values: &[&str]) -> Vec<OsString> {
         values.iter().map(OsString::from).collect()
+    }
+
+    #[test]
+    fn developer_workflow_arguments_are_forwarded_opaquely() {
+        let parsed = parse(strings(&[
+            "eval",
+            "--scenario",
+            "path with spaces/scenario.json",
+            "--sample-id",
+            "sample-1",
+            "--agent-arg",
+            "literal $(text)",
+        ]))
+        .expect("known developer workflow");
+        let Invocation::DeveloperWorkflow { command, args } = parsed else {
+            panic!("expected developer workflow");
+        };
+        assert_eq!(command, "eval");
+        assert_eq!(
+            args,
+            strings(&[
+                "--scenario",
+                "path with spaces/scenario.json",
+                "--sample-id",
+                "sample-1",
+                "--agent-arg",
+                "literal $(text)",
+            ])
+        );
+    }
+
+    #[test]
+    fn unknown_top_level_command_is_not_forwarded() {
+        assert!(parse(strings(&["unknown", "argument"])).is_err());
     }
 
     #[test]

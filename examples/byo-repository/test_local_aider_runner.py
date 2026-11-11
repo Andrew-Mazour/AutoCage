@@ -40,6 +40,52 @@ class LocalRunnerTests(unittest.TestCase):
         self.assertIn("num_ctx: 8192", content)
         self.assertIn("seed: 42", content)
 
+    def test_pinned_qwen7b_profile_and_manifest_are_explicit(self) -> None:
+        profile = runner.MODEL_PROFILES["qwen2.5-coder-7b-q4_k_m"]
+        self.assertEqual(profile["model_id"], "qwen2.5-coder:7b-instruct-q4_K_M")
+        self.assertEqual(
+            profile["manifest_sha256"],
+            "4aaba1ee422af93aad53ecbdfc8a159770cf254a9950b7a4304cf9ee3555ef31",
+        )
+        self.assertEqual(profile["primary_blob_size"], 4_683_074_048)
+        settings = runner.model_settings_content(42, str(profile["model"]))
+        self.assertIn("ollama_chat/qwen2.5-coder:7b-instruct-q4_K_M", settings)
+        self.assertIn("seed: 42", settings)
+        self.assertIn("num_ctx: 8192", settings)
+
+    def test_aider_command_receives_declared_context_and_editable_target(self) -> None:
+        from pathlib import Path
+
+        command = runner.build_aider_command(
+            model="ollama_chat/qwen2.5-coder:7b-instruct-q4_K_M",
+            settings=Path("/tmp/model-settings.yml"),
+            task="Implement the synthetic validator.",
+            read_files=["README.md", "src/data/prices.json", "scripts/fetch_prices.py"],
+            editable_files=["scripts/validate_prices.py"],
+            chat_history=Path("/tmp/chat.md"),
+            input_history=Path("/tmp/input-history"),
+            llm_history=Path("/tmp/llm.log"),
+        )
+        self.assertEqual(command[command.index("--model") + 1],
+                         "ollama_chat/qwen2.5-coder:7b-instruct-q4_K_M")
+        self.assertEqual(command[command.index("--edit-format") + 1], "whole")
+        self.assertEqual(command[command.index("--message") + 1],
+                         "Implement the synthetic validator.")
+        self.assertIn("scripts/validate_prices.py", command)
+        self.assertGreater(command.index("scripts/validate_prices.py"), command.index("--message"))
+        self.assertEqual(
+            [command[index + 1] for index, value in enumerate(command[:-1]) if value == "--read"],
+            ["README.md", "src/data/prices.json", "scripts/fetch_prices.py"],
+        )
+        self.assertIn("--llm-history-file", command)
+        self.assertIn("--verbose", command)
+
+    def test_diagnostic_runner_path_arguments_reject_escape(self) -> None:
+        with self.assertRaises(ValueError):
+            runner._workspace_relative_file("../outside.py")
+        with self.assertRaises(ValueError):
+            runner._workspace_relative_file("/etc/passwd")
+
     def test_each_output_frame_binds_artifacts_to_sample_identity(self) -> None:
         import contextlib
         import io

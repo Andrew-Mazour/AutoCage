@@ -436,7 +436,7 @@ class EvidenceAndScenarioRegressionTests(unittest.TestCase):
             self.assertTrue(task.metadata["retain_agent_diagnostics"])
 
             (fixture / ".autocage-synthetic-playground").unlink()
-            with self.assertRaisesRegex(ValueError, "restricted to the declared synthetic local-Aider playground"):
+            with self.assertRaisesRegex(ValueError, "restricted to declared synthetic local-agent scenarios"):
                 local_aider_regression(
                     scenario_file=str(scenario_path), work_root=str(root / "other-results"),
                     pilot=True, experiment_id="unmarked-opt-in", retain_agent_diagnostics=True,

@@ -33,6 +33,24 @@ EXPECTED_OLLAMA_VERSION = "0.40.4"
 EXPECTED_MANIFEST_SHA256 = "ce40a49b0aa2b3b607d26a603e0f2db06a256cecbc9cca7adf893ae11a80275a"
 CONTEXT_LENGTH = 8192
 TEMPERATURE = 0.0
+MODEL_PROFILES = {
+    "qwen2.5-coder-3b": {
+        "model": MODEL,
+        "model_id": MODEL_ID,
+        "manifest": MANIFEST,
+        "manifest_sha256": EXPECTED_MANIFEST_SHA256,
+        "primary_blob": MODEL_BLOB,
+        "primary_blob_size": MODEL_SIZE,
+    },
+    "qwen2.5-coder-7b-q4_k_m": {
+        "model": "ollama_chat/qwen2.5-coder:7b-instruct-q4_K_M",
+        "model_id": "qwen2.5-coder:7b-instruct-q4_K_M",
+        "manifest": MODEL_DIR / "manifests/registry.ollama.ai/library/qwen2.5-coder/7b-instruct-q4_K_M",
+        "manifest_sha256": "4aaba1ee422af93aad53ecbdfc8a159770cf254a9950b7a4304cf9ee3555ef31",
+        "primary_blob": MODEL_DIR / "blobs/sha256-60e05f2100071479f596b964f89f510f057ce397ea22f2833a0cfe029bfc2463",
+        "primary_blob_size": 4_683_074_048,
+    },
+}
 CAPTURE_LIMITS = {
     "aider-chat-history.md": 512 * 1024,
     "aider-llm-history.log": 512 * 1024,
@@ -57,7 +75,10 @@ def workspace_input(value: str) -> str:
     return result.relative_to(root).as_posix()
 
 
-def verify_local_install() -> tuple[str, str, str, str]:
+def verify_local_install(profile_name: str = "qwen2.5-coder-3b") -> tuple[str, str, str, str]:
+    profile = MODEL_PROFILES.get(profile_name)
+    if profile is None:
+        raise RuntimeError("model profile is not allowlisted")
     if not OLLAMA.is_file() or not os.access(OLLAMA, os.X_OK):
         raise RuntimeError("Ollama missing at /usr/bin/ollama; no network fallback is used")
     if not AIDER.is_file() or not os.access(AIDER, os.X_OK):
@@ -77,12 +98,13 @@ def verify_local_install() -> tuple[str, str, str, str]:
     )
     if litellm.returncode != 0 or not litellm.stdout.strip():
         raise RuntimeError("could not identify the installed LiteLLM version")
-    if not MANIFEST.is_file():
-        raise RuntimeError("local Qwen2.5-Coder model manifest missing; no model will be downloaded")
-    raw = MANIFEST.read_bytes()
+    manifest_path = profile["manifest"]
+    if not manifest_path.is_file():
+        raise RuntimeError("pinned local Ollama model manifest missing; no model will be downloaded")
+    raw = manifest_path.read_bytes()
     manifest_hash = hashlib.sha256(raw).hexdigest()
-    if manifest_hash != EXPECTED_MANIFEST_SHA256:
-        raise RuntimeError("local Qwen2.5-Coder manifest does not match the pinned identity")
+    if manifest_hash != profile["manifest_sha256"]:
+        raise RuntimeError("local Ollama manifest does not match the pinned model identity")
     manifest = json.loads(raw)
     for item in [manifest.get("config"), *manifest.get("layers", [])]:
         if not isinstance(item, dict) or not isinstance(item.get("digest"), str):
@@ -90,9 +112,41 @@ def verify_local_install() -> tuple[str, str, str, str]:
         blob = MODEL_DIR / "blobs" / item["digest"].replace(":", "-")
         if not blob.is_file() or blob.stat().st_size != item.get("size"):
             raise RuntimeError("a pinned local Ollama model blob is missing or has the wrong size")
-    if not MODEL_BLOB.is_file() or MODEL_BLOB.stat().st_size != MODEL_SIZE:
-        raise RuntimeError("pinned Qwen2.5-Coder model blob is missing or has the wrong size")
+    primary_blob = profile["primary_blob"]
+    if not primary_blob.is_file() or primary_blob.stat().st_size != profile["primary_blob_size"]:
+        raise RuntimeError("pinned primary Ollama model blob is missing or has the wrong size")
     return manifest_hash, aider.stdout.strip(), ollama.stdout.strip(), litellm.stdout.strip()
+
+
+def _workspace_relative_file(value: str) -> str:
+    relative = Path(value)
+    if relative.is_absolute() or ".." in relative.parts or not relative.parts:
+        raise ValueError("agent file arguments must be workspace-relative")
+    root = Path.cwd().resolve(strict=True)
+    result = (root / relative).resolve(strict=True)
+    result.relative_to(root)
+    if not result.is_file():
+        raise ValueError("agent file arguments must name regular workspace files")
+    return result.relative_to(root).as_posix()
+
+
+def build_aider_command(
+    *, model: str, settings: Path, task: str, read_files: list[str],
+    editable_files: list[str], chat_history: Path, input_history: Path,
+    llm_history: Path | None,
+) -> list[str]:
+    command = [
+        str(AIDER), "--model", model, "--model-settings-file", str(settings),
+        "--edit-format", "whole", "--no-git", "--no-analytics", "--yes-always",
+        "--map-tokens", "0", "--no-pretty", "--no-auto-commits",
+        "--input-history-file", str(input_history), "--chat-history-file", str(chat_history),
+    ]
+    for path in read_files:
+        command.extend(["--read", path])
+    command.extend(["--message", task, *editable_files])
+    if llm_history is not None:
+        command.extend(["--llm-history-file", str(llm_history), "--verbose"])
+    return command
 
 
 def _drain_bounded(stream, limit: int, result: dict[str, object]) -> None:
@@ -177,9 +231,9 @@ def _request_options(stderr: bytes) -> list[dict[str, object]]:
     return found
 
 
-def model_settings_content(model_seed: int) -> str:
+def model_settings_content(model_seed: int, model: str = MODEL) -> str:
     return (
-        "- name: " + MODEL + "\n"
+        "- name: " + model + "\n"
         "  edit_format: whole\n"
         "  use_temperature: 0.0\n"
         "  extra_params:\n"
@@ -217,6 +271,9 @@ def main() -> int:
     parser.add_argument("--input", required=True)
     parser.add_argument("--sample-id", required=True)
     parser.add_argument("--model-seed", required=True, type=int)
+    parser.add_argument("--model-profile", choices=sorted(MODEL_PROFILES), default="qwen2.5-coder-3b")
+    parser.add_argument("--editable-file", action="append", default=[])
+    parser.add_argument("--read-file", action="append", default=[])
     parser.add_argument("--retain-diagnostics", action="store_true",
                         help="retain bounded transcripts for this synthetic playground sample")
     args = parser.parse_args()
@@ -225,12 +282,22 @@ def main() -> int:
         parser.error("--model-seed must be between 0 and 2147483647")
     os.umask(0o077)
     input_path = workspace_input(args.input)
-    manifest_hash, aider_version, ollama_version, litellm_version = verify_local_install()
+    read_files = list(dict.fromkeys(
+        [input_path, *[_workspace_relative_file(value) for value in args.read_file]]
+    ))
+    editable_files = args.editable_file or list(EDITABLE_FILES)
+    editable_files = [_workspace_relative_file(value) for value in editable_files]
+    if len(set(editable_files)) != len(editable_files):
+        parser.error("--editable-file values must be unique")
+    profile = MODEL_PROFILES[args.model_profile]
+    model = str(profile["model"])
+    model_id = str(profile["model_id"])
+    manifest_hash, aider_version, ollama_version, litellm_version = verify_local_install(args.model_profile)
     with tempfile.TemporaryDirectory(prefix="autocage-aider-", dir="/tmp") as temporary:
         private = Path(temporary)
         os.chmod(private, 0o700)
         settings = private / "model-settings.yml"
-        settings.write_text(model_settings_content(args.model_seed), encoding="utf-8")
+        settings.write_text(model_settings_content(args.model_seed, model), encoding="utf-8")
         settings.chmod(0o600)
         chat_history = private / "aider-chat-history.md"
         llm_history = private / "aider-llm-history.log"
@@ -275,7 +342,7 @@ def main() -> int:
 
             request = urllib.request.Request(
                 "http://127.0.0.1:11434/api/show",
-                data=json.dumps({"model": MODEL_ID}).encode("utf-8"),
+                data=json.dumps({"model": model_id}).encode("utf-8"),
                 headers={"Content-Type": "application/json"},
                 method="POST",
             )
@@ -284,16 +351,16 @@ def main() -> int:
             if not isinstance(model_info, dict) or len(json.dumps(model_info).encode()) > CAPTURE_LIMITS["ollama-model-info.json"]:
                 raise RuntimeError("local Ollama model configuration exceeds the diagnostic limit")
 
-            command = [
-                str(AIDER), "--model", MODEL, "--model-settings-file", str(settings),
-                "--edit-format", "whole", "--no-git", "--no-analytics", "--yes-always",
-                "--map-tokens", "0", "--no-pretty", "--no-auto-commits",
-                "--input-history-file", str(private / "input-history"),
-                "--chat-history-file", str(chat_history),
-                "--read", input_path, "--message", args.task, *EDITABLE_FILES,
-            ]
-            if args.retain_diagnostics:
-                command.extend(["--llm-history-file", str(llm_history), "--verbose"])
+            command = build_aider_command(
+                model=model,
+                settings=settings,
+                task=args.task,
+                read_files=read_files,
+                editable_files=editable_files,
+                chat_history=chat_history,
+                input_history=private / "input-history",
+                llm_history=llm_history if args.retain_diagnostics else None,
+            )
             run_started = time.monotonic()
             exit_code, stdout, stderr, stream_sizes = run_bounded(command, env, 256 * 1024)
             elapsed = int((time.monotonic() - run_started) * 1000)
@@ -311,7 +378,7 @@ def main() -> int:
             stderr_path.write_bytes(stderr)
             metrics = {
                 "agent": "Aider", "aider_version": aider_version,
-                "ollama_version": ollama_version, "model": MODEL_ID,
+                "ollama_version": ollama_version, "model": model_id,
                 "litellm_version": litellm_version,
                 "model_manifest_sha256": manifest_hash,
                 "sample_id": args.sample_id, "model_seed": args.model_seed,
@@ -343,7 +410,8 @@ def main() -> int:
                     len(model_info_bytes), len(model_info_bytes) > CAPTURE_LIMITS["ollama-model-info.json"],
                 )
                 effective = {
-                    "model": MODEL_ID,
+                    "model": model_id,
+                    "model_profile": args.model_profile,
                     "model_manifest_sha256": manifest_hash,
                     "aider_version": aider_version,
                     "ollama_version": ollama_version,

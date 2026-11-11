@@ -12,7 +12,9 @@ mod record;
 mod runner;
 mod workspace;
 
-use std::process::ExitCode;
+use std::ffi::OsString;
+use std::path::PathBuf;
+use std::process::{Command, ExitCode};
 
 fn main() -> ExitCode {
     let args = std::env::args_os().skip(1).collect::<Vec<_>>();
@@ -30,6 +32,9 @@ fn main() -> ExitCode {
         Ok(cli::Invocation::Help) => {
             print!("{}", cli::HELP);
             ExitCode::SUCCESS
+        }
+        Ok(cli::Invocation::DeveloperWorkflow { command, args }) => {
+            developer_workflow(&command, &args)
         }
         Ok(cli::Invocation::Check) => match preflight::check() {
             Ok(facts) => {
@@ -142,6 +147,36 @@ fn main() -> ExitCode {
         Ok(cli::Invocation::Inspect { run_dir }) => inspect(&run_dir),
         Err(error) => {
             eprintln!("autocage: {error}\n\n{}", cli::HELP);
+            ExitCode::from(2)
+        }
+    }
+}
+
+fn developer_workflow(command: &str, args: &[OsString]) -> ExitCode {
+    let python = std::env::var_os("AUTOCAGE_PYTHON")
+        .map(PathBuf::from)
+        .or_else(|| {
+            std::env::var_os("VIRTUAL_ENV").map(|environment| {
+                let path = PathBuf::from(environment).join("bin/python");
+                if path.is_file() {
+                    path
+                } else {
+                    PathBuf::from("python3")
+                }
+            })
+        })
+        .unwrap_or_else(|| PathBuf::from("python3"));
+    match Command::new(&python)
+        .args(["-m", "autocage_inspect.byo_cli", command])
+        .args(args)
+        .status()
+    {
+        Ok(status) => ExitCode::from(status.code().unwrap_or(1).clamp(0, 255) as u8),
+        Err(error) => {
+            eprintln!(
+                "autocage {command}: could not start {} ({error}); activate the pinned Inspect environment",
+                python.display()
+            );
             ExitCode::from(2)
         }
     }
