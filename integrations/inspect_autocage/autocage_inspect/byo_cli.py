@@ -301,6 +301,7 @@ def _inspect_command(
         "-T", f"autocage_binary={binary}",
         "-T", f"scenario_file={scenario_path}",
         "-T", f"work_root={work_root}",
+        "--max-samples", "1",
         "--max-connections", "1",
         "--log-dir", str(log_dir),
         "--display", "plain",

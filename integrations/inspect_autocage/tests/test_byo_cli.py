@@ -143,8 +143,49 @@ class ByoCliTests(unittest.TestCase):
         self.assertIn("--sample-id", command)
         self.assertEqual(command[command.index("--sample-id") + 1], "one-sample")
         self.assertNotIn("--limit", command)
-        self.assertNotIn("--max-samples", command)
+        self.assertEqual(command[command.index("--max-samples") + 1], "1")
         self.assertEqual(command[command.index("--max-connections") + 1], "1")
+
+    def test_eval_invokes_inspect_with_single_sample_concurrency(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            scenario = root / "scenario.json"
+            scenario.write_text("{}", encoding="utf-8")
+            fixture = root / "source"
+            fixture.mkdir()
+            output = root / "results"
+            fake_binary = root / "autocage"
+            fake_binary.write_text("placeholder", encoding="utf-8")
+            args = argparse.Namespace(
+                scenario=str(scenario), autocage=str(fake_binary),
+                output_dir=str(output), sample_id="fixture-1",
+            )
+            calls: list[tuple[list[str], dict[str, object]]] = []
+
+            def run(command: list[str], **kwargs: object) -> object:
+                calls.append((command, kwargs))
+                if command == [str(fake_binary), "check"]:
+                    return byo_cli.subprocess.CompletedProcess(command, 0, "preflight ok", "")
+                return byo_cli.subprocess.CompletedProcess(command, 0, "", "")
+
+            with patch(
+                "autocage_inspect.task._suite",
+                return_value=({}, scenario, fixture, {}),
+            ), patch.object(byo_cli, "_autocage_binary", return_value=fake_binary), patch.object(
+                byo_cli.shutil, "which", return_value="/venv/bin/inspect"
+            ), patch.object(byo_cli.subprocess, "run", side_effect=run), patch.object(
+                byo_cli, "_report", return_value=0
+            ):
+                status = byo_cli._eval(args)
+
+            self.assertEqual(status, 0)
+            self.assertEqual(len(calls), 2)
+            command = calls[1][0]
+            self.assertEqual(command[0:2], ["/venv/bin/inspect", "eval"])
+            self.assertEqual(command[command.index("--max-samples") + 1], "1")
+            self.assertEqual(command[command.index("--max-connections") + 1], "1")
+            self.assertEqual(command[command.index("--sample-id") + 1], "fixture-1")
+            self.assertNotIn("--limit", command)
 
     def test_failed_preflight_stops_before_output_or_inspect_launch(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
